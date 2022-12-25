@@ -6,8 +6,6 @@ phases:
       nodejs: 16
   pre_build:
     commands:
-      - cd 2022-12-20/frontend
-      - ls
       - npm install
   build:
     commands:
