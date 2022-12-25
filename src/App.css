@@ -1,0 +1,756 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Montserrat&family=Playfair+Display&family=Poppins&family=Rajdhani&display=swap');
+
+
+
+.bg {
+  /* background: linear-gradient(108.7deg, #000000 -1.31%, #2D2D2D -1.3%, #000000 35.38%); */
+  min-height: 100vh;
+  background: url("./background-image.png"),linear-gradient(108.7deg, #000000 -1.31%, #2D2D2D -1.3%, #000000 35.38%);
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-color: black;
+  background-position: center;
+
+}
+
+/* Header */
+
+.outer-flex-box-container {
+  padding-top: 36px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1248px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.header-left {
+  font-family: Rajdhani;
+  font-size: 26px;
+  font-weight: 300;
+  line-height: 33px;
+  letter-spacing: 0em;
+  text-align: left;
+  width: 25%;
+  color: white;
+}
+
+.search {
+  font-family: Rajdhani;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  max-height: 38px;
+  max-width: 115px;
+  border-radius: 27px;
+  background: #7DFFA1;
+  margin-right: 28px;
+  height: 38px;
+  width: 115px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#search-text {
+  padding-left: 18px;
+  font-family: Rajdhani;
+  border-radius: 27px;
+  border: none;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  text-align: left;
+  box-shadow: 0px 0px 2px 2px #7DFFA180;
+  color: white;
+  max-width: 285px;
+  max-height: 38px;
+  height: 38px;
+  width: 285px;
+  margin-right: 8px;
+  background: black;
+}
+
+.connect_button {
+  font-family: Rajdhani;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  box-shadow: 0px 0px 2px 2px #7dffa1;
+  border-radius: 27px;
+  max-width: 143.3px;
+  max-height: 38px;
+  width: 143.3px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+.inner-flex-box-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.social-text {
+  font-family: Be Vietnam;
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  display: none;
+}
+
+.social-container {
+  padding-top: 20px;
+  padding-bottom: 8px;
+  padding-right: 28px;
+  padding-left: 28px;
+  box-shadow: 0px 0px 2px 2px #7DFFA1;
+  border: solid 1.5px #7DFFA1;
+  border-radius: 17px;
+  max-width: 243px;
+}
+
+.social-image {
+  width: 32.89px;
+  height: 32px;
+  object-fit: cover;
+  margin-right: 0px;
+}
+
+.social-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.header-account-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 35px;
+}
+
+.header-profile-id {
+  font-family: Be Vietnam;
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: white;
+  padding-top: 4px;
+}
+
+.header-profile-image {
+  max-width: 43.13px;
+  max-height: 43.13px;
+  border-radius: 25px;
+}
+
+.left-bar-toshi {
+  font-family: Playfair Display;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 11px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.left-bar-tools {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 11px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+
+.left-bar-logo {
+  max-height: 19.582693099975586px;
+  max-width: 24.815532684326172px;
+  margin-bottom: 5.93px;
+}
+
+.left-bar-text-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.left-bar-logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 49px;
+  padding-top: 36px;
+}
+
+.page-text {
+  font-family: Be Vietnam;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  display: none;
+}
+
+
+.page-item:hover {
+  cursor: pointer;
+  border-top: 1.5px solid #7DFFA1;
+  border-bottom: 1.5px solid #7DFFA1;
+}
+
+.social-item:hover {
+  cursor: pointer;
+}
+
+.page-image {
+  max-height: 29px;
+  max-width: 34.395347595214844px;
+  margin-right: 0px;
+}
+
+.page-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 21px;
+  padding-top: 15px;
+  padding-bottom: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
+}
+
+.pages-container {
+  max-width: 144.5px;
+}
+
+.left-bar-container {
+  background: black;
+  position: absolute;
+  top: 0px;
+  min-height: 100vh;
+  height: 100%;
+  width: 121px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  transition: 0.5s;
+}
+
+.left-bar-inner-container {
+  position: sticky;
+}
+
+.left-bar-container:hover {
+  width: 242px;
+  transition: width 0.5s;
+}
+
+.left-bar-container:hover .page-image {
+  max-height: 29px;
+  max-width: 34.395347595214844px;
+  margin-right: 28.6px;
+}
+
+.left-bar-container:hover .left-bar-toshi {
+  font-family: Playfair Display;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.left-bar-container:hover .left-bar-tools {
+  font-family: Montserrat;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.left-bar-container:hover .left-bar-logo {
+  max-height: 40.924991607666016px;
+  max-width: 51.860870361328125px;
+  margin-bottom: 12.4px;
+}
+
+.left-bar-container:hover .page-text {
+  display: block;
+}
+
+.left-bar-container:hover .social-text {
+  display: block;
+}
+
+.left-bar-container:hover .social-image {
+  margin-right: 11px;
+}
+
+.connect_button:hover{
+  cursor: pointer;
+}
+
+
+/* Overview */
+
+.wallet-difference::after{
+  content: "%";
+}
+
+.assets-container {
+  margin-bottom: 50px;
+}
+
+.asset-text-middle {
+  font-family: Rajdhani;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #F9F9F9;
+  margin-left: 200px;
+}
+
+.table-right {
+  margin-top: -5px;
+  margin-right: 25px;
+  width: 6%;
+}
+
+.top-token-container {
+  font-family: Be Vietnam;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-top: 0.75px;
+  width: 17%;
+}
+
+/* Profile */
+
+.asset-text {
+  font-family: Rajdhani;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #F9F9F9;
+  margin-left: 22px;
+  margin-right: 51px;
+}
+
+.table-ids {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assets-container {
+  background: linear-gradient(0deg, #1E1E1E, #1E1E1E);
+  box-shadow: 0px 0px 12.471795082092285px -1.9692308902740479px #FFFFFF73;
+  max-width: 512px;
+  height: 100%;
+  width: 100%;
+  border-radius: 6.56px;
+  padding-left: 20.35px;
+  padding-right: 26.26px;
+  padding-bottom: 21.38px;
+  padding-top: 14.44px;
+}
+
+.profile-header-text {
+  font-family: Rajdhani;
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-bottom: 24px;
+}
+
+.profile-image {
+  max-height: 138px;
+  max-width: 138px;
+  margin-right: 33px;
+}
+
+.profile-wallet-information {
+  margin-bottom: 38px;
+}
+
+.wallet-worth {
+  font-family: Poppins;
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 85px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.wallet-worth::before {
+  content: '$';
+}
+
+.wallet-change {
+  font-family: Poppins;
+  font-size: 23px;
+  font-weight: 300;
+  line-height: 34px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #0DFF09;
+}
+
+.wallet-id {
+  font-family: Be Vietnam;
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 38px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.recharts-legend-wrapper {
+  display: none;
+}
+
+.chartTitle {
+  color: white;
+  font-family: Rajdhani;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  margin-left: 40px;
+  text-align: left;
+}
+
+.chart-outer-container {
+  margin-top: 15.31px;
+  background: linear-gradient(0deg, #1E1E1E, #1E1E1E);
+  box-shadow: 0px 0px 13.21336841583252px -2.0863211154937744px #ffffff73;
+  padding: 10px;
+}
+
+.overview-outer-container {
+  max-width: 1248px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 56px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.wallet-id::before {
+  content: 'ID: ';
+  font-family: Rajdhani;
+  font-size: 26px;
+  font-weight: 400;
+  line-height: 33px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #f9f9f96e;
+}
+
+.profile-wallet-information {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.profile-left-side {
+  margin-right: 38.76px;
+}
+
+.profile-outer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+}
+
+.profile-outer-container {
+  max-width: 1248px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 56px;
+}
+
+.profile-right-side,
+.profile-left-side {
+  width: 50%;
+}
+
+.table-ids {
+  border-bottom: 0.33px solid #05D3F2;
+  padding-bottom: 7.22px;
+}
+
+.table-token-full {
+  font-family: Be Vietnam;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+  margin-right: 3px;
+}
+
+.table-token-short {
+  font-family: Be Vietnam;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #6D6D6D;
+}
+
+.table-token-price {
+  font-family: Be Vietnam;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+  margin-right: 3px;
+}
+
+.table-token-allocation {
+  font-family: Be Vietnam;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #6D6D6D;
+}
+
+.table-amount {
+  font-family: Be Vietnam;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.table-amount::before{
+  content: '$';
+}
+
+.table-price-change::after{
+  content: '%';
+}
+
+.table-price-change {
+  font-family: Be Vietnam;
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #D8494A;
+  text-align: end;
+}
+
+
+.table-amount-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.75px;
+}
+
+.personal-table-left {
+  display: flex;
+  flex-direction: row;
+  margin-left: 22px;
+  width: 50%;
+}
+
+.personal-table-right {
+  margin-top: -5px;
+  margin-right: 25px;
+  width: 50%;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.table-left {
+  display: flex;
+  flex-direction: row;
+  margin-left: 22px;
+  width: 25%;
+}
+
+.table-token-container,
+.table-token-price-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.table-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.table-inner-token-container {
+  margin-top: 0.75px;
+}
+
+.table-img {
+  margin-right: 42px;
+  max-width: 32px;
+  max-height: 32px;
+  object-fit: cover;
+}
+
+.table-item {
+  margin-top: 34.02px;
+  margin-right: 25px;
+}
+
+.hour,
+.day,
+.week,
+.month,
+.year {
+  font-family: Be Vietnam;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  padding-right: 3px;
+  padding-left: 3px;
+  border-radius: 1.47px;
+  color: #86F9A6;
+  border: none;
+  background-color: transparent;
+  border: 0.49px solid transparent;
+}
+
+.hour:hover,
+.day:hover,
+.week:hover,
+.month:hover,
+.year:hover {
+  background-color: #86F9A6;
+  color: black;
+  border: 0.49px solid #86F9A6;
+  cursor: pointer;
+}
+
+.wallet-change::after{
+  content: '%';
+}
+.hour.active, .year.active{
+  background-color: #86F9A6;
+  color: black;
+  border: 0.49px solid #86F9A6;
+  cursor: pointer;
+}
+
+.date-change {
+  display: flex;
+  background: linear-gradient(119.02deg, #1E1E1E 80.59%, #000000 101.02%);
+  flex-direction: row;
+  max-width: 309.36px;
+  box-shadow: 0px 0px 7.887511730194092px -1.2453967332839966px #ffffff73;
+  justify-content: space-between;
+  padding-left: 9px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 4.15px;
+  margin-bottom: 8.15px;
+}
+
+.wallet-amount {
+  font-family: Poppins;
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 85px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.wallet-difference {
+  font-family: Poppins;
+  font-size: 23px;
+  font-weight: 300;
+  line-height: 34px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #0DFF09;
+}
+
+.chart-container {
+  margin-top: 15px;
+}

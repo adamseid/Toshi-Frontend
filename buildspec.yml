@@ -1,0 +1,17 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 16
+  pre_build:
+    commands:
+      - cd 2022-12-20/frontend
+      - ls
+      - npm install
+  build:
+    commands:
+      - npm run build
+artifacts:
+  base-directory: 'build'
+  files: '**/*'
