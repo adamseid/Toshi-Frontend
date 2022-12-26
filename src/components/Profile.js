@@ -4,8 +4,6 @@ import { updateState } from '../modules/Profile'
 import Graph from './profile/Graph'
 import Table from './profile/Table'
 
-
-
 const default_state = {
 
   header: {
@@ -19,14 +17,12 @@ const default_state = {
 
 export default class Profile extends Component {
 
-
-
   constructor(props) {
     super(props)
     this.state = default_state
   }
 
-ws = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
+ws = new WebSocket('ws://build-loadb-4hazk5fp03at-173901606.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
 
 componentDidMount() {
   this.ws.onopen = () => {
