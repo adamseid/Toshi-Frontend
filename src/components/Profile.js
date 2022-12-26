@@ -22,7 +22,7 @@ export default class Profile extends Component {
     this.state = default_state
   }
 
-ws = new WebSocket('ws://build-loadb-k2z04hqfzpk7-659387239.us-east-1.elb.amazonaws.com:8000/ws/toshi-profile/')
+ws = new WebSocket('ws://127.0.0.1:8000/ws/toshi-profile/')
 
 componentDidMount() {
   this.ws.onopen = () => {
