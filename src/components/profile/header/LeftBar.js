@@ -52,9 +52,9 @@ const LeftBar = ({walletId}) => {
             <div className="pages-container">
                 <div className="page-item">
                     <img src={overview} className="page-image" />
-                    <div onClick={handleClick} className="page-text">
+                    <a className="page-text" href="http://dms-toshi-frontend-site.s3-website-us-east-1.amazonaws.com/overview">
                         Overview
-                    </div>
+                    </a>
                 </div>
                 <div className="page-item">
                     <img src={favourite} className="page-image" />
