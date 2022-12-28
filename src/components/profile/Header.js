@@ -20,7 +20,8 @@ export default class Header extends Component {
   urlWalletAddress = (wallet) => {
     this.props.state['header']['walletAddress'] = wallet
     this.updateWalletAddress()
-    var ws = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
+    // var ws = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
+    var ws = new WebSocket('ws://build-loadb-1S0P80N7QL18J-897508943.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
     ws.onopen = () => {
       console.log('THIS IS connected')
       this.props.ws.send(
