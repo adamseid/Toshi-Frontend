@@ -17,14 +17,14 @@ export default class Header extends Component {
     )
   }
 
-  // componentDidUpdate(){
-  //   this.iswalletConnected()
-  // }
-
   componentDidMount(){
     this.iswalletConnected()
   }
   
+  updateWalletAddress (wallet) {
+    this.setState(this.props.state)
+  }
+
   iswalletConnected = async () => {
     if (window.ethereum){
       const accounts = await window.ethereum.request({
@@ -32,13 +32,14 @@ export default class Header extends Component {
       }).then((result) => {
         if(result){
           if(result[0].length > 0){
+            console.log(result[0])
+            this.updateWalletAddress()
             this.props.state['header']['walletAddress'] = result[0]
             this.props.ws.send(
                 JSON.stringify({
                     request: 'select',
                     location: ['header'],
                     time_frame: result[0]
-                    // time_frame: "0xa542f325990CEB47e2AE8BD9dccF8960b16eB7a9"
                 })
             )
           }

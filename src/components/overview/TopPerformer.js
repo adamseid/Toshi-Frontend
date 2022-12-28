@@ -61,7 +61,11 @@ export default class TopPerformer extends Component {
                                 this.props.state['daily_top_performers']['data'].length == 0 ? (
                                     console.log("NO WALLET ID")
                                 ) :
-                                (this.props.state['top_performer']['graph'][1]['pv'] - this.props.state['top_performer']['graph'][0]['pv']) / (this.props.state['top_performer']['graph'][0]['pv'])
+                                this.props.state['top_performer']['graph'][1] ? (
+                                    this.props.state['top_performer']['graph'][1]['pv'] - this.props.state['top_performer']['graph'][0]['pv']) / (this.props.state['top_performer']['graph'][0]['pv']
+
+                                ):
+                                console.log("HEYYYYY")
                             }
                         </div>
                         <div className='wallet-id'>

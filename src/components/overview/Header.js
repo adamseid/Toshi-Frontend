@@ -20,6 +20,10 @@ export default class Header extends Component {
     this.iswalletConnected()
   }
   
+  updateWalletAddress (wallet) {
+    this.setState(this.props.state)
+  }
+
   iswalletConnected = async () => {
     if (window.ethereum){
       const accounts = await window.ethereum.request({
@@ -27,7 +31,16 @@ export default class Header extends Component {
       }).then((result) => {
         if(result){
           if(result[0].length > 0){
+            console.log(result[0])
+            this.updateWalletAddress()
             this.props.state['header']['walletAddress'] = result[0]
+            this.props.ws.send(
+                JSON.stringify({
+                    request: 'select',
+                    location: ['header'],
+                    time_frame: result[0]
+                })
+            )
           }
         }
       })
