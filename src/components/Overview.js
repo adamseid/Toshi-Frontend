@@ -32,8 +32,8 @@ const default_state = {
 
 export default class Overview extends Component {
 
-    // ws = new WebSocket('ws://build-loadb-1S0P80N7QL18J-897508943.us-east-1.elb.amazonaws.com/ws/toshi/')
-    ws = new WebSocket('ws://localhost:8000/ws/toshi/')
+    ws = new WebSocket('ws://build-loadb-1S0P80N7QL18J-897508943.us-east-1.elb.amazonaws.com/ws/toshi/')
+    // ws = new WebSocket('ws://localhost:8000/ws/toshi/')
 
     constructor(props) {
         super(props)
