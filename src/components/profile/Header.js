@@ -17,8 +17,32 @@ export default class Header extends Component {
     )
   }
 
+  urlWalletAddress = (wallet) => {
+    this.props.state['header']['walletAddress'] = wallet
+    this.updateWalletAddress()
+    var ws = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
+    ws.onopen = () => {
+      console.log('THIS IS connected')
+      this.props.ws.send(
+        JSON.stringify({
+          request: 'select',
+          location: ['header'],
+          time_frame: wallet
+        })
+      )
+    }
+  }
+
   componentDidMount(){
-    this.iswalletConnected()
+    if(window.location.href.includes("?")){
+      var url = window.location.href
+      var temp_wallet_address = window.location.href.split("?")[1]
+      if(this.isValid(temp_wallet_address)){
+        this.urlWalletAddress(temp_wallet_address)
+      }
+    }else{
+      this.iswalletConnected()
+    }
   }
   
   updateWalletAddress (wallet) {
@@ -32,7 +56,6 @@ export default class Header extends Component {
       }).then((result) => {
         if(result){
           if(result[0].length > 0){
-            console.log(result[0])
             this.updateWalletAddress()
             this.props.state['header']['walletAddress'] = result[0]
             this.props.ws.send(
@@ -48,13 +71,46 @@ export default class Header extends Component {
     }
   }
 
+  isValid = (wallet) => {
+    var i=0;
+    var character='';
+    if (wallet.length >= 26 && wallet.length <= 42){
+      while (i <= wallet.length){
+        character = wallet.charAt(i);
+        if (character == character.toUpperCase()) {
+          return true
+        }
+        if (character == character.toLowerCase()){
+          console.log ('lower case true');
+        }
+      i++;
+    }
+    }
+    return false
+  }
+  
+  handleText = (event) => {
+    this.props.state['header']['walletAddress'] = event.target.value
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    this.props.state['profile']['table']['data'] = []
+    this.props.ws.send(
+      JSON.stringify({
+          request: 'select',
+          location: ['header'],
+          time_frame: this.props.state['header']['walletAddress']
+      })
+    )
+  }
+
   onPressed = async () => {
     if (window.ethereum) {
       const accounts = await window.ethereum.request({
         method: "eth_requestAccounts",
       }).then((result) => {
         this.props.state['header']['walletAddress'] = result[0]
-        console.log(result[0])
         this.props.ws.send(
           JSON.stringify({
               request: 'select',
@@ -79,12 +135,10 @@ export default class Header extends Component {
             Market Overview
           </div>
           <div className='inner-flex-box-container'>
-            <div className='left-side'>
-              <input type="text" id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
-              <div className='search'>
-                Search
-              </div>
-            </div>
+            <form className='left-side' onSubmit={this.handleSubmit}>
+              <input type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
+              <input type="submit" id = "submit" value="Submit" className='search' />
+            </form>
             <div className='right-side'>
               {
                 this.props.state['header']['walletAddress'] == "" ? (

@@ -4,6 +4,41 @@ import LeftBar from "./header/LeftBar"
 import React, { Component } from 'react'
 
 export default class Header extends Component {
+
+  handleText = (event) => {
+    this.props.state['header']['walletAddress'] = event.target.value
+  }
+  
+  isValid = (wallet) => {
+    var i=0;
+    var character='';
+    if (wallet.length >= 26 && wallet.length <= 42){
+      while (i <= wallet.length){
+        character = wallet.charAt(i);
+        if (character == character.toUpperCase()) {
+          return true
+        }
+        if (character == character.toLowerCase()){
+          console.log ('lower case true');
+        }
+      i++;
+    }
+    }else{
+      // INVALID WALLET ADDRESS
+    }
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    if(this.isValid(this.props.state['header']['walletAddress'])){
+      var url = "http://localhost:3000/profile?" + this.props.state['header']['walletAddress']
+      console.log(url)
+      window.location.href = url;
+    }else{
+      alert("Invalid Wallet Address")
+    }
+  }
+
   
   select = (data) => {
     console.log('select')
@@ -78,12 +113,10 @@ export default class Header extends Component {
             Market Overview
           </div>
           <div className='inner-flex-box-container'>
-            <div className='left-side'>
-              <input type="text" id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
-              <div className='search'>
-                Search
-              </div>
-            </div>
+            <form className='left-side' onSubmit={this.handleSubmit}>
+              <input type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
+              <input type="submit" id = "submit" value="Submit" className='search' />
+            </form>
             <div className='right-side'>
               {
                 this.props.state['header']['walletAddress'] == "" ? (
