@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import LeftBar from "./header/LeftBar"
 
 import React, { Component } from 'react'
-const ws2= new WebSocket('ws://dualstack.build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+const ws2= new WebSocket('wss://build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
 export default class Header extends Component {
 
   select = (data) => {
-    const ws2 = new WebSocket('ws://dualstack.build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+    const ws2 = new WebSocket('wss://build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
     ws2.onopen = () => {
       console.log('❌❌❌❌THIS IS connected')
       ws2.send(
@@ -78,7 +78,7 @@ export default class Header extends Component {
     
     const walletAddress=JSON.stringify(result);
   //  const ws = new WebSocket('ws://dualstack.build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
-  const ws = new WebSocket('ws://dualstack.build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+  const ws = new WebSocket('wss://build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
   ws.onopen = ()=>{
     ws.send(
       JSON.stringify({
@@ -117,7 +117,7 @@ export default class Header extends Component {
     event.preventDefault();
     this.props.state['profile']['table']['data'] = []
     console.log("CLICKED")
-    const ws = new WebSocket('ws://dualstack.build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+    const ws = new WebSocket('wss://build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
     ws.onopen = ()=>{
       ws.send(
         JSON.stringify({
