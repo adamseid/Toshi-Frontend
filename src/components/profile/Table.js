@@ -12,18 +12,22 @@ import {
 } from "recharts";
 
 const time_frame = ['1H', '1D', '1W', '1M', '1Y']
+const ws2 = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
 
-export default class Graph extends Component {
+export default class Graph extends Component {  
   select = (data,event) => {
-    console.log('select')
-
-    this.props.ws.send(
+    const ws2 = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
+    ws2.onopen = () => {
+      console.log('❌❌❌❌THIS IS connected')
+      ws2.send(
         JSON.stringify({
-            request: 'select',
-            location: ['profile', 'graph'],
-            time_frame: data
+          request: 'select',
+          location: ['profile', 'graph'],
+          time_frame: data
         })
-    )
+      )
+    }
+    console.log('select')
 }
 
   render() {
@@ -49,9 +53,6 @@ export default class Graph extends Component {
                 return (
                     <div key={index} className='table-item'>
                         <div className='personal-table-left'>
-                            {/* <div className='table-img'>
-                            <img src = {ethereum} className = "table-token" />
-                            </div> */}
                             <div className='table-inner-token-container'>
                             <div className='table-token-container'>
                                 <div className='table-token-full'>
@@ -94,42 +95,3 @@ export default class Graph extends Component {
 
 
 
-/* {/* {assets.map((asset,index) => {
-  return(
-    <div key={index} className='table-item'>
-      <div className='table-left'>
-        <div className='table-img'>
-          <img src = {ethereum} className = "table-token" />
-        </div>
-        <div className='table-inner-token-container'>
-          <div className='table-token-container'>
-            <div className='table-token-full'>
-              {asset.tokenName}
-            </div>
-            <div className='table-token-short'>
-              {asset.tokenAbbreviation}
-            </div>
-          </div>
-          <div className='table-token-price-container'>
-            <div className='table-token-price'>
-              {asset.tokenAmount}
-            </div>
-            <div className='table-token-allocation'>
-              {asset.tokenAllocation}
-            </div>
-          </div>
-        </div>
-      </div>
-      <div className='table-right'>
-        <div className='table-amount-container'>
-          <div className='table-amount'>
-            {asset.tokenPrice}
-          </div>
-          <div className='table-price-change'>
-            {asset.tokenPriceDifference}
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-})} */
