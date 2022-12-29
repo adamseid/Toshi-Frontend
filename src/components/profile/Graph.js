@@ -10,13 +10,13 @@ import {
     Legend,
     Label
 } from "recharts";
-const ws2 = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+const ws2 = new WebSocket('ws://dualstack.build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
 
 const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 
 export default class Graph extends Component {
   select = (data,event) => {
-    const ws2 = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+    const ws2 = new WebSocket('ws://dualstack.build-loadb-1w6r869nnd2xy-378492499.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
     console.log('select')
     for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
         document.getElementsByClassName("hour")[i].classList.remove("active")
