@@ -3,11 +3,11 @@ import { useHistory } from "react-router-dom";
 import LeftBar from "./header/LeftBar"
 
 import React, { Component } from 'react'
-const ws2= new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+const ws2= new WebSocket('ws://localhost:8000/ws/toshi-profile/')
 export default class Header extends Component {
 
   select = (data) => {
-    const ws2 = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+    const ws2 = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
     ws2.onopen = () => {
       console.log('❌❌❌❌THIS IS connected')
       ws2.send(
@@ -67,7 +67,7 @@ export default class Header extends Component {
             const walletTest=this.props.state['header']['walletAddress'] = result[0]
             console.log("❌Wallet address update variable"+walletTest)
             console.log("❌Wallet address update"+result[0])
-          this.sendWalletAddress(walletTest);
+            this.sendWalletAddress(walletTest);
           }
         }
       })
@@ -78,7 +78,7 @@ export default class Header extends Component {
     
     const walletAddress=JSON.stringify(result);
   //  const ws = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
-  const ws = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+  const ws = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
   ws.onopen = ()=>{
     ws.send(
       JSON.stringify({
@@ -116,13 +116,17 @@ export default class Header extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.props.state['profile']['table']['data'] = []
-    this.props.ws.send(
-      JSON.stringify({
+    console.log("CLICKED")
+    const ws = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
+    ws.onopen = ()=>{
+      ws.send(
+        JSON.stringify({
           request: 'select',
           location: ['header'],
           time_frame: this.props.state['header']['walletAddress']
-      })
-    )
+        })
+      )
+    }
   }
 
   onPressed = async () => {
