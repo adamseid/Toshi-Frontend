@@ -52,9 +52,9 @@ const LeftBar = ({walletId}) => {
             <div className="pages-container">
                 <div className="page-item">
                     <img src={overview} className="page-image" />
-                    <a className="page-text" href="http://dms-toshi-frontend-site.s3-website-us-east-1.amazonaws.com/overview">
+                    {/* <a className="page-text" href="http://dms-toshi-frontend-site.s3-website-us-east-1.amazonaws.com/overview">
                         Overview
-                    </a>
+                    </a> */}
                 </div>
                 <div className="page-item">
                     <img src={favourite} className="page-image" />

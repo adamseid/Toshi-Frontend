@@ -66,6 +66,7 @@ export default class Header extends Component {
       }).then((result) => {
         if(result){
           if(result[0].length > 0){
+            console.log("❌Wallet connected")
             console.log(result[0])
             this.updateWalletAddress()
             this.props.state['header']['walletAddress'] = result[0]
@@ -76,6 +77,9 @@ export default class Header extends Component {
                     time_frame: result[0]
                 })
             )
+          }
+          else{
+            console.log("No wallet connected")
           }
         }
       })

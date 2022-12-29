@@ -14,7 +14,9 @@ const default_state = {
       table: [],
   }
 }
-
+export function webSocket (){
+  return new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com')
+} 
 export default class Profile extends Component {
 
   constructor(props) {
@@ -22,20 +24,31 @@ export default class Profile extends Component {
     this.state = default_state
   }
 
-ws = new WebSocket('ws://build-loadb-1S0P80N7QL18J-897508943.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+
 // ws = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
 
+connectSocket = () => {
+  const ws= new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+    ws.onopen = () => {
+       console.log('connected innside profile')
+   }
+ 
+   ws.onmessage = (e) => {
+       let data = JSON.parse(e.data)
+       console.log("data->"+data)
+       let state = updateState(data, this.state, default_state)
+       this.setState(state)
+   }
+}
+
 componentDidMount() {
-  this.ws.onopen = () => {
-      console.log('connected')
+  try{
+    this.connectSocket();
+  
+  }catch(e){
+console.error(e);
   }
 
-  this.ws.onmessage = (e) => {
-      let data = JSON.parse(e.data)
-      console.log(data)
-      let state = updateState(data, this.state, default_state)
-      this.setState(state)
-  }
 }
 
   render() {
