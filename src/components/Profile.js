@@ -15,7 +15,7 @@ const default_state = {
   }
 }
 export function webSocket (){
-  return new WebSocket('ws://build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+  return new WebSocket('wss://build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
 } 
 export default class Profile extends Component {
 
@@ -28,7 +28,7 @@ export default class Profile extends Component {
 // ws = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
 
 connectSocket = () => {
-  const ws= new WebSocket('ws://build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+  const ws= new WebSocket('wss://build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
     ws.onopen = () => {
        console.log('connected innside profile')
    }
