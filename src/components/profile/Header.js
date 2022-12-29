@@ -3,28 +3,31 @@ import { useHistory } from "react-router-dom";
 import LeftBar from "./header/LeftBar"
 
 import React, { Component } from 'react'
-
+const ws2= new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
 export default class Header extends Component {
 
   select = (data) => {
-    console.log('select')
-    this.props.ws.send(
+    const ws2 = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+    ws2.onopen = () => {
+      console.log('❌❌❌❌THIS IS connected')
+      ws2.send(
         JSON.stringify({
-            request: 'select',
-            location: ['header'],
-            time_frame: data
+          request: 'select',
+          location: ['header'],
+          time_frame: data
         })
-    )
+      )
+    }
   }
 
   urlWalletAddress = (wallet) => {
     this.props.state['header']['walletAddress'] = wallet
     this.updateWalletAddress()
     // var ws = new WebSocket('ws://localhost:8000/ws/toshi-profile/')
-    var ws = new WebSocket('ws://build-loadb-1S0P80N7QL18J-897508943.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
-    ws.onopen = () => {
+  // FIXME: change all the socket connections to this approach
+    ws2.onopen = () => {
       console.log('THIS IS connected')
-      this.props.ws.send(
+      ws2.send(
         JSON.stringify({
           request: 'select',
           location: ['header'],
@@ -46,7 +49,8 @@ export default class Header extends Component {
     }
   }
   
-  updateWalletAddress (wallet) {
+  updateWalletAddress () {
+    console.log("❌ updateWalletAddress information "+JSON.stringify(this.props.state));
     this.setState(this.props.state)
   }
 
@@ -56,22 +60,37 @@ export default class Header extends Component {
         method: "eth_accounts"
       }).then((result) => {
         if(result){
+          console.log("❌Wallet connected 2")
+          console.log(JSON.stringify(result));
           if(result[0].length > 0){
             this.updateWalletAddress()
-            this.props.state['header']['walletAddress'] = result[0]
-            this.props.ws.send(
-                JSON.stringify({
-                    request: 'select',
-                    location: ['header'],
-                    time_frame: result[0]
-                })
-            )
+            const walletTest=this.props.state['header']['walletAddress'] = result[0]
+            console.log("❌Wallet address update variable"+walletTest)
+            console.log("❌Wallet address update"+result[0])
+          this.sendWalletAddress(walletTest);
           }
         }
       })
     }
   }
 
+  sendWalletAddress(result) {
+    
+    const walletAddress=JSON.stringify(result);
+  //  const ws = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+  const ws = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+  ws.onopen = ()=>{
+    ws.send(
+      JSON.stringify({
+          request: 'select',
+          location: ['header'],
+          time_frame: walletAddress
+      })
+  )
+  }
+  
+
+  }
   isValid = (wallet) => {
     var i=0;
     var character='';
@@ -107,25 +126,53 @@ export default class Header extends Component {
   }
 
   onPressed = async () => {
-    if (window.ethereum) {
+    if (window.ethereum){
       const accounts = await window.ethereum.request({
-        method: "eth_requestAccounts",
+        method: "eth_accounts"
       }).then((result) => {
-        this.props.state['header']['walletAddress'] = result[0]
-        this.props.ws.send(
-          JSON.stringify({
-              request: 'select',
-              location: ['header'],
-              time_frame: result[0]
-          })
-        )
-      }).catch((err) => {
-        console.log(err)
-      });
-    }else{
-      alert("Get MetaMask!");
+        if(result){
+          if(result[0].length > 0){
+            console.log("❌Wallet connected")
+            console.log(result[0])
+            this.updateWalletAddress()
+            this.props.state['header']['walletAddress'] = result[0]
+            this.props.ws.send(
+                JSON.stringify({
+                    request: 'select',
+                    location: ['header'],
+                    time_frame: result[0]
+                })
+            )
+          }
+          else{
+            console.log("No wallet connected")
+          }
+        }
+      })
     }
+
+
+
+    // if (window.ethereum) {
+    //   const accounts = await window.ethereum.request({
+    //     method: "eth_requestAccounts",
+    //   }).then((result) => {
+    //     this.props.state['header']['walletAddress'] = result[0]
+    //     this.props.ws.send(
+    //       JSON.stringify({
+    //           request: 'select',
+    //           location: ['header'],
+    //           time_frame: result[0]
+    //       })
+    //     )
+    //   }).catch((err) => {
+    //     console.log(err)
+    //   });
+    // }else{
+    //   alert("Get MetaMask!");
+    // }
   }
+
 
   render() {
 
