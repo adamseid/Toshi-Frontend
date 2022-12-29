@@ -12,11 +12,11 @@ import {
 } from "recharts";
 
 const time_frame = ['1H', '1D', '1W', '1M', '1Y']
-const ws2 = new WebSocket('ws://build-loadb-1AKB2BWGHE33W-25261184.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+const ws2 = new WebSocket('ws://build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
 
 export default class Graph extends Component {  
   select = (data,event) => {
-    const ws2 = new WebSocket('ws://build-loadb-1AKB2BWGHE33W-25261184.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+    const ws2 = new WebSocket('ws://build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
     ws2.onopen = () => {
       console.log('❌❌❌❌THIS IS connected')
       ws2.send(
