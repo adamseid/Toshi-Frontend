@@ -1,34 +1,8 @@
 import React, { Component } from 'react'
 import profileImage from "../profile/header/images/temp-profile-image.png"
-import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    Label
-} from "recharts";
+import axios from "axios";
 
-const time_frame = ['1H', '1D', '1W', '1M', '1Y']
-const ws2 = new WebSocket('wss://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
 
-export default class Graph extends Component {  
-  select = (data,event) => {
-    const ws2 = new WebSocket('wss://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
-    ws2.onopen = () => {
-      console.log('❌❌❌❌THIS IS connected')
-      ws2.send(
-        JSON.stringify({
-          request: 'select',
-          location: ['profile', 'graph'],
-          time_frame: data
-        })
-      )
-    }
-    console.log('select')
-}
 
   render() {
     return (
@@ -47,9 +21,9 @@ export default class Graph extends Component {
             </div>
             {
               this.props.state['profile']['table'].length == 0 ? (
-                console.log("EMPTY")
+                <></>
               ) : 
-              this.props.state['profile']['table']['data'].map((asset, index) => {
+              this.props.state['profile']['table'].map((asset, index) => {
                 return (
                     <div key={index} className='table-item'>
                         <div className='personal-table-left'>
