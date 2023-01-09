@@ -32,9 +32,6 @@ const default_state = {
 
 export default class Overview extends Component {
 
-    // ws = new WebSocket('wss://18.232.137.221:8000/ws/toshi/')
-    ws = new WebSocket('wss://build-loadb-19gvvsyoyvbl1-325879419.us-east-1.elb.amazonaws.com/ws/toshi/')
-
     constructor(props) {
         super(props)
         this.state = default_state
