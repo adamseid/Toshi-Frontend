@@ -3,8 +3,8 @@ import profileImage from "../profile/header/images/temp-profile-image.png"
 import axios from "axios";
 
 const toggle = true
-const backend_url = "http://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/"
-// const backend_url = "http://127.0.0.1:8000/" 
+// const backend_url = "http://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/"
+const backend_url = "http://127.0.0.1:8000/" 
 
 export default class Graph extends Component {  
 
