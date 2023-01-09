@@ -1,34 +1,35 @@
 import React, { Component } from 'react'
 import profileImage from "../profile/header/images/temp-profile-image.png"
-import {
-    LineChart,
-    Line,
-    XAxis,
-    YAxis,
-    CartesianGrid,
-    Tooltip,
-    Legend,
-    Label
-} from "recharts";
+import axios from "axios";
 
-const time_frame = ['1H', '1D', '1W', '1M', '1Y']
-const ws2 = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
+const toggle = true
+const backend_url = "http://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/"
+// const backend_url = "http://127.0.0.1:8000/" 
 
 export default class Graph extends Component {  
-  select = (data,event) => {
-    const ws2 = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
-    ws2.onopen = () => {
-      console.log('❌❌❌❌THIS IS connected')
-      ws2.send(
-        JSON.stringify({
-          request: 'select',
-          location: ['profile', 'graph'],
-          time_frame: data
-        })
-      )
-    }
-    console.log('select')
-}
+
+    assetTableHttpRequest = () => {
+        var url = backend_url + "api/toshi/assets/"
+        axios.post( url , this.props.state).then((response) => {
+          this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
+          this.setPropsState()
+        });
+      }
+    
+      setPropsState = () => {
+        this.setState(this.props.state)
+      }
+    
+      componentDidUpdate = () => {
+        if(this.props.state['header'] != ""){
+            this.assetTableHttpRequest()
+            if(this.toggle){
+                this.toggle = false
+                this.assetTableHttpRequest()
+            }
+        }
+      }
+      
 
   render() {
     return (
@@ -47,9 +48,9 @@ export default class Graph extends Component {
             </div>
             {
               this.props.state['profile']['table'].length == 0 ? (
-                console.log("EMPTY")
+                <></>
               ) : 
-              this.props.state['profile']['table']['data'].map((asset, index) => {
+              this.props.state['profile']['table'].map((asset, index) => {
                 return (
                     <div key={index} className='table-item'>
                         <div className='personal-table-left'>
