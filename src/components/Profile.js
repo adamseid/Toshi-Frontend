@@ -39,53 +39,6 @@ export default class Profile extends Component {
     this.updateWalletAddress()
   }
 
-  isValid = (wallet) => {
-    var i=0;
-    var character='';
-    if (wallet.length >= 26 && wallet.length <= 42){
-      while (i <= wallet.length){
-        character = wallet.charAt(i);
-        if (character == character.toUpperCase()) {
-          return true
-        }
-        if (character == character.toLowerCase()){
-          console.log ('lower case true');
-        }
-      i++;
-      }
-    }
-    return false
-  }
-
-  iswalletConnected = async () => {
-    if (window.ethereum){
-      const accounts = await window.ethereum.request({
-        method: "eth_accounts"
-      }).then((result) => {
-        if(result[0]){
-          if(result[0].length > 0){
-            this.updateWalletAddress()
-            // const walletTest=this.state['header']['walletAddress'] = result[0]
-            const walletTest=this.state['header']['walletAddress'] =  "0xa542f325990ceb47e2ae8bd9dccf8960b16eb7a9"
-            this.sendWalletAddress(walletTest);       
-          }
-        }
-      })
-    }
-  }
-
-  componentDidMount(){
-    if(window.location.href.includes("?")){
-      var url = window.location.href
-      var temp_wallet_address = window.location.href.split("?")[1]
-      if(this.isValid(temp_wallet_address)){
-        this.urlWalletAddress(temp_wallet_address)
-      }
-    }else{
-      this.iswalletConnected()
-    }
-  }
-
   
   updateWalletAddress () {
     this.setState(this.state)
