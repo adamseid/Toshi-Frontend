@@ -4,6 +4,8 @@ import LeftBar from "./header/LeftBar"
 import axios from "axios";
 
 import React, { Component } from 'react'
+export default class Header extends Component {
+
 
 
   urlWalletAddress = (wallet) => {
@@ -47,6 +49,16 @@ import React, { Component } from 'react'
     }
   }
 
+  componentDidMount(){
+    if(window.location.href.includes("?")){
+      var url = window.location.href
+      var temp_wallet_address = window.location.href.split("?")[1]
+      if(this.isValid(temp_wallet_address)){
+        this.urlWalletAddress(temp_wallet_address)
+      }
+    }else{
+      this.iswalletConnected()
+    }
   }
 
   httpPostRequest = () => {
@@ -71,7 +83,7 @@ import React, { Component } from 'react'
 
   handleSubmit = (event) => {
     event.preventDefault();
-
+    this.updateWalletAddress()
   }
 
   onPressed = async () => {

@@ -10,7 +10,7 @@ import {
     Legend,
     Label
 } from "recharts";
-
+import axios from "axios";
 
 // const ws2 = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
 const backend_url = "http://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/"
@@ -19,7 +19,6 @@ const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 
 export default class Graph extends Component {
   select = (data,event) => {
-
     for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
         document.getElementsByClassName("hour")[i].classList.remove("active")
       }
