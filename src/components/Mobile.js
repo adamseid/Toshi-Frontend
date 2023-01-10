@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import mobileImage from "./images/mobile-image.jpeg"
+import mobileImage from "./images/mobile-image.png"
 
 
 export default class Mobile extends Component {
