@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import profileImage from "../profile/header/images/temp-profile-image.png"
 import axios from "axios";
 
-const toggle = true
+
 const backend_url = "http://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/"
 // const backend_url = "http://127.0.0.1:8000/" 
-
+var toggle = true
 export default class Graph extends Component {  
 
     assetTableHttpRequest = () => {
         var url = backend_url + "api/toshi/assets/"
+        
         axios.post( url , this.props.state).then((response) => {
           this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
           this.setPropsState()
@@ -22,9 +23,8 @@ export default class Graph extends Component {
     
       componentDidUpdate = () => {
         if(this.props.state['header'] != ""){
-            this.assetTableHttpRequest()
-            if(this.toggle){
-                this.toggle = false
+            if(toggle){
+                toggle = false
                 this.assetTableHttpRequest()
             }
         }

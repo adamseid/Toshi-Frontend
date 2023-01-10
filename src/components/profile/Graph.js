@@ -28,7 +28,14 @@ export default class Graph extends Component {
 
   walletBalanceHttpRequest = () => {
     var url = backend_url + "api/toshi/walletBalance/"
-    axios.post(url, this.props.state).then((response) => {
+    // const headers = {
+    //   'Access-Control-Allow-Origin': '*'
+    // }
+    axios.post(url, this.props.state,
+      // {
+      //   headers: headers
+      // }
+    ).then((response) => {
       this.props.state['profile']['accountBalance'] = response.data['profile_response']
       this.setPropsState()
     });
@@ -47,7 +54,6 @@ export default class Graph extends Component {
   }
 
   componentDidUpdate = () => {
-    console.log("wdfcvgkyvk")
     if(this.props.state['header'] != ""){
       if(this.props.state['profile']['accountBalance'] == ""){
         this.walletBalanceHttpRequest()
