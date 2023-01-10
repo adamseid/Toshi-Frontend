@@ -15,10 +15,10 @@ import { useNavigate } from "react-router-dom";
 
 const LeftBar = ({walletId}) => {
 
-    const history = useNavigate();
+    const navigate = useNavigate();
 
     function handleClick() {
-      history.push("/overview");
+        navigate("/");
     }
 
     function onHover() {
@@ -33,6 +33,8 @@ const LeftBar = ({walletId}) => {
         console.log(document.getElementsByClassName("left-bar-container")[0]);
 
     }
+
+    
 
 
     return (
@@ -50,11 +52,11 @@ const LeftBar = ({walletId}) => {
             </div>
 
             <div className="pages-container">
-                <div className="page-item">
+                <div className="page-item" onClick={handleClick}>
                     <img src={overview} className="page-image" />
-                    {/* <a className="page-text" href="http://dms-toshi-frontend-site.s3-website-us-east-1.amazonaws.com/overview">
+                    <div className="page-text">
                         Overview
-                    </a> */}
+                    </div>
                 </div>
                 <div className="page-item">
                     <img src={favourite} className="page-image" />
@@ -71,30 +73,30 @@ const LeftBar = ({walletId}) => {
             </div>
 
             <div className="social-container">
-                <div className="social-item">
+                <a href = "https://www.twitter.com" className="social-item">
                     <img className="social-image" src={twitter} />
                     <div className="social-text">
                         Twitter
                     </div>
-                </div>
-                <div className="social-item">
+                </a>
+                <a href = "https://www.telegram.com"  className="social-item">
                     <img className="social-image" src={telegram} />
                     <div className="social-text">
                         Telegram
                     </div>
-                </div>
-                <div className="social-item">
+                </a>
+                <div className="social-item" onClick={handleClick}>
                     <img className="social-image" src={website} />
-                    <div className="social-text">
+                    <a className="social-text">
                         Website
-                    </div>
+                    </a>
                 </div>
-                <div className="social-item">
+                <a href = "https://www.google.ca/docs/about/" className="social-item">
                     <img className="social-image" src={docs} />
                     <div className="social-text">
                         Docs
                     </div>
-                </div>
+                </a>
             </div>
 
             <div className="header-account-container">
