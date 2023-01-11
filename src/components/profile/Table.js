@@ -6,12 +6,15 @@ import axios from "axios";
 const backend_url = "http://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/"
 // const backend_url = "http://127.0.0.1:8000/" 
 var toggle = true
+var walletID = ""
+
 export default class Graph extends Component {  
 
     assetTableHttpRequest = () => {
         var url = backend_url + "api/toshi/assets/"
         
         axios.post( url , this.props.state).then((response) => {
+            console.log(response.data)
           this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
           this.setPropsState()
         });
@@ -22,12 +25,10 @@ export default class Graph extends Component {
       }
     
       componentDidUpdate = () => {
-        if(this.props.state['header'] != ""){
-            if(toggle){
-                toggle = false
-                this.assetTableHttpRequest()
-            }
-        }
+        if(walletID != this.props['state']['header']['walletAddress']){
+            this.assetTableHttpRequest()
+          }
+          walletID = this.props['state']['header']['walletAddress']
       }
       
 
