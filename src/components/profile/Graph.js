@@ -16,9 +16,23 @@ import axios from "axios";
 const backend_url = "http://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/"
 // const backend_url = "http://127.0.0.1:8000/" 
 const time_frame = ['1H', '1D', '1W', '1M', '1Y']
+var walletID = ""
 
 export default class Graph extends Component {
   select = (data,event) => {
+    if(data == "1H"){
+      this.props.state['profile']['graph'][0] = this.props.state['profile']['hourlyGraph']
+    }else if (data == "1D"){
+      this.props.state['profile']['graph'][0] = this.props.state['profile']['dailyGraph']
+    }else if (data == "1W"){
+      this.props.state['profile']['graph'][0] = this.props.state['profile']['weeklyGraph']
+    }else if(data == "1M"){
+      this.props.state['profile']['graph'][0] = this.props.state['profile']['monthlyGraph']
+    }else if(data == "1Y"){
+      this.props.state['profile']['graph'][0] = this.props.state['profile']['yearlyGraph']
+    }
+    this.setPropsState()
+    
     for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
         document.getElementsByClassName("hour")[i].classList.remove("active")
       }
@@ -28,15 +42,12 @@ export default class Graph extends Component {
 
   walletBalanceHttpRequest = () => {
     var url = backend_url + "api/toshi/walletBalance/"
-    // const headers = {
-    //   'Access-Control-Allow-Origin': '*'
-    // }
-    axios.post(url, this.props.state,
-      // {
-      //   headers: headers
-      // }
-    ).then((response) => {
-      this.props.state['profile']['accountBalance'] = response.data['profile_response']
+    axios.post(url, this.props.state,).then((response) => {
+      if(response.data['profile_response'] == ""){
+        this.props.state['profile']['accountBalance'] = 0
+      }else{
+        this.props.state['profile']['accountBalance'] = response.data['profile_response']
+      }
       this.setPropsState()
     });
   }
@@ -44,7 +55,13 @@ export default class Graph extends Component {
   graphHttpRequest = () => {
     var url = backend_url + "api/toshi/graph/"
     axios.post(url, this.props.state).then((response) => {
-      this.props.state['profile']['graph'] = response.data['profile_response']['profile']['graph']
+      console.log(response.data['profile_response']['profile']['graph'])
+      this.props.state['profile']['hourlyGraph'] = response.data['profile_response']['profile']['graph'][0]
+      this.props.state['profile']['dailyGraph'] = response.data['profile_response']['profile']['graph'][1]
+      this.props.state['profile']['weeklyGraph'] = response.data['profile_response']['profile']['graph'][2]
+      this.props.state['profile']['monthlyGraph'] = response.data['profile_response']['profile']['graph'][3]
+      this.props.state['profile']['yearlyGraph'] = response.data['profile_response']['profile']['graph'][4]
+      this.props.state['profile']['graph'] = [response.data['profile_response']['profile']['graph'][4],response.data['profile_response']['profile']['graph'][5],response.data['profile_response']['profile']['graph'][6]]
       this.setPropsState()
     });
   }
@@ -52,14 +69,16 @@ export default class Graph extends Component {
   setPropsState = () => {
     this.setState(this.props.state)
   }
+  componentDidMount = () => {
+    console.log("Current Props Mount: ",this.props['state']['header']['walletAddress'])
+  }
 
   componentDidUpdate = () => {
-    if(this.props.state['header'] != ""){
-      if(this.props.state['profile']['accountBalance'] == ""){
-        this.walletBalanceHttpRequest()
-        this.graphHttpRequest()
-      }
+    if(walletID != this.props['state']['header']['walletAddress']){
+      this.walletBalanceHttpRequest()
+      this.graphHttpRequest()
     }
+    walletID = this.props['state']['header']['walletAddress']
   }
   
   render() {
@@ -74,8 +93,8 @@ export default class Graph extends Component {
               {
                 this.props.state['profile']['accountBalance'] ? (
                   Math.round((this.props.state['profile']['accountBalance']*100))/100
-                ) : 
-                <></>
+                ) :
+                <>0</>
               }
             </div>
             <div className='wallet-change'>

@@ -13,7 +13,8 @@ import { useNavigate } from "react-router-dom";
 const default_state = {
 
   header: {
-      walletAddress: ""
+      walletAddress: "",
+      rerender: false,
   },
   profile: {
       graph: [],
@@ -25,7 +26,7 @@ const default_state = {
       hourlyGraph:[],
       table: [],
       component: []
-  }
+  },
 }
 
 
@@ -120,7 +121,9 @@ export default class Profile extends Component {
   }
 
   handleSubmit = (event) => {
+    console.log("Searched: ", this.state)
     event.preventDefault();
+    this.updateWalletAddress();
   }
 
   onPressed = async () => {
