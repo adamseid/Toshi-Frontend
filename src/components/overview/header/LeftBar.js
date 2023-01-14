@@ -20,6 +20,11 @@ const LeftBar = ({walletId}) => {
         navigate("/");
     }
 
+    function handleClickPersonal() {
+        console.log("clicked")
+        window.location.href = "http://localhost:3000/profile"
+    }
+
     function onHover() {
         document.getElementsByClassName("social-text");
         document.getElementsByClassName("social-image");
@@ -58,9 +63,9 @@ const LeftBar = ({walletId}) => {
                     </div>
                 </div>
                 <div className="page-item">
-                    <img src={favourite} className="page-image" />
+                    <img src={favourite} className="page-image" onClick={handleClickPersonal} />
                     <div className="page-text">
-                        Favourites
+                        Profile
                     </div>
                 </div>
                 <div className="page-item">

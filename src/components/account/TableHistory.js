@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import profileImage from "../profile/header/images/temp-profile-image.png"
 import axios from "axios";
 
 
@@ -11,15 +10,13 @@ var walletID = ""
 export default class Graph extends Component {  
 
     assetTableHttpRequest = () => {
-        var url = backend_url + "api/toshi/assets/"
+        var url = backend_url + "api/toshi/accounthistory/"
         
         axios.post( url , this.props.state).then((response) => {
             console.log(response.data)
-          this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
-          this.setPropsState()
+
         }).catch(error => {
-            this.props.state['profile']['table'] = []
-            this.setPropsState()
+            console.log(error)
           });;
       }
     
@@ -27,27 +24,33 @@ export default class Graph extends Component {
         this.setState(this.props.state)
       }
     
-      componentDidUpdate = () => {
-        if(walletID != this.props['state']['header']['walletAddress']){
-            this.assetTableHttpRequest()
-          }
-          walletID = this.props['state']['header']['walletAddress']
-      }
+    //   componentDidUpdate = () => {
+    //     if(walletID != this.props['state']['header']['walletAddress']){
+    //         this.assetTableHttpRequest()
+    //       }
+    //       walletID = this.props['state']['header']['walletAddress']
+    //   }
       
 
   render() {
     return (
-    <div>
+    <div className = "table-overview-outer-container">
         <div className='profile-header-text'>
-            Your Assets
+            Your Wallet History
         </div>
-        <div className='assets-container'>
-            <div className='table-ids'>
+        <div className='account-container'>
+            <div className='account-ids'>
                 <div className='asset-text'>
                     Asset
                 </div>
                 <div className='asset-text'>
-                    Amount
+                    Total Transactions
+                </div>
+                <div className='asset-text'>
+                    Profit TX
+                </div>
+                <div className='asset-text'>
+                    Profit Total
                 </div>
             </div>
             {

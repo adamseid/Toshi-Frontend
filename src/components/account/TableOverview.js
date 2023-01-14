@@ -11,16 +11,13 @@ var walletID = ""
 export default class Graph extends Component {  
 
     assetTableHttpRequest = () => {
-        var url = backend_url + "api/toshi/assets/"
+        var url = backend_url + "api/toshi/account/"
         
         axios.post( url , this.props.state).then((response) => {
             console.log(response.data)
-          this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
-          this.setPropsState()
         }).catch(error => {
-            this.props.state['profile']['table'] = []
-            this.setPropsState()
-          });;
+            console.log(error)
+          })
       }
     
       setPropsState = () => {
@@ -37,17 +34,23 @@ export default class Graph extends Component {
 
   render() {
     return (
-    <div>
+    <div className = "table-overview-outer-container">
         <div className='profile-header-text'>
-            Your Assets
+            Your Wallet History Overview
         </div>
-        <div className='assets-container'>
-            <div className='table-ids'>
+        <div className='account-container'>
+            <div className='account-ids'>
                 <div className='asset-text'>
-                    Asset
+                    Profit Total
                 </div>
                 <div className='asset-text'>
-                    Amount
+                    TX Sum
+                </div>
+                <div className='asset-text'>
+                    Profit TX
+                </div>
+                <div className='asset-text'>
+                    Profit %
                 </div>
             </div>
             {
