@@ -93,9 +93,9 @@ const LeftBar = ({walletId}) => {
                 </a>
                 <a href = "https://www.toshi.tools/"  className="social-item">
                     <img className="social-image" src={website} />
-                    <a className="social-text">
+                    <div className="social-text">
                         Website
-                    </a>
+                    </div>
                 </a>
             </div>
 

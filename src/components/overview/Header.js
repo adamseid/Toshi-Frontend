@@ -30,6 +30,7 @@ export default class Header extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault();
+    document.getElementById("search-text").value = ""
     if(this.isValid(this.props.state['header']['walletAddress'])){
       var url = "http://54.158.91.9:8000/profile?" + this.props.state['header']['walletAddress']
       console.log(url)
