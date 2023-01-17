@@ -14,7 +14,10 @@ export default class Graph extends Component {
         var url = backend_url + "api/toshi/account/"
         
         axios.post( url , this.props.state).then((response) => {
-            console.log(response.data)
+            console.log("ACCOUNT RESPONSE: ",response.data)
+            this.props.state['accountOverview']['table'] = response.data['profile_response']['accountOverview']['table']
+            this.setPropsState()
+            console.log("STATE RESPONSE: ", this.props.state['accountOverview']['table'])
         }).catch(error => {
             console.log(error)
           })
@@ -54,41 +57,23 @@ export default class Graph extends Component {
                 </div>
             </div>
             {
-              this.props.state['profile']['table'].length == 0 ? (
+              this.props.state['accountOverview']['table'].length == 0 ? (
                 <></>
               ) : 
-              this.props.state['profile']['table'].map((asset, index) => {
+              this.props.state['accountOverview']['table'].map((account, index) => {
                 return (
-                    <div key={index} className='table-item'>
-                        <div className='personal-table-left'>
-                            <div className='table-inner-token-container'>
-                            <div className='table-token-container'>
-                                <div className='table-token-full'>
-                                    {asset[0]}
-                                </div>
-                                <div className='table-token-short'>
-                                {asset[1]}
-                                </div>
-                            </div>
-                            <div className='table-token-price-container'>
-                                <div className='table-token-price'>
-                                {Math.round(asset[2] * 100) / 100}
-                                </div>
-                                <div className='table-token-allocation'>
-                                {asset[3]}
-                                </div>
-                            </div>
-                            </div>
+                    <div key={index} className='account-ids'>
+                        <div className='asset-text-data'>
+                            {account[0]}
                         </div>
-                        <div className='personal-table-right'>
-                            <div className='table-amount-container'>
-                            <div className='table-amount'>
-                                {Math.round(asset[4] * 100) / 100}
-                            </div>
-                            <div className='table-price-change'>
-                                {asset[5]}
-                            </div>
-                            </div>
+                        <div className='asset-text-data'>
+                            {account[1]}
+                        </div>
+                        <div className='asset-text-data'>
+                            {account[2]}
+                        </div>
+                        <div className='asset-text-data'>
+                            {account[3]}
                         </div>
                     </div>
                 )

@@ -17,8 +17,14 @@ const LeftBar = ({walletId}) => {
 
     const navigate = useNavigate();
 
-    function handleClick() {
-        navigate("/");
+    function handleClick(pageName) {
+        if (pageName == "overview"){
+            navigate("/");
+        }else if (pageName == "profile"){
+            navigate("/profile");
+        }else if (pageName == "account"){
+            navigate("/account");
+        }
     }
 
     function onHover() {
@@ -52,22 +58,22 @@ const LeftBar = ({walletId}) => {
             </div>
 
             <div className="pages-container">
-                <div className="page-item" onClick={handleClick}>
+                <div className="page-item" onClick={() => handleClick('overview')}>
                     <img src={overview} className="page-image" />
                     <div className="page-text">
                         Overview
                     </div>
                 </div>
-                <div className="page-item">
+                <div className="page-item" onClick={() => handleClick('profile')}>
                     <img src={favourite} className="page-image" />
                     <div className="page-text">
                         Profile
                     </div>
                 </div>
-                <div className="page-item">
+                <div className="page-item" onClick={() => handleClick('account')}>
                     <img src={settings} className="page-image" />
                     <div className="page-text">
-                        Settings
+                        History
                     </div>
                 </div>
             </div>

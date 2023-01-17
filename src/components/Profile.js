@@ -71,8 +71,8 @@ export default class Profile extends Component {
         if(result[0]){
           if(result[0].length > 0){
             this.updateWalletAddress()
-            const walletTest=this.state['header']['walletAddress'] = result[0]
-            // const walletTest=this.state['header']['walletAddress'] =  "0xa542f325990ceb47e2ae8bd9dccf8960b16eb7a9"
+            // const walletTest=this.state['header']['walletAddress'] = result[0]
+            const walletTest=this.state['header']['walletAddress'] =  "0xa542f325990ceb47e2ae8bd9dccf8960b16eb7a9"
             this.sendWalletAddress(walletTest);       
           }
         }

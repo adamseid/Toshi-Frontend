@@ -17,8 +17,14 @@ const LeftBar = ({walletId}) => {
 
     const navigate = useNavigate();
 
-    function handleClick() {
-        navigate("/");
+    function handleClick(pageName) {
+        if (pageName == "overview"){
+            navigate("/");
+        }else if (pageName == "profile"){
+            navigate("/profile");
+        }else if (pageName == "account"){
+            navigate("/account");
+        }
     }
 
     function onHover() {
@@ -52,50 +58,44 @@ const LeftBar = ({walletId}) => {
             </div>
 
             <div className="pages-container">
-                <div className="page-item" onClick={handleClick}>
+                <div className="page-item" onClick={() => handleClick('overview')}>
                     <img src={overview} className="page-image" />
                     <div className="page-text">
                         Overview
                     </div>
                 </div>
-                <div className="page-item">
+                <div className="page-item" onClick={() => handleClick('profile')}>
                     <img src={favourite} className="page-image" />
                     <div className="page-text">
                         Profile
                     </div>
                 </div>
-                <div className="page-item">
+                <div className="page-item" onClick={() => handleClick('account')}>
                     <img src={settings} className="page-image" />
                     <div className="page-text">
-                        Settings
+                        History
                     </div>
                 </div>
             </div>
 
             <div className="social-container">
-                <a href = "https://www.twitter.com" className="social-item">
+                <a href = "https://twitter.com/Toshi_Tools" className="social-item">
                     <img className="social-image" src={twitter} />
                     <div className="social-text">
                         Twitter
                     </div>
                 </a>
-                <a href = "https://www.telegram.com"  className="social-item">
+                <a href = "https://t.me/ToshiToolsGateway"  className="social-item">
                     <img className="social-image" src={telegram} />
                     <div className="social-text">
                         Telegram
                     </div>
                 </a>
-                <div className="social-item" onClick={handleClick}>
+                <a href = "https://t.me/ToshiToolsGateway"  className="social-item">
                     <img className="social-image" src={website} />
                     <a className="social-text">
                         Website
                     </a>
-                </div>
-                <a href = "https://www.google.ca/docs/about/" className="social-item">
-                    <img className="social-image" src={docs} />
-                    <div className="social-text">
-                        Docs
-                    </div>
                 </a>
             </div>
 
