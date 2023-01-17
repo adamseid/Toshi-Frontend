@@ -126,6 +126,7 @@ export default class Profile extends Component {
     console.log("Searched: ", this.state)
     event.preventDefault();
     this.updateWalletAddress();
+    document.getElementById("search-text").value = ""
   }
 
   onPressed = async () => {

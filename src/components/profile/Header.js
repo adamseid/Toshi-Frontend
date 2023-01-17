@@ -84,6 +84,7 @@ export default class Header extends Component {
   handleSubmit = (event) => {
     event.preventDefault();
     this.updateWalletAddress()
+    document.getElementById("search-text").value = ""
   }
 
   onPressed = async () => {

@@ -14,8 +14,8 @@ import {
 
 const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 
-const backend_url = "http://54.158.91.9:8000/"
-// const backend_url = "http://127.0.0.1:8000/" 
+// const backend_url = "http://54.158.91.9:8000/"
+const backend_url = "http://127.0.0.1:8000/" 
 var toggle = true
 var walletID = ""
 
@@ -111,50 +111,52 @@ export default class Graph extends Component {
                     Profit Total
                 </div>
             </div>
-            <div className='account-detailed-inner-container'>
-                {
-                this.props['state']['accountOverview']['table'].length == 0 ? (
-                    <div></div>
-                ) : 
-                this.props['state']['accountOverview']['table'].map((account, index) => {
-                    return (
-                        <div key={index} className='account-detailed-ids'>
-                            <div className='asset-text-data-detailed-first-element'>
-                                <div className='account-token-outer-container'>
-                                    <img className='account-bullet' src = {BulletPoint} />
-                                    <div className='account-token-inner-container'>
-                                        <div className='account-top-row'>
-                                            <div className='account-token-name'>
-                                                {account[3]}
+            <div className='account-table'>
+                <div className='account-detailed-inner-container'>
+                    {
+                    this.props['state']['accountOverview']['table'].length == 0 ? (
+                        <div></div>
+                    ) : 
+                    this.props['state']['accountOverview']['table'].map((account, index) => {
+                        return (
+                            <div key={index} className='account-detailed-ids'>
+                                <div className='asset-text-data-detailed-first-element'>
+                                    <div className='account-token-outer-container'>
+                                        <img className='account-bullet' src = {BulletPoint} />
+                                        <div className='account-token-inner-container'>
+                                            <div className='account-top-row'>
+                                                <div className='account-token-name'>
+                                                    {account[3]}
+                                                </div>
+                                                <div className='account-token-symbol'>
+                                                    {account[4]}
+                                                </div>
                                             </div>
-                                            <div className='account-token-symbol'>
-                                                {account[4]}
-                                            </div>
-                                        </div>
-                                        <div className='account-bottom-row'>
-                                            <div className='account-token-allocation'>
-                                                {account[5]}
-                                            </div>
-                                            <div className='account-token-allocation-percentage'>
-                                                ({account[6]}%)
+                                            <div className='account-bottom-row'>
+                                                <div className='account-token-allocation'>
+                                                    {account[5]}
+                                                </div>
+                                                <div className='account-token-allocation-percentage'>
+                                                    ({account[6]}%)
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div className='asset-text-data-detailed-second-element'>
+                                {account[0]}
+                                </div>
+                                <div className='asset-text-data-detailed'>
+                                {account[1]}
+                                </div>
+                                <div className='asset-text-data-detailed'>
+                                {account[2]} 
+                                </div>
                             </div>
-                            <div className='asset-text-data-detailed-second-element'>
-                            {account[0]}
-                            </div>
-                            <div className='asset-text-data-detailed'>
-                            {account[1]}
-                            </div>
-                            <div className='asset-text-data-detailed'>
-                            {account[2]} 
-                            </div>
-                        </div>
-                    )
-                })
-                }    
+                        )
+                    })
+                    }
+                </div>      
                 <div className='chart-container'>
                     <LineChart
                         background={{ fill: "red" }}
@@ -196,8 +198,8 @@ export default class Graph extends Component {
                         activeDot={{ r: 8 }}
                     />
                     </LineChart>
-                </div>
-            </div>        
+                </div>  
+            </div>
         </div>
     </div>
         
