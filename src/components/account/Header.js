@@ -62,7 +62,7 @@ export default class Header extends Component {
   }
 
   httpPostRequest = () => {
-    axios.post("http://127.0.0.1:8000/api/toshi/", this.props.state).then((response) => {
+    axios.post("http://54.158.91.9:8000/api/toshi/", this.props.state).then((response) => {
       console.log("THIS IS THE RESPONSE FROM BACKEND: ", response.data['profile_response'])
       this.props.state['profile'] = response.data['profile_response']['profile']
       this.updateWalletAddress()
