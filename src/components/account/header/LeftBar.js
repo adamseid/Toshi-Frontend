@@ -91,7 +91,7 @@ const LeftBar = ({walletId}) => {
                         Telegram
                     </div>
                 </a>
-                <a href = "https://t.me/ToshiToolsGateway"  className="social-item">
+                <a href = "https://www.toshi.tools/"  className="social-item">
                     <img className="social-image" src={website} />
                     <a className="social-text">
                         Website

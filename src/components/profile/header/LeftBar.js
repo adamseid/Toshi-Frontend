@@ -79,29 +79,23 @@ const LeftBar = ({walletId}) => {
             </div>
 
             <div className="social-container">
-                <a href = "https://www.twitter.com" className="social-item">
+                <a href = "https://twitter.com/Toshi_Tools" className="social-item">
                     <img className="social-image" src={twitter} />
                     <div className="social-text">
                         Twitter
                     </div>
                 </a>
-                <a href = "https://www.telegram.com"  className="social-item">
+                <a href = "https://t.me/ToshiToolsGateway"  className="social-item">
                     <img className="social-image" src={telegram} />
                     <div className="social-text">
                         Telegram
                     </div>
                 </a>
-                <div className="social-item" onClick={handleClick}>
+                <a href = "https://www.toshi.tools/"  className="social-item">
                     <img className="social-image" src={website} />
                     <a className="social-text">
                         Website
                     </a>
-                </div>
-                <a href = "https://www.google.ca/docs/about/" className="social-item">
-                    <img className="social-image" src={docs} />
-                    <div className="social-text">
-                        Docs
-                    </div>
                 </a>
             </div>
 
