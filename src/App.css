@@ -975,11 +975,11 @@ a {
 }
 
 .account-detailed-inner-container{
-  width: 50%;
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  justify-content: space-between;
+  justify-content: flex-start;
+  width: 50%;
 }
 
 .account-table{
