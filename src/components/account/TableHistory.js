@@ -47,7 +47,7 @@ export default class Graph extends Component {
         
         axios.post( url , this.props.state).then((response) => {
             console.log("ACCOUNT DETAILS: ",response.data)
-            this.props['state']['accountOverview']['table'] = response.data['profile_response']
+            this.props['state']['accountDetailed']['table'] = response.data['profile_response']
             this.setPropsState()
 
         }).catch(error => {
@@ -76,8 +76,8 @@ export default class Graph extends Component {
     
       componentDidUpdate = () => {
         if(walletID != this.props['state']['header']['walletAddress']){
-            this.graphHttpRequest()
             this.assetTableHttpRequest()
+            this.graphHttpRequest()
           }
           walletID = this.props['state']['header']['walletAddress']
       }
@@ -114,10 +114,10 @@ export default class Graph extends Component {
             <div className='account-table'>
                 <div className='account-detailed-inner-container'>
                     {
-                    this.props['state']['accountOverview']['table'].length == 0 ? (
+                    this.props['state']['accountDetailed']['table'].length == 0 ? (
                         <div></div>
                     ) : 
-                    this.props['state']['accountOverview']['table'].map((account, index) => {
+                    this.props['state']['accountDetailed']['table'].map((account, index) => {
                         return (
                             <div key={index} className='account-detailed-ids'>
                                 <div className='asset-text-data-detailed-first-element'>
