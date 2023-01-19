@@ -267,7 +267,7 @@ a {
 
 .left-bar-container {
   background: black;
-  position: absolute;
+  position: fixed;
   top: 0px;
   min-height: 100vh;
   height: 100%;
