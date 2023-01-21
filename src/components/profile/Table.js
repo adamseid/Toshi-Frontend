@@ -14,9 +14,9 @@ export default class Graph extends Component {
         var url = backend_url + "api/toshi/assets/"
         
         axios.post( url , this.props.state).then((response) => {
-            console.log(response.data)
-          this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
-          this.setPropsState()
+            console.log("READ: ", response.data['profile_response']['profile']['table'])
+            this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
+            this.setPropsState()
         }).catch(error => {
             this.props.state['profile']['table'] = []
             this.setPropsState()
@@ -69,10 +69,15 @@ export default class Graph extends Component {
                             </div>
                             <div className='table-token-price-container'>
                                 <div className='table-token-price'>
-                                {Math.round(asset[2] * 100) / 100}
+                                {asset[2]}
                                 </div>
                                 <div className='table-token-allocation'>
-                                {asset[3]}
+                                {
+                                    asset[3] < 1 ? (
+                                        <div className='table-token-allocation-small'> 1 </div>
+                                    ) : 
+                                    <div className='table-token-allocation-small-real'> {asset[3]} </div>
+                                } 
                                 </div>
                             </div>
                             </div>
@@ -80,11 +85,16 @@ export default class Graph extends Component {
                         <div className='personal-table-right'>
                             <div className='table-amount-container'>
                             <div className='table-amount'>
-                                {Math.round(asset[4] * 100) / 100}
+                                {
+                                    asset[5] <= 0 ? (
+                                        <div className='table-asset-small'> 0.1 </div>
+                                    ) : 
+                                    asset[5]
+                                } 
                             </div>
-                            <div className='table-price-change'>
+                            {/* <div className='table-price-change'>
                                 {asset[5]}
-                            </div>
+                            </div> */}
                             </div>
                         </div>
                     </div>

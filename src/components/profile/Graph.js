@@ -114,11 +114,11 @@ export default class Graph extends Component {
           Wallet Performance
         </div>
         <div className='date-change'>
-          {time_frame.map((data, i) => (
-            <div key={i}>
-                <button className='hour' onClick={this.select.bind(this, data)}>{data}</button>
-            </div>
-          ))}
+            <button className='hour' onClick={this.select.bind(this, time_frame[0])}>{time_frame[0]}</button>
+            <button className='hour' onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
+            <button className='hour' onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
+            <button className='hour' onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
+            <button className='hour active' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
         </div>
         <div className='wallet-amount'>
           {
