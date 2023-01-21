@@ -150,7 +150,12 @@ export default class Graph extends Component {
                                 {account[1]}
                                 </div>
                                 <div className='asset-text-data-detailed'>
-                                {account[2]} 
+                                 {
+                                    account[2] < 0 ? (
+                                        <div className='account-table-small-eth'> 1 </div>
+                                    ) : 
+                                    account[2]
+                                 }
                                 </div>
                             </div>
                         )

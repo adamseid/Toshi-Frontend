@@ -634,7 +634,25 @@ a {
   line-height: 18px;
   letter-spacing: 0em;
   text-align: left;
+  margin-left: 10px;
   color: #6D6D6D;
+}
+
+.table-token-allocation-small-real:after,
+.table-token-allocation-small:after{
+  content: '%';
+}
+.table-token-allocation-small{
+  font-family: Be Vietnam;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+  color: #6D6D6D;
+}
+
+.table-token-allocation-small::before{
+  content: '<';
 }
 
 .table-amount {
@@ -647,9 +665,7 @@ a {
   color: white;
 }
 
-.table-amount::before{
-  content: '$';
-}
+
 
 .table-price-change::after{
   content: '%';
@@ -702,6 +718,9 @@ a {
   justify-content: flex-start;
 }
 
+.table-asset-small:before{
+  content: '<';
+}
 .table-item {
   display: flex;
   flex-direction: row;
@@ -891,6 +910,10 @@ a {
   letter-spacing: 0em;
   text-align: left;
   color: #6D6D6D;
+}
+
+.account-table-small-eth:before{
+  content: '<';
 }
 
 .account-token-allocation{
