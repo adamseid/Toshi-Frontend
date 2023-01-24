@@ -21,19 +21,19 @@ var walletID = ""
 export default class Graph extends Component {
   select = (data,event) => {
     if(data == "1H"){
-      this.props.state['profile']['graph'][0] = this.props.state['profile']['hourlyGraph']
+      this.props.state['profile']['graph'] = this.props.state['profile']['hourlyGraph']
       this.props.state['profile']['profit'] = this.props.state['profile']['hourlyProfit']
     }else if (data == "1D"){
-      this.props.state['profile']['graph'][0] = this.props.state['profile']['dailyGraph']
+      this.props.state['profile']['graph'] = this.props.state['profile']['dailyGraph']
       this.props.state['profile']['profit'] = this.props.state['profile']['dailyProfit']
     }else if (data == "1W"){
-      this.props.state['profile']['graph'][0] = this.props.state['profile']['weeklyGraph']
+      this.props.state['profile']['graph'] = this.props.state['profile']['weeklyGraph']
       this.props.state['profile']['profit'] = this.props.state['profile']['weeklyProfit']
     }else if(data == "1M"){
-      this.props.state['profile']['graph'][0] = this.props.state['profile']['monthlyGraph']
+      this.props.state['profile']['graph'] = this.props.state['profile']['monthlyGraph']
       this.props.state['profile']['profit'] = this.props.state['profile']['monthlyProfit']
     }else if(data == "1Y"){
-      this.props.state['profile']['graph'][0] = this.props.state['profile']['yearlyGraph']
+      this.props.state['profile']['graph'] = this.props.state['profile']['yearlyGraph']
       this.props.state['profile']['profit'] = this.props.state['profile']['yearlyProfit']
     }
     this.setPropsState()
@@ -61,6 +61,7 @@ export default class Graph extends Component {
     var url = backend_url + "api/toshi/graph/"
     axios.post(url, this.props.state).then((response) => {
       console.log("PROFILE: ", response.data['profile_response']['profile']['graph'])
+      this.props.state['profile']['graph'] = response.data['profile_response']['profile']['graph'][4]
       this.props.state['profile']['hourlyGraph'] = response.data['profile_response']['profile']['graph'][0]
       this.props.state['profile']['dailyGraph'] = response.data['profile_response']['profile']['graph'][1]
       this.props.state['profile']['weeklyGraph'] = response.data['profile_response']['profile']['graph'][2]
@@ -108,14 +109,14 @@ export default class Graph extends Component {
                 <>0</>
               }
             </div>
-            <div className='wallet-change'>
+            {/* <div className='wallet-change'>
               {
                 this.props.state['profile']['graph'].length == 0 ? (
                   <></>
                 ) : 
                 Math.round(this.props.state['profile']['graph'][2] * 100) / 100
               }
-            </div>
+            </div> */}
             <div className='wallet-id'>
               {this.props.state['header']['walletAddress'].substring(0, 6) + "..." + this.props.state['header']['walletAddress'].substring(38, 42)}
             </div>
@@ -163,7 +164,7 @@ export default class Graph extends Component {
                 this.props.state['profile']['graph'].length == 0 ? (
                   <></>
                 ) : 
-                this.props.state['profile']['graph'][0]
+                this.props.state['profile']['graph']
               }
               margin={{
                   top: 0,
