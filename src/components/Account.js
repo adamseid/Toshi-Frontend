@@ -27,6 +27,11 @@ const default_state = {
     weeklyGraph:[],
     dailyGraph:[],
     hourlyGraph:[],
+    yearlyTable:[],
+    monthlyTable:[],
+    weeklyTable:[],
+    dailyTable:[],
+    hourlyTable:[],
   }
 }
 

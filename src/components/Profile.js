@@ -24,6 +24,12 @@ const default_state = {
       weeklyGraph:[],
       dailyGraph:[],
       hourlyGraph:[],
+      profit:0,
+      yearlyProfit: 0,
+      monthlyProfit: 0,
+      weeklyProfit: 0,
+      dailyProfit: 0,
+      hourlyProfit: 0,
       table: [],
       component: []
   },

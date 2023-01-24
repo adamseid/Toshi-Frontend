@@ -456,6 +456,23 @@ a {
   margin-bottom: 24px;
 }
 
+.positive{
+  display: flex;
+  color: #0DFF09;
+}
+
+.positive:before{
+  content: "+";
+}
+
+.negative{
+  color: #D8494A;
+}
+
+.negative:before{
+  content: "-";
+}
+
 .profile-image {
   max-height: 138px;
   max-width: 138px;
