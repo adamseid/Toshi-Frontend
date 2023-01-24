@@ -18,20 +18,26 @@ const backend_url = "http://54.158.91.9:8000/"
 // const backend_url = "http://127.0.0.1:8000/" 
 var toggle = true
 var walletID = ""
+const dexToolsURL = "https://etherscan.io/dex/uniswapv2/"
 
 export default class Graph extends Component {  
 
     select = (data,event) => {
         if(data == "1H"){
             this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['hourlyGraph']
+            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['hourlyTable']
         }else if (data == "1D"){
             this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['dailyGraph']
+            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['dailyTable']
         }else if (data == "1W"){
             this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['weeklyGraph']
+            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['weeklyTable']
         }else if(data == "1M"){
             this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['monthlyGraph']
+            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['monthlyTable']
         }else if(data == "1Y"){
             this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['yearlyGraph']
+            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['yearlyTable']
         }
         this.setPropsState()
         
@@ -47,7 +53,13 @@ export default class Graph extends Component {
         
         axios.post( url , this.props.state).then((response) => {
             console.log("ACCOUNT DETAILS: ",response.data)
-            this.props['state']['accountDetailed']['table'] = response.data['profile_response']
+            this.props['state']['accountDetailed']['table'] = response.data['profile_response'][0]
+            this.props['state']['accountDetailed']['yearlyTable'] = response.data['profile_response'][0]
+            this.props['state']['accountDetailed']['monthlyTable'] = response.data['profile_response'][1]
+            this.props['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
+            this.props['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
+            this.props['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
+
             this.setPropsState()
 
         }).catch(error => {
@@ -76,10 +88,12 @@ export default class Graph extends Component {
     
       componentDidUpdate = () => {
         if(walletID != this.props['state']['header']['walletAddress']){
+            this.props['state']['accountDetailed']['table'] = []
             this.assetTableHttpRequest()
             this.graphHttpRequest()
           }
           walletID = this.props['state']['header']['walletAddress']
+          
       }
       
 
@@ -124,14 +138,14 @@ export default class Graph extends Component {
                                     <div className='account-token-outer-container'>
                                         <img className='account-bullet' src = {BulletPoint} />
                                         <div className='account-token-inner-container'>
-                                            <div className='account-top-row'>
+                                            <a href = {dexToolsURL + account[7]} className='account-top-row'>
                                                 <div className='account-token-name'>
                                                     {account[3]}
                                                 </div>
                                                 <div className='account-token-symbol'>
                                                     {account[4]}
                                                 </div>
-                                            </div>
+                                            </a>
                                             <div className='account-bottom-row'>
                                                 <div className='account-token-allocation'>
                                                     {account[5]}
@@ -150,12 +164,12 @@ export default class Graph extends Component {
                                 {account[1]}
                                 </div>
                                 <div className='asset-text-data-detailed'>
-                                 {
-                                    account[2] < 0 ? (
-                                        <div className='account-table-small-eth'> 1 </div>
-                                    ) : 
-                                    account[2]
-                                 }
+                                {
+                                    account[2] > 0 ? (
+                                        <div class = "positive"> {account[2]} </div>
+                                    ) :
+                                        <div class = "negative"> {account[2]} </div>
+                                }
                                 </div>
                             </div>
                         )

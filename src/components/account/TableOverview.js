@@ -44,6 +44,9 @@ export default class Graph extends Component {
         <div className='account-container'>
             <div className='account-ids'>
                 <div className='asset-text'>
+                    Eth Balance
+                </div>
+                <div className='asset-text'>
                     Profit Total
                 </div>
                 <div className='asset-text'>
@@ -63,6 +66,9 @@ export default class Graph extends Component {
               this.props.state['accountOverview']['table'].map((account, index) => {
                 return (
                     <div key={index} className='account-ids'>
+                        <div className='asset-text-data'>
+                            {account[4]}
+                        </div>
                         <div className='asset-text-data'>
                             {account[0]}
                         </div>
