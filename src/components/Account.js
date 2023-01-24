@@ -32,6 +32,7 @@ const default_state = {
     weeklyTable:[],
     dailyTable:[],
     hourlyTable:[],
+    ethPriceChange: 0,
   }
 }
 
@@ -77,7 +78,8 @@ export default class Profile extends Component {
         if(result[0]){
           if(result[0].length > 0){
             this.updateWalletAddress()
-            const walletTest=this.state['header']['walletAddress'] = result[0]
+            // const walletTest=this.state['header']['walletAddress'] = result[0]
+            const walletTest=this.state['header']['walletAddress'] = "0xbf2499e4cda11eb33eea341ae425d85b6e93f028"
             this.sendWalletAddress(walletTest);       
           }
         }

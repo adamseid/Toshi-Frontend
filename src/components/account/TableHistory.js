@@ -14,8 +14,8 @@ import {
 
 const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 
-const backend_url = "http://54.158.91.9:8000/"
-// const backend_url = "http://127.0.0.1:8000/" 
+// const backend_url = "http://54.158.91.9:8000/"
+const backend_url = "http://127.0.0.1:8000/" 
 var toggle = true
 var walletID = ""
 const dexToolsURL = "https://etherscan.io/dex/uniswapv2/"
@@ -59,6 +59,7 @@ export default class Graph extends Component {
             this.props['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
             this.props['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
             this.props['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
+            this.props['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][5]
 
             this.setPropsState()
 
@@ -166,11 +167,26 @@ export default class Graph extends Component {
                                 <div className='asset-text-data-detailed'>
                                 {
                                     account[2] > 0 ? (
-                                        <div class = "positive"> {account[2]} </div>
+                                        <div class = "positive"> 
+                                            <div className='top-positive'>
+                                                {account[2]} 
+                                            </div>
+                                            <div className='bottom'>
+                                                {this.props['state']['accountDetailed']['ethPriceChange']}
+                                            </div>
+                                        </div>
                                     ) :
-                                        <div class = "negative"> {account[2]} </div>
+                                        <div class = "negative"> 
+                                            <div className='top-negative'>
+                                                {account[2]} 
+                                            </div>
+                                            <div className='bottom'>
+                                                {this.props['state']['accountDetailed']['ethPriceChange']}
+                                            </div>
+                                        </div>
                                 }
                                 </div>
+
                             </div>
                         )
                     })
