@@ -32,6 +32,7 @@ const default_state = {
     weeklyTable:[],
     dailyTable:[],
     hourlyTable:[],
+    ethPriceChange: 0,
   }
 }
 

@@ -459,17 +459,24 @@ a {
 .positive{
   display: flex;
   color: #0DFF09;
+  flex-direction: column;
 }
 
-.positive:before{
+.bottom{
+  font-size: 13px;
+}
+
+.top-positive:before{
   content: "+";
 }
 
 .negative{
   color: #D8494A;
+  display: flex;
+  flex-direction: column;
 }
 
-.negative:before{
+.top-negative:before{
   content: "-";
 }
 
