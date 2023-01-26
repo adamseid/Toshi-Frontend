@@ -32,7 +32,7 @@ const default_state = {
 }
 export default class Overview extends Component {
     // ws = new WebSocket('ws://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi/')
-    ws = new WebSocket('ws://ws.toshitools.app/ws/toshi/')
+    ws = new WebSocket('wss://ws.toshitools.app/ws/toshi/')
 
     constructor(props) {
         super(props)
