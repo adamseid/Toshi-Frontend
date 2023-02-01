@@ -1,0 +1,22 @@
+name: Deploy to EC2
+on: [push]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install SSH Key
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.SSH_PRIVATE_KEY }}
+        known_hosts: 'placeholder'
+
+    - name: Set ownership
+      run: |
+          chown -R $(id -u):$(id -g) $PWD
+    - name: Adding Known Hosts
+      run: ssh-keyscan -H 54.158.91.9 >> ~/.ssh/known_hosts
+
+    - name: Connect to EC2 instance
+      run: ssh ubuntu@54.158.91.9 sudo sh /opt/Update-Frontend.sh
