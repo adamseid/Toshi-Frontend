@@ -119,9 +119,9 @@ export default class Graph extends Component {
                 <div className='asset-text-history'>
                     Total Transactions
                 </div>
-                <div className='asset-text-history'>
+                {/* <div className='asset-text-history'>
                     Profit TX
-                </div>
+                </div> */}
                 <div className='asset-text-history'>
                     Profit Total
                 </div>
@@ -161,12 +161,12 @@ export default class Graph extends Component {
                                 <div className='asset-text-data-detailed-second-element'>
                                 {account[0]}
                                 </div>
-                                <div className='asset-text-data-detailed'>
+                                {/* <div className='asset-text-data-detailed'>
                                 {account[1]}
-                                </div>
+                                </div> */}
                                 <div className='asset-text-data-detailed'>
                                 {
-                                    account[2] > 0 ? (
+                                    account[2] >= 0 ? (
                                         <div class = "positive"> 
                                             <div className='top-positive'>
                                                 {account[2]} 
