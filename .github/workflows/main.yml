@@ -16,7 +16,7 @@ jobs:
       run: |
           chown -R $(id -u):$(id -g) $PWD
     - name: Adding Known Hosts
-      run: ssh-keyscan -H 54.158.91.9 >> ~/.ssh/known_hosts
+      run: ssh-keyscan -H 51.158.232.204 >> ~/.ssh/known_hosts
 
     - name: Connect to EC2 instance
-      run: ssh ubuntu@54.158.91.9 sudo sh /opt/Update-Frontend.sh
+      run: ssh ubuntu@51.158.232.204 sudo sh /mnt/Update-Frontend.sh
