@@ -35,7 +35,7 @@ const default_state = {
   },
 }
 
-
+const backend_url = "https://ws.toshitools.app/"
 
 export default class Profile extends Component {
   
@@ -149,6 +149,19 @@ export default class Profile extends Component {
     }
   }
 
+  getTableState = () => {
+    var url = backend_url + "api/toshi/assets/"
+        
+    axios.post( url , this.state).then((response) => {
+      console.log("READ: ", response.data['profile_response']['profile']['table'])
+      this.state['profile']['table'] = response.data['profile_response']['profile']['table']
+      this.setState(this.state)
+    }).catch(error => {
+      this.state['profile']['table'] = []
+      this.setState(this.state)
+    });
+  }
+
   onClickTotalLiqEth = () => {
     document.querySelectorAll(".profile-left-buttons")[0].classList.add("active-button")
     document.querySelectorAll(".profile-left-buttons")[1].classList.remove("active-button")
@@ -157,6 +170,8 @@ export default class Profile extends Component {
   onClickTotalTokens = () => {
     document.querySelectorAll(".profile-left-buttons")[1].classList.add("active-button")
     document.querySelectorAll(".profile-left-buttons")[0].classList.remove("active-button")
+    this.getTableState();
+    console.log(this.state['profile']['table'])
   }
 
   render() {

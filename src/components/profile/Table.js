@@ -20,7 +20,7 @@ export default class Graph extends Component {
         }).catch(error => {
             this.props.state['profile']['table'] = []
             this.setPropsState()
-          });;
+          });
       }
     
       setPropsState = () => {
