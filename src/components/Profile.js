@@ -37,7 +37,8 @@ const default_state = {
   },
 }
 
-const backend_url = "https://ws.toshitools.app/"
+// const backend_url = "https://ws.toshitools.app/"
+const backend_url = "http://127.0.0.1:8000/"
 
 export default class Profile extends Component {
   
@@ -174,7 +175,7 @@ export default class Profile extends Component {
   onClickTotalLiqEth = () => {
     document.querySelectorAll(".profile-left-buttons")[0].classList.add("active-button")
     document.querySelectorAll(".profile-left-buttons")[1].classList.remove("active-button")
-    this.state['profile']['display'] = false;
+    this.state['profile']['displayTotalTokens'] = false;
     this.setState(this.state)
   }
 
@@ -183,7 +184,7 @@ export default class Profile extends Component {
     document.querySelectorAll(".profile-left-buttons")[0].classList.remove("active-button")
     this.getTableState();
     this.getTotalTokens();
-    this.state['profile']['display'] = true;
+    this.state['profile']['displayTotalTokens'] = true;
     this.setState(this.state)
     console.log(this.state['profile']['table'])
     console.log(this.state['profile']['totalTokens'])
