@@ -149,6 +149,16 @@ export default class Profile extends Component {
     }
   }
 
+  onClickTotalLiqEth = () => {
+    document.querySelectorAll(".profile-left-buttons")[0].classList.add("active-button")
+    document.querySelectorAll(".profile-left-buttons")[1].classList.remove("active-button")
+  }
+
+  onClickTotalTokens = () => {
+    document.querySelectorAll(".profile-left-buttons")[1].classList.add("active-button")
+    document.querySelectorAll(".profile-left-buttons")[0].classList.remove("active-button")
+  }
+
   render() {
     return (
       <div className='bg'>
@@ -181,8 +191,8 @@ export default class Profile extends Component {
       <div className='profile-outer-container'>
         <div className='profile-left-side'>
           <div className='profile-left-buttons-container'>
-            <div className="profile-left-buttons">Total Liquid Eth</div>
-            <div className="profile-left-buttons">Total Tokens</div>
+            <div className="profile-left-buttons" onClick={this.onClickTotalLiqEth}>Total Liquid Eth</div>
+            <div className="profile-left-buttons" onClick={this.onClickTotalTokens}>Total Tokens</div>
           </div>
         < Graph
           state = {this.state}
