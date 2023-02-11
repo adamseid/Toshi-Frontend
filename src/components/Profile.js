@@ -31,7 +31,8 @@ const default_state = {
       dailyProfit: 0,
       hourlyProfit: 0,
       table: [],
-      component: []
+      component: [],
+      totalTokens: 0,
   },
 }
 
@@ -162,6 +163,13 @@ export default class Profile extends Component {
     });
   }
 
+  getTotalTokens = () => {
+    var tokensSum = 0
+    this.state['profile']['table'].forEach((asset)=> (tokensSum += asset[5]))
+    this.state['profile']['totalTokens'] = tokensSum;
+    this.setState(this.state)
+  }
+
   onClickTotalLiqEth = () => {
     document.querySelectorAll(".profile-left-buttons")[0].classList.add("active-button")
     document.querySelectorAll(".profile-left-buttons")[1].classList.remove("active-button")
@@ -171,7 +179,9 @@ export default class Profile extends Component {
     document.querySelectorAll(".profile-left-buttons")[1].classList.add("active-button")
     document.querySelectorAll(".profile-left-buttons")[0].classList.remove("active-button")
     this.getTableState();
+    this.getTotalTokens();
     console.log(this.state['profile']['table'])
+    console.log(this.state['profile']['totalTokens'])
   }
 
   render() {
