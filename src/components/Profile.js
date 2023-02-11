@@ -181,8 +181,8 @@ export default class Profile extends Component {
       <div className='profile-outer-container'>
         <div className='profile-left-side'>
           <div className='profile-left-buttons-container'>
-            <button className="profile-left-buttons">Total Liquid Eth</button>
-            <button className="profile-left-buttons">Total Tokens</button>
+            <div className="profile-left-buttons">Total Liquid Eth</div>
+            <div className="profile-left-buttons">Total Tokens</div>
           </div>
         < Graph
           state = {this.state}
