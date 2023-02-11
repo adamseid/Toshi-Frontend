@@ -19,4 +19,4 @@ jobs:
       run: ssh-keyscan -H 51.158.232.204 >> ~/.ssh/known_hosts
 
     - name: Connect to EC2 instance
-      run: ssh ubuntu@51.158.232.204 sudo sh /mnt/Update-Frontend.sh
+      run: ssh ubuntu@51.158.232.204 sh /mnt/Update-Frontend.sh
