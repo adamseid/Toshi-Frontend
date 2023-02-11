@@ -641,7 +641,7 @@ a {
   margin-right: 30px;
 }
 
-.profile-left-buttons:hover{
+.profile-left-buttons:hover, .active-button{
   font-family: Rajdhani;
   font-size: 14px;
   font-weight: 500;
@@ -656,6 +656,7 @@ a {
   height: 38px;
   width: 143.3px;
   color: black;
+  cursor: pointer;
 }
 
 .table-ids {
