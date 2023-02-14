@@ -14,8 +14,8 @@ import {
 
 const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 
-const backend_url = "https://ws.toshitools.app/"
-// const backend_url = "http://127.0.0.1:8000/" 
+// const backend_url = "https://ws.toshitools.app/"
+const backend_url = "http://127.0.0.1:8000/" 
 var toggle = true
 var walletID = ""
 const dexToolsURL = "https://etherscan.io/dex/uniswapv2/"
@@ -123,7 +123,7 @@ export default class Graph extends Component {
                     Profit TX
                 </div> */}
                 <div className='asset-text-history'>
-                    Profit Total
+                    Total Profit (USD)
                 </div>
             </div>
             <div className='account-table'>
@@ -169,7 +169,7 @@ export default class Graph extends Component {
                                     account[2] >= 0 ? (
                                         <div class = "positive"> 
                                             <div className='top-positive'>
-                                                {account[2]} 
+                                                ${account[8]} 
                                             </div>
                                             <div className='bottom'>
                                                 {this.props['state']['accountDetailed']['ethPriceChange']}
@@ -178,7 +178,7 @@ export default class Graph extends Component {
                                     ) :
                                         <div class = "negative"> 
                                             <div className='top-negative'>
-                                                {account[2]} 
+                                                ${account[8]} 
                                             </div>
                                             <div className='bottom'>
                                                 {this.props['state']['accountDetailed']['ethPriceChange']}
