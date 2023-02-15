@@ -89,6 +89,7 @@ export default class Graph extends Component {
         axios.post( url , this.props.state).then((response) => {
           console.log("READ: ", response.data['profile_response']['profile']['table'])
           this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
+          this.props.state['profile']['table'].push()
           this.setPropsState()
           console.log("Read State: " + this.props.state['profile']['table'])
         }).catch(error => {
@@ -214,7 +215,7 @@ export default class Graph extends Component {
                                 <div className='asset-text-data-detailed'>
                                     {this.props.state['profile']['table'].map(asset => {
                                         return(
-                                            account[3] == asset[0] && (<>${asset[5]}</>)
+                                            account[3] == asset[0] && (<><div>${asset[5]}</div><div>%{asset[3]}</div></>)
                                         )
                                     })}
                                 </div>
