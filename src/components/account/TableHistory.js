@@ -125,6 +125,9 @@ export default class Graph extends Component {
                 <div className='asset-text-history'>
                     Total Profit (USD)
                 </div>
+                <div className="asset-text-history">
+                    Current Holdings
+                </div>
             </div>
             <div className='account-table'>
                 <div className='account-detailed-inner-container'>
@@ -167,26 +170,28 @@ export default class Graph extends Component {
                                 <div className='asset-text-data-detailed'>
                                 {
                                     account[2] >= 0 ? (
-                                        <div class = "positive"> 
+                                        <div className = "positive"> 
                                             <div className='top-positive'>
-                                                ${account[8]} 
+                                                ${account[10]} 
                                             </div>
                                             <div className='bottom'>
-                                                {this.props['state']['accountDetailed']['ethPriceChange']}
+                                                { (account[9]) != 0 ? "%" + Math.round(Math.abs((account[2]/account[9]))*100) : "%0" }
                                             </div>
                                         </div>
                                     ) :
                                         <div class = "negative"> 
                                             <div className='top-negative'>
-                                                ${account[8]} 
+                                                ${account[10]} 
                                             </div>
                                             <div className='bottom'>
-                                                {this.props['state']['accountDetailed']['ethPriceChange']}
+                                                { (account[9]) != 0 ? "%" + Math.round((account[2]/account[9]))*100 : "%0" }
                                             </div>
                                         </div>
                                 }
                                 </div>
-
+                                <div className='asset-text-data-detailed'>
+                                    some data
+                                </div>
                             </div>
                         )
                     })
