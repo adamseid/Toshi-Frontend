@@ -205,7 +205,7 @@ export default class Graph extends Component {
                                                 ${account[10]} 
                                             </div>
                                             <div className='bottom'>
-                                                { (account[9]) != 0 ? "%" + Math.round(Math.abs((account[2]/account[9]))*100) : "%0" }
+                                                { (account[9]) !== 0 ? "%" + Math.round(Math.abs((account[2]/account[9]))*100) : "%0" }
                                             </div>
                                         </div>
                                     ) :
@@ -214,7 +214,7 @@ export default class Graph extends Component {
                                                 ${account[10]} 
                                             </div>
                                             <div className='bottom'>
-                                                { (account[9]) != 0 ? "%" + Math.round((account[2]/account[9]))*100 : "%0" }
+                                                { (account[9]) !== 0 ? "%" + Math.round((account[2]/account[9]))*100 : "%0" }
                                             </div>
                                         </div>
                                 }
