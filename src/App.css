@@ -949,7 +949,7 @@ a {
   justify-content: space-between;
   align-items: center;
   max-width: 50%;
-  margin-left: 10px;
+  margin-left: 22px;
 }
 
 .account-detailed-ids{
@@ -1081,6 +1081,10 @@ a {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.nowrap{
+  white-space: nowrap;
 }
 
 /* Toggle Button */

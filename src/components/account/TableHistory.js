@@ -78,6 +78,7 @@ export default class Graph extends Component {
           this.props.state['accountDetailed']['monthlyGraph'] = response.data['profile_response'][3]
           this.props.state['accountDetailed']['yearlyGraph'] = response.data['profile_response'][4]
           this.props.state['accountDetailed']['graph'] = response.data['profile_response'][4]
+          this.props.state['accountDetailed']['ethUsd'] = response.data['profile_response'][6]
           this.setPropsState()
           console.log("ACCOUNT GRAPGH STATE: ",this.props.state)
         });
@@ -113,6 +114,12 @@ export default class Graph extends Component {
           walletID = this.props['state']['header']['walletAddress']
           
       }
+
+      onClickSwitchHandler = () => {
+        this.props.state['accountDetailed']['holdingsDisplay'] = !(this.props.state['accountDetailed']['holdingsDisplay']);
+        this.setPropsState();
+        console.log("switched")
+      }
       
 
   render() {
@@ -139,13 +146,13 @@ export default class Graph extends Component {
                 {/* <div className='asset-text-history'>
                     Profit TX
                 </div> */}
-                <div className='asset-text-history'>
-                    Total Profit (USD)
+                <div className='asset-text-history nowrap'>
+                    Total Profit <br/>(USD)
                 </div>
-                <div className="asset-text-history">
-                    Current Holdings
+                <div className="asset-text-history nowrap">
+                    Current Holdings<br/>
                     <label className="switch">
-                        <input type="checkbox"/>
+                        <input type="checkbox" onClick={this.onClickSwitchHandler} checked={this.props.state['accountDetailed']['holdingsDisplay']}/>
                         <span className="slider round"></span>
                         <span className="ETH-label">ETH</span>
                         <span className="USD-label">USD</span>
@@ -213,11 +220,18 @@ export default class Graph extends Component {
                                 }
                                 </div>
                                 <div className='asset-text-data-detailed'>
-                                    {this.props.state['profile']['table'].map(asset => {
+                                    {this.props.state['accountDetailed']['holdingsDisplay'] ? 
+                                    (this.props.state['profile']['table'].map(asset => {
                                         return(
-                                            account[3] == asset[0] && (<><div>${asset[5]}</div><div>%{asset[3]}</div></>)
+                                            account[3] === asset[0] && (<><div>${asset[5]}</div><div>%{asset[3]}</div></>)
                                         )
-                                    })}
+                                    }))
+                                    : 
+                                    (this.props.state['profile']['table'].map(asset => {
+                                        return(
+                                            account[3] === asset[0] && (<><div className="nowrap">{Math.round(asset[5]/this.props.state['accountDetailed']['ethUsd']*10)/10} ETH</div><div>%{asset[3]}</div></>)
+                                        )
+                                    }))}
                                 </div>
                             </div>
                         )
