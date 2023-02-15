@@ -33,6 +33,9 @@ const default_state = {
     dailyTable:[],
     hourlyTable:[],
     ethPriceChange: 0,
+  },
+  profile: {
+    table: [],
   }
 }
 

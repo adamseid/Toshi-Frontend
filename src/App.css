@@ -1081,3 +1081,21 @@ a {
   width: 100%;
   justify-content: space-between;
 }
+
+/* Toggle Button */
+/* .toggle{
+  --width: 60px;
+  --height: calc(var(--width)/3);
+
+  position: relative;
+  display: inline-block;
+  width: var(--weight);
+  height: var(--height);
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.3);
+  border-radius: var(--height);
+  cursor: pointer;
+}
+
+.toggle input{
+  display: none;
+} */

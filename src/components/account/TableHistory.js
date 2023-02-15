@@ -82,6 +82,21 @@ export default class Graph extends Component {
           console.log("ACCOUNT GRAPGH STATE: ",this.props.state)
         });
       }
+
+      getCurrentHoldings = () => {
+        var url = "http://127.0.0.1:8000/" + "api/toshi/assets/"
+            
+        axios.post( url , this.props.state).then((response) => {
+          console.log("READ: ", response.data['profile_response']['profile']['table'])
+          this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
+          this.setPropsState()
+          console.log("Read State: " + this.props.state['profile']['table'])
+        }).catch(error => {
+          this.props.state['profile']['table'] = []
+          this.setPropsState()
+          console.log("Error in getCurrentHoldings" + error.message)
+        });
+      }
     
       setPropsState = () => {
         this.setState(this.props.state)
@@ -92,6 +107,7 @@ export default class Graph extends Component {
             this.props['state']['accountDetailed']['table'] = []
             this.assetTableHttpRequest()
             this.graphHttpRequest()
+            this.getCurrentHoldings()
           }
           walletID = this.props['state']['header']['walletAddress']
           
@@ -127,6 +143,11 @@ export default class Graph extends Component {
                 </div>
                 <div className="asset-text-history">
                     Current Holdings
+                    <label class="toggle">
+                        <input type="checkbox"/>
+                        <span class="slider"></span>
+                        <span class="labels" data-on="ON" data-off="OFF"></span>
+                    </label>
                 </div>
             </div>
             <div className='account-table'>
