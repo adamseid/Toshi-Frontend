@@ -143,10 +143,11 @@ export default class Graph extends Component {
                 </div>
                 <div className="asset-text-history">
                     Current Holdings
-                    <label class="toggle">
+                    <label className="switch">
                         <input type="checkbox"/>
-                        <span class="slider"></span>
-                        <span class="labels" data-on="ON" data-off="OFF"></span>
+                        <span className="slider round"></span>
+                        <span className="ETH-label">ETH</span>
+                        <span className="USD-label">USD</span>
                     </label>
                 </div>
             </div>
