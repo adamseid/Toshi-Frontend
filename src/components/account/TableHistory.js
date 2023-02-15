@@ -211,7 +211,11 @@ export default class Graph extends Component {
                                 }
                                 </div>
                                 <div className='asset-text-data-detailed'>
-                                    some data
+                                    {this.props.state['profile']['table'].map(asset => {
+                                        return(
+                                            account[3] == asset[0] && (<>${asset[5]}</>)
+                                        )
+                                    })}
                                 </div>
                             </div>
                         )
