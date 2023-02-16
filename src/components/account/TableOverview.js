@@ -32,8 +32,10 @@ export default class Graph extends Component {
             this.props['state']['accountOverview']['ethUsd'] = response.data['profile_response'][6]
             let sum = 0;
             let tokensProfitable = 0;
+            let totalgas = 0;
             response.data['profile_response'][0].forEach((token)=>{
                 sum += token[2];
+                totalgas += token[10];
                 if(token[2] > 0){
                     tokensProfitable += 1;
                 }
@@ -41,6 +43,7 @@ export default class Graph extends Component {
             this.props['state']['accountOverview']['profit'] = sum;
             this.props['state']['accountOverview']['tokensTraded'] = response.data['profile_response'][0].length
             this.props['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
+            this.props['state']['accountOverview']['totalGas'] = totalgas;
             this.setPropsState()
             console.log("TABLEOVERVIEW STATE: " + this.props.state['accountOverview'])
         }).catch(error => {
@@ -96,10 +99,10 @@ export default class Graph extends Component {
                         {this.props.state.accountOverview.tokensProfitable}
                     </div>
                     <div className='asset-text-data'>
-                        %{this.props.state.accountOverview.tokensProfitable / this.props.state.accountOverview.tokensTraded * 100}
+                        %{Math.round(this.props.state.accountOverview.tokensProfitable / this.props.state.accountOverview.tokensTraded * 100 * 10)/10}
                     </div>
                     <div className='asset-text-data'>
-                            
+                        ${Math.round(this.props.state.accountOverview.totalGas * this.props.state.accountOverview.ethUsd * 10000 )/10000}
                     </div>
                 </div>
       

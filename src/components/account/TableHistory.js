@@ -202,7 +202,7 @@ export default class Graph extends Component {
                                     account[2] >= 0 ? (
                                         <div className = "positive"> 
                                             <div className='top-positive'>
-                                                ${account[10]} 
+                                                ${account[11]} 
                                             </div>
                                             <div className='bottom'>
                                                 { (account[9]) !== 0 ? "%" + Math.round(Math.abs((account[2]/account[9]))*100) : "%0" }
@@ -211,7 +211,7 @@ export default class Graph extends Component {
                                     ) :
                                         <div class = "negative"> 
                                             <div className='top-negative'>
-                                                ${account[10]} 
+                                                ${account[11]} 
                                             </div>
                                             <div className='bottom'>
                                                 { (account[9]) !== 0 ? "%" + Math.round((account[2]/account[9]))*100 : "%0" }
