@@ -126,7 +126,7 @@ export default class Graph extends Component {
     return (
     <div className = "table-overview-outer-container">
         <div className='profile-header-text'>
-            Your Wallet History
+            Token History Overview
         </div>
         <div className='date-change'>
             <button className='hour' onClick={this.select.bind(this, time_frame[0])}>{time_frame[0]}</button>
