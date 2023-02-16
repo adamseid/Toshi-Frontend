@@ -46,7 +46,8 @@ const default_state = {
   }
 }
 
-
+const backend_url = "http://127.0.0.1:8000/" 
+var walletID = ""
 
 export default class Profile extends Component {
   
@@ -55,6 +56,55 @@ export default class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = default_state
+  }
+
+  assetTableHttpRequest = () => {
+    var url = backend_url + "api/toshi/accounthistory/"
+    
+    axios.post( url , this.state).then((response) => {
+        // token history overview states
+        console.log("ACCOUNT DETAILS: ",response.data)
+        this['state']['accountDetailed']['table'] = response.data['profile_response'][0]
+        this['state']['accountDetailed']['yearlyTable'] = response.data['profile_response'][0]
+        this['state']['accountDetailed']['monthlyTable'] = response.data['profile_response'][1]
+        this['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
+        this['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
+        this['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
+        this['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][5]
+
+        // profit history overview states
+        console.log("ACCOUNT DETAILS: ",response.data)
+        this['state']['accountOverview']['table'] = response.data['profile_response'][0]
+        this['state']['accountOverview']['ethUsd'] = response.data['profile_response'][6]
+        let sum = 0;
+        let tokensProfitable = 0;
+        let totalgas = 0;
+        response.data['profile_response'][0].forEach((token)=>{
+            sum += token[2];
+            totalgas += token[10];
+            if(token[2] > 0){
+                tokensProfitable += 1;
+            }
+        })
+        this['state']['accountOverview']['profit'] = sum;
+        this['state']['accountOverview']['tokensTraded'] = response.data['profile_response'][0].length
+        this['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
+        this['state']['accountOverview']['totalGas'] = totalgas;
+
+        this.setState(this.state)
+
+    }).catch(error => {
+        console.log(error)
+      })
+  }
+
+  componentDidUpdate = () => {
+    if(walletID != this['state']['header']['walletAddress']){
+        this['state']['accountDetailed']['table'] = []
+        this.assetTableHttpRequest()
+      }
+      walletID = this['state']['header']['walletAddress']
+      
   }
 
   urlWalletAddress = (wallet) => {

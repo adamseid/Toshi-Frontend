@@ -23,44 +23,44 @@ export default class Graph extends Component {
     //       })
     //   }
 
-    assetTableHttpRequest = () => {
-        var url = backend_url + "api/toshi/accounthistory/"
+    // assetTableHttpRequest = () => {
+    //     var url = backend_url + "api/toshi/accounthistory/"
         
-        axios.post( url , this.props.state).then((response) => {
-            console.log("ACCOUNT DETAILS: ",response.data)
-            this.props['state']['accountOverview']['table'] = response.data['profile_response'][0]
-            this.props['state']['accountOverview']['ethUsd'] = response.data['profile_response'][6]
-            let sum = 0;
-            let tokensProfitable = 0;
-            let totalgas = 0;
-            response.data['profile_response'][0].forEach((token)=>{
-                sum += token[2];
-                totalgas += token[10];
-                if(token[2] > 0){
-                    tokensProfitable += 1;
-                }
-            })
-            this.props['state']['accountOverview']['profit'] = sum;
-            this.props['state']['accountOverview']['tokensTraded'] = response.data['profile_response'][0].length
-            this.props['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
-            this.props['state']['accountOverview']['totalGas'] = totalgas;
-            this.setPropsState()
-            console.log("TABLEOVERVIEW STATE: " + this.props.state['accountOverview'])
-        }).catch(error => {
-            console.log(error)
-          })
-      }
+    //     axios.post( url , this.props.state).then((response) => {
+    //         console.log("ACCOUNT DETAILS: ",response.data)
+    //         this.props['state']['accountOverview']['table'] = response.data['profile_response'][0]
+    //         this.props['state']['accountOverview']['ethUsd'] = response.data['profile_response'][6]
+    //         let sum = 0;
+    //         let tokensProfitable = 0;
+    //         let totalgas = 0;
+    //         response.data['profile_response'][0].forEach((token)=>{
+    //             sum += token[2];
+    //             totalgas += token[10];
+    //             if(token[2] > 0){
+    //                 tokensProfitable += 1;
+    //             }
+    //         })
+    //         this.props['state']['accountOverview']['profit'] = sum;
+    //         this.props['state']['accountOverview']['tokensTraded'] = response.data['profile_response'][0].length
+    //         this.props['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
+    //         this.props['state']['accountOverview']['totalGas'] = totalgas;
+    //         this.setPropsState()
+    //         console.log("TABLEOVERVIEW STATE: " + this.props.state['accountOverview'])
+    //     }).catch(error => {
+    //         console.log(error)
+    //       })
+    //   }
 
       setPropsState = () => {
         this.setState(this.props.state)
       }
     
-      componentDidUpdate = () => {
-        if(walletID != this.props['state']['header']['walletAddress']){
-            this.assetTableHttpRequest()
-          }
-          walletID = this.props['state']['header']['walletAddress']
-      }
+    //   componentDidUpdate = () => {
+    //     if(walletID != this.props['state']['header']['walletAddress']){
+    //         this.assetTableHttpRequest()
+    //       }
+    //       walletID = this.props['state']['header']['walletAddress']
+    //   }
       
 
   render() {

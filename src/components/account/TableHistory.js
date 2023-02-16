@@ -48,25 +48,25 @@ export default class Graph extends Component {
         event.target.classList.add("active")
     }
 
-    assetTableHttpRequest = () => {
-        var url = backend_url + "api/toshi/accounthistory/"
+    // assetTableHttpRequest = () => {
+    //     var url = backend_url + "api/toshi/accounthistory/"
         
-        axios.post( url , this.props.state).then((response) => {
-            console.log("ACCOUNT DETAILS: ",response.data)
-            this.props['state']['accountDetailed']['table'] = response.data['profile_response'][0]
-            this.props['state']['accountDetailed']['yearlyTable'] = response.data['profile_response'][0]
-            this.props['state']['accountDetailed']['monthlyTable'] = response.data['profile_response'][1]
-            this.props['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
-            this.props['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
-            this.props['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
-            this.props['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][5]
+    //     axios.post( url , this.props.state).then((response) => {
+    //         console.log("ACCOUNT DETAILS: ",response.data)
+    //         this.props['state']['accountDetailed']['table'] = response.data['profile_response'][0]
+    //         this.props['state']['accountDetailed']['yearlyTable'] = response.data['profile_response'][0]
+    //         this.props['state']['accountDetailed']['monthlyTable'] = response.data['profile_response'][1]
+    //         this.props['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
+    //         this.props['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
+    //         this.props['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
+    //         this.props['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][5]
 
-            this.setPropsState()
+    //         this.setPropsState()
 
-        }).catch(error => {
-            console.log(error)
-          })
-      }
+    //     }).catch(error => {
+    //         console.log(error)
+    //       })
+    //   }
 
       graphHttpRequest = () => {
         var url = backend_url + "api/toshi/accountGraph/"
@@ -107,7 +107,7 @@ export default class Graph extends Component {
       componentDidUpdate = () => {
         if(walletID != this.props['state']['header']['walletAddress']){
             this.props['state']['accountDetailed']['table'] = []
-            this.assetTableHttpRequest()
+            // this.assetTableHttpRequest()
             this.graphHttpRequest()
             this.getCurrentHoldings()
           }
