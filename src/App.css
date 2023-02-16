@@ -1165,3 +1165,11 @@ input:checked + .slider:before {
   top: 2px;
   font-weight: 700;
 }
+
+.green{
+  color: #5CC489;
+}
+
+.red{
+  color: red;
+}
