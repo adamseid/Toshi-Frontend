@@ -18,6 +18,11 @@ const default_state = {
   },
   accountOverview: {
       table: [],
+      ethUsd: 0,
+      profit: 0,
+      tokensTraded: 0,
+      tokensProfitable: 0,
+      totalGas: 0,
   },
   accountDetailed: {
     table: [],
