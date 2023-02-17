@@ -37,6 +37,7 @@ const default_state = {
     weeklyTable:[],
     dailyTable:[],
     hourlyTable:[],
+    maxTable:[],
     ethPriceChange: 0,
     ethUsd: 1,
     holdingsDisplay: false,
@@ -74,13 +75,14 @@ export default class Profile extends Component {
         this['state']['accountOverview']['tokensTraded'] = this['state']['accountOverview']['table'].length
         this['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
         this['state']['accountOverview']['totalGas'] = totalgas * this['state']['accountOverview']['ethUsd'];
-  }
+      }
+
 
   select = (data,event) => {
     if(data == "MAX"){
         this.state['accountDetailed']['graph'] = this.state['accountDetailed']['yearlyGraph']
-        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['yearlyTable']
-        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['yearlyTable']
+        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['maxTable']
+        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['maxTable']
     }else if (data == "1D"){
         this.state['accountDetailed']['graph'] = this.state['accountDetailed']['dailyGraph']
         this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['dailyTable']
@@ -122,17 +124,19 @@ export default class Profile extends Component {
         this['state']['accountDetailed']['monthlyTable'] = response.data['profile_response'][1]
         this['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
         this['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
-        this['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
-        this['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][5]
+        // this['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
+        this['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][4]
+        this['state']['accountDetailed']['maxTable'] = response.data['profile_response'][6]
 
         // profit history overview states
-        console.log("ACCOUNT DETAILS: ",response.data)
+        
         this['state']['accountOverview']['table'] = response.data['profile_response'][0]
-        this['state']['accountOverview']['ethUsd'] = response.data['profile_response'][6]
+        this['state']['accountOverview']['ethUsd'] = response.data['profile_response'][5]
         this.updateAccountOverviewStates();
 
         this.setState(this.state)
-
+        console.log(this['state']['accountOverview']['profit'])
+        console.log(this['state']['accountOverview']['totalGas'])
     }).catch(error => {
         console.log(error)
       })
