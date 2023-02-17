@@ -31,11 +31,14 @@ const default_state = {
       dailyProfit: 0,
       hourlyProfit: 0,
       table: [],
-      component: []
+      component: [],
+      totalTokens: 0,
+      displayTotalTokens: false,
   },
 }
 
-
+// const backend_url = "https://ws.toshitools.app/"
+const backend_url = "http://127.0.0.1:8000/"
 
 export default class Profile extends Component {
   
@@ -149,6 +152,44 @@ export default class Profile extends Component {
     }
   }
 
+  getTableState = () => {
+    var url = backend_url + "api/toshi/assets/"
+        
+    axios.post( url , this.state).then((response) => {
+      console.log("READ: ", response.data['profile_response']['profile']['table'])
+      this.state['profile']['table'] = response.data['profile_response']['profile']['table']
+      this.setState(this.state)
+    }).catch(error => {
+      this.state['profile']['table'] = []
+      this.setState(this.state)
+    });
+  }
+
+  getTotalTokens = () => {
+    var tokensSum = 0
+    this.state['profile']['table'].forEach((asset)=> (tokensSum += asset[5]))
+    this.state['profile']['totalTokens'] = tokensSum;
+    this.setState(this.state)
+  }
+
+  onClickTotalLiqEth = () => {
+    document.querySelectorAll(".profile-left-buttons")[0].classList.add("active-button")
+    document.querySelectorAll(".profile-left-buttons")[1].classList.remove("active-button")
+    this.state['profile']['displayTotalTokens'] = false;
+    this.setState(this.state)
+  }
+
+  onClickTotalTokens = () => {
+    document.querySelectorAll(".profile-left-buttons")[1].classList.add("active-button")
+    document.querySelectorAll(".profile-left-buttons")[0].classList.remove("active-button")
+    this.getTableState();
+    this.getTotalTokens();
+    this.state['profile']['displayTotalTokens'] = true;
+    this.setState(this.state)
+    console.log(this.state['profile']['table'])
+    console.log(this.state['profile']['totalTokens'])
+  }
+
   render() {
     return (
       <div className='bg'>
@@ -180,6 +221,10 @@ export default class Profile extends Component {
         </div>
       <div className='profile-outer-container'>
         <div className='profile-left-side'>
+          <div className='profile-left-buttons-container'>
+            <div className="profile-left-buttons active-button" onClick={this.onClickTotalLiqEth}>Total Liquid Eth</div>
+            <div className="profile-left-buttons" onClick={this.onClickTotalTokens}>Total Tokens</div>
+          </div>
         < Graph
           state = {this.state}
         />

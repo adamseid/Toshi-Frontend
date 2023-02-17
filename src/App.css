@@ -614,6 +614,51 @@ a {
   width: 50%;
 }
 
+.profile-left-buttons-container{
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  min-height: 80px;
+}
+
+.profile-left-buttons{
+  font-family: Rajdhani;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  box-shadow: 0px 0px 2px 2px #7dffa1;
+  border-radius: 27px;
+  max-width: 143.3px;
+  max-height: 38px;
+  width: 143.3px;
+  height: 38px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.profile-left-buttons:hover, .active-button{
+  font-family: Rajdhani;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  max-height: 38px;
+  max-width: 143.3px;
+  border-radius: 27px;
+  background: #7DFFA1;
+  margin-right: 30px;
+  height: 38px;
+  width: 143.3px;
+  color: black;
+  cursor: pointer;
+}
+
 .table-ids {
   border-bottom: 0.33px solid #05D3F2;
   padding-bottom: 7.22px;
@@ -781,8 +826,8 @@ a {
   text-align: left;
   padding-top: 7px;
   padding-bottom: 7px;
-  padding-right: 3px;
-  padding-left: 3px;
+  padding-right: 20px;
+  padding-left: 20px;
   border-radius: 1.47px;
   color: #86F9A6;
   border: none;
@@ -823,7 +868,7 @@ a {
   padding-top: 2px;
   padding-bottom: 2px;
   border-radius: 4.15px;
-  margin-bottom: 8.15px;
+  margin-bottom: 14.15px;
 }
 
 .wallet-amount {
@@ -904,6 +949,7 @@ a {
   justify-content: space-between;
   align-items: center;
   max-width: 50%;
+  margin-left: 22px;
 }
 
 .account-detailed-ids{
@@ -1035,4 +1081,95 @@ a {
   display: flex;
   width: 100%;
   justify-content: space-between;
+}
+
+.nowrap{
+  white-space: nowrap;
+}
+
+/* Toggle Button */
+
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 17px;
+  margin-top: 5px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  border: 3px solid darkgreen;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 15px;
+  width: 26px;
+  left: -2px;
+  bottom: -1px;
+  background-color: darkgreen;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: transparent;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px darkgreen;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(22px);
+  -ms-transform: translateX(22px);
+  transform: translateX(22px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 20px;
+}
+
+.ETH-label{
+  position: absolute;
+  top: 2px;
+  font-weight: 700;
+}
+
+.USD-label{
+  position: absolute;
+  left: 28px;
+  top: 2px;
+  font-weight: 700;
+}
+
+.green{
+  color: #5CC489;
+}
+
+.red{
+  color: red;
 }

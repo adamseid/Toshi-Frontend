@@ -103,10 +103,11 @@ export default class Graph extends Component {
           <div className='profile-wallet-information-right'>
             <div className='wallet-worth'>
               {
-                this.props.state['profile']['accountBalance'] ? (
+                this.props.state['profile']['displayTotalTokens'] ? (this.props.state['profile']['totalTokens']) :
+                (this.props.state['profile']['accountBalance'] ? (
                   Math.round((this.props.state['profile']['accountBalance']*100))/100
                 ) :
-                <>0</>
+                <>0</>)
               }
             </div>
             {/* <div className='wallet-change'>
