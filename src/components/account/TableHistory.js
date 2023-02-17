@@ -12,7 +12,7 @@ import {
     Label
 } from "recharts";
 
-const time_frame = ['1H', '1D', '1W', '1M', '1Y']
+// const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 
 // const backend_url = "https://ws.toshitools.app/"
 const backend_url = "http://127.0.0.1:8000/" 
@@ -22,31 +22,31 @@ const dexToolsURL = "https://etherscan.io/dex/uniswapv2/"
 
 export default class Graph extends Component {  
 
-    select = (data,event) => {
-        if(data == "1H"){
-            this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['hourlyGraph']
-            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['hourlyTable']
-        }else if (data == "1D"){
-            this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['dailyGraph']
-            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['dailyTable']
-        }else if (data == "1W"){
-            this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['weeklyGraph']
-            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['weeklyTable']
-        }else if(data == "1M"){
-            this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['monthlyGraph']
-            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['monthlyTable']
-        }else if(data == "1Y"){
-            this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['yearlyGraph']
-            this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['yearlyTable']
-        }
-        this.setPropsState()
+    // select = (data,event) => {
+    //     if(data == "1H"){
+    //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['hourlyGraph']
+    //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['hourlyTable']
+    //     }else if (data == "1D"){
+    //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['dailyGraph']
+    //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['dailyTable']
+    //     }else if (data == "1W"){
+    //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['weeklyGraph']
+    //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['weeklyTable']
+    //     }else if(data == "1M"){
+    //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['monthlyGraph']
+    //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['monthlyTable']
+    //     }else if(data == "1Y"){
+    //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['yearlyGraph']
+    //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['yearlyTable']
+    //     }
+    //     this.setPropsState()
         
-        for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
-            document.getElementsByClassName("hour")[i].classList.remove("active")
-          }
+    //     for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
+    //         document.getElementsByClassName("hour")[i].classList.remove("active")
+    //       }
     
-        event.target.classList.add("active")
-    }
+    //     event.target.classList.add("active")
+    // }
 
     // assetTableHttpRequest = () => {
     //     var url = backend_url + "api/toshi/accounthistory/"
@@ -128,13 +128,13 @@ export default class Graph extends Component {
         <div className='profile-header-text'>
             Token History Overview
         </div>
-        <div className='date-change'>
+        {/* <div className='date-change'>
             <button className='hour' onClick={this.select.bind(this, time_frame[0])}>{time_frame[0]}</button>
             <button className='hour' onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
             <button className='hour' onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
             <button className='hour' onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
             <button className='hour active' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
-        </div>
+        </div> */}
         <div className='account-container'>
             <div className='account-ids'>
                 <div className='asset-text-first-history'>

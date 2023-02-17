@@ -48,6 +48,7 @@ const default_state = {
 
 const backend_url = "http://127.0.0.1:8000/" 
 var walletID = ""
+const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX']
 
 export default class Profile extends Component {
   
@@ -56,6 +57,58 @@ export default class Profile extends Component {
   constructor(props) {
     super(props)
     this.state = default_state
+  }
+
+  updateAccountOverviewStates = () => {
+    let sum = 0;
+        let tokensProfitable = 0;
+        let totalgas = 0;
+        this['state']['accountOverview']['table'].forEach((token)=>{
+            sum += token[2];
+            totalgas += token[10];
+            if(token[2] > 0){
+                tokensProfitable += 1;
+            }
+        })
+        this['state']['accountOverview']['profit'] = sum;
+        this['state']['accountOverview']['tokensTraded'] = this['state']['accountOverview']['table'].length
+        this['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
+        this['state']['accountOverview']['totalGas'] = totalgas * this['state']['accountOverview']['ethUsd'];
+  }
+
+  select = (data,event) => {
+    if(data == "MAX"){
+        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['yearlyGraph']
+        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['yearlyTable']
+        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['yearlyTable']
+    }else if (data == "1D"){
+        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['dailyGraph']
+        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['dailyTable']
+        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['dailyTable']
+    }else if (data == "1W"){
+        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['weeklyGraph']
+        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['weeklyTable']
+        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['weeklyTable']
+    }else if(data == "1M"){
+        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['monthlyGraph']
+        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['monthlyTable']
+        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['monthlyTable']
+    }else if(data == "1Y"){
+        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['yearlyGraph']
+        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['yearlyTable']
+        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['yearlyTable']
+    }
+
+    this.updateAccountOverviewStates();
+
+
+    this.setState(this.state)
+    
+    for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
+        document.getElementsByClassName("hour")[i].classList.remove("active")
+      }
+
+    event.target.classList.add("active")
   }
 
   assetTableHttpRequest = () => {
@@ -76,20 +129,7 @@ export default class Profile extends Component {
         console.log("ACCOUNT DETAILS: ",response.data)
         this['state']['accountOverview']['table'] = response.data['profile_response'][0]
         this['state']['accountOverview']['ethUsd'] = response.data['profile_response'][6]
-        let sum = 0;
-        let tokensProfitable = 0;
-        let totalgas = 0;
-        response.data['profile_response'][0].forEach((token)=>{
-            sum += token[2];
-            totalgas += token[10];
-            if(token[2] > 0){
-                tokensProfitable += 1;
-            }
-        })
-        this['state']['accountOverview']['profit'] = sum;
-        this['state']['accountOverview']['tokensTraded'] = response.data['profile_response'][0].length
-        this['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
-        this['state']['accountOverview']['totalGas'] = totalgas * response.data['profile_response'][6];
+        this.updateAccountOverviewStates();
 
         this.setState(this.state)
 
@@ -242,6 +282,13 @@ export default class Profile extends Component {
           <LeftBar walletId = {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)} />
         </div>
       <div className='account-outer-container'>
+        <div className='date-change'>
+            <button className='hour' onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
+            <button className='hour' onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
+            <button className='hour' onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
+            <button className='hour active' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
+            <button className='hour' onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
+        </div>
         < TableOverview
             state = {this.state}
         />
