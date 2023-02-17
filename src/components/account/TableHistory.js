@@ -170,7 +170,7 @@ export default class Graph extends Component {
                             <div key={index} className='account-detailed-ids'>
                                 <div className='asset-text-data-detailed-first-element'>
                                     <div className='account-token-outer-container'>
-                                        <img className='account-bullet' src = {BulletPoint} />
+                                        <img className='account-bullet' src = {account[11] ? account[11] : BulletPoint} />
                                         <div className='account-token-inner-container'>
                                             <a href = {dexToolsURL + account[7]} className='account-top-row'>
                                                 <div className='account-token-name'>
@@ -202,7 +202,7 @@ export default class Graph extends Component {
                                     account[2] >= 0 ? (
                                         <div className = "positive"> 
                                             <div className='top-positive'>
-                                                ${account[11]} 
+                                                ${account[12]} 
                                             </div>
                                             <div className='bottom'>
                                                 { (account[9]) !== 0 ? "%" + Math.round(Math.abs((account[2]/account[9]))*100) : "%0" }
@@ -211,7 +211,7 @@ export default class Graph extends Component {
                                     ) :
                                         <div class = "negative"> 
                                             <div className='top-negative'>
-                                                ${account[11]} 
+                                                ${account[12]} 
                                             </div>
                                             <div className='bottom'>
                                                 { (account[9]) !== 0 ? "%" + Math.round((account[2]/account[9]))*100 : "%0" }

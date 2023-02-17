@@ -98,7 +98,7 @@ export default class Graph extends Component {
                     <div className='asset-text-data'>
                         {this.props.state.accountOverview.tokensProfitable}
                     </div>
-                    <div className={'asset-text-data' + (this.props.state.accountOverview.tokensProfitable / this.props.state.accountOverview.tokensTraded * 100 > 50 ? " green" : " red")} >
+                    <div className={'asset-text-data' + (this.props.state.accountOverview.tokensProfitable / this.props.state.accountOverview.tokensTraded * 100 >= 50 ? " green" : " red")} >
                         %{Math.round(this.props.state.accountOverview.tokensProfitable / this.props.state.accountOverview.tokensTraded * 100 * 10)/10}
                     </div>
                     <div className='asset-text-data red'>
