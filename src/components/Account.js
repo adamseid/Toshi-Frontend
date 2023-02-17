@@ -89,7 +89,7 @@ export default class Profile extends Component {
         this['state']['accountOverview']['profit'] = sum;
         this['state']['accountOverview']['tokensTraded'] = response.data['profile_response'][0].length
         this['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
-        this['state']['accountOverview']['totalGas'] = totalgas;
+        this['state']['accountOverview']['totalGas'] = totalgas * response.data['profile_response'][6];
 
         this.setState(this.state)
 
