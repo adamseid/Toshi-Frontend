@@ -200,10 +200,17 @@ export default class Graph extends Component {
                       ) : <></>   
                 }
                 </div>
-                
-
-                <div className="asset-text-data-detailed-second-element">
-                    
+   
+                <div className="asset-text-data-detailed">
+                    {this.props.state.accountDetailed.transactionsPerToken[0] ? 
+                    Object.values(this.props.state.accountDetailed.transactionsPerToken[0]).map((value,index) => {
+                        return (
+                        <div>
+                            {value}
+                        </div>
+                        )
+                    } )
+                    : <></>}
                 </div>
                 
                 <div className="asset-text-data-detailed">
@@ -212,17 +219,17 @@ export default class Graph extends Component {
                         return (
                             value >= 0 ? (
                                 <div className = "positive">
-                                    <div className='top-positive'>
-                                        {value}
+                                    <div>
+                                        +${value}
                                     </div>
                                     <div className='bottom'>
                                         0%
                                     </div>
                                 </div>
                             ) :
-                            <div class = "negative">
-                                <div className='top-negative'>
-                                    {value}
+                            <div className = "negative">
+                                <div>
+                                    -${Math.abs(value)}
                                 </div>
                                 <div className='bottom'>
                                     0%
