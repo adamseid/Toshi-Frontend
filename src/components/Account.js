@@ -4,6 +4,7 @@ import { updateState } from '../modules/Profile'
 import Graph from './account/Graph'
 import TableOverview from './account/TableOverview'
 import TableHistory from './account/TableHistory'
+import VolumeHistoryOverviewTable from './account/VolumeHistoryOverviewTable'
 import axios from "axios";
 import LeftBar from "./account/header/LeftBar"
 import { useNavigate } from "react-router-dom";
@@ -33,6 +34,9 @@ const default_state = {
     dailyTable:[],
     hourlyTable:[],
     ethPriceChange: 0,
+  },
+  volumeHistoryTable: {
+    maxVolumeHistoryTable:[]
   }
 }
 
@@ -78,8 +82,9 @@ export default class Profile extends Component {
         if(result[0]){
           if(result[0].length > 0){
             this.updateWalletAddress()
-            const walletTest=this.state['header']['walletAddress'] = result[0]
-            // const walletTest=this.state['header']['walletAddress'] =  "0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A"
+            // const walletTest=this.state['header']['walletAddress'] =  "0xEcd2Ae407bBADaAB3A0A1Bf0c0a009C9f272a8F7"
+            // const walletTest=this.state['header']['walletAddress'] = result[0]
+            const walletTest=this.state['header']['walletAddress'] =  "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"
             this.sendWalletAddress(walletTest);       
           }
         }
@@ -184,6 +189,9 @@ export default class Profile extends Component {
       <div className='account-outer-container'>
         < TableOverview
             state = {this.state}
+        />
+        < VolumeHistoryOverviewTable
+          state = {this.state}
         />
         < TableHistory
             state = {this.state}

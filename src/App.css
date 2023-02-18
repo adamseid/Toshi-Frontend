@@ -903,7 +903,7 @@ a {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  max-width: 50%;
+  max-width: 70%;
 }
 
 .account-detailed-ids{
