@@ -29,7 +29,7 @@ const default_state = {
     profitDict: {},
     tokensProfitable: 0,
     transactionsPerToken: {},
-    tokenExpenses: {},
+    tokenDetails: {},
     
     table: [],
     graph: [],
@@ -77,7 +77,7 @@ export default class Profile extends Component {
         this.state['accountDetailed']['profitDict'] = [response.data['profile_response'][5]]
         this.state['accountDetailed']['tokensProfitable'] = [response.data['profile_response'][6]]
         this.state['accountDetailed']['transactionsPerToken'] = [response.data['profile_response'][7]]
-        this.state['accountDetailed']['tokenExpenses'] = [response.data['profile_response'][8]]
+        this.state['accountDetailed']['tokenDetails'] = [response.data['profile_response'][8]]
         this.setState(this.state)
         console.log("VOLUME HISTORY STATE RESPONSE: ", this.state['volumeHistoryTable']['maxVolumeHistoryTable'])
         console.log("profitDict: ", this.state.accountDetailed.profitDict)
