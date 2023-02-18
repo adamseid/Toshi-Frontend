@@ -8,57 +8,11 @@ var toggle = true;
 var walletID = "";
 
 export default class Graph extends Component {
-  // assetTableHttpRequest = () => {
-  //     var url = backend_url + "api/toshi/account/"
-  //     console.log(url)
-  //     axios.post( url , this.props.state).then((response) => {
-  //         console.log("ACCOUNT RESPONSE: ",response.data)
-  //         this.props.state['accountOverview']['table'] = response.data['profile_response']['accountOverview']['table']
-  //         this.setPropsState()
-  //         console.log("STATE RESPONSE: ", this.props.state['accountOverview']['table'])
-  //     }).catch(error => {
-  //         console.log(error)
-  //       })
-  //   }
-
-  // assetTableHttpRequest = () => {
-  //     var url = backend_url + "api/toshi/accounthistory/"
-
-  //     axios.post( url , this.props.state).then((response) => {
-  //         console.log("ACCOUNT DETAILS: ",response.data)
-  //         this.props['state']['accountOverview']['table'] = response.data['profile_response'][0]
-  //         this.props['state']['accountOverview']['ethUsd'] = response.data['profile_response'][6]
-  //         let sum = 0;
-  //         let tokensProfitable = 0;
-  //         let totalgas = 0;
-  //         response.data['profile_response'][0].forEach((token)=>{
-  //             sum += token[2];
-  //             totalgas += token[10];
-  //             if(token[2] > 0){
-  //                 tokensProfitable += 1;
-  //             }
-  //         })
-  //         this.props['state']['accountOverview']['profit'] = sum;
-  //         this.props['state']['accountOverview']['tokensTraded'] = response.data['profile_response'][0].length
-  //         this.props['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
-  //         this.props['state']['accountOverview']['totalGas'] = totalgas;
-  //         this.setPropsState()
-  //         console.log("TABLEOVERVIEW STATE: " + this.props.state['accountOverview'])
-  //     }).catch(error => {
-  //         console.log(error)
-  //       })
-  //   }
 
   setPropsState = () => {
     this.setState(this.props.state);
   };
 
-  //   componentDidUpdate = () => {
-  //     if(walletID != this.props['state']['header']['walletAddress']){
-  //         this.assetTableHttpRequest()
-  //       }
-  //       walletID = this.props['state']['header']['walletAddress']
-  //   }
   numberOfZeros = (number) => {
     return Math.floor(Math.abs(Math.log10(number))) - 1;
   };
@@ -71,6 +25,8 @@ export default class Graph extends Component {
     } 
     return null;
   };
+
+  
 
   render() {
     return (
@@ -87,55 +43,30 @@ export default class Graph extends Component {
 
           <div className="account-ids">
             <div
-              className={
-                "asset-text-data" +
-                (this.props.state.accountOverview.profit > 0
-                  ? " green"
-                  : " red")
+              className="asset-text-data" >
+              {
+              this.props.state.accountDetailed.profitDict[0] ? Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue, 0)*100)/100 : <></>
               }
-            >
-              +$
-              {Math.round(
-                this.props.state.accountOverview.profit *
-                  this.props.state.accountOverview.ethUsd *
-                  10
-              ) / 10}
             </div>
             <div className="asset-text-data">
-              {this.props.state.accountOverview.tokensTraded}
+              {
+              this.props.state.accountDetailed.profitDict[0] ? Object.values(this.props.state.accountDetailed.profitDict[0]).length : <></>
+              }
             </div>
             <div className="asset-text-data">
-              {this.props.state.accountOverview.tokensProfitable}
-            </div>
-            <div
-              className={
-                "asset-text-data" +
-                ((this.props.state.accountOverview.tokensProfitable /
-                  this.props.state.accountOverview.tokensTraded) *
-                  100 >=
-                50
-                  ? " green"
-                  : " red")
+              {
+              this.props.state.accountDetailed.profitDict[0] ? this.props.state.accountDetailed.tokensProfitable : <></>
               }
-            >
-              %
-              {Math.round(
-                (this.props.state.accountOverview.tokensProfitable /
-                  this.props.state.accountOverview.tokensTraded) *
-                  100 *
-                  10
-              ) / 10}
+            </div>
+    
+            <div className="asset-text-data">
+            {
+              this.props.state.accountDetailed.profitDict[0] ? 
+              Math.round(this.props.state.accountDetailed.tokensProfitable / Object.values(this.props.state.accountDetailed.profitDict[0]).length *100 *100)/100 + "%"
+              : <></>
+            }
             </div>
             <div className="asset-text-data red">
-              {/* ${Math.round(this.props.state.accountOverview.totalGas * this.props.state.accountOverview.ethUsd * 10000 )/10000} */}
-              {this.props.state.accountOverview.totalGas === 0 ? 0 : this.props.state.accountOverview.totalGas >= 0.01 ? 
-              (<div>{Math.round(this.props.state.accountOverview.totalGas * 10000 )/10000}</div>) :
-              (<div>
-                <span>0.0</span>
-                <sub>{this.numberOfZeros(this.props.state.accountOverview.totalGas)}</sub>
-                <span>{this.convertDecimalFormat(this.props.state.accountOverview.totalGas)}</span>
-                {/* <div>{this.props.state.accountOverview.totalGas}</div> */}
-              </div>)} 
               
             </div>
           </div>

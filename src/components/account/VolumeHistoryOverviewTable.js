@@ -9,18 +9,20 @@ var walletID = ""
 
 export default class Graph extends Component {  
 
-    volumeHistoryHttpRequest = () => {
-        var url = backend_url + "api/toshi/volume_history_overview"
-        console.log(url)
-        axios.post( url , this.props.state).then((response) => {
-            console.log("VOLUME HISTORY RESPONSE: ",response.data)
-            this.props.state['volumeHistoryTable']['maxVolumeHistoryTable'] = [response.data['profile_response']]
-            this.setPropsState()
-            console.log("VOLUME HISTORY STATE RESPONSE: ", this.props.state['volumeHistoryTable']['maxVolumeHistoryTable'])
-        }).catch(error => {
-            console.log(error)
-          })
-      }
+    // volumeHistoryHttpRequest = () => {
+    //     var url = backend_url + "api/toshi/volume_history_overview"
+    //     console.log(url)
+    //     axios.post( url , this.props.state).then((response) => {
+    //         console.log("VOLUME HISTORY RESPONSE: ",response.data)
+    //         this.props.state['volumeHistoryTable']['maxVolumeHistoryTable'] = [response.data['profile_response']]
+    //         this.props.state['accountDetailed']['profitDict'] = [response.data['profile_response'][5]]
+    //         this.setPropsState()
+    //         console.log("VOLUME HISTORY STATE RESPONSE: ", this.props.state['volumeHistoryTable']['maxVolumeHistoryTable'])
+    //         console.log(this.props.state.accountDetailed.profitDict)
+    //     }).catch(error => {
+    //         console.log(error)
+    //       })
+    //   }
     
       setPropsState = () => {
         this.setState(this.props.state)
@@ -28,7 +30,7 @@ export default class Graph extends Component {
     
       componentDidUpdate = () => {
         if(walletID != this.props['state']['header']['walletAddress']){
-            this.volumeHistoryHttpRequest()
+            // this.volumeHistoryHttpRequest()
           }
           walletID = this.props['state']['header']['walletAddress']
       }

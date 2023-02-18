@@ -22,10 +22,12 @@ const default_state = {
       ethUsd: 0,
       profit: 0,
       tokensTraded: 0,
-      tokensProfitable: 0,
+      
       totalGas: 0,
   },
   accountDetailed: {
+    profitDict: {},
+    tokensProfitable: 0,
     table: [],
     graph: [],
     yearlyGraph:[],
@@ -58,54 +60,69 @@ const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX']
 export default class Profile extends Component {
   
 
-
   constructor(props) {
     super(props)
     this.state = default_state
   }
 
-  updateAccountOverviewStates = () => {
-    let sum = 0;
-        let tokensProfitable = 0;
-        let totalgas = 0;
-        this['state']['accountOverview']['table'].forEach((token)=>{
-            sum += token[2];
-            totalgas += token[10];
-            if(token[2] > 0){
-                tokensProfitable += 1;
-            }
-        })
-        this['state']['accountOverview']['profit'] = sum;
-        this['state']['accountOverview']['tokensTraded'] = this['state']['accountOverview']['table'].length
-        this['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
-        this['state']['accountOverview']['totalGas'] = totalgas * this['state']['accountOverview']['ethUsd'];
-      }
+  volumeHistoryHttpRequest = () => {
+    var url = backend_url + "api/toshi/volume_history_overview"
+    console.log(url)
+    axios.post( url , this.state).then((response) => {
+        console.log("VOLUME HISTORY RESPONSE: ",response.data)
+        this.state['volumeHistoryTable']['maxVolumeHistoryTable'] = [response.data['profile_response']]
+        this.state['accountDetailed']['profitDict'] = [response.data['profile_response'][5]]
+        this.state['accountDetailed']['tokensProfitable'] = [response.data['profile_response'][6]]
+        this.setState(this.state)
+        console.log("VOLUME HISTORY STATE RESPONSE: ", this.state['volumeHistoryTable']['maxVolumeHistoryTable'])
+        console.log("ProfitDict: ", this.state.accountDetailed.profitDict)
+    }).catch(error => {
+        console.log(error)
+      })
+  }
+
+  // updateAccountOverviewStates = () => {
+  //   let sum = 0;
+  //       let tokensProfitable = 0;
+  //       let totalgas = 0;
+  //       this['state']['accountOverview']['table'].forEach((token)=>{
+  //           sum += token[2];
+  //           totalgas += token[10];
+  //           if(token[2] > 0){
+  //               tokensProfitable += 1;
+  //           }
+  //       })
+  //       this['state']['accountOverview']['profit'] = sum;
+  //       this['state']['accountOverview']['tokensTraded'] = this['state']['accountOverview']['table'].length
+  //       this['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
+  //       this['state']['accountOverview']['totalGas'] = totalgas * this['state']['accountOverview']['ethUsd'];
+  //     }
 
 
   select = (data,event) => {
-    if(data == "MAX"){
-        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['yearlyGraph']
-        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['maxTable']
-        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['maxTable']
-    }else if (data == "1D"){
-        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['dailyGraph']
-        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['dailyTable']
-        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['dailyTable']
-    }else if (data == "1W"){
-        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['weeklyGraph']
-        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['weeklyTable']
-        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['weeklyTable']
-    }else if(data == "1M"){
-        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['monthlyGraph']
-        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['monthlyTable']
-        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['monthlyTable']
-    }else if(data == "1Y"){
-        this.state['accountDetailed']['graph'] = this.state['accountDetailed']['yearlyGraph']
-        this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['yearlyTable']
-        this['state']['accountOverview']['table'] = this['state']['accountDetailed']['yearlyTable']
-    }
+    // if(data == "MAX"){
+    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['yearlyGraph']
+    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['maxTable']
+    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['maxTable']
+    // }else if (data == "1D"){
+    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['dailyGraph']
+    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['dailyTable']
+    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['dailyTable']
+    // }else if (data == "1W"){
+    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['weeklyGraph']
+    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['weeklyTable']
+    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['weeklyTable']
+    // }else if(data == "1M"){
+    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['monthlyGraph']
+    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['monthlyTable']
+    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['monthlyTable']
+    // }else if(data == "1Y"){
+    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['yearlyGraph']
+    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['yearlyTable']
+    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['yearlyTable']
+    // }
 
-    this.updateAccountOverviewStates();
+    // this.updateAccountOverviewStates();
 
 
     this.setState(this.state)
@@ -117,39 +134,40 @@ export default class Profile extends Component {
     event.target.classList.add("active")
   }
 
-  assetTableHttpRequest = () => {
-    var url = backend_url + "api/toshi/accounthistory/"
+  // assetTableHttpRequest = () => {
+  //   var url = backend_url + "api/toshi/accounthistory/"
     
-    axios.post( url , this.state).then((response) => {
-        // token history overview states
-        console.log("ACCOUNT DETAILS: ",response.data)
-        this['state']['accountDetailed']['table'] = response.data['profile_response'][0]
-        this['state']['accountDetailed']['yearlyTable'] = response.data['profile_response'][0]
-        this['state']['accountDetailed']['monthlyTable'] = response.data['profile_response'][1]
-        this['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
-        this['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
-        // this['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
-        this['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][4]
-        this['state']['accountDetailed']['maxTable'] = response.data['profile_response'][6]
+  //   axios.post( url , this.state).then((response) => {
+  //       // token history overview states
+  //       console.log("ACCOUNT DETAILS: ",response.data)
+  //       this['state']['accountDetailed']['table'] = response.data['profile_response'][0]
+  //       this['state']['accountDetailed']['yearlyTable'] = response.data['profile_response'][0]
+  //       this['state']['accountDetailed']['monthlyTable'] = response.data['profile_response'][1]
+  //       this['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
+  //       this['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
+  //       // this['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
+  //       this['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][4]
+  //       this['state']['accountDetailed']['maxTable'] = response.data['profile_response'][6]
 
-        // profit history overview states
+  //       // profit history overview states
         
-        this['state']['accountOverview']['table'] = response.data['profile_response'][0]
-        this['state']['accountOverview']['ethUsd'] = response.data['profile_response'][5]
-        this.updateAccountOverviewStates();
+  //       this['state']['accountOverview']['table'] = response.data['profile_response'][0]
+  //       this['state']['accountOverview']['ethUsd'] = response.data['profile_response'][5]
+  //       this.updateAccountOverviewStates();
 
-        this.setState(this.state)
-        console.log(this['state']['accountOverview']['profit'])
-        console.log(this['state']['accountOverview']['totalGas'])
-    }).catch(error => {
-        console.log(error)
-      })
-  }
+  //       this.setState(this.state)
+  //       console.log(this['state']['accountOverview']['profit'])
+  //       console.log(this['state']['accountOverview']['totalGas'])
+  //   }).catch(error => {
+  //       console.log(error)
+  //     })
+  // }
 
   componentDidUpdate = () => {
     if(walletID != this['state']['header']['walletAddress']){
         this['state']['accountDetailed']['table'] = []
-        this.assetTableHttpRequest()
+        // this.assetTableHttpRequest()
+        this.volumeHistoryHttpRequest()
       }
       walletID = this['state']['header']['walletAddress']
       
