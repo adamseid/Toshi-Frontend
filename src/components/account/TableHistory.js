@@ -223,7 +223,7 @@ export default class Graph extends Component {
                                         +${value}
                                     </div>
                                     <div className='bottom'>
-                                        0%
+                                        {Math.round(value/Object.values(this.props.state.accountDetailed.tokenExpenses[0])[index]["expense"]*100*10)/10}%
                                     </div>
                                 </div>
                             ) :
@@ -232,7 +232,7 @@ export default class Graph extends Component {
                                     -${Math.abs(value)}
                                 </div>
                                 <div className='bottom'>
-                                    0%
+                                    {Math.round(value/Object.values(this.props.state.accountDetailed.tokenExpenses[0])[index]["expense"]*100*10)/10}%
                                 </div>
                             </div>
                         )
