@@ -26,10 +26,10 @@ const default_state = {
       totalGas: 0,
   },
   accountDetailed: {
-    profitDict: {},
+    profitDict: 0,
     tokensProfitable: 0,
-    transactionsPerToken: {},
-    tokenDetails: {},
+    transactionsPerToken: 0,
+    tokenDetails: 0,
     
     table: [],
     graph: [],
