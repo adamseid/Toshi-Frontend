@@ -146,7 +146,7 @@ export default class Graph extends Component {
             <button className='hour active' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
         </div> */}
         <div className="account-container">
-          <div className="account-ids">
+          <div className="tokenHistoryOverviewTitles">
             <div className="asset-text-first-history">Asset</div>
             <div className="asset-text-history">Total Transactions</div>
             {/* <div className='asset-text-history'>
@@ -174,38 +174,39 @@ export default class Graph extends Component {
             </div>
           </div>
           <div className="account-table">
-            <div className="account-detailed-inner-container">
-            
+            <div>
               <div className="account-detailed-ids">
               <div className="asset-text-data-detailed-first-element">
-              {this.props.state.accountDetailed.profitDict[0] ? 
-                Object.keys(this.props.state.accountDetailed.profitDict[0]).map(
-                        (key, index) => {
-                          return (   
-                              <div className="account-token-outer-container">
-                                <img className="account-bullet" src={BulletPoint} />
-                                <div className="account-token-inner-container">
-                                  <a className="account-top-row">
-                                    <div className="account-token-name">{key}</div>
-                                    <div className="account-token-symbol"></div>
-                                  </a>
-                                  <div className="account-bottom-row">
-                                    <div className="account-token-allocation"></div>
-                                    <div className="account-token-allocation-percentage"></div>
-                                  </div>
+                {this.props.state.accountDetailed.profitDict[0] ? 
+                    Object.keys(this.props.state.accountDetailed.profitDict[0]).map(
+                            (key, index) => {
+                            return (  
+                                 
+                                <div className="account-token-outer-container">
+                                    <img className="account-bullet" src={BulletPoint} />
+                                    <div className="account-token-inner-container">
+                                    <a className="account-top-row">
+                                        <div className="account-token-name">{key}</div>
+                                        <div className="account-token-symbol"></div>
+                                    </a>
+                                    <div className="account-bottom-row">
+                                        <div className="account-token-allocation"></div>
+                                        <div className="account-token-allocation-percentage"></div>
+                                    </div>
+                                    </div>
                                 </div>
-                              </div>
-                          );
-                        }
-                      ) : <></>   
-                }
+                                
+                            );
+                            }
+                        ) : <></>   
+                    }
                 </div>
    
                 <div className="asset-text-data-detailed">
                     {this.props.state.accountDetailed.transactionsPerToken[0] ? 
                     Object.values(this.props.state.accountDetailed.transactionsPerToken[0]).map((value,index) => {
                         return (
-                        <div>
+                        <div className="tokenHistoryTableBlock">
                             {value}
                         </div>
                         )
@@ -213,12 +214,13 @@ export default class Graph extends Component {
                     : <></>}
                 </div>
                 
+                
                 <div className="asset-text-data-detailed">
                   {this.props.state.accountDetailed.profitDict[0] ? 
                     Object.values(this.props.state.accountDetailed.profitDict[0]).map((value, index)=> {
                         return (
                             value >= 0 ? (
-                                <div className = "positive">
+                                <div className = "positive tokenHistoryTableBlock">
                                     <div>
                                         +${value}
                                     </div>
@@ -227,7 +229,7 @@ export default class Graph extends Component {
                                     </div>
                                 </div>
                             ) :
-                            <div className = "negative">
+                            <div className = "negative tokenHistoryTableBlock">
                                 <div>
                                     -${Math.abs(value)}
                                 </div>
