@@ -46,8 +46,8 @@ export default class Graph extends Component {
               {
               this.props.state.accountDetailed.profitDict[0] ? 
               (Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue, 0)*100)/100 >= 0 ? 
-              <div className="green">{Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue, 0)*100)/100}</div>
-              : <div className="red">{Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue, 0)*100)/100}</div>
+              <div className="green">+${Math.abs(Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue, 0)*100)/100)}</div>
+              : <div className="red">-${Math.abs(Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue, 0)*100)/100)}</div>
               ) 
               : <></>
               }
@@ -75,19 +75,19 @@ export default class Graph extends Component {
             
             </div>
             <div className="asset-text-data red">
-              $
+              
               {this.props.state.accountDetailed.profitDict[0] ? 
               (Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0) < 0.01 ? 
               (
               <div>
-              <span>0.0</span>
+              <span>$0.0</span>
               <sub>
                 {this.numberOfZeros(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0))}
               </sub>
               <span>{this.convertDecimalFormat(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0))}</span>
               </div>
               ) 
-              : (Math.round(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0)*100)/100))
+              : "$" + (Math.round(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0)*100)/100))
               : <></>
               }
             </div>

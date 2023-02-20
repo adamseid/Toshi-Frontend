@@ -97,14 +97,20 @@ export default class Graph extends Component {
       .post(url, this.props.state)
       .then((response) => {
         console.log(
-          "READ: ",
+          "READ assets response: ",
           response.data["profile_response"]["profile"]["table"]
         );
+        // const currentHoldings = {...this.props.state["accountDetailed"]["profitDict"][0]}
+        // Object.keys(currentHoldings).forEach((i)=> currentHoldings[i] = [0, 0]);
+        // response.data["profile_response"]["profile"]["table"].forEach((asset)=>{
+        //   currentHoldings[asset[1]] = [asset[5], asset[3]]
+        // })
+        // console.log("currentHoldingsDict" + Object.keys(currentHoldings) + ":" + Object.values(currentHoldings))
         this.props.state["profile"]["table"] =
           response.data["profile_response"]["profile"]["table"];
-        this.props.state["profile"]["table"].push();
+        // this.props.state["profile"]["table"].push();
         this.setPropsState();
-        console.log("Read State: " + this.props.state["profile"]["table"]);
+        console.log("Read State Profile Table: " + this.props.state["profile"]["table"]);
       })
       .catch((error) => {
         this.props.state["profile"]["table"] = [];
@@ -162,7 +168,7 @@ export default class Graph extends Component {
               <label className="switch">
                 <input
                   type="checkbox"
-                  onClick={this.onClickSwitchHandler}
+                  onChange={this.onClickSwitchHandler}
                   checked={
                     this.props.state["accountDetailed"]["holdingsDisplay"]
                   }
@@ -182,7 +188,7 @@ export default class Graph extends Component {
                             (key, index) => {
                             return (  
                                  
-                                <div className="account-token-outer-container">
+                                <div key={index} className="account-token-outer-container">
                                     <img className="account-bullet" src={BulletPoint} />
                                     <div className="account-token-inner-container">
                                     <a className="account-top-row">
@@ -206,7 +212,7 @@ export default class Graph extends Component {
                     {this.props.state.accountDetailed.transactionsPerToken[0] ? 
                     Object.values(this.props.state.accountDetailed.transactionsPerToken[0]).map((value,index) => {
                         return (
-                        <div className="tokenHistoryTableBlock">
+                        <div key={index} className="tokenHistoryTableBlock">
                             {value}
                         </div>
                         )
@@ -220,7 +226,7 @@ export default class Graph extends Component {
                     Object.values(this.props.state.accountDetailed.profitDict[0]).map((value, index)=> {
                         return (
                             value >= 0 ? (
-                                <div className = "positive tokenHistoryTableBlock">
+                                <div className = "positive tokenHistoryTableBlock" key={index}>
                                     <div>
                                         +${value}
                                     </div>
@@ -229,7 +235,7 @@ export default class Graph extends Component {
                                     </div>
                                 </div>
                             ) :
-                            <div className = "negative tokenHistoryTableBlock">
+                            <div className = "negative tokenHistoryTableBlock" key={index}>
                                 <div>
                                     -${Math.abs(value)}
                                 </div>
@@ -243,18 +249,18 @@ export default class Graph extends Component {
                   }
                 </div>
                 <div className="asset-text-data-detailed">
-                  {/* {this.props.state['accountDetailed']['holdingsDisplay'] ? 
-                            (this.props.state['profile']['table'].map(asset => {
+                  {this.props.state['accountDetailed']['holdingsDisplay'] ? 
+                            (this.props.state['profile']['table'].map((asset, index) => {
                                 return(
-                                    account[3] === asset[0] && (<><div>${asset[5]}</div><div>%{asset[3]}</div></>)
+                                    (<div key={index}><div className="nowrap">${asset[5]}</div><div>%{asset[3]}</div></div>)
                                 )
                             }))
                             : 
-                            (this.props.state['profile']['table'].map(asset => {
+                            (this.props.state['profile']['table'].map((asset, index) => {
                                 return(
-                                    account[3] === asset[0] && (<><div className="nowrap">{Math.round(asset[5]/this.props.state['accountDetailed']['ethUsd']*10)/10} ETH</div><div>%{asset[3]}</div></>)
+                                    (<div key={index}><div className="nowrap">{asset[5]/this.props.state['accountDetailed']['ethUsd']} ETH</div><div>%{asset[3]}</div></div>)
                                 )
-                            }))} */}
+                            }))}
                 </div>
               </div>
             </div>

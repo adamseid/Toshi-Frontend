@@ -45,11 +45,11 @@ const default_state = {
     hourlyTable:[],
     maxTable:[],
     ethPriceChange: 0,
+    holdingsDisplay: false,
   },
   volumeHistoryTable: {
     maxVolumeHistoryTable:[],
     ethUsd: 1,
-    holdingsDisplay: false,
   },
   profile: {
     table: [],
