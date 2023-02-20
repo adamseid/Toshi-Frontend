@@ -75,18 +75,19 @@ export default class Graph extends Component {
             
             </div>
             <div className="asset-text-data red">
+              $
               {this.props.state.accountDetailed.profitDict[0] ? 
-              (Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasPrice'], 0) < 0.01 ? 
+              (Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0) < 0.01 ? 
               (
               <div>
               <span>0.0</span>
               <sub>
-                {this.numberOfZeros(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasPrice'], 0))}
+                {this.numberOfZeros(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0))}
               </sub>
-              <span>{this.convertDecimalFormat(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasPrice'], 0))}</span>
+              <span>{this.convertDecimalFormat(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0))}</span>
               </div>
               ) 
-              : (Math.round(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasPrice'], 0)*10000)/10000))
+              : (Math.round(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0)*100)/100))
               : <></>
               }
             </div>
