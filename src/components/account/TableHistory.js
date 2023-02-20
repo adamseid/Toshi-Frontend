@@ -222,7 +222,7 @@ export default class Graph extends Component {
                 
                 
                 <div className="asset-text-data-detailed">
-                  {this.props.state.accountDetailed.profitDict[0] ? 
+                  {this.props.state.accountDetailed.profitDict[0] && this.props.state.accountDetailed.tokenDetails[0]? 
                     Object.values(this.props.state.accountDetailed.profitDict[0]).map((value, index)=> {
                         return (
                             value >= 0 ? (
@@ -231,7 +231,7 @@ export default class Graph extends Component {
                                         +${value}
                                     </div>
                                     <div className='bottom'>
-                                        {Math.round(value/Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"]*100*10)/10}%
+                                        {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index])["expense"]*100*10)/10 : <></>}%
                                     </div>
                                 </div>
                             ) :
@@ -240,7 +240,7 @@ export default class Graph extends Component {
                                     -${Math.abs(value)}
                                 </div>
                                 <div className='bottom'>
-                                    {Math.round(value/Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"]*100*10)/10}%
+                                    {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"])*100*10)/10 : <></>}%
                                 </div>
                             </div>
                         )

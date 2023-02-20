@@ -82,7 +82,7 @@ export default class Profile extends Component {
         console.log("VOLUME HISTORY STATE RESPONSE: ", this.state['volumeHistoryTable']['maxVolumeHistoryTable'])
         console.log("profitDict: ", this.state.accountDetailed.profitDict)
         console.log("transactionsPerToken: ", this.state.accountDetailed.transactionsPerToken)
-
+        console.log("tokenDetails values: ", (this.state.accountDetailed.tokenDetails))
     }).catch(error => {
         console.log(error)
       })
