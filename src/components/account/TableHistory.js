@@ -257,21 +257,45 @@ export default class Graph extends Component {
                   this.props.state['accountDetailed']['holdingsDisplay'] ? 
                             (Object.keys(this.props.state.accountDetailed.profitDict[0]).map((token, index) => {
                                 return(
-                                  <div className="tokenHistoryTableBlock">
+                                  <div className="tokenHistoryTableBlock" key={index}>
                                   {this.props.state.accountDetailed.currentHoldings.hasOwnProperty(token) ? 
                                   
-                                  <div key={index}><div className="nowrap">${this.props.state["accountDetailed"]["currentHoldings"][token][1]}</div><div>%{this.props.state["accountDetailed"]["currentHoldings"][token][0]}</div></div> :
-                                  <div key={index}><div className="nowrap">$0</div><div>0%</div></div>}
+                                  <div><div className="nowrap">${Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]*100)/100}</div><div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div></div> :
+                                  <div><div className="nowrap">$0</div><div>0%</div></div>}
                                   </div>
                                 )
                             }))
                             : 
                             (Object.keys(this.props.state.accountDetailed.profitDict[0]).map((token, index) => {
                                 return(
-                                  <div className="tokenHistoryTableBlock">
+                                  <div className="tokenHistoryTableBlock" key={index}>
                                     {(this.props.state.accountDetailed.currentHoldings.hasOwnProperty(token) ? 
-                                    <div key={index}><div className="nowrap">{this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]} ETH</div><div>%{this.props.state["accountDetailed"]["currentHoldings"][token][0]}</div></div> :
-                                    <div key={index}><div className="nowrap">0 ETH</div><div>0%</div></div>)}
+                                    // <div>
+                                    //   <div className="nowrap">
+                                    //     {this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]} ETH
+                                    //   </div>
+                                    // <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
+                                    // </div> 
+                                    this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"] < 0.01 ?
+                                    (<div>
+                                      <div className="nowrap">
+                                        <span>0.0</span>
+                                        <sub>
+                                          {this.props.numberOfZeros(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])}
+                                        </sub>
+                                        <span>{this.props.convertDecimalFormat(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])} ETH</span>
+                                      </div>
+                                      <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
+                                    </div>) : (
+                                      <div>
+                                         <div className="nowrap">
+                                            {Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]*10000)/10000} ETH
+                                         </div>
+                                         <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
+                                      </div> 
+                                    )
+                                    :
+                                    <div><div className="nowrap">0 ETH</div><div>0%</div></div>)}
                                   </div>
                                 )
                             })) : <></>}
