@@ -68,19 +68,19 @@ export default class Graph extends Component {
               return (
                   <div key={index} className='account-ids'>
                       <div className='asset-text-data'>
-                          ${account[0]}
+                          ${Math.round(account[0]*100)/100}
                       </div>
                       <div className='asset-text-data'>
-                          ${account[1]}
+                          ${Math.round(account[1]*100)/100}
                       </div>
                       <div className='asset-text-data'>
-                          ${account[2]}
+                          ${Math.round(account[2]*100)/100}
                       </div>
                       <div className='asset-text-data'>
-                          ${account[3]}
+                          ${Math.round(account[3]*100)/100}
                       </div>
                       <div className='asset-text-data'>
-                          ${account[4]*-1}
+                          ${Math.round(account[4]*-1*100)/100}
                       </div>
                   </div>
               )
