@@ -168,7 +168,7 @@ export default class Profile extends Component {
 
   getTotalTokens = () => {
     var tokensSum = 0
-    this.state['profile']['table'].forEach((asset)=> (tokensSum += asset[5]))
+    this.state['profile']['table'].forEach((asset)=> (tokensSum += asset[3]))
     this.state['profile']['totalTokens'] = tokensSum;
     this.setState(this.state)
   }
