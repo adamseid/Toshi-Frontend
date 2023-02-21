@@ -30,6 +30,8 @@ const default_state = {
     tokensProfitable: 0,
     transactionsPerToken: 0,
     tokenDetails: 0,
+    currentHoldings: {},
+    ethUsd: 1,
     
     table: [],
     graph: [],
@@ -49,7 +51,6 @@ const default_state = {
   },
   volumeHistoryTable: {
     maxVolumeHistoryTable:[],
-    ethUsd: 1,
   },
   profile: {
     table: [],
@@ -78,6 +79,7 @@ export default class Profile extends Component {
         this.state['accountDetailed']['tokensProfitable'] = [response.data['profile_response'][6]]
         this.state['accountDetailed']['transactionsPerToken'] = [response.data['profile_response'][7]]
         this.state['accountDetailed']['tokenDetails'] = [response.data['profile_response'][8]]
+        this.state['accountDetailed']['ethUsd'] = [response.data['profile_response'][9]]
         this.setState(this.state)
         console.log("VOLUME HISTORY STATE RESPONSE: ", this.state['volumeHistoryTable']['maxVolumeHistoryTable'])
         console.log("profitDict: ", this.state.accountDetailed.profitDict)
