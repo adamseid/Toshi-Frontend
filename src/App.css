@@ -387,6 +387,8 @@ a {
   text-align: left;
   color: #F9F9F9;
   width: 12.5%;
+  margin-left: 22px;
+  margin-right: 20px;
 }
 
 .asset-text-data {
