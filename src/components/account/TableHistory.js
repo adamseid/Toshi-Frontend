@@ -100,15 +100,9 @@ export default class Graph extends Component {
           "READ assets response: ",
           response.data["profile_response"]["profile"]["table"]
         );
-        // const currentHoldings = {...this.props.state["accountDetailed"]["profitDict"][0]}
-        // Object.keys(currentHoldings).forEach((i)=> currentHoldings[i] = [0, 0]);
-        // response.data["profile_response"]["profile"]["table"].forEach((asset)=>{
-        //   currentHoldings[asset[1]] = [asset[5], asset[3]]
-        // })
-        // console.log("currentHoldingsDict" + Object.keys(currentHoldings) + ":" + Object.values(currentHoldings))
         const currentHoldings = {};
         response.data["profile_response"]["profile"]["table"].forEach((asset)=>{
-          currentHoldings[asset[1]] = [asset[3], asset[5]]
+          currentHoldings[asset[1]] = [asset[4], asset[3]]
         })
         this.props.state["accountDetailed"]["currentHoldings"] =
           currentHoldings;
@@ -270,12 +264,6 @@ export default class Graph extends Component {
                                 return(
                                   <div className="tokenHistoryTableBlock" key={index}>
                                     {(this.props.state.accountDetailed.currentHoldings.hasOwnProperty(token) ? 
-                                    // <div>
-                                    //   <div className="nowrap">
-                                    //     {this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]} ETH
-                                    //   </div>
-                                    // <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
-                                    // </div> 
                                     this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"] < 0.01 ?
                                     (<div>
                                       <div className="nowrap">
