@@ -91,7 +91,7 @@ export default class Graph extends Component {
                             </div>
                             <div className='table-token-price-container'>
                                 {
-                                    asset[2] < 0.001 ? (
+                                    asset[2] < 0.001 && asset[2] > 0 ? (
                                         <div className='table-token-price'>
                                             <span>0.0</span>
                                             <sub>
@@ -106,7 +106,7 @@ export default class Graph extends Component {
                                     )
                                 }
                                 {
-                                    asset[4] < 0.001 ? (
+                                    asset[4] < 0.001 && asset[4] > 0 ? (
                                         <div className='table-token-allocation'>
                                             <span>%0.0</span>
                                             <sub>
@@ -126,7 +126,7 @@ export default class Graph extends Component {
                         <div className='personal-table-right'>
                             <div className='table-amount-container'>
                                 {
-                                    asset[3] < 0.001 ? (
+                                    asset[3] < 0.001 && asset[3] > 0 ? (
                                         <div className='table-amount'>
                                             <span>$0.0</span>
                                             <sub>
