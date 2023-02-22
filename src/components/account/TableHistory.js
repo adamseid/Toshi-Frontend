@@ -248,7 +248,7 @@ export default class Graph extends Component {
                     ) : <></>
                   }
                 </div>
-                <div className="asset-text-data-detailed">
+                <div className="asset-text-data-detailed currentHoldings">
                   {this.props.state['accountDetailed']['profitDict'][0] && this.props.state['accountDetailed']['currentHoldings'] ? 
                   this.props.state['accountDetailed']['holdingsDisplay'] ? 
                             (Object.keys(this.props.state.accountDetailed.profitDict[0]).map((token, index) => {
