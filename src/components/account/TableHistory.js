@@ -187,7 +187,9 @@ export default class Graph extends Component {
                             return (  
                                  
                                 <div key={index} className="account-token-outer-container">
-                                    <img className="account-bullet" src={BulletPoint} />
+                                    <img className="account-bullet" src={
+                                      this.props.state.accountDetailed.profitDict[0][key][1] ? this.props.state.accountDetailed.profitDict[0][key][1] : BulletPoint
+                                    } />
                                     <div className="account-token-inner-container">
                                     <a className="account-top-row">
                                         <div className="account-token-name">{key}</div>
