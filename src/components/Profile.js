@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const default_state = {
 
   header: {
-      walletAddress: "",
+      walletAddress: "0xEcd2Ae407bBADaAB3A0A1Bf0c0a009C9f272a8F7",
       rerender: false,
   },
   profile: {
@@ -37,8 +37,9 @@ const default_state = {
   },
 }
 
+const backend_url = "https://stagingws.toshitools.app/"
 // const backend_url = "https://ws.toshitools.app/"
-const backend_url = "http://127.0.0.1:8000/"
+// const backend_url = "http://127.0.0.1:8000/"
 
 export default class Profile extends Component {
   
@@ -72,6 +73,7 @@ export default class Profile extends Component {
     return false
   }
 
+
   iswalletConnected = async () => {
     if (window.ethereum){
       const accounts = await window.ethereum.request({
@@ -82,6 +84,7 @@ export default class Profile extends Component {
             this.updateWalletAddress()
             const walletTest=this.state['header']['walletAddress'] = result[0]
             // const walletTest=this.state['header']['walletAddress'] = "0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A"
+            // const walletTest=this.state['header']['walletAddress'] = "0xEcd2Ae407bBADaAB3A0A1Bf0c0a009C9f272a8F7"
             this.sendWalletAddress(walletTest);       
           }
         }
@@ -153,23 +156,11 @@ export default class Profile extends Component {
     }
   }
 
-  getTableState = () => {
-    var url = backend_url + "api/toshi/assets/"
-        
-    axios.post( url , this.state).then((response) => {
-      console.log("READ: ", response.data['profile_response']['profile']['table'])
-      this.state['profile']['table'] = response.data['profile_response']['profile']['table']
-      this.setState(this.state)
-    }).catch(error => {
-      this.state['profile']['table'] = []
-      this.setState(this.state)
-    });
-  }
-
   getTotalTokens = () => {
     var tokensSum = 0
+    console.log(this.state['profile']['table'])
     this.state['profile']['table'].forEach((asset)=> (tokensSum += asset[3]))
-    this.state['profile']['totalTokens'] = tokensSum;
+    this.state['profile']['totalTokens'] = Math.round((tokensSum*100))/100;
     this.setState(this.state)
   }
 
@@ -183,12 +174,9 @@ export default class Profile extends Component {
   onClickTotalTokens = () => {
     document.querySelectorAll(".profile-left-buttons")[1].classList.add("active-button")
     document.querySelectorAll(".profile-left-buttons")[0].classList.remove("active-button")
-    this.getTableState();
     this.getTotalTokens();
     this.state['profile']['displayTotalTokens'] = true;
     this.setState(this.state)
-    console.log(this.state['profile']['table'])
-    console.log(this.state['profile']['totalTokens'])
   }
 
   render() {
