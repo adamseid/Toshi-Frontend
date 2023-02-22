@@ -378,6 +378,13 @@ a {
 
 /* Profile */
 
+.profile_token_image{
+  max-width: 31px;
+  max-height: 31px;
+  border-radius: 15.5px;
+  margin-right: 20px;
+}
+
 .asset-text {
   font-family: Rajdhani;
   font-size: 10px;
@@ -765,13 +772,12 @@ a {
   display: flex;
   flex-direction: row;
   margin-left: 22px;
-  width: 50%;
+  width: 70%;
 }
 
 .personal-table-right {
   margin-top: -5px;
   margin-right: 25px;
-  width: 50%;
   display: flex;
   justify-content: flex-end;
 }

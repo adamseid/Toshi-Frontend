@@ -13,7 +13,8 @@ import {
 import axios from "axios";
 
 // const ws2 = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
-const backend_url = "https://ws.toshitools.app/"
+// const backend_url = "https://ws.toshitools.app/"
+const backend_url = "https://stagingws.toshitools.app/"
 // const backend_url = "http://127.0.0.1:8000/" 
 const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 var walletID = ""

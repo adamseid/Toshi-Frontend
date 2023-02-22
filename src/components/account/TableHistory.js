@@ -15,7 +15,8 @@ import {
 // const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 
 // const backend_url = "https://ws.toshitools.app/"
-const backend_url = "http://127.0.0.1:8000/";
+const backend_url = "https://stagingws.toshitools.app/"
+// const backend_url = "http://127.0.0.1:8000/";
 var toggle = true;
 var walletID = "";
 const dexToolsURL = "https://etherscan.io/dex/uniswapv2/";
@@ -91,8 +92,7 @@ export default class Graph extends Component {
   };
 
   getCurrentHoldings = () => {
-    var url = "http://127.0.0.1:8000/" + "api/toshi/assets/";
-
+    var url = backend_url + "api/toshi/assets/";
     axios
       .post(url, this.props.state)
       .then((response) => {
