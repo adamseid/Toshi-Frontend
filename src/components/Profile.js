@@ -82,7 +82,7 @@ export default class Profile extends Component {
             this.updateWalletAddress()
             const walletTest=this.state['header']['walletAddress'] = result[0]
             // // const walletTest=this.state['header']['walletAddress'] = "0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A"
-            const walletTest=this.state['header']['walletAddress'] = "0xEcd2Ae407bBADaAB3A0A1Bf0c0a009C9f272a8F7"
+            // const walletTest=this.state['header']['walletAddress'] = "0xEcd2Ae407bBADaAB3A0A1Bf0c0a009C9f272a8F7"
             this.sendWalletAddress(walletTest);       
           }
         }
