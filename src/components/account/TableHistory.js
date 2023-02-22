@@ -102,7 +102,7 @@ export default class Graph extends Component {
         );
         const currentHoldings = {};
         response.data["profile_response"]["profile"]["table"].forEach((asset)=>{
-          currentHoldings[asset[1]] = [asset[4], asset[3]]
+          currentHoldings[asset[0]] = [asset[4], asset[3]]
         })
         this.props.state["accountDetailed"]["currentHoldings"] =
           currentHoldings;
@@ -223,22 +223,22 @@ export default class Graph extends Component {
                   {this.props.state.accountDetailed.profitDict[0] && this.props.state.accountDetailed.tokenDetails[0]? 
                     Object.values(this.props.state.accountDetailed.profitDict[0]).map((value, index)=> {
                         return (
-                            value >= 0 ? (
+                            value[0] >= 0 ? (
                                 <div className = "positive tokenHistoryTableBlock" key={index}>
                                     <div>
-                                        +${value}
+                                        +${value[0]}
                                     </div>
                                     <div className='bottom'>
-                                        {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index])["expense"]*100*10)/10 : <></>}%
+                                        {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index])["expense"]*100*10)/10 : <></>}%
                                     </div>
                                 </div>
                             ) :
                             <div className = "negative tokenHistoryTableBlock" key={index}>
                                 <div>
-                                    -${Math.abs(value)}
+                                    -${Math.abs(value[0])}
                                 </div>
                                 <div className='bottom'>
-                                    {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"])*100*10)/10 : <></>}%
+                                    {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"])*100*10)/10 : <></>}%
                                 </div>
                             </div>
                         )
