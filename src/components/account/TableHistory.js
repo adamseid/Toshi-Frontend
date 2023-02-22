@@ -100,20 +100,18 @@ export default class Graph extends Component {
           "READ assets response: ",
           response.data["profile_response"]["profile"]["table"]
         );
-        // const currentHoldings = {...this.props.state["accountDetailed"]["profitDict"][0]}
-        // Object.keys(currentHoldings).forEach((i)=> currentHoldings[i] = [0, 0]);
-        // response.data["profile_response"]["profile"]["table"].forEach((asset)=>{
-        //   currentHoldings[asset[1]] = [asset[5], asset[3]]
-        // })
-        // console.log("currentHoldingsDict" + Object.keys(currentHoldings) + ":" + Object.values(currentHoldings))
-        this.props.state["profile"]["table"] =
-          response.data["profile_response"]["profile"]["table"];
+        const currentHoldings = {};
+        response.data["profile_response"]["profile"]["table"].forEach((asset)=>{
+          currentHoldings[asset[1]] = [asset[4], asset[3]]
+        })
+        this.props.state["accountDetailed"]["currentHoldings"] =
+          currentHoldings;
         // this.props.state["profile"]["table"].push();
         this.setPropsState();
-        console.log("Read State Profile Table: " + this.props.state["profile"]["table"]);
+        console.log("Read State Profile Table: " + JSON.stringify(this.props.state["accountDetailed"]["currentHoldings"]));
       })
       .catch((error) => {
-        this.props.state["profile"]["table"] = [];
+        this.props.state["accountDetailed"]["currentHoldings"] = {};
         this.setPropsState();
         console.log("Error in getCurrentHoldings" + error.message);
       });
@@ -222,7 +220,7 @@ export default class Graph extends Component {
                 
                 
                 <div className="asset-text-data-detailed">
-                  {this.props.state.accountDetailed.profitDict[0] ? 
+                  {this.props.state.accountDetailed.profitDict[0] && this.props.state.accountDetailed.tokenDetails[0]? 
                     Object.values(this.props.state.accountDetailed.profitDict[0]).map((value, index)=> {
                         return (
                             value >= 0 ? (
@@ -231,7 +229,7 @@ export default class Graph extends Component {
                                         +${value}
                                     </div>
                                     <div className='bottom'>
-                                        {Math.round(value/Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"]*100*10)/10}%
+                                        {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index])["expense"]*100*10)/10 : <></>}%
                                     </div>
                                 </div>
                             ) :
@@ -240,7 +238,7 @@ export default class Graph extends Component {
                                     -${Math.abs(value)}
                                 </div>
                                 <div className='bottom'>
-                                    {Math.round(value/Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"]*100*10)/10}%
+                                    {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"])*100*10)/10 : <></>}%
                                 </div>
                             </div>
                         )
@@ -249,18 +247,46 @@ export default class Graph extends Component {
                   }
                 </div>
                 <div className="asset-text-data-detailed">
-                  {this.props.state['accountDetailed']['holdingsDisplay'] ? 
-                            (this.props.state['profile']['table'].map((asset, index) => {
+                  {this.props.state['accountDetailed']['profitDict'][0] && this.props.state['accountDetailed']['currentHoldings'] ? 
+                  this.props.state['accountDetailed']['holdingsDisplay'] ? 
+                            (Object.keys(this.props.state.accountDetailed.profitDict[0]).map((token, index) => {
                                 return(
-                                    (<div key={index}><div className="nowrap">${asset[5]}</div><div>%{asset[3]}</div></div>)
+                                  <div className="tokenHistoryTableBlock" key={index}>
+                                  {this.props.state.accountDetailed.currentHoldings.hasOwnProperty(token) ? 
+                                  
+                                  <div><div className="nowrap">${Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]*100)/100}</div><div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div></div> :
+                                  <div><div className="nowrap">$0</div><div>0%</div></div>}
+                                  </div>
                                 )
                             }))
                             : 
-                            (this.props.state['profile']['table'].map((asset, index) => {
+                            (Object.keys(this.props.state.accountDetailed.profitDict[0]).map((token, index) => {
                                 return(
-                                    (<div key={index}><div className="nowrap">{asset[5]/this.props.state['accountDetailed']['ethUsd']} ETH</div><div>%{asset[3]}</div></div>)
+                                  <div className="tokenHistoryTableBlock" key={index}>
+                                    {(this.props.state.accountDetailed.currentHoldings.hasOwnProperty(token) ? 
+                                    this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"] < 0.01 ?
+                                    (<div>
+                                      <div className="nowrap">
+                                        <span>0.0</span>
+                                        <sub>
+                                          {this.props.numberOfZeros(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])}
+                                        </sub>
+                                        <span>{this.props.convertDecimalFormat(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])} ETH</span>
+                                      </div>
+                                      <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
+                                    </div>) : (
+                                      <div>
+                                         <div className="nowrap">
+                                            {Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]*10000)/10000} ETH
+                                         </div>
+                                         <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
+                                      </div> 
+                                    )
+                                    :
+                                    <div><div className="nowrap">0 ETH</div><div>0%</div></div>)}
+                                  </div>
                                 )
-                            }))}
+                            })) : <></>}
                 </div>
               </div>
             </div>

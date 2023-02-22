@@ -12,21 +12,7 @@ export default class Graph extends Component {
   setPropsState = () => {
     this.setState(this.props.state);
   };
-
-  numberOfZeros = (number) => {
-    return Math.floor(Math.abs(Math.log10(number))) - 1;
-  };
-
-  convertDecimalFormat = (number) => {
-    if (number < 0.01) {
-        number = parseInt(number.toString().replace(".", "")).toString().slice(0,4)
-        return number;
-      
-    } 
-    return null;
-  };
   
-
   render() {
     return (
       <div className="table-overview-outer-container">
@@ -82,9 +68,9 @@ export default class Graph extends Component {
               <div>
               <span>$0.0</span>
               <sub>
-                {this.numberOfZeros(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0))}
+                {this.props.numberOfZeros(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0))}
               </sub>
-              <span>{this.convertDecimalFormat(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0))}</span>
+              <span>{this.props.convertDecimalFormat(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0))}</span>
               </div>
               ) 
               : "$" + (Math.round(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0)*100)/100))
