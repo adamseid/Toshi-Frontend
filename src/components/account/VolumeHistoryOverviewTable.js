@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import axios from "axios";
 
 
-// const backend_url = "https://ws.toshitools.app/"
-const backend_url = "http://127.0.0.1:8000/" 
+const backend_url = "https://ws.toshitools.app/"
+// const backend_url = "http://127.0.0.1:8000/" 
 var toggle = true
 var walletID = ""
 

@@ -136,9 +136,9 @@ export default class Graph extends Component {
         <div className='wallet-amount'>
           {
             this.props.state['profile']['profit'] > 0 ? (
-              <div class = "positive"> {this.props.state['profile']['profit']} </div>
+              <div className = "positive"> {this.props.state['profile']['profit']} </div>
             ) :
-              <div class = "negative"> {this.props.state['profile']['profit']} </div>
+              <div className = "negative"> {this.props.state['profile']['profit']} </div>
           }
         </div>
         {/* <div className='wallet-difference'>

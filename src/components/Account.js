@@ -57,7 +57,8 @@ const default_state = {
   }
 }
 
-const backend_url = "http://127.0.0.1:8000/" 
+// const backend_url = "http://127.0.0.1:8000/" 
+const backend_url = "https://ws.toshitools.app/" 
 var walletID = ""
 const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX']
 
