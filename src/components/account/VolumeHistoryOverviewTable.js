@@ -48,9 +48,17 @@ export default class Graph extends Component {
           {
             this.props.state.volumeHistoryOverview.table[this.props.state.time]?.map((account, index) => {
               return (
-                <div key={index} className='asset-text-data'>
+                index === 3 ? 
+                  <div key={index} className='asset-text-data green'>
+                    +${Math.abs((Math.round(account*100)/100)).toFixed(2)}
+                  </div> : (index == 4 ? 
+                    <div key={index} className='asset-text-data red'>
+                    -${Math.abs((Math.round(account*100)/100)).toFixed(2)}
+                  </div> : 
+                  <div key={index} className='asset-text-data'>
                     ${Math.abs((Math.round(account*100)/100)).toFixed(2)}
-                </div>
+                  </div>
+                    )      
               )
           })
           } 
