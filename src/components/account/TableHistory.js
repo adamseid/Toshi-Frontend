@@ -22,51 +22,6 @@ var walletID = "";
 const dexToolsURL = "https://etherscan.io/dex/uniswapv2/";
 
 export default class Graph extends Component {
-  // select = (data,event) => {
-  //     if(data == "1H"){
-  //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['hourlyGraph']
-  //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['hourlyTable']
-  //     }else if (data == "1D"){
-  //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['dailyGraph']
-  //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['dailyTable']
-  //     }else if (data == "1W"){
-  //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['weeklyGraph']
-  //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['weeklyTable']
-  //     }else if(data == "1M"){
-  //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['monthlyGraph']
-  //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['monthlyTable']
-  //     }else if(data == "1Y"){
-  //         this.props.state['accountDetailed']['graph'] = this.props.state['accountDetailed']['yearlyGraph']
-  //         this.props['state']['accountDetailed']['table'] = this.props['state']['accountDetailed']['yearlyTable']
-  //     }
-  //     this.setPropsState()
-
-  //     for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
-  //         document.getElementsByClassName("hour")[i].classList.remove("active")
-  //       }
-
-  //     event.target.classList.add("active")
-  // }
-
-  // assetTableHttpRequest = () => {
-  //     var url = backend_url + "api/toshi/accounthistory/"
-
-  //     axios.post( url , this.props.state).then((response) => {
-  //         console.log("ACCOUNT DETAILS: ",response.data)
-  //         this.props['state']['accountDetailed']['table'] = response.data['profile_response'][0]
-  //         this.props['state']['accountDetailed']['yearlyTable'] = response.data['profile_response'][0]
-  //         this.props['state']['accountDetailed']['monthlyTable'] = response.data['profile_response'][1]
-  //         this.props['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
-  //         this.props['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
-  //         this.props['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
-  //         this.props['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][5]
-
-  //         this.setPropsState()
-
-  //     }).catch(error => {
-  //         console.log(error)
-  //       })
-  //   }
 
   graphHttpRequest = () => {
     var url = backend_url + "api/toshi/accountGraph/";
@@ -106,7 +61,6 @@ export default class Graph extends Component {
         })
         this.props.state["accountDetailed"]["currentHoldings"] =
           currentHoldings;
-        // this.props.state["profile"]["table"].push();
         this.setPropsState();
         console.log("Read State Profile Table: " + JSON.stringify(this.props.state["accountDetailed"]["currentHoldings"]));
       })
@@ -124,7 +78,6 @@ export default class Graph extends Component {
   componentDidUpdate = () => {
     if (walletID != this.props["state"]["header"]["walletAddress"]) {
       this.props["state"]["accountDetailed"]["table"] = [];
-      // this.assetTableHttpRequest()
       this.graphHttpRequest();
       this.getCurrentHoldings();
     }
@@ -142,20 +95,10 @@ export default class Graph extends Component {
     return (
       <div className="table-overview-outer-container">
         <div className="profile-header-text">Token History Overview</div>
-        {/* <div className='date-change'>
-            <button className='hour' onClick={this.select.bind(this, time_frame[0])}>{time_frame[0]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
-            <button className='hour active' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
-        </div> */}
         <div className="account-container">
           <div className="tokenHistoryOverviewTitles">
             <div className="asset-text-first-history">Token Name</div>
             <div className="asset-text-history">Total Transactions</div>
-            {/* <div className='asset-text-history'>
-                    Profit TX
-                </div> */}
             <div className="asset-text-history nowrap">
               Total Profit <br />
               (USD)
@@ -273,19 +216,19 @@ export default class Graph extends Component {
                                         <sub>
                                           {this.props.numberOfZeros(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])}
                                         </sub>
-                                        <span>{this.props.convertDecimalFormat(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])} <span className="ETHLabel">ETH</span></span>
+                                        <span>{this.props.convertDecimalFormat(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])} <span className="grey">ETH</span></span>
                                       </div>
                                       <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
                                     </div>) : (
                                       <div>
                                          <div className="nowrap">
-                                            {Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]*10000)/10000} <span className="ETHLabel">ETH</span>
+                                            {Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]*10000)/10000} <span className="grey">ETH</span>
                                          </div>
                                          <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
                                       </div> 
                                     )
                                     :
-                                    <div><div className="nowrap">0 <span className="ETHLabel">ETH</span></div><div>0%</div></div>)}
+                                    <div><div className="nowrap">0 <span className="grey">ETH</span></div><div>0%</div></div>)}
                                   </div>
                                 )
                             })) : <></>}

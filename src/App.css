@@ -1200,6 +1200,6 @@ input:checked + .slider:before {
   color: red
 }
 
-.ETHLabel{
+.grey{
   color: rgb(165, 161, 161);
 }
