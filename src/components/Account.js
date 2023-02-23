@@ -61,7 +61,8 @@ const default_state = {
     table: []
   },
   tokenHistoryOverview : {
-    table: []
+    table: [],
+    holdingsDisplay: false,
   }
 }
 

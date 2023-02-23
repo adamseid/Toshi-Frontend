@@ -11,12 +11,16 @@ import {
   Legend,
   Label,
 } from "recharts";
+import { NumberFormat } from "./NumberFormat";
 
 // const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 
 // const backend_url = "https://ws.toshitools.app/"
-const backend_url = "https://stagingws.toshitools.app/"
+// const backend_url = "https://stagingws.toshitools.app/"
 // const backend_url = "http://127.0.0.1:8000/";
+
+const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
+
 var toggle = true;
 var walletID = "";
 const dexToolsURL = "https://etherscan.io/dex/uniswapv2/";
@@ -85,8 +89,8 @@ export default class Graph extends Component {
   };
 
   onClickSwitchHandler = () => {
-    this.props.state["accountDetailed"]["holdingsDisplay"] =
-      !this.props.state["accountDetailed"]["holdingsDisplay"];
+    this.props.state["tokenHistoryOverview"]["holdingsDisplay"] =
+      !this.props.state["tokenHistoryOverview"]["holdingsDisplay"];
     this.setPropsState();
     console.log("switched");
   };
@@ -111,7 +115,7 @@ export default class Graph extends Component {
                   type="checkbox"
                   onChange={this.onClickSwitchHandler}
                   checked={
-                    this.props.state["accountDetailed"]["holdingsDisplay"]
+                    this.props.state["tokenHistoryOverview"]["holdingsDisplay"]
                   }
                 />
                 <span className="slider round"></span>
@@ -126,7 +130,7 @@ export default class Graph extends Component {
               <div>
                 {this.props.state.tokenHistoryOverview.table[4]?.map((asset, index)=> {
                   return (
-                <div key={index}>
+                <div key={index} className="account-detailed-ids">
                     <div className="asset-text-data-detailed-first-element">
                       <div className="account-token-outer-container">
                         <img className="account-bullet" src={
@@ -134,7 +138,7 @@ export default class Graph extends Component {
                         } />
                         <div className="account-token-inner-container">
                         <a className="account-top-row">
-                        <div className="account-token-name">{asset[0]}</div>
+                        <div className="account-token-name nowrap">{asset[0]}</div>
                         <div className="account-token-symbol">{asset[1]}</div>
                         </a>
                         <div className="account-bottom-row">
@@ -149,13 +153,34 @@ export default class Graph extends Component {
                       {asset[3]}
                     </div>
                 
-                
                     <div className="asset-text-data-detailed">
-                      {asset[3]}
+                      {asset[5] >= 0 ? (
+                                <div className = "positive tokenHistoryTableBlock" key={index}>
+                                    <div>
+                                        ${Math.round(asset[5]*100)/100}
+                                    </div>
+                                    <div className='bottom'>
+                                        +{0}%
+                                    </div>
+                                </div>
+                            ) :
+                            <div className = "negative tokenHistoryTableBlock" key={index}>
+                                <div>
+                                    ${Math.abs(Math.round(asset[5]*100)/100)}
+                                </div>
+                                <div className='bottom'>
+                                    -{0}%
+                                </div>
+                            </div>}
                     </div>
-                    <div className="asset-text-data-detailed currentHoldings">
-                  
+                  <div className="asset-text-data-detailed currentHoldings">
+                    <div className="nowrap">
+                        {this.props.state.tokenHistoryOverview.holdingsDisplay ? (
+                          asset[6] === 0 || asset[7] === 0 ? <>$0</> :
+                        asset[6] < 0.01 ? <NumberFormat number={asset[6]}/> : "$" + Math.round(asset[6]*100)/100
+                  ): asset[6] === 0 || asset[7] === 0 ? <>0 ETH</> : asset[7] < 0.01 ? <NumberFormat number={asset[7]}/> : Math.round(asset[7]*10000)/10000 + " ETH"}
                     </div>
+                  </div>
                 </div>
                   )
                 })}
