@@ -8,21 +8,6 @@ var toggle = true
 var walletID = ""
 
 export default class Graph extends Component {  
-
-    // volumeHistoryHttpRequest = () => {
-    //     var url = backend_url + "api/toshi/volume_history_overview"
-    //     console.log(url)
-    //     axios.post( url , this.props.state).then((response) => {
-    //         console.log("VOLUME HISTORY RESPONSE: ",response.data)
-    //         this.props.state['volumeHistoryTable']['maxVolumeHistoryTable'] = [response.data['profile_response']]
-    //         this.props.state['accountDetailed']['profitDict'] = [response.data['profile_response'][5]]
-    //         this.setPropsState()
-    //         console.log("VOLUME HISTORY STATE RESPONSE: ", this.props.state['volumeHistoryTable']['maxVolumeHistoryTable'])
-    //         console.log(this.props.state.accountDetailed.profitDict)
-    //     }).catch(error => {
-    //         console.log(error)
-    //       })
-    //   }
     
       setPropsState = () => {
         this.setState(this.props.state)
@@ -60,32 +45,17 @@ export default class Graph extends Component {
                 Total Wallet Loss Volume
               </div>
           </div>
-          {/* {
-            this.props.state['volumeHistoryTable']['maxVolumeHistoryTable'].length == 0 ? (
-              <></>
-            ) : 
-            this.props.state['volumeHistoryTable']['maxVolumeHistoryTable'].map((account, index) => {
+          <div className='account-ids'>
+          {
+            this.props.state.volumeHistoryOverview.table[4]?.map((account, index) => {
               return (
-                  <div key={index} className='account-ids'>
-                      <div className='asset-text-data'>
-                          ${Math.round(account[0]*100)/100}
-                      </div>
-                      <div className='asset-text-data'>
-                          ${Math.round(account[1]*100)/100}
-                      </div>
-                      <div className='asset-text-data'>
-                          ${Math.round(account[2]*100)/100}
-                      </div>
-                      <div className='asset-text-data'>
-                          ${Math.round(account[3]*100)/100}
-                      </div>
-                      <div className='asset-text-data'>
-                          ${Math.round(account[4]*-1*100)/100}
-                      </div>
-                  </div>
+                <div key={index} className='asset-text-data'>
+                    ${Math.round(account*100)/100}
+                </div>
               )
           })
-          }             */}
+          } 
+          </div>           
       </div>
   </div>
     )

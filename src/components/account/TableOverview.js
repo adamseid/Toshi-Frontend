@@ -39,6 +39,7 @@ export default class Graph extends Component {
               : <></>
               } */}
               {
+                this.props.state.profitHistoryOverview.table[4] ? 
                 this.props.state.profitHistoryOverview.table[4][0] >= 0 ?
                 <div className = "green">
                   {this.props.state.profitHistoryOverview.table[4][0]}
@@ -46,6 +47,7 @@ export default class Graph extends Component {
                 <div className = "red">
                   {this.props.state.profitHistoryOverview.table[4][0]}
                 </div>
+                : <></>
               }
             </div>
             <div className="asset-text-data">
@@ -53,7 +55,9 @@ export default class Graph extends Component {
               this.props.state.accountDetailed.profitDict[0] ? Object.values(this.props.state.accountDetailed.profitDict[0]).length : <></>
               } */}
               {
+                this.props.state.profitHistoryOverview.table[4] ?
                 this.props.state.profitHistoryOverview.table[4][1]
+                : <></>
               }
             </div>
             <div className="asset-text-data">
@@ -61,7 +65,9 @@ export default class Graph extends Component {
               this.props.state.accountDetailed.profitDict[0] ? this.props.state.accountDetailed.tokensProfitable : <></>
               } */}
               {
+                this.props.state.profitHistoryOverview.table[4] ?
                 this.props.state.profitHistoryOverview.table[4][2]
+                : <></>
               }
             </div>
     
@@ -74,11 +80,12 @@ export default class Graph extends Component {
                 ) 
                 : <></>
                 } */}
-              
+              {this.props.state.profitHistoryOverview.table[4] ? 
               <div className={this.props.state.profitHistoryOverview.table[4][3] > 50 ? "green" : "red"}>
                 {this.props.state.profitHistoryOverview.table[4][3]}%
               </div>
-              
+              : <></>
+              } 
             </div>
             <div className="asset-text-data red">
               
@@ -97,7 +104,9 @@ export default class Graph extends Component {
               : <></>
               } */}
               {
+                this.props.state.profitHistoryOverview.table[4] ?
                 this.props.state.profitHistoryOverview.table[4][4]
+                : <></>
               }
             </div> 
           </div>

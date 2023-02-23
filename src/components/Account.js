@@ -88,6 +88,8 @@ export default class Profile extends Component {
       this.state['profitHistoryOverview']['table'] = incomingData[0]
       this.state['volumeHistoryOverview']['table'] = incomingData[1]
       this.state['tokenHistoryOverview']['table'] = incomingData[2]
+      this.setState(this.state)
+      console.log(this.state.volumeHistoryOverview)
     }).catch(error => {
       console.log(error)
     })
