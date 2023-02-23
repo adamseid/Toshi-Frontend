@@ -27,44 +27,62 @@ export default class Graph extends Component {
             <div className="asset-text">Win Rate</div>
             <div className="asset-text">Total spent on gas fees (USD)</div>
           </div>
-
-          <div className="account-ids">
-            <div
-              className="asset-text-data">
-              {
+        
+            <div className="account-ids">
+              <div className="asset-text-data">
+              {/* {
               this.props.state.accountDetailed.profitDict[0] ? 
               (Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue[0], 0)*100)/100 >= 0 ? 
               <div className="green">+${Math.abs(Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue[0], 0)*100)/100)}</div>
               : <div className="red">-${Math.abs(Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue[0], 0)*100)/100)}</div>
               ) 
               : <></>
+              } */}
+              {
+                this.props.state.profitHistoryOverview.table[4][0] >= 0 ?
+                <div className = "green">
+                  {this.props.state.profitHistoryOverview.table[4][0]}
+                </div>:
+                <div className = "red">
+                  {this.props.state.profitHistoryOverview.table[4][0]}
+                </div>
               }
             </div>
             <div className="asset-text-data">
-              {
+              {/* {
               this.props.state.accountDetailed.profitDict[0] ? Object.values(this.props.state.accountDetailed.profitDict[0]).length : <></>
+              } */}
+              {
+                this.props.state.profitHistoryOverview.table[4][1]
               }
             </div>
             <div className="asset-text-data">
-              {
+              {/* {
               this.props.state.accountDetailed.profitDict[0] ? this.props.state.accountDetailed.tokensProfitable : <></>
+              } */}
+              {
+                this.props.state.profitHistoryOverview.table[4][2]
               }
             </div>
     
             <div className="asset-text-data">
-              {
+              {/* {
                 this.props.state.accountDetailed.profitDict[0] ? 
                 (Math.round(this.props.state.accountDetailed.tokensProfitable / Object.values(this.props.state.accountDetailed.profitDict[0]).length *100 *100)/100 >= 50 ? 
                 <div className="green">{Math.round(this.props.state.accountDetailed.tokensProfitable / Object.values(this.props.state.accountDetailed.profitDict[0]).length *100 *100)/100 + "%"}</div>
                 : <div className="red">{Math.round(this.props.state.accountDetailed.tokensProfitable / Object.values(this.props.state.accountDetailed.profitDict[0]).length *100 *100)/100 + "%"}</div>
                 ) 
                 : <></>
-                }
-            
+                } */}
+              
+              <div className={this.props.state.profitHistoryOverview.table[4][3] > 50 ? "green" : "red"}>
+                {this.props.state.profitHistoryOverview.table[4][3]}%
+              </div>
+              
             </div>
             <div className="asset-text-data red">
               
-              {this.props.state.accountDetailed.profitDict[0] ? 
+              {/* {this.props.state.accountDetailed.profitDict[0] ? 
               (Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0) < 0.01 ? 
               (
               <div>
@@ -77,8 +95,11 @@ export default class Graph extends Component {
               ) 
               : "$" + (Math.round(Object.values(this.props.state.accountDetailed.tokenDetails[0]).reduce((accumulator, currentValue) => accumulator + currentValue['gasFees'], 0)*100)/100))
               : <></>
+              } */}
+              {
+                this.props.state.profitHistoryOverview.table[4][4]
               }
-            </div>
+            </div> 
           </div>
         </div>
       </div>
