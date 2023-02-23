@@ -118,10 +118,10 @@ export default class Header extends Component {
             Market Overview
           </div>
           <div className='inner-flex-box-container'>
-            <form className='left-side' onSubmit={this.handleSubmit}>
+            {/* <form className='left-side' onSubmit={this.handleSubmit}>
               <input type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
               <input type="submit" id = "submit" value="Submit" className='search' />
-            </form>
+            </form> */}
             <div className='right-side'>
               {
                 this.props.state['header']['walletAddress'] == "" ? (

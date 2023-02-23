@@ -17,9 +17,6 @@ const default_state = {
   header: {
       walletAddress: "",
   },
-  profitHistoryOverview : [],
-  volumeHistoryOverview : [],
-  tokenHistoryOverview: [],
   accountOverview: {
       table: [],
       ethUsd: 0,
@@ -35,7 +32,6 @@ const default_state = {
     tokenDetails: 0,
     currentHoldings: {},
     ethUsd: 1,
-    
     table: [],
     graph: [],
     yearlyGraph:[],
@@ -57,11 +53,20 @@ const default_state = {
   },
   profile: {
     table: [],
+  },
+  profitHistoryOverview : {
+    table: []
+  },
+  volumeHistoryOverview : {
+    table: []
+  },
+  tokenHistoryOverview : {
+    table: []
   }
 }
 
-const backend_url = "https://stagingws.toshitools.app/"
-// const backend_url = "http://127.0.0.1:8000/" 
+// const backend_url = "https://stagingws.toshitools.app/"
+const backend_url = "http://127.0.0.1:8000/" 
 // const backend_url = "https://ws.toshitools.app/" 
 var walletID = ""
 const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX']
@@ -77,24 +82,33 @@ export default class Profile extends Component {
   volumeHistoryHttpRequest = () => {
     var url = backend_url + "api/toshi/history"
     console.log(url)
-    axios.post( url , this.state).then((response) => {
-        console.log("VOLUME HISTORY RESPONSE: ",response.data)
-        // this.state['volumeHistoryTable']['maxVolumeHistoryTable'] = [response.data['profile_response']]
-        // this.state['accountDetailed']['profitDict'] = [response.data['profile_response'][5]]
-        // this.state['accountDetailed']['tokensProfitable'] = [response.data['profile_response'][6]]
-        // this.state['accountDetailed']['transactionsPerToken'] = [response.data['profile_response'][7]]
-        // this.state['accountDetailed']['tokenDetails'] = [response.data['profile_response'][8]]
-        // this.state['accountDetailed']['ethUsd'] = [response.data['profile_response'][9]]
-
-
-        this.setState(this.state)
-        // console.log("VOLUME HISTORY STATE RESPONSE: ", this.state['volumeHistoryTable']['maxVolumeHistoryTable'])
-        // console.log("profitDict: ", this.state.accountDetailed.profitDict)
-        // console.log("transactionsPerToken: ", this.state.accountDetailed.transactionsPerToken)
-        // console.log("tokenDetails values: ", (this.state.accountDetailed.tokenDetails))
+    axios.post( "http://127.0.0.1:8000/api/toshi/history"  , this.state).then((response) => {
+      var incomingData = response.data['profile_response']
+      console.log("HISTORY RESPONSE: ",incomingData)
+      this.state['profitHistoryOverview']['table'] = incomingData[0]
+      this.state['volumeHistoryOverview']['table'] = incomingData[1]
+      this.state['tokenHistoryOverview']['table'] = incomingData[2]
     }).catch(error => {
-        console.log(error)
-      })
+      console.log(error)
+    })
+    
+    // axios.post( url , this.state).then((response) => {
+    //   console.log("VOLUME HISTORY RESPONSE: ",response.data)
+    //   this.state['volumeHistoryTable']['maxVolumeHistoryTable'] = [response.data['profile_response']]
+    //   this.state['accountDetailed']['profitDict'] = [response.data['profile_response'][5]]
+    //   this.state['accountDetailed']['tokensProfitable'] = [response.data['profile_response'][6]]
+    //   this.state['accountDetailed']['transactionsPerToken'] = [response.data['profile_response'][7]]
+    //   this.state['accountDetailed']['tokenDetails'] = [response.data['profile_response'][8]]
+    //   this.state['accountDetailed']['ethUsd'] = [response.data['profile_response'][9]]
+    //   this.setState(this.state)
+    //   console.log("VOLUME HISTORY STATE RESPONSE: ", this.state['volumeHistoryTable']['maxVolumeHistoryTable'])
+    //   console.log("profitDict: ", this.state.accountDetailed.profitDict)
+    //   console.log("transactionsPerToken: ", this.state.accountDetailed.transactionsPerToken)
+    //   console.log("tokenDetails values: ", (this.state.accountDetailed.tokenDetails))
+    // }).catch(error => {
+    //   console.log(error)
+    // })
+
   }
 
   // updateAccountOverviewStates = () => {
