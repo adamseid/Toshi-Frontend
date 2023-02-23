@@ -160,7 +160,7 @@ export default class Graph extends Component {
                                         ${(Math.round(asset[5]*100)/100).toFixed(2)}
                                     </div>
                                     <div className='bottom'>
-                                        +{0}%
+                                        {asset[9]}%
                                     </div>
                                 </div>
                             ) :
@@ -169,7 +169,7 @@ export default class Graph extends Component {
                                     ${(Math.abs(Math.round(asset[5]*100)/100)).toFixed(2)}
                                 </div>
                                 <div className='bottom'>
-                                    -{0}%
+                                    {asset[9]}%
                                 </div>
                             </div>}
                     </div>
