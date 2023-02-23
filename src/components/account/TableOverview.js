@@ -33,9 +33,9 @@ export default class Graph extends Component {
               className="asset-text-data">
               {
               this.props.state.accountDetailed.profitDict[0] ? 
-              (Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue, 0)*100)/100 >= 0 ? 
-              <div className="green">+${Math.abs(Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue, 0)*100)/100)}</div>
-              : <div className="red">-${Math.abs(Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue, 0)*100)/100)}</div>
+              (Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue[0], 0)*100)/100 >= 0 ? 
+              <div className="green">+${Math.abs(Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue[0], 0)*100)/100)}</div>
+              : <div className="red">-${Math.abs(Math.round(Object.values(this.props.state.accountDetailed.profitDict[0]).reduce((accumulator, currentValue)=> accumulator + currentValue[0], 0)*100)/100)}</div>
               ) 
               : <></>
               }
