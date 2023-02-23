@@ -124,7 +124,7 @@ export default class Graph extends Component {
             <div>
               <div className="account-detailed-ids">
               <div className="asset-text-data-detailed-first-element">
-                {this.props.state.accountDetailed.profitDict[0] ? 
+                {/* {this.props.state.accountDetailed.profitDict[0] ? 
                     Object.keys(this.props.state.accountDetailed.profitDict[0]).map(
                             (key, index) => {
                             return (  
@@ -148,11 +148,11 @@ export default class Graph extends Component {
                             );
                             }
                         ) : <></>   
-                    }
+                    } */}
                 </div>
    
                 <div className="asset-text-data-detailed">
-                    {this.props.state.accountDetailed.transactionsPerToken[0] ? 
+                    {/* {this.props.state.accountDetailed.transactionsPerToken[0] ? 
                     Object.values(this.props.state.accountDetailed.transactionsPerToken[0]).map((value,index) => {
                         return (
                         <div key={index} className="tokenHistoryTableBlock">
@@ -160,12 +160,12 @@ export default class Graph extends Component {
                         </div>
                         )
                     } )
-                    : <></>}
+                    : <></>} */}
                 </div>
                 
                 
                 <div className="asset-text-data-detailed">
-                  {this.props.state.accountDetailed.profitDict[0] && this.props.state.accountDetailed.tokenDetails[0]? 
+                  {/* {this.props.state.accountDetailed.profitDict[0] && this.props.state.accountDetailed.tokenDetails[0]? 
                     Object.values(this.props.state.accountDetailed.profitDict[0]).map((value, index)=> {
                         return (
                             value[0] >= 0 ? (
@@ -189,10 +189,10 @@ export default class Graph extends Component {
                         )
                     }
                     ) : <></>
-                  }
+                  } */}
                 </div>
                 <div className="asset-text-data-detailed currentHoldings">
-                  {this.props.state['accountDetailed']['profitDict'][0] && this.props.state['accountDetailed']['currentHoldings'] ? 
+                  {/* {this.props.state['accountDetailed']['profitDict'][0] && this.props.state['accountDetailed']['currentHoldings'] ? 
                   this.props.state['accountDetailed']['holdingsDisplay'] ? 
                             (Object.keys(this.props.state.accountDetailed.profitDict[0]).map((token, index) => {
                                 return(
@@ -231,7 +231,7 @@ export default class Graph extends Component {
                                     <div><div className="nowrap">0 <span className="grey">ETH</span></div><div>0%</div></div>)}
                                   </div>
                                 )
-                            })) : <></>}
+                            })) : <></>} */}
                 </div>
               </div>
             </div>

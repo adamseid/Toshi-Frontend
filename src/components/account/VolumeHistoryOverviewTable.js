@@ -60,7 +60,7 @@ export default class Graph extends Component {
                 Total Wallet Loss Volume
               </div>
           </div>
-          {
+          {/* {
             this.props.state['volumeHistoryTable']['maxVolumeHistoryTable'].length == 0 ? (
               <></>
             ) : 
@@ -85,7 +85,7 @@ export default class Graph extends Component {
                   </div>
               )
           })
-          }            
+          }             */}
       </div>
   </div>
     )
