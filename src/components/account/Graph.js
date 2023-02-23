@@ -12,9 +12,8 @@ import {
 } from "recharts";
 import axios from "axios";
 
-const backend_url = "https://stagingws.toshitools.app/"
-// const backend_url = "https://ws.toshitools.app/"
-// const backend_url = "http://127.0.0.1:8000/" 
+const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
+
 const time_frame = ['1H', '1D', '1W', '1M', '1Y']
 var walletID = ""
 

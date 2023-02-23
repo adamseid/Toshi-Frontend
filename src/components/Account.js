@@ -65,9 +65,7 @@ const default_state = {
   }
 }
 
-// const backend_url = "https://stagingws.toshitools.app/"
-const backend_url = "http://127.0.0.1:8000/" 
-// const backend_url = "https://ws.toshitools.app/" 
+const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
 var walletID = ""
 const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX']
 
@@ -235,8 +233,8 @@ export default class Profile extends Component {
           if(result[0].length > 0){
             this.updateWalletAddress()
             // const walletTest=this.state['header']['walletAddress'] =  "0xEcd2Ae407bBADaAB3A0A1Bf0c0a009C9f272a8F7"
-            // const walletTest=this.state['header']['walletAddress'] = result[0]
-            const walletTest=this.state['header']['walletAddress'] =  "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"
+            const walletTest=this.state['header']['walletAddress'] = result[0]
+            // const walletTest=this.state['header']['walletAddress'] =  "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"
             this.sendWalletAddress(walletTest);       
           }
         }

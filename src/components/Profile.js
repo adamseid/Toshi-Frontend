@@ -37,9 +37,7 @@ const default_state = {
   },
 }
 
-const backend_url = "https://stagingws.toshitools.app/"
-// const backend_url = "https://ws.toshitools.app/"
-// const backend_url = "http://127.0.0.1:8000/"
+const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
 
 export default class Profile extends Component {
   
