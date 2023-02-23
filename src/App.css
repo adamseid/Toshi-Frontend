@@ -419,8 +419,8 @@ a {
   text-align: left;
   color: #F9F9F9;
   width: 23%;
-  margin-left:64px;
-  margin-right: 20px;
+  margin-left:57px;
+  margin-right: 25px;
 }
 
 .asset-text-history{
@@ -1069,11 +1069,12 @@ a {
   width: 50px;
   margin-top: 9px;
   min-width: 20px;
-  margin-right: 83px;
+  margin-right: 80px;
 }
 
 .currentHoldings{
   width: 50px;
+  margin-left: 2px;
 }
 
 .asset-text-data-detailed-first-element{
@@ -1085,7 +1086,6 @@ a {
   text-align: left;
   color: #FFFFFF;
   width: 220px;
-  margin-top: 9px;
   margin-right: 93px;
 }
 

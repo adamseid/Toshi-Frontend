@@ -151,7 +151,7 @@ export default class Graph extends Component {
         </div> */}
         <div className="account-container">
           <div className="tokenHistoryOverviewTitles">
-            <div className="asset-text-first-history">Asset</div>
+            <div className="asset-text-first-history">Token Name</div>
             <div className="asset-text-history">Total Transactions</div>
             {/* <div className='asset-text-history'>
                     Profit TX
@@ -231,7 +231,7 @@ export default class Graph extends Component {
                                         ${value[0]}
                                     </div>
                                     <div className='bottom'>
-                                        +{(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? (Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index])["expense"]*100*10)/10).toFixed(1) : <></>}%
+                                        +{(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? (Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index])["expense"]*100*100)/100).toFixed(2) : <></>}%
                                     </div>
                                 </div>
                             ) :
@@ -240,7 +240,7 @@ export default class Graph extends Component {
                                     ${Math.abs(value[0])}
                                 </div>
                                 <div className='bottom'>
-                                    -{(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.abs(Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"])*100*10)/10).toFixed(1) : <></>}%
+                                    -{(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.abs(Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"])*100*100)/100).toFixed(2) : <></>}%
                                 </div>
                             </div>
                         )
