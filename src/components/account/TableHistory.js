@@ -273,19 +273,19 @@ export default class Graph extends Component {
                                         <sub>
                                           {this.props.numberOfZeros(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])}
                                         </sub>
-                                        <span>{this.props.convertDecimalFormat(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])} ETH</span>
+                                        <span>{this.props.convertDecimalFormat(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])} <span className="ETHLabel">ETH</span></span>
                                       </div>
                                       <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
                                     </div>) : (
                                       <div>
                                          <div className="nowrap">
-                                            {Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]*10000)/10000} ETH
+                                            {Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]*10000)/10000} <span className="ETHLabel">ETH</span>
                                          </div>
                                          <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
                                       </div> 
                                     )
                                     :
-                                    <div><div className="nowrap">0 ETH</div><div>0%</div></div>)}
+                                    <div><div className="nowrap">0 <span className="ETHLabel">ETH</span></div><div>0%</div></div>)}
                                   </div>
                                 )
                             })) : <></>}
