@@ -1074,7 +1074,7 @@ a {
 
 .currentHoldings{
   width: 50px;
-  margin-left: 10px;
+  margin-left: 2px;
 }
 
 .asset-text-data-detailed-first-element{
@@ -1086,8 +1086,8 @@ a {
   text-align: left;
   color: #FFFFFF;
   /* width: 300px; */
-  width: 325px;
-  margin-right: 93px;
+  width: 380px;
+  margin-right: 40px;
 }
 
 .tokenHistoryTableBlock{

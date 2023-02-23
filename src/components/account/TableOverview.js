@@ -35,10 +35,10 @@ export default class Graph extends Component {
                 this.props.state.profitHistoryOverview.table[this.props.state.time] ? 
                 this.props.state.profitHistoryOverview.table[this.props.state.time][0] >= 0 ?
                 <div className = "green">
-                  ${(Math.round(this.props.state.profitHistoryOverview.table[this.props.state.time][0]*100)/100).toFixed(2)}
+                  +${(Math.round(this.props.state.profitHistoryOverview.table[this.props.state.time][0]*100)/100).toFixed(2)}
                 </div>:
                 <div className = "red">
-                  ${(Math.round(this.props.state.profitHistoryOverview.table[this.props.state.time][0]*100)/100).toFixed(2)}
+                  -${Math.abs((Math.round(this.props.state.profitHistoryOverview.table[this.props.state.time][0]*100)/100)).toFixed(2)}
                 </div>
                 : <></>
               }
@@ -67,9 +67,9 @@ export default class Graph extends Component {
               } 
             </div>
             <div className="asset-text-data red">
-              ${
+              {
                 this.props.state.profitHistoryOverview.table[this.props.state.time] ?
-                (Math.round(this.props.state.profitHistoryOverview.table[this.props.state.time][4]*100)/100).toFixed(2)
+                <>${(Math.round(this.props.state.profitHistoryOverview.table[this.props.state.time][4]*100)/100).toFixed(2)}</>
                 : <></>
               }
             </div> 
