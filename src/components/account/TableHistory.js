@@ -128,7 +128,7 @@ export default class Graph extends Component {
             <div>
               {/* <div className="account-detailed-ids"> */}
               <div>
-                {this.props.state.tokenHistoryOverview.table[4]?.map((asset, index)=> {
+                {this.props.state.tokenHistoryOverview.table[this.props.state.time]?.map((asset, index)=> {
                   return (
                 <div key={index} className="account-detailed-ids">
                     <div className="asset-text-data-detailed-first-element">
@@ -157,7 +157,7 @@ export default class Graph extends Component {
                       {asset[5] >= 0 ? (
                                 <div className = "positive tokenHistoryTableBlock" key={index}>
                                     <div>
-                                        ${Math.round(asset[5]*100)/100}
+                                        ${(Math.round(asset[5]*100)/100).toFixed(2)}
                                     </div>
                                     <div className='bottom'>
                                         +{0}%
@@ -166,7 +166,7 @@ export default class Graph extends Component {
                             ) :
                             <div className = "negative tokenHistoryTableBlock" key={index}>
                                 <div>
-                                    ${Math.abs(Math.round(asset[5]*100)/100)}
+                                    ${(Math.abs(Math.round(asset[5]*100)/100)).toFixed(2)}
                                 </div>
                                 <div className='bottom'>
                                     -{0}%
@@ -178,7 +178,7 @@ export default class Graph extends Component {
                         {this.props.state.tokenHistoryOverview.holdingsDisplay ? (
                           asset[6] === 0 || asset[7] === 0 ? <>$0</> :
                         asset[6] < 0.01 ? <NumberFormat number={asset[6]}/> : "$" + Math.round(asset[6]*100)/100
-                  ): asset[6] === 0 || asset[7] === 0 ? <>0 ETH</> : asset[7] < 0.01 ? <NumberFormat number={asset[7]}/> : Math.round(asset[7]*10000)/10000 + " ETH"}
+                  ): asset[6] === 0 || asset[7] === 0 ? <>0 ETH</> : asset[7] < 0.01 ? <><NumberFormat number={asset[7]}/><span> ETH</span></> : Math.round(asset[7]*10000)/10000 + " ETH"}
                     </div>
                   </div>
                 </div>

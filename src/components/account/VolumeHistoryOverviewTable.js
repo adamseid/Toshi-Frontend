@@ -46,10 +46,10 @@ export default class Graph extends Component {
           </div>
           <div className='account-ids'>
           {
-            this.props.state.volumeHistoryOverview.table[4]?.map((account, index) => {
+            this.props.state.volumeHistoryOverview.table[this.props.state.time]?.map((account, index) => {
               return (
                 <div key={index} className='asset-text-data'>
-                    ${Math.round(account*100)/100}
+                    ${Math.abs((Math.round(account*100)/100)).toFixed(2)}
                 </div>
               )
           })

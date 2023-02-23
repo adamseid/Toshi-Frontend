@@ -63,7 +63,8 @@ const default_state = {
   tokenHistoryOverview : {
     table: [],
     holdingsDisplay: false,
-  }
+  },
+  time: 4
 }
 
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
@@ -92,71 +93,24 @@ export default class Profile extends Component {
     }).catch(error => {
       console.log(error)
     })
-    
-    // axios.post( url , this.state).then((response) => {
-    //   console.log("VOLUME HISTORY RESPONSE: ",response.data)
-    //   this.state['volumeHistoryTable']['maxVolumeHistoryTable'] = [response.data['profile_response']]
-    //   this.state['accountDetailed']['profitDict'] = [response.data['profile_response'][5]]
-    //   this.state['accountDetailed']['tokensProfitable'] = [response.data['profile_response'][6]]
-    //   this.state['accountDetailed']['transactionsPerToken'] = [response.data['profile_response'][7]]
-    //   this.state['accountDetailed']['tokenDetails'] = [response.data['profile_response'][8]]
-    //   this.state['accountDetailed']['ethUsd'] = [response.data['profile_response'][9]]
-    //   this.setState(this.state)
-    //   console.log("VOLUME HISTORY STATE RESPONSE: ", this.state['volumeHistoryTable']['maxVolumeHistoryTable'])
-    //   console.log("profitDict: ", this.state.accountDetailed.profitDict)
-    //   console.log("transactionsPerToken: ", this.state.accountDetailed.transactionsPerToken)
-    //   console.log("tokenDetails values: ", (this.state.accountDetailed.tokenDetails))
-    // }).catch(error => {
-    //   console.log(error)
-    // })
-
   }
-
-  // updateAccountOverviewStates = () => {
-  //   let sum = 0;
-  //       let tokensProfitable = 0;
-  //       let totalgas = 0;
-  //       this['state']['accountOverview']['table'].forEach((token)=>{
-  //           sum += token[2];
-  //           totalgas += token[10];
-  //           if(token[2] > 0){
-  //               tokensProfitable += 1;
-  //           }
-  //       })
-  //       this['state']['accountOverview']['profit'] = sum;
-  //       this['state']['accountOverview']['tokensTraded'] = this['state']['accountOverview']['table'].length
-  //       this['state']['accountOverview']['tokensProfitable'] = tokensProfitable;
-  //       this['state']['accountOverview']['totalGas'] = totalgas * this['state']['accountOverview']['ethUsd'];
-  //     }
 
 
   select = (data,event) => {
-    // if(data == "MAX"){
-    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['yearlyGraph']
-    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['maxTable']
-    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['maxTable']
-    // }else if (data == "1D"){
-    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['dailyGraph']
-    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['dailyTable']
-    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['dailyTable']
-    // }else if (data == "1W"){
-    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['weeklyGraph']
-    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['weeklyTable']
-    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['weeklyTable']
-    // }else if(data == "1M"){
-    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['monthlyGraph']
-    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['monthlyTable']
-    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['monthlyTable']
-    // }else if(data == "1Y"){
-    //     this.state['accountDetailed']['graph'] = this.state['accountDetailed']['yearlyGraph']
-    //     this['state']['accountDetailed']['table'] = this['state']['accountDetailed']['yearlyTable']
-    //     this['state']['accountOverview']['table'] = this['state']['accountDetailed']['yearlyTable']
-    // }
-
-    // this.updateAccountOverviewStates();
-
+    if(data == "MAX"){
+      this.state.time = 4
+    }else if (data == "1D"){
+      this.state.time = 0
+    }else if (data == "1W"){
+      this.state.time = 1
+    }else if(data == "1M"){
+      this.state.time = 2
+    }else if(data == "1Y"){
+      this.state.time = 3
+    }
 
     this.setState(this.state)
+    console.log(this.state.time)
     
     for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
         document.getElementsByClassName("hour")[i].classList.remove("active")
