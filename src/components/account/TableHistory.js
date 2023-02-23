@@ -228,19 +228,19 @@ export default class Graph extends Component {
                             value[0] >= 0 ? (
                                 <div className = "positive tokenHistoryTableBlock" key={index}>
                                     <div>
-                                        +${value[0]}
+                                        ${value[0]}
                                     </div>
                                     <div className='bottom'>
-                                        {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index])["expense"]*100*10)/10 : <></>}%
+                                        +{(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? (Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index])["expense"]*100*10)/10).toFixed(1) : <></>}%
                                     </div>
                                 </div>
                             ) :
                             <div className = "negative tokenHistoryTableBlock" key={index}>
                                 <div>
-                                    -${Math.abs(value[0])}
+                                    ${Math.abs(value[0])}
                                 </div>
                                 <div className='bottom'>
-                                    {(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"])*100*10)/10 : <></>}%
+                                    -{(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.abs(Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"])*100*10)/10).toFixed(1) : <></>}%
                                 </div>
                             </div>
                         )
