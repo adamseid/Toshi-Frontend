@@ -139,7 +139,7 @@ export default class Graph extends Component {
                         <div className="account-token-inner-container">
                         <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]}>
                         <div className="account-token-name nowrap">{asset[0]}</div>
-                        <div className="account-token-symbol">{asset[1]}</div>
+                        <div className="account-token-symbol nowrap">{asset[1]}</div>
                         </a>
                         <div className="account-bottom-row">
                           <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
