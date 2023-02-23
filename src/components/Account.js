@@ -82,7 +82,7 @@ export default class Profile extends Component {
   volumeHistoryHttpRequest = () => {
     var url = backend_url + "api/toshi/history"
     console.log(url)
-    axios.post( "http://127.0.0.1:8000/api/toshi/history"  , this.state).then((response) => {
+    axios.post( url  , this.state).then((response) => {
       var incomingData = response.data['profile_response']
       console.log("HISTORY RESPONSE: ",incomingData)
       this.state['profitHistoryOverview']['table'] = incomingData[0]
@@ -190,8 +190,8 @@ export default class Profile extends Component {
           if(result[0].length > 0){
             this.updateWalletAddress()
             // const walletTest=this.state['header']['walletAddress'] =  "0xEcd2Ae407bBADaAB3A0A1Bf0c0a009C9f272a8F7"
-            const walletTest=this.state['header']['walletAddress'] = result[0]
-            // const walletTest=this.state['header']['walletAddress'] =  "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"
+            // const walletTest=this.state['header']['walletAddress'] = result[0]
+            const walletTest=this.state['header']['walletAddress'] =  "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"
             this.sendWalletAddress(walletTest);       
           }
         }
