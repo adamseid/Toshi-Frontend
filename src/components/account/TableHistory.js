@@ -122,7 +122,43 @@ export default class Graph extends Component {
           </div>
           <div className="account-table">
             <div>
-              <div className="account-detailed-ids">
+              {/* <div className="account-detailed-ids"> */}
+              <div>
+                {this.props.state.tokenHistoryOverview.table[4]?.map((asset, index)=> {
+                  return (
+                <div key={index}>
+                    <div className="asset-text-data-detailed-first-element">
+                      <div className="account-token-outer-container">
+                        <img className="account-bullet" src={
+                          asset[8] ? asset[8] : BulletPoint
+                        } />
+                        <div className="account-token-inner-container">
+                        <a className="account-top-row">
+                        <div className="account-token-name">{asset[0]}</div>
+                        <div className="account-token-symbol">{asset[1]}</div>
+                        </a>
+                        <div className="account-bottom-row">
+                          <div className="account-token-allocation"></div>
+                          <div className="account-token-allocation-percentage"></div>
+                        </div>
+                        </div>
+                      </div>
+                    </div>
+   
+                    <div className="asset-text-data-detailed">
+                      {asset[3]}
+                    </div>
+                
+                
+                    <div className="asset-text-data-detailed">
+                      {asset[3]}
+                    </div>
+                    <div className="asset-text-data-detailed currentHoldings">
+                  
+                    </div>
+                </div>
+                  )
+                })}
               <div className="asset-text-data-detailed-first-element">
                 {/* {this.props.state.accountDetailed.profitDict[0] ? 
                     Object.keys(this.props.state.accountDetailed.profitDict[0]).map(
@@ -149,6 +185,7 @@ export default class Graph extends Component {
                             }
                         ) : <></>   
                     } */}
+                    
                 </div>
    
                 <div className="asset-text-data-detailed">
