@@ -8,6 +8,7 @@ import VolumeHistoryOverviewTable from './account/VolumeHistoryOverviewTable'
 import axios from "axios";
 import LeftBar from "./account/header/LeftBar"
 import { useNavigate } from "react-router-dom";
+import { LoadingSpinner } from './account/LoadingSpinner'
 
 // WEBSOCKET-LINK
 // ('ws://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
@@ -82,6 +83,7 @@ export default class Profile extends Component {
 
   volumeHistoryHttpRequest = () => {
     this.state.isLoading = true;
+    document.body.classList.add("greyBackground");
     this.setState(this.state)
     var url = backend_url + "api/toshi/history"
     console.log(url)
@@ -92,13 +94,14 @@ export default class Profile extends Component {
       this.state['volumeHistoryOverview']['table'] = incomingData[1]
       this.state['tokenHistoryOverview']['table'] = incomingData[2]
       this.state.isLoading = false;
+      document.body.classList.remove("greyBackground");
       this.setState(this.state)
       console.log(this.state.volumeHistoryOverview)
     }).catch(error => {
+      document.body.classList.remove("greyBackground");
       console.log(error)
     })
   }
-
 
   select = (data,event) => {
     if(data == "MAX"){
@@ -122,35 +125,6 @@ export default class Profile extends Component {
 
     event.target.classList.add("active")
   }
-
-  // assetTableHttpRequest = () => {
-  //   var url = backend_url + "api/toshi/accounthistory/"
-    
-  //   axios.post( url , this.state).then((response) => {
-  //       // token history overview states
-  //       console.log("ACCOUNT DETAILS: ",response.data)
-  //       this['state']['accountDetailed']['table'] = response.data['profile_response'][0]
-  //       this['state']['accountDetailed']['yearlyTable'] = response.data['profile_response'][0]
-  //       this['state']['accountDetailed']['monthlyTable'] = response.data['profile_response'][1]
-  //       this['state']['accountDetailed']['weeklyTable'] = response.data['profile_response'][2]
-  //       this['state']['accountDetailed']['dailyTable'] = response.data['profile_response'][3]
-  //       // this['state']['accountDetailed']['hourlyTable'] = response.data['profile_response'][4]
-  //       this['state']['accountDetailed']['ethPriceChange'] = response.data['profile_response'][4]
-  //       this['state']['accountDetailed']['maxTable'] = response.data['profile_response'][6]
-
-  //       // profit history overview states
-        
-  //       this['state']['accountOverview']['table'] = response.data['profile_response'][0]
-  //       this['state']['accountOverview']['ethUsd'] = response.data['profile_response'][5]
-  //       this.updateAccountOverviewStates();
-
-  //       this.setState(this.state)
-  //       console.log(this['state']['accountOverview']['profit'])
-  //       console.log(this['state']['accountOverview']['totalGas'])
-  //   }).catch(error => {
-  //       console.log(error)
-  //     })
-  // }
 
   componentDidUpdate = () => {
     if(walletID != this['state']['header']['walletAddress']){
@@ -317,6 +291,7 @@ export default class Profile extends Component {
             <button className='hour active' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
             <button className='hour' onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
         </div>
+        {this.state.isLoading ? <LoadingSpinner/> : <></>}
         < TableOverview
             state = {this.state}
             numberOfZeros = {this.numberOfZeros}
