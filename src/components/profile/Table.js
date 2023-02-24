@@ -14,12 +14,15 @@ export default class Graph extends Component {
         var url = backend_url + "api/toshi/assets/"
         this.props.state.profileLoading = true
         this.setPropsState()
+        document.body.classList.add("greyBackground")
         axios.post( url , this.props.state).then((response) => {
             console.log("READ: ", response.data['profile_response']['profile']['table'])
             this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
             this.props.state.profileLoading = false
             this.setPropsState()
+            document.body.classList.remove("greyBackground")
         }).catch(error => {
+            document.body.classList.remove("greyBackground")
             this.props.state['profile']['table'] = []
             this.setPropsState()
           });
@@ -67,6 +70,7 @@ export default class Graph extends Component {
                     Amount
                 </div>
             </div>
+            {this.props.state.profileLoading ? <LoadingSpinner/> : <></>}
             { 
               this.props.state['profile']['table'].length == 0 ? (
                 <></>
