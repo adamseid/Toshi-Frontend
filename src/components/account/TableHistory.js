@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import axios from "axios";
 import BulletPoint from "../images/bulletPoint.png";
-import { LoadingSpinner } from "./LoadingSpinner";
 import {
   LineChart,
   Line,
@@ -127,7 +126,7 @@ export default class Graph extends Component {
           </div>
           <div className="account-table">
             <div>
-              {this.props.state.isLoading ? <LoadingSpinner/> : 
+               
               <div>
               {this.props.state.tokenHistoryOverview.table[this.props.state.time]?.map((asset, index)=> {
                 return (
@@ -188,7 +187,7 @@ export default class Graph extends Component {
                 )
               })}
             </div>
-              }
+              
             </div>
               
 

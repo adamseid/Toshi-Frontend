@@ -67,8 +67,7 @@ export default class Graph extends Component {
                     Amount
                 </div>
             </div>
-            {
-            this.props.state.profileLoading ? <LoadingSpinner/> : 
+            { 
               this.props.state['profile']['table'].length == 0 ? (
                 <></>
               ) : 

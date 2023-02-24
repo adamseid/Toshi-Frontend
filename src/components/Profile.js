@@ -35,6 +35,7 @@ const default_state = {
       totalTokens: 0,
       displayTotalTokens: false,
   },
+  profileLoading: false,
 }
 
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL

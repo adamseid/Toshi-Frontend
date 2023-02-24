@@ -30,7 +30,7 @@ export default class Graph extends Component {
             <div className="asset-text">Total spent on gas fees (USD)</div>
           </div>
 
-          {this.props.state.isLoading ? <LoadingSpinner/> : 
+           
           <div className="account-ids">
               <div className="asset-text-data">
               {
@@ -75,7 +75,7 @@ export default class Graph extends Component {
                 : <></>
               }
             </div> 
-          </div>}
+          </div>
             
         </div>
       </div>
