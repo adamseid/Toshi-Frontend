@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import profileImage from "../profile/header/images/bulletPoint.png"
 import axios from "axios";
+import { LoadingSpinner } from '../account/LoadingSpinner';
 
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
 
@@ -11,10 +12,12 @@ export default class Graph extends Component {
 
     assetTableHttpRequest = () => {
         var url = backend_url + "api/toshi/assets/"
-        
+        this.props.state.profileLoading = true
+        this.setPropsState()
         axios.post( url , this.props.state).then((response) => {
             console.log("READ: ", response.data['profile_response']['profile']['table'])
             this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
+            this.props.state.profileLoading = false
             this.setPropsState()
         }).catch(error => {
             this.props.state['profile']['table'] = []
@@ -65,6 +68,7 @@ export default class Graph extends Component {
                 </div>
             </div>
             {
+            this.props.state.profileLoading ? <LoadingSpinner/> : 
               this.props.state['profile']['table'].length == 0 ? (
                 <></>
               ) : 

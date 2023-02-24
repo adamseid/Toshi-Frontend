@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from "axios";
+import { LoadingSpinner } from './LoadingSpinner';
 
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
 
@@ -44,25 +45,28 @@ export default class Graph extends Component {
                 Total Wallet Loss Volume
               </div>
           </div>
-          <div className='account-ids'>
-          {
-            this.props.state.volumeHistoryOverview.table[this.props.state.time]?.map((account, index) => {
-              return (
-                index === 3 ? 
-                  <div key={index} className='asset-text-data green'>
-                    +${Math.abs((Math.round(account*100)/100)).toFixed(2)}
-                  </div> : (index == 4 ? 
-                    <div key={index} className='asset-text-data red'>
-                    -${Math.abs((Math.round(account*100)/100)).toFixed(2)}
-                  </div> : 
-                  <div key={index} className='asset-text-data'>
-                    ${Math.abs((Math.round(account*100)/100)).toFixed(2)}
-                  </div>
-                    )      
-              )
-          })
-          } 
-          </div>           
+          {this.props.state.isLoading ? <LoadingSpinner/> : 
+           <div className='account-ids'>
+           {
+             this.props.state.volumeHistoryOverview.table[this.props.state.time]?.map((account, index) => {
+               return (
+                 index === 3 ? 
+                   <div key={index} className='asset-text-data green'>
+                     +${Math.abs((Math.round(account*100)/100)).toFixed(2)}
+                   </div> : (index == 4 ? 
+                     <div key={index} className='asset-text-data red'>
+                     -${Math.abs((Math.round(account*100)/100)).toFixed(2)}
+                   </div> : 
+                   <div key={index} className='asset-text-data'>
+                     ${Math.abs((Math.round(account*100)/100)).toFixed(2)}
+                   </div>
+                     )      
+               )
+           })
+           } 
+           </div>
+          }
+                    
       </div>
   </div>
     )

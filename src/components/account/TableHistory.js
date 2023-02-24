@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
 import BulletPoint from "../images/bulletPoint.png";
+import { LoadingSpinner } from "./LoadingSpinner";
 import {
   LineChart,
   Line,
@@ -126,179 +127,70 @@ export default class Graph extends Component {
           </div>
           <div className="account-table">
             <div>
-              {/* <div className="account-detailed-ids"> */}
+              {this.props.state.isLoading ? <LoadingSpinner/> : 
               <div>
-                {this.props.state.tokenHistoryOverview.table[this.props.state.time]?.map((asset, index)=> {
-                  return (
-                <div key={index} className="account-detailed-ids">
-                    <div className="asset-text-data-detailed-first-element">
-                      <div className="account-token-outer-container">
-                        <img className="account-bullet" src={
-                          asset[8] ? asset[8] : BulletPoint
-                        } />
-                        <div className="account-token-inner-container">
-                        <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]}>
-                        <div className="account-token-name nowrap">{asset[0]}</div>
-                        <div className="account-token-symbol nowrap">{asset[1]}</div>
-                        </a>
-                        <div className="account-bottom-row">
-                          <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
-                          <div className="account-token-allocation-percentage"></div>
-                        </div>
-                        </div>
+              {this.props.state.tokenHistoryOverview.table[this.props.state.time]?.map((asset, index)=> {
+                return (
+              <div key={index} className="account-detailed-ids">
+                  <div className="asset-text-data-detailed-first-element">
+                    <div className="account-token-outer-container">
+                      <img className="account-bullet" src={
+                        asset[8] ? asset[8] : BulletPoint
+                      } />
+                      <div className="account-token-inner-container">
+                      <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]}>
+                      <div className="account-token-name nowrap">{asset[0]}</div>
+                      <div className="account-token-symbol nowrap">{asset[1]}</div>
+                      </a>
+                      <div className="account-bottom-row">
+                        <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
+                        <div className="account-token-allocation-percentage"></div>
+                      </div>
                       </div>
                     </div>
-   
-                    <div className="asset-text-data-detailed">
-                      {asset[3]}
-                    </div>
-                
-                    <div className="asset-text-data-detailed">
-                      {asset[5] >= 0 ? (
-                                <div className = "positive tokenHistoryTableBlock" key={index}>
-                                    <div>
-                                        ${(Math.round(asset[5]*100)/100).toFixed(2)}
-                                    </div>
-                                    <div className='bottom'>
-                                        {asset[9]}%
-                                    </div>
-                                </div>
-                            ) :
-                            <div className = "negative tokenHistoryTableBlock" key={index}>
-                                <div>
-                                    ${(Math.abs(Math.round(asset[5]*100)/100)).toFixed(2)}
-                                </div>
-                                <div className='bottom'>
-                                    {asset[9]}%
-                                </div>
-                            </div>}
-                    </div>
-                  <div className="asset-text-data-detailed currentHoldings">
-                    <div className="nowrap">
-                        {this.props.state.tokenHistoryOverview.holdingsDisplay ? (
-                          asset[6] === 0 || asset[7] === 0 ? <>$0</> :
-                        asset[6] < 0.01 ? <NumberFormat number={asset[6]}/> : "$" + Math.round(asset[6]*100)/100
-                  ): asset[6] === 0 || asset[7] === 0 ? <>0<span className="grey"> ETH</span></> : 
-                  asset[7] < 0.01 ? <><NumberFormat number={asset[7]}/><span className="grey"> ETH</span></> : 
-                  <>{Math.round(asset[7]*10000)/10000}<span className="grey"> ETH</span></>}
-                    </div>
+                  </div>
+ 
+                  <div className="asset-text-data-detailed">
+                    {asset[3]}
+                  </div>
+              
+                  <div className="asset-text-data-detailed">
+                    {asset[5] >= 0 ? (
+                              <div className = "positive tokenHistoryTableBlock" key={index}>
+                                  <div>
+                                      ${(Math.round(asset[5]*100)/100).toFixed(2)}
+                                  </div>
+                                  <div className='bottom'>
+                                      {asset[9]}%
+                                  </div>
+                              </div>
+                          ) :
+                          <div className = "negative tokenHistoryTableBlock" key={index}>
+                              <div>
+                                  ${(Math.abs(Math.round(asset[5]*100)/100)).toFixed(2)}
+                              </div>
+                              <div className='bottom'>
+                                  {asset[9]}%
+                              </div>
+                          </div>}
+                  </div>
+                <div className="asset-text-data-detailed currentHoldings">
+                  <div className="nowrap">
+                      {this.props.state.tokenHistoryOverview.holdingsDisplay ? (
+                        asset[6] === 0 || asset[7] === 0 ? <>$0</> :
+                      asset[6] < 0.01 ? <NumberFormat number={asset[6]}/> : "$" + Math.round(asset[6]*100)/100
+                ): asset[6] === 0 || asset[7] === 0 ? <>0<span className="grey"> ETH</span></> : 
+                asset[7] < 0.01 ? <><NumberFormat number={asset[7]}/><span className="grey"> ETH</span></> : 
+                <>{Math.round(asset[7]*10000)/10000}<span className="grey"> ETH</span></>}
                   </div>
                 </div>
-                  )
-                })}
-              <div className="asset-text-data-detailed-first-element">
-                {/* {this.props.state.accountDetailed.profitDict[0] ? 
-                    Object.keys(this.props.state.accountDetailed.profitDict[0]).map(
-                            (key, index) => {
-                            return (  
-                                 
-                                <div key={index} className="account-token-outer-container">
-                                    <img className="account-bullet" src={
-                                      this.props.state.accountDetailed.profitDict[0][key][1] ? this.props.state.accountDetailed.profitDict[0][key][1] : BulletPoint
-                                    } />
-                                    <div className="account-token-inner-container">
-                                    <a className="account-top-row">
-                                        <div className="account-token-name">{key}</div>
-                                        <div className="account-token-symbol"></div>
-                                    </a>
-                                    <div className="account-bottom-row">
-                                        <div className="account-token-allocation"></div>
-                                        <div className="account-token-allocation-percentage"></div>
-                                    </div>
-                                    </div>
-                                </div>
-                                
-                            );
-                            }
-                        ) : <></>   
-                    } */}
-                    
-                </div>
-   
-                <div className="asset-text-data-detailed">
-                    {/* {this.props.state.accountDetailed.transactionsPerToken[0] ? 
-                    Object.values(this.props.state.accountDetailed.transactionsPerToken[0]).map((value,index) => {
-                        return (
-                        <div key={index} className="tokenHistoryTableBlock">
-                            {value}
-                        </div>
-                        )
-                    } )
-                    : <></>} */}
-                </div>
-                
-                
-                <div className="asset-text-data-detailed">
-                  {/* {this.props.state.accountDetailed.profitDict[0] && this.props.state.accountDetailed.tokenDetails[0]? 
-                    Object.values(this.props.state.accountDetailed.profitDict[0]).map((value, index)=> {
-                        return (
-                            value[0] >= 0 ? (
-                                <div className = "positive tokenHistoryTableBlock" key={index}>
-                                    <div>
-                                        ${value[0]}
-                                    </div>
-                                    <div className='bottom'>
-                                        +{(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? (Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index])["expense"]*100*100)/100).toFixed(2) : <></>}%
-                                    </div>
-                                </div>
-                            ) :
-                            <div className = "negative tokenHistoryTableBlock" key={index}>
-                                <div>
-                                    ${Math.abs(value[0])}
-                                </div>
-                                <div className='bottom'>
-                                    -{(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]) ? Math.abs(Math.round(value[0]/(Object.values(this.props.state.accountDetailed.tokenDetails[0])[index]["expense"])*100*100)/100).toFixed(2) : <></>}%
-                                </div>
-                            </div>
-                        )
-                    }
-                    ) : <></>
-                  } */}
-                </div>
-                <div className="asset-text-data-detailed currentHoldings">
-                  {/* {this.props.state['accountDetailed']['profitDict'][0] && this.props.state['accountDetailed']['currentHoldings'] ? 
-                  this.props.state['accountDetailed']['holdingsDisplay'] ? 
-                            (Object.keys(this.props.state.accountDetailed.profitDict[0]).map((token, index) => {
-                                return(
-                                  <div className="tokenHistoryTableBlock" key={index}>
-                                  {this.props.state.accountDetailed.currentHoldings.hasOwnProperty(token) ? 
-                                  
-                                  <div><div className="nowrap">${Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]*100)/100}</div><div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div></div> :
-                                  <div><div className="nowrap">$0</div><div>0%</div></div>}
-                                  </div>
-                                )
-                            }))
-                            : 
-                            (Object.keys(this.props.state.accountDetailed.profitDict[0]).map((token, index) => {
-                                return(
-                                  <div className="tokenHistoryTableBlock" key={index}>
-                                    {(this.props.state.accountDetailed.currentHoldings.hasOwnProperty(token) ? 
-                                    this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"] < 0.01 ?
-                                    (<div>
-                                      <div className="nowrap">
-                                        <span>0.0</span>
-                                        <sub>
-                                          {this.props.numberOfZeros(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])}
-                                        </sub>
-                                        <span>{this.props.convertDecimalFormat(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"])} <span className="grey">ETH</span></span>
-                                      </div>
-                                      <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
-                                    </div>) : (
-                                      <div>
-                                         <div className="nowrap">
-                                            {Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][1]/this.props.state["accountDetailed"]["ethUsd"]*10000)/10000} <span className="grey">ETH</span>
-                                         </div>
-                                         <div>%{Math.round(this.props.state["accountDetailed"]["currentHoldings"][token][0]*100)/100}</div>
-                                      </div> 
-                                    )
-                                    :
-                                    <div><div className="nowrap">0 <span className="grey">ETH</span></div><div>0%</div></div>)}
-                                  </div>
-                                )
-                            })) : <></>} */}
-                </div>
               </div>
+                )
+              })}
             </div>
+              }
+            </div>
+              
 
             <div className="chart-container">
               <LineChart
