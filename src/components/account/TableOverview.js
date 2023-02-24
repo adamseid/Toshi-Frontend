@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import profileImage from "../profile/header/images/temp-profile-image.png";
 import axios from "axios";
+import { LoadingSpinner } from "./LoadingSpinner";
 
 
 // const backend_url = "https://stagingws.toshitools.app/"
@@ -28,8 +29,9 @@ export default class Graph extends Component {
             <div className="asset-text">Win Rate</div>
             <div className="asset-text">Total spent on gas fees (USD)</div>
           </div>
-        
-            <div className="account-ids">
+
+          {this.props.state.isLoading ? <LoadingSpinner/> : 
+          <div className="account-ids">
               <div className="asset-text-data">
               {
                 this.props.state.profitHistoryOverview.table[this.props.state.time] ? 
@@ -73,7 +75,8 @@ export default class Graph extends Component {
                 : <></>
               }
             </div> 
-          </div>
+          </div>}
+            
         </div>
       </div>
     );

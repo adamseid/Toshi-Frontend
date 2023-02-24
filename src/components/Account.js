@@ -64,7 +64,8 @@ const default_state = {
     table: [],
     holdingsDisplay: false,
   },
-  time: 4
+  time: 4,
+  isLoading: false,
 }
 
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
@@ -80,6 +81,8 @@ export default class Profile extends Component {
   }
 
   volumeHistoryHttpRequest = () => {
+    this.state.isLoading = true;
+    this.setState(this.state)
     var url = backend_url + "api/toshi/history"
     console.log(url)
     axios.post( url  , this.state).then((response) => {
@@ -88,6 +91,7 @@ export default class Profile extends Component {
       this.state['profitHistoryOverview']['table'] = incomingData[0]
       this.state['volumeHistoryOverview']['table'] = incomingData[1]
       this.state['tokenHistoryOverview']['table'] = incomingData[2]
+      this.state.isLoading = false;
       this.setState(this.state)
       console.log(this.state.volumeHistoryOverview)
     }).catch(error => {
