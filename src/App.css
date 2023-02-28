@@ -399,7 +399,7 @@ a {
 
 .asset-text-data {
   font-family: Be Vietnam;
-  font-size: 16.43px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 24.01px;
   letter-spacing: 0em;
@@ -412,7 +412,7 @@ a {
 
 .asset-text-first-history{
   font-family: Rajdhani;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 13px;
   letter-spacing: 0em;
@@ -425,7 +425,7 @@ a {
 
 .asset-text-history{
   font-family: Rajdhani;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 13px;
   letter-spacing: 0em;
@@ -473,7 +473,7 @@ a {
 }
 
 .bottom{
-  font-size: 13px;
+  font-size: 18px;
 }
 
 .top-positive:before{
@@ -980,7 +980,7 @@ a {
 .account-token-name{
   margin-right: 3px;
   font-family: Be Vietnam;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0em;
@@ -990,7 +990,7 @@ a {
 
 .account-token-symbol{
   font-family: Be Vietnam;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0em;
@@ -1005,7 +1005,7 @@ a {
 .account-token-allocation{
   margin-right: 3px;
   font-family: Be Vietnam;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: 0em;
@@ -1060,7 +1060,7 @@ a {
 
 .asset-text-data-detailed {
   font-family: Be Vietnam;
-  font-size: 16.43px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 24.01px;
   letter-spacing: 0em;
