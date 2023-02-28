@@ -398,7 +398,7 @@ a {
 }
 
 .asset-text-data {
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 500;
   line-height: 24.01px;
@@ -979,7 +979,7 @@ a {
 
 .account-token-name{
   margin-right: 3px;
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
@@ -989,7 +989,7 @@ a {
 }
 
 .account-token-symbol{
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
@@ -1004,7 +1004,7 @@ a {
 
 .account-token-allocation{
   margin-right: 3px;
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 700;
   line-height: 18px;
@@ -1014,7 +1014,7 @@ a {
 }
 
 .account-token-allocation-percentage{
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 12px;
   font-weight: 700;
   line-height: 18px;
@@ -1059,7 +1059,7 @@ a {
 }
 
 .asset-text-data-detailed {
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 500;
   line-height: 24.01px;
@@ -1078,7 +1078,7 @@ a {
 }
 
 .asset-text-data-detailed-first-element{
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 16.43px;
   font-weight: 500;
   line-height: 24.01px;
