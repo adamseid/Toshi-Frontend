@@ -40,7 +40,6 @@ export default class Header extends Component {
           if(result[0].length > 0){
             this.updateWalletAddress()
             const walletTest=this.props.state['header']['walletAddress'] = result[0]
-            // const walletTest=this.props.state['header']['walletAddress'] =  "0xa542f325990ceb47e2ae8bd9dccf8960b16eb7a9"
             this.sendWalletAddress(walletTest);       
             this.httpPostRequest()     
           }
