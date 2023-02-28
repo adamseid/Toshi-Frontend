@@ -955,8 +955,8 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  max-width: 70%;
+  align-items: flex-start;
+  max-width: 95%;
 }
 
 .tokenHistoryOverviewTitles{
