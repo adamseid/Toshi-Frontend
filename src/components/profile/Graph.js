@@ -10,18 +10,19 @@ import {
     Legend,
     Label
 } from "recharts";
+
 import axios from "axios";
 
 // const ws2 = new WebSocket('ws://build-DMSLo-101U365JD1Q4D-1878096217.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
-const time_frame = ['1H', '1D', '1W', '1M', '1Y']
+const time_frame = ['1D', '1W', '1M', '1Y','MAX']
 var walletID = ""
 
 export default class Graph extends Component {
   select = (data,event) => {
-    if(data == "1H"){
-      this.props.state['profile']['graph'] = this.props.state['profile']['hourlyGraph']
-      this.props.state['profile']['profit'] = this.props.state['profile']['hourlyProfit']
+    if(data == "MAX"){
+      this.props.state['profile']['graph'] = this.props.state['profile']['maxGraph']
+      this.props.state['profile']['profit'] = this.props.state['profile']['maxProfit']
     }else if (data == "1D"){
       this.props.state['profile']['graph'] = this.props.state['profile']['dailyGraph']
       this.props.state['profile']['profit'] = this.props.state['profile']['dailyProfit']
@@ -60,18 +61,18 @@ export default class Graph extends Component {
     var url = backend_url + "api/toshi/graph/"
     axios.post(url, this.props.state).then((response) => {
       console.log("PROFILE: ", response.data['profile_response']['profile']['graph'])
-      this.props.state['profile']['graph'] = response.data['profile_response']['profile']['graph'][4]
-      this.props.state['profile']['hourlyGraph'] = response.data['profile_response']['profile']['graph'][0]
-      this.props.state['profile']['dailyGraph'] = response.data['profile_response']['profile']['graph'][1]
-      this.props.state['profile']['weeklyGraph'] = response.data['profile_response']['profile']['graph'][2]
-      this.props.state['profile']['monthlyGraph'] = response.data['profile_response']['profile']['graph'][3]
-      this.props.state['profile']['yearlyGraph'] = response.data['profile_response']['profile']['graph'][4]
+      this.props.state['profile']['graph'] = response.data['profile_response']['profile']['graph'][0]
       this.props.state['profile']['profit'] = response.data['profile_response']['profile']['graph'][5]
-      this.props.state['profile']['yearlyProfit'] = response.data['profile_response']['profile']['graph'][5]
-      this.props.state['profile']['monthlyProfit'] = response.data['profile_response']['profile']['graph'][6]
-      this.props.state['profile']['weeklyProfit'] = response.data['profile_response']['profile']['graph'][7]
-      this.props.state['profile']['dailyProfit'] = response.data['profile_response']['profile']['graph'][8]
-      this.props.state['profile']['hourlyProfit'] = response.data['profile_response']['profile']['graph'][9]
+      this.props.state['profile']['maxGraph'] = response.data['profile_response']['profile']['graph'][0]
+      this.props.state['profile']['yearlyGraph'] = response.data['profile_response']['profile']['graph'][1]
+      this.props.state['profile']['monthlyGraph'] = response.data['profile_response']['profile']['graph'][2]
+      this.props.state['profile']['weeklyGraph'] = response.data['profile_response']['profile']['graph'][3]
+      this.props.state['profile']['dailyGraph'] = response.data['profile_response']['profile']['graph'][4]
+      this.props.state['profile']['maxProfit'] = response.data['profile_response']['profile']['graph'][5]
+      this.props.state['profile']['yearlyProfit'] = response.data['profile_response']['profile']['graph'][6]
+      this.props.state['profile']['monthlyProfit'] = response.data['profile_response']['profile']['graph'][7]
+      this.props.state['profile']['weeklyProfit'] = response.data['profile_response']['profile']['graph'][8]
+      this.props.state['profile']['dailyProfit'] = response.data['profile_response']['profile']['graph'][9]
       this.setPropsState()
       console.log("PROFILE: ", this.state.profile)
     });
@@ -135,9 +136,9 @@ export default class Graph extends Component {
         <div className='wallet-amount'>
           {
             this.props.state['profile']['profit'] > 0 ? (
-              <div className = "positive"> {this.props.state['profile']['profit']} </div>
+              <div className = "positive"> ${this.props.state['profile']['profit']} </div>
             ) :
-              <div className = "negative"> {this.props.state['profile']['profit']} </div>
+              <div className = "negative"> ${this.props.state['profile']['profit']} </div>
           }
         </div>
         {/* <div className='wallet-difference'>
@@ -156,8 +157,6 @@ export default class Graph extends Component {
           
           <div className='chart-container'>
             <LineChart
-              background={{ fill: "red" }}
-              fill={"red"}
               width={600}
               height={400}
               data={
@@ -174,9 +173,17 @@ export default class Graph extends Component {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" horizontal={false} vertical={false} />
-              <XAxis dataKey="name" tick={{ fill: '#FFFFFF' }} tickLine={{ stroke: '#FFFFFF' }} stroke="#FFFFFF">
+              <XAxis 
+              dataKey="time_name"
+              tick={{ fill: '#FFFFFF' }} 
+              tickLine={{ stroke: '#FFFFFF' }} 
+              stroke="#FFFFFF"
+              height = {60}
+              label={{ value: 'Time', angle: 0, position: 'bottom', offset:"-25", }}
+              >
               </XAxis>
               <YAxis 
+              label={{ value: 'Amount (USD)', angle: 90, position: 'right', offset:"-10"}}
               orientation="right" 
               tick={{ fill: '#FFFFFF' }} 
               tickLine={{ stroke: '#FFFFFF' }} 
@@ -184,16 +191,15 @@ export default class Graph extends Component {
               width={80} >
               </YAxis>
               <Legend verticalAlign="top" display={false} />
-              <Tooltip />
-              <Legend
-                  display={true}
-              />
+              <Legend display={true} />
               <Line
-                  type="monotone"
-                  dataKey="pv"
+                  type="natural"
+                  dataKey="USD"
                   stroke="#86F9A6"
-                  activeDot={{ r: 8 }}
+                  activeDot={{ stroke: 'red', strokeWidth: 0, r: 5 }}
+                  dot = {false}
               />
+              <Tooltip cursor={false} />
             </LineChart>
           </div>
         </div>

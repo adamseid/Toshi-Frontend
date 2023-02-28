@@ -113,7 +113,7 @@ export default class Header extends Component {
       <div>
         <div className='outer-flex-box-container'>
           <div className='header-left'>
-            Market Overview
+            Profile Overview
           </div>
           <div className='inner-flex-box-container'>
             <form className='left-side' onSubmit={this.handleSubmit}>

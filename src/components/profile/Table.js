@@ -16,7 +16,6 @@ export default class Graph extends Component {
         this.setPropsState()
         document.body.classList.add("greyBackground")
         axios.post( url , this.props.state).then((response) => {
-            console.log("READ: ", response.data['profile_response']['profile']['table'])
             this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
             this.props.state.profileLoading = false
             this.setPropsState()
@@ -33,10 +32,7 @@ export default class Graph extends Component {
       }
     
       componentDidUpdate = () => {
-        console.log("WALLET ID: ", walletID)
-        console.log("PROPS WALLET ID: ", this.props['state']['header']['walletAddress'])
         if(walletID != this.props['state']['header']['walletAddress']){
-            console.log("sadfasdfa sdfas df asdf a sdf a")
             this.assetTableHttpRequest()
           }
           walletID = this.props['state']['header']['walletAddress']

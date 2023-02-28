@@ -387,7 +387,7 @@ a {
 
 .asset-text {
   font-family: Rajdhani;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 13px;
   letter-spacing: 0em;
@@ -675,8 +675,7 @@ a {
 }
 
 .table-token-full {
-  font-family: Be Vietnam;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0em;
@@ -686,8 +685,7 @@ a {
 }
 
 .table-token-short {
-  font-family: Be Vietnam;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0em;
@@ -696,8 +694,7 @@ a {
 }
 
 .table-token-price {
-  font-family: Be Vietnam;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: 0em;
@@ -707,8 +704,7 @@ a {
 }
 
 .table-token-allocation {
-  font-family: Be Vietnam;
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: 0em;
@@ -735,8 +731,7 @@ a {
 }
 
 .table-amount {
-  font-family: Be Vietnam;
-  font-size: 16px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 24px;
   letter-spacing: 0em;
@@ -1047,7 +1042,7 @@ a {
 
 .asset-text-data-detailed-second-element {
   font-family: Be Vietnam;
-  font-size: 16.43px;
+  font-size: 16px;
   font-weight: 500;
   line-height: 24.01px;
   letter-spacing: 0em;

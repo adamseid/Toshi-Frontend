@@ -13,7 +13,7 @@ import { useNavigate } from "react-router-dom";
 const default_state = {
 
   header: {
-      walletAddress: "0xEcd2Ae407bBADaAB3A0A1Bf0c0a009C9f272a8F7",
+      walletAddress: "",
       rerender: false,
   },
   profile: {
@@ -23,13 +23,13 @@ const default_state = {
       monthlyGraph:[],
       weeklyGraph:[],
       dailyGraph:[],
-      hourlyGraph:[],
+      maxGraph:[],
       profit:0,
       yearlyProfit: 0,
       monthlyProfit: 0,
       weeklyProfit: 0,
       dailyProfit: 0,
-      hourlyProfit: 0,
+      maxProfit: 0,
       table: [],
       component: [],
       totalTokens: 0,
@@ -81,8 +81,8 @@ export default class Profile extends Component {
         if(result[0]){
           if(result[0].length > 0){
             this.updateWalletAddress()
-            const walletTest=this.state['header']['walletAddress'] = result[0]
-            // const walletTest=this.state['header']['walletAddress'] = "0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A"
+            // const walletTest=this.state['header']['walletAddress'] = result[0]
+            const walletTest=this.state['header']['walletAddress'] = "0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A"
             // const walletTest=this.state['header']['walletAddress'] = "0xEcd2Ae407bBADaAB3A0A1Bf0c0a009C9f272a8F7"
             this.sendWalletAddress(walletTest);       
           }
@@ -184,7 +184,7 @@ export default class Profile extends Component {
         <div>
           <div className='outer-flex-box-container'>
             <div className='header-left'>
-              Market Overview
+              Profile Overview
             </div>
             <div className='inner-flex-box-container'>
               <form className='left-side' onSubmit={this.handleSubmit}>
