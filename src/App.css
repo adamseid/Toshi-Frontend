@@ -349,7 +349,7 @@ a {
 
 .asset-text-middle {
   font-family: Rajdhani;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 13px;
   letter-spacing: 0em;
@@ -360,13 +360,13 @@ a {
 
 .table-right {
   margin-top: -5px;
-  margin-right: 25px;
+  margin-right: 12px;
   width: 6%;
 }
 
 .top-token-container {
   /* font-family: Be Vietnam; */
-  font-size: 12px;
+  font-size: 18px;
   font-weight: 500;
   line-height: 18px;
   letter-spacing: 0em;
@@ -374,6 +374,13 @@ a {
   color: white;
   margin-top: 0.75px;
   width: 17%;
+  margin-right: 33px;
+  margin-left: 5px;
+}
+
+.top-token-container > a {
+  text-decoration: none;
+  color: white;
 }
 
 /* Profile */
@@ -752,7 +759,7 @@ a {
 
 .table-price-change {
   /* font-family: Be Vietnam; */
-  font-size: 13px;
+  font-size: 18px;
   font-weight: 400;
   line-height: 20px;
   letter-spacing: 0em;

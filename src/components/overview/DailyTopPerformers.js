@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Graph from './top_performer/Graph'
 import "../../App.css"
 
-const time_frame = ['1H', '1D', '1W', '1M', '1Y']
+const time_frame = ['1D', '1W', '1M', '1Y']
 
 
 export default class DailyTopPerformers extends Component {
@@ -73,9 +73,11 @@ export default class DailyTopPerformers extends Component {
                                     <div className='table-inner-token-container'>
                                         <div className='table-token-container'>
                                             <div className='top-token-container'>
+                                                <a href={"https://etherscan.io/address/" + asset[0]}>
                                                 {
                                                     asset[0].substring(0, 6) + "..." +  asset[0].substring(38, 42)
                                                 }
+                                                </a>
                                             </div>
                                         </div>
                                     </div>

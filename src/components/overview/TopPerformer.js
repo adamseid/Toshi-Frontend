@@ -11,7 +11,7 @@ import {
     Legend,
     Label
 } from "recharts";
-const time_frame = ['1H', '1D', '1W', '1M', '1Y']
+const time_frame = ['1D', '1W', '1M', '1Y']
 
 
 export default class TopPerformer extends Component {
