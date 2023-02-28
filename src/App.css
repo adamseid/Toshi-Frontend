@@ -398,8 +398,8 @@ a {
 }
 
 .asset-text-data {
-  font-family: Be Vietnam;
-  font-size: 16.43px;
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
   font-weight: 500;
   line-height: 24.01px;
   letter-spacing: 0em;
@@ -412,7 +412,7 @@ a {
 
 .asset-text-first-history{
   font-family: Rajdhani;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 13px;
   letter-spacing: 0em;
@@ -425,7 +425,7 @@ a {
 
 .asset-text-history{
   font-family: Rajdhani;
-  font-size: 10px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 13px;
   letter-spacing: 0em;
@@ -473,7 +473,7 @@ a {
 }
 
 .bottom{
-  font-size: 13px;
+  font-size: 18px;
 }
 
 .top-positive:before{
@@ -675,6 +675,7 @@ a {
 }
 
 .table-token-full {
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
@@ -685,6 +686,7 @@ a {
 }
 
 .table-token-short {
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 700;
   line-height: 24px;
@@ -694,6 +696,7 @@ a {
 }
 
 .table-token-price {
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 700;
   line-height: 18px;
@@ -704,6 +707,7 @@ a {
 }
 
 .table-token-allocation {
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 700;
   line-height: 18px;
@@ -718,7 +722,7 @@ a {
   content: '%';
 }
 .table-token-allocation-small{
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 12px;
   font-weight: 700;
   line-height: 18px;
@@ -731,6 +735,7 @@ a {
 }
 
 .table-amount {
+  /* font-family: Be Vietnam; */
   font-size: 18px;
   font-weight: 500;
   line-height: 24px;
@@ -942,7 +947,7 @@ a {
   padding-left: 20.35px;
   padding-right: 26.26px;
   padding-bottom: 21.38px;
-  padding-top: 14.44px;
+  padding-top: 22px;
   margin-bottom: 50px;
 }
 
@@ -950,15 +955,15 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items: center;
-  max-width: 70%;
+  align-items: flex-start;
+  max-width: 95%;
 }
 
 .tokenHistoryOverviewTitles{
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   max-width: 70%;
 }
 
@@ -974,8 +979,8 @@ a {
 
 .account-token-name{
   margin-right: 3px;
-  font-family: Be Vietnam;
-  font-size: 16px;
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0em;
@@ -984,8 +989,8 @@ a {
 }
 
 .account-token-symbol{
-  font-family: Be Vietnam;
-  font-size: 16px;
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
   font-weight: 700;
   line-height: 24px;
   letter-spacing: 0em;
@@ -999,8 +1004,8 @@ a {
 
 .account-token-allocation{
   margin-right: 3px;
-  font-family: Be Vietnam;
-  font-size: 12px;
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
   font-weight: 700;
   line-height: 18px;
   letter-spacing: 0em;
@@ -1009,7 +1014,7 @@ a {
 }
 
 .account-token-allocation-percentage{
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 12px;
   font-weight: 700;
   line-height: 18px;
@@ -1054,15 +1059,15 @@ a {
 }
 
 .asset-text-data-detailed {
-  font-family: Be Vietnam;
-  font-size: 16.43px;
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
   font-weight: 500;
   line-height: 24.01px;
   letter-spacing: 0em;
   text-align: left;
   color: #FFFFFF;
   width: 50px;
-  margin-top: 9px;
+  margin-top: 5px;
   min-width: 20px;
   margin-right: 78px;
 }
@@ -1073,7 +1078,7 @@ a {
 }
 
 .asset-text-data-detailed-first-element{
-  font-family: Be Vietnam;
+  /* font-family: Be Vietnam; */
   font-size: 16.43px;
   font-weight: 500;
   line-height: 24.01px;
@@ -1113,8 +1118,8 @@ a {
 .switch {
   position: relative;
   display: inline-block;
-  width: 50px;
-  height: 17px;
+  width: 80px;
+  height: 23px;
   margin-top: 5px;
 }
 
@@ -1142,8 +1147,8 @@ a {
 .slider:before {
   position: absolute;
   content: "";
-  height: 15px;
-  width: 26px;
+  height: 20px;
+  width: 40px;
   left: -2px;
   bottom: -1px;
   background-color: darkgreen;
@@ -1160,9 +1165,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(22px);
-  -ms-transform: translateX(22px);
-  transform: translateX(22px);
+  -webkit-transform: translateX(36px);
+  -ms-transform: translateX(36px);
+  transform: translateX(36px);
 }
 
 /* Rounded sliders */
@@ -1176,14 +1181,15 @@ input:checked + .slider:before {
 
 .ETH-label{
   position: absolute;
-  top: 2px;
+  top: 5px;
+  left: 10px;
   font-weight: 700;
 }
 
 .USD-label{
   position: absolute;
-  left: 28px;
-  top: 2px;
+  left: 43px;
+  top: 5px;
   font-weight: 700;
 }
 
