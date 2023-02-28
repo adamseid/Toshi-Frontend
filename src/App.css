@@ -1118,8 +1118,8 @@ a {
 .switch {
   position: relative;
   display: inline-block;
-  width: 50px;
-  height: 17px;
+  width: 80px;
+  height: 23px;
   margin-top: 5px;
 }
 
@@ -1147,8 +1147,8 @@ a {
 .slider:before {
   position: absolute;
   content: "";
-  height: 15px;
-  width: 26px;
+  height: 20px;
+  width: 40px;
   left: -2px;
   bottom: -1px;
   background-color: darkgreen;
@@ -1165,9 +1165,9 @@ input:focus + .slider {
 }
 
 input:checked + .slider:before {
-  -webkit-transform: translateX(22px);
-  -ms-transform: translateX(22px);
-  transform: translateX(22px);
+  -webkit-transform: translateX(36px);
+  -ms-transform: translateX(36px);
+  transform: translateX(36px);
 }
 
 /* Rounded sliders */
@@ -1181,14 +1181,15 @@ input:checked + .slider:before {
 
 .ETH-label{
   position: absolute;
-  top: 2px;
+  top: 5px;
+  left: 10px;
   font-weight: 700;
 }
 
 .USD-label{
   position: absolute;
-  left: 28px;
-  top: 2px;
+  left: 43px;
+  top: 5px;
   font-weight: 700;
 }
 
