@@ -963,7 +963,7 @@ a {
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   max-width: 70%;
 }
 
@@ -1067,7 +1067,7 @@ a {
   text-align: left;
   color: #FFFFFF;
   width: 50px;
-  margin-top: 9px;
+  margin-top: 5px;
   min-width: 20px;
   margin-right: 78px;
 }
