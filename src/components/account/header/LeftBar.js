@@ -100,16 +100,21 @@ const LeftBar = ({walletId}) => {
                     </div>
                 </a>
             </div>
-
+            <a href={"https://etherscan.io/address/" + walletId} target="_blank">
             <div className="header-account-container">
+                
                 <img src={profileImage} className="header-profile-image" />
                 <div className="header-profile-id">
                     Account 1
                 </div>
                 <div className="header-profile-id">
+                
                     {walletId}
+                
                 </div>
+                
             </div>
+            </a>
         </div>
     )
 }

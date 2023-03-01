@@ -164,6 +164,13 @@ a {
   align-items: center;
   justify-content: center;
   margin: 35px 0px;
+  padding: 20px;
+  transition: 0.2s;
+}
+
+.header-account-container:hover {
+  box-shadow: 0 0 9px -2px rgb(221, 216, 216);
+  border-radius: 17px;
 }
 
 .header-profile-id {
