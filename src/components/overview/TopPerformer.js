@@ -89,39 +89,44 @@ export default class TopPerformer extends Component {
                             }
                         </div>
                         <LineChart
-                            background={{ fill: "red" }}
-                            fill={"red"}
-                            width={600}
-                            height={400}
-                            data={this.props.state['top_performer']['graph']}
-                            margin={{
-                                top: 0,
-                                right: 0,
-                                left: 0,
-                                bottom: 0
-                            }}
+                        width={600}
+                        height={400}
+                        data={this.props.state['top_performer']['graph']}
+                        margin={{
+                            top: 0,
+                            right: 0,
+                            left: 0,
+                            bottom: 0
+                        }}
                         >
                             <CartesianGrid strokeDasharray="3 3" horizontal={false} vertical={false} />
-                            <XAxis dataKey="name" tick={{ fill: '#FFFFFF' }} tickLine={{ stroke: '#FFFFFF' }} stroke="#FFFFFF">
+                            <XAxis 
+                            dataKey="time_name"
+                            tick={{ fill: '#FFFFFF' }} 
+                            tickLine={{ stroke: '#FFFFFF' }} 
+                            stroke="#FFFFFF"
+                            height = {60}
+                            label={{ value: 'Time', angle: 0, position: 'bottom', offset:"-25", }}
+                            >
                             </XAxis>
                             <YAxis 
+                            label={{ value: 'Amount (USD)', angle: 90, position: 'right', offset:"-10"}}
                             orientation="right" 
                             tick={{ fill: '#FFFFFF' }} 
                             tickLine={{ stroke: '#FFFFFF' }} 
                             stroke="#FFFFFF"
-                            width={80} >
+                            width={120} >
                             </YAxis>
                             <Legend verticalAlign="top" display={false} />
-                            <Tooltip />
-                            <Legend
-                                display={true}
-                            />
+                            <Legend display={true} />
                             <Line
-                                type="monotone"
-                                dataKey="pv"
+                                type="natural"
+                                dataKey="USD"
                                 stroke="#86F9A6"
-                                activeDot={{ r: 8 }}
+                                activeDot={{ stroke: 'red', strokeWidth: 0, r: 5 }}
+                                dot = {false}
                             />
+                            <Tooltip cursor={false} />
                         </LineChart>
                     </div>
                 </div>

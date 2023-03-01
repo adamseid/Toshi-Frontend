@@ -86,7 +86,6 @@ export default class Profile extends Component {
     document.body.classList.add("greyBackground");
     this.setState(this.state)
     var url = backend_url + "api/toshi/history"
-    console.log(url)
     axios.post( url  , this.state).then((response) => {
       var incomingData = response.data['profile_response']
       console.log("HISTORY RESPONSE: ",incomingData)
@@ -96,7 +95,6 @@ export default class Profile extends Component {
       this.state.isLoading = false;
       document.body.classList.remove("greyBackground");
       this.setState(this.state)
-      console.log(this.state.volumeHistoryOverview)
     }).catch(error => {
       document.body.classList.remove("greyBackground");
       console.log(error)
