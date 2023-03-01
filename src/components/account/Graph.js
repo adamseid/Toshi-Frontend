@@ -105,7 +105,9 @@ export default class Graph extends Component {
               }
             </div>
             <div className='wallet-id'>
+            <a href={"https://etherscan.io/address/" + this.props.state['header']['walletAddress']}>
               {this.props.state['header']['walletAddress'].substring(0, 6) + "..." + this.props.state['header']['walletAddress'].substring(38, 42)}
+            </a>
             </div>
           </div>
         </div>
