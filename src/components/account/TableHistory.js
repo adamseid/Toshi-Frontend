@@ -137,7 +137,7 @@ export default class Graph extends Component {
                         asset[8] ? asset[8] : BulletPoint
                       } />
                       <div className="account-token-inner-container">
-                      <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]}>
+                      <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]} target="_blank">
                       <div className="account-token-name nowrap">{asset[0]}</div>
                       <div className="account-token-symbol nowrap">{asset[1]}</div>
                       </a>
