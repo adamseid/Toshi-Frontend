@@ -30,21 +30,13 @@ export default class Graph extends Component {
   graphHttpRequest = () => {
     var url = backend_url + "api/toshi/accountGraph/";
     axios.post(url, this.props.state).then((response) => {
-      console.log(response.data["profile_response"]);
-      this.props.state["accountDetailed"]["hourlyGraph"] =
-        response.data["profile_response"][0];
-      this.props.state["accountDetailed"]["dailyGraph"] =
-        response.data["profile_response"][1];
-      this.props.state["accountDetailed"]["weeklyGraph"] =
-        response.data["profile_response"][2];
-      this.props.state["accountDetailed"]["monthlyGraph"] =
-        response.data["profile_response"][3];
-      this.props.state["accountDetailed"]["yearlyGraph"] =
-        response.data["profile_response"][4];
-      this.props.state["accountDetailed"]["graph"] =
-        response.data["profile_response"][4];
-      this.props.state["accountDetailed"]["ethUsd"] =
-        response.data["profile_response"][6];
+      console.log("GRAPH: ", response.data['profile_response'])
+      this.props.state['profile']['graph'] = response.data['profile_response'][0]
+      this.props.state['profile']['maxGraph'] = response.data['profile_response'][0]
+      this.props.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
+      this.props.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
+      this.props.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
+      this.props.state['profile']['dailyGraph'] = response.data['profile_response'][4]
       this.setPropsState();
       console.log("ACCOUNT GRAPGH STATE: ", this.props.state);
     });
@@ -192,53 +184,51 @@ export default class Graph extends Component {
               
 
             <div className="chart-container">
-              <LineChart
-                background={{ fill: "red" }}
-                fill={"red"}
-                width={400}
-                height={300}
-                data={
-                  this.props.state["accountDetailed"]["graph"].length == 0 ? (
-                    <></>
-                  ) : (
-                    this.props.state["accountDetailed"]["graph"]
-                  )
-                }
-                margin={{
+            <LineChart
+              width={400}
+              height={300}
+              data={
+                this.props.state['profile']['graph'] == [] ? (
+                  <></>
+                ) : 
+                this.props.state['profile']['graph']
+              }
+              margin={{
                   top: 0,
                   right: 0,
                   left: 0,
-                  bottom: 0,
-                }}
+                  bottom: 0
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" horizontal={false} vertical={false} />
+              <XAxis 
+              dataKey="time_name"
+              tick={{ fill: '#FFFFFF' }} 
+              tickLine={{ stroke: '#FFFFFF' }} 
+              stroke="#FFFFFF"
+              height = {60}
+              label={{ value: 'Time', angle: 0, position: 'bottom', offset:"-25", }}
               >
-                <CartesianGrid
-                  strokeDasharray="3 3"
-                  horizontal={false}
-                  vertical={false}
-                />
-                <XAxis
-                  dataKey="name"
-                  tick={{ fill: "#FFFFFF" }}
-                  tickLine={{ stroke: "#FFFFFF" }}
-                  stroke="#FFFFFF"
-                ></XAxis>
-                <YAxis
-                  orientation="right"
-                  tick={{ fill: "#FFFFFF" }}
-                  tickLine={{ stroke: "#FFFFFF" }}
-                  stroke="#FFFFFF"
-                  width={80}
-                ></YAxis>
-                <Legend verticalAlign="top" display={false} />
-                <Tooltip />
-                <Legend display={true} />
-                <Line
-                  type="monotone"
-                  dataKey="pv"
+              </XAxis>
+              <YAxis 
+              label={{ value: 'Amount (USD)', angle: 90, position: 'right', offset:"-10"}}
+              orientation="right" 
+              tick={{ fill: '#FFFFFF' }} 
+              tickLine={{ stroke: '#FFFFFF' }} 
+              stroke="#FFFFFF"
+              width={80} >
+              </YAxis>
+              <Legend verticalAlign="top" display={false} />
+              <Legend display={true} />
+              <Line
+                  type="natural"
+                  dataKey="USD"
                   stroke="#86F9A6"
-                  activeDot={{ r: 8 }}
-                />
-              </LineChart>
+                  activeDot={{ stroke: 'red', strokeWidth: 0, r: 5 }}
+                  dot = {false}
+              />
+              <Tooltip cursor={false} />
+            </LineChart>
             </div>
           </div>
         </div>

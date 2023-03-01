@@ -54,13 +54,14 @@ export default class Graph extends Component {
   graphHttpRequest = () => {
     var url = backend_url + "api/toshi/graph/"
     axios.post(url, this.props.state).then((response) => {
-      console.log(response.data['profile_response']['profile']['graph'])
-      this.props.state['profile']['hourlyGraph'] = response.data['profile_response']['profile']['graph'][0]
-      this.props.state['profile']['dailyGraph'] = response.data['profile_response']['profile']['graph'][1]
-      this.props.state['profile']['weeklyGraph'] = response.data['profile_response']['profile']['graph'][2]
-      this.props.state['profile']['monthlyGraph'] = response.data['profile_response']['profile']['graph'][3]
-      this.props.state['profile']['yearlyGraph'] = response.data['profile_response']['profile']['graph'][4]
-      this.props.state['profile']['graph'] = [response.data['profile_response']['profile']['graph'][4],response.data['profile_response']['profile']['graph'][5],response.data['profile_response']['profile']['graph'][6]]
+      console.log("GRAPH: ", response.data['profile_response'])
+      this.props.state['profile']['graph'] = response.data['profile_response'][0]
+      this.props.state['profile']['maxGraph'] = response.data['profile_response'][0]
+      this.props.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
+      this.props.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
+      this.props.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
+      this.props.state['profile']['dailyGraph'] = response.data['profile_response'][4]
+      // this.props.state['profile']['graph'] = [response.data['profile_response']['profile']['graph'][4],response.data['profile_response']['profile']['graph'][5],response.data['profile_response']['profile']['graph'][6]]
       this.setPropsState()
     });
   }
