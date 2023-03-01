@@ -138,7 +138,7 @@ export default class Graph extends Component {
                                         </div>
                                     ) : (
                                         <div className='table-amount'>
-                                            ${asset[3]}
+                                            ${asset[3].toFixed(2)}
                                         </div>
                                     )
                                 }
