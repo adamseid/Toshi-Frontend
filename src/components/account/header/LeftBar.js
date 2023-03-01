@@ -58,12 +58,14 @@ const LeftBar = ({walletId}) => {
             </div>
 
             <div className="pages-container">
+                
                 <div className="page-item" onClick={() => handleClick('overview')}>
                     <img src={overview} className="page-image" />
                     <div className="page-text">
                         Overview
                     </div>
                 </div>
+                
                 <div className="page-item" onClick={() => handleClick('profile')}>
                     <img src={favourite} className="page-image" />
                     <div className="page-text">

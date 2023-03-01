@@ -235,8 +235,39 @@ a {
 
 .page-item:hover {
   cursor: pointer;
-  border-top: 1.5px solid #7DFFA1;
-  border-bottom: 1.5px solid #7DFFA1;
+  /* border-top: 1.5px solid #7DFFA1;
+  border-bottom: 1.5px solid #7DFFA1; */
+}
+
+@keyframes pageItemAnimation{
+  from {width: 0%;}
+  to {width:100%;}
+}
+
+.page-item:hover::before{
+  position: absolute;
+  content: "";
+  background: #7DFFA1;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0%;
+  animation-name: pageItemAnimation;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.page-item:hover::after{
+  position: absolute;
+  content: "";
+  background: #7DFFA1;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  animation-name: pageItemAnimation;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
 .social-item:hover {
@@ -249,7 +280,10 @@ a {
   margin-right: 0px;
 }
 
+/* style="transform: translate3d(-120%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" */
+
 .page-item {
+  position:relative;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -259,6 +293,7 @@ a {
   padding-bottom: 13px;
   padding-left: 10px;
   padding-right: 10px;
+  /* transition: border 1s linear; */
 }
 
 .pages-container {
@@ -849,7 +884,7 @@ a {
   border: none;
   background-color: transparent;
   border: 0.49px solid transparent;
-  margin: 5px 0px;
+  margin: 5px 5px;
 }
 
 .hour:hover,
