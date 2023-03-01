@@ -79,19 +79,19 @@ const LeftBar = ({walletId}) => {
             </div>
 
             <div className="social-container">
-                <a href = "https://twitter.com/Toshi_Tools" className="social-item">
+                <a href = "https://twitter.com/Toshi_Tools" className="social-item" target="_blank">
                     <img className="social-image" src={twitter} />
                     <div className="social-text">
                         Twitter
                     </div>
                 </a>
-                <a href = "https://t.me/ToshiToolsGateway"  className="social-item">
+                <a href = "https://t.me/ToshiToolsGateway"  className="social-item" target="_blank">
                     <img className="social-image" src={telegram} />
                     <div className="social-text">
                         Telegram
                     </div>
                 </a>
-                <a href = "https://www.toshi.tools/"  className="social-item">
+                <a href = "https://www.toshi.tools/"  className="social-item" target="_blank">
                     <img className="social-image" src={website} />
                     <div className="social-text">
                         Website
