@@ -1281,3 +1281,14 @@ input:checked + .slider:before {
 .greyBackground{
   opacity: 0.5;
 }
+
+.wallet-glow:hover{
+  transition: all 200ms cubic-bezier(.23, 1, .32, 1);
+  text-shadow: 0px 0px 15px #f3f3f1;
+  font-weight: 700;
+}
+
+.wallet-id > a {
+  text-decoration: none;
+  color: white;
+}

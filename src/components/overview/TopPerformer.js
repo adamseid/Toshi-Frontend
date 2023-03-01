@@ -73,7 +73,9 @@ export default class TopPerformer extends Component {
                                 this.props.state['daily_top_performers']['data'].length == 0 ? (
                                     console.log("NO WALLET ID")
                                 ) :
-                                this.props.state['daily_top_performers']['data'][0][0].substring(0, 6) + "..." +  this.props.state['daily_top_performers']['data'][0][0].substring(38, 42)
+                                <a href={"https://etherscan.io/address/" + this.props.state['daily_top_performers']['data'][0][0]} target="_blank">
+                                {this.props.state['daily_top_performers']['data'][0][0].substring(0, 6) + "..." +  this.props.state['daily_top_performers']['data'][0][0].substring(38, 42)}
+                                </a>
                             }
                         </div>
                     </div>

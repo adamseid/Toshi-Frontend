@@ -46,7 +46,7 @@ export default class DailyTopPerformers extends Component {
                                     <div className='table-inner-token-container'>
                                         <div className='table-token-container'>
                                             <div className='top-token-container'>
-                                                <a href={"https://etherscan.io/address/" + asset[0]} target="_blank">
+                                                <a href={"https://etherscan.io/address/" + asset[0]} target="_blank" className="wallet-glow">
                                                 {
                                                     asset[0].substring(0, 6) + "..." +  asset[0].substring(38, 42)
                                                 }
