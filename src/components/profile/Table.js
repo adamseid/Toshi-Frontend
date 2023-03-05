@@ -16,6 +16,7 @@ export default class Graph extends Component {
         this.setPropsState()
         document.body.classList.add("greyBackground")
         axios.post( url , this.props.state).then((response) => {
+            console.log("PROFILE PAGE ASSET TABLE: ", response.data['profile_response']['profile']['table'])
             this.props.state['profile']['table'] = response.data['profile_response']['profile']['table']
             this.props.state.profileLoading = false
             this.setPropsState()
@@ -76,10 +77,10 @@ export default class Graph extends Component {
                     <div key={index} className='table-item'>
                         <div className='personal-table-left'>
                             {
-                                asset.length == 5 ?(
+                                asset.length == 6 ?(
                                     <img className = "profile_token_image" src={profileImage} />
                                 ) : (
-                                    <img className = "profile_token_image" src={asset[5]} />
+                                    <img className = "profile_token_image" src={asset[6]} />
                                 )
                             }
                             <div className='table-inner-token-container'>
