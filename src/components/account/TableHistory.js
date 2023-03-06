@@ -126,7 +126,7 @@ export default class Graph extends Component {
                   <div className="asset-text-data-detailed-first-element">
                     <div className="account-token-outer-container">
                       <img className="account-bullet" src={
-                        asset[8] ? asset[8] : BulletPoint
+                        asset[9] ? asset[9] : BulletPoint
                       } />
                       <div className="account-token-inner-container">
                       <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]} target="_blank">
@@ -152,7 +152,7 @@ export default class Graph extends Component {
                                       ${(Math.round(asset[5]*100)/100).toFixed(2)}
                                   </div>
                                   <div className='bottom'>
-                                      {asset[9]}%
+                                      {asset[10]}%
                                   </div>
                               </div>
                           ) :
@@ -161,7 +161,7 @@ export default class Graph extends Component {
                                   ${(Math.abs(Math.round(asset[5]*100)/100)).toFixed(2)}
                               </div>
                               <div className='bottom'>
-                                  {asset[9]}%
+                                  {asset[10]}%
                               </div>
                           </div>}
                   </div>
