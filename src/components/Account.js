@@ -286,8 +286,8 @@ export default class Profile extends Component {
             <button className='hour' onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
             <button className='hour' onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
             <button className='hour' onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
-            <button className='hour active' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
+            <button className='hour' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
+            <button className='hour active' onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
         < TableOverview
