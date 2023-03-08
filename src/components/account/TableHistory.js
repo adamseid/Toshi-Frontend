@@ -143,7 +143,7 @@ export default class Graph extends Component {
                   <div className="nowrap">
                       {this.props.state.tokenHistoryOverview.holdingsDisplay ? (
                         asset[6] === 0 || asset[7] === 0 ? <>$0</> :
-                      asset[6] < 0.01 ? <NumberFormat number={asset[6]}/> : "$" + Math.round(asset[6]*100)/100
+                      asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + Math.round(asset[6]*100)/100
                 ): asset[6] === 0 || asset[7] === 0 ? <>0<span className="grey"> ETH</span></> : 
                 asset[7] < 0.01 ? <><NumberFormat number={asset[7]}/><span className="grey"> ETH</span></> : 
                 <>{Math.round(asset[7]*10000)/10000}<span className="grey"> ETH</span></>}
