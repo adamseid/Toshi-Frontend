@@ -50,7 +50,6 @@ export default class Graph extends Component {
     if (walletID != this.props["state"]["header"]["walletAddress"]) {
       this.props["state"]["accountDetailed"]["table"] = [];
       this.graphHttpRequest();
-      this.getCurrentHoldings();
     }
     walletID = this.props["state"]["header"]["walletAddress"];
   };
