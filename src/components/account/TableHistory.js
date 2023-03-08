@@ -42,31 +42,6 @@ export default class Graph extends Component {
     });
   };
 
-  getCurrentHoldings = () => {
-    var url = backend_url + "api/toshi/assets/";
-    axios
-      .post(url, this.props.state)
-      .then((response) => {
-        console.log(
-          "READ assets response: ",
-          response.data["profile_response"]["profile"]["table"]
-        );
-        const currentHoldings = {};
-        response.data["profile_response"]["profile"]["table"].forEach((asset)=>{
-          currentHoldings[asset[0]] = [asset[4], asset[3]]
-        })
-        this.props.state["accountDetailed"]["currentHoldings"] =
-          currentHoldings;
-        this.setPropsState();
-        console.log("Read State Profile Table: " + JSON.stringify(this.props.state["accountDetailed"]["currentHoldings"]));
-      })
-      .catch((error) => {
-        this.props.state["accountDetailed"]["currentHoldings"] = {};
-        this.setPropsState();
-        console.log("Error in getCurrentHoldings" + error.message);
-      });
-  };
-
   setPropsState = () => {
     this.setState(this.props.state);
   };
