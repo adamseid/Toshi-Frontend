@@ -106,6 +106,7 @@ export default class Profile extends Component {
     var url = backend_url + "api/toshi/accountGraph/";
     axios.post(url, this.state).then((response) => {
       console.log("GRAPH: ", response.data['profile_response'])
+
       this.state['profile']['graph'] = response.data['profile_response'][0]
       this.state['profile']['maxGraph'] = response.data['profile_response'][0]
       this.state['profile']['yearlyGraph'] = response.data['profile_response'][1]

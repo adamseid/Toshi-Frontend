@@ -13,8 +13,6 @@ import {
 
 export const Chart = ( { graphData } ) => {
 
-    
-
   return (
     <div className="account-container">
         <div className="chart-container">
@@ -36,10 +34,11 @@ export const Chart = ( { graphData } ) => {
             >
               <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={true} stroke={"#313233"}/>
               <XAxis 
-              dataKey="time_name"
+              dataKey="time_formatted"
               tick={{ fill: '#FFFFFF' }} 
               tickLine={{ stroke: '#FFFFFF' }} 
               stroke="#FFFFFF"
+              tickCount = {12}
               height = {60}
               label={{ value: 'Time', angle: 0, position: 'bottom', offset:"-25", }}
               >
@@ -60,12 +59,13 @@ export const Chart = ( { graphData } ) => {
               <Line
                   type="natural"
                   dataKey="USD"
-                  stroke="green"
+                  stroke="#86F9A6"
+                  strokeWidth={"3"}
                   activeDot={{ stroke: 'red', strokeWidth: 0, r: 5 }}
                   dot = {false}
               />
               {/* <Tooltip cursor={false} /> */}
-              <Tooltip cursor={{ stroke: "#86F9A6", strokeDasharray: 5 }} />
+              <Tooltip cursor={{ stroke: "#86F9A6", strokeDasharray: 5 }} itemStyle={{color: "green"}}/>
             </LineChart>
         </div>
     </div>

@@ -1022,7 +1022,7 @@ a {
   flex-direction: row;
   justify-content: flex-start;
   align-items: flex-start;
-  max-width: 70%;
+  max-width: 100%;
 }
 
 .account-detailed-ids{
@@ -1127,7 +1127,7 @@ a {
   width: 50px;
   margin-top: 5px;
   min-width: 20px;
-  margin-right: 78px;
+  margin-right: 116px;
 }
 
 .currentHoldings{
@@ -1144,7 +1144,7 @@ a {
   text-align: left;
   color: #FFFFFF;
   /* width: 300px; */
-  width: 420px;
+  width: 550px;
 }
 
 .tokenHistoryTableBlock{
