@@ -124,18 +124,23 @@ export default class Profile extends Component {
     if(data == "MAX"){
       this.state.time = 4
       this.state.profile.graph = this.state.profile.maxGraph
+      this.state['profile']['currentRange'] = this.state.profile.ranges[0]
     }else if (data == "1D"){
       this.state.time = 0
       this.state.profile.graph = this.state.profile.dailyGraph
+      this.state['profile']['currentRange'] = this.state.profile.ranges[4]
     }else if (data == "1W"){
       this.state.time = 1
       this.state.profile.graph = this.state.profile.weeklyGraph
+      this.state['profile']['currentRange'] = this.state.profile.ranges[3]
     }else if(data == "1M"){
       this.state.time = 2
       this.state.profile.graph = this.state.profile.monthlyGraph
+      this.state['profile']['currentRange'] = this.state.profile.ranges[2]
     }else if(data == "1Y"){
       this.state.time = 3
       this.state.profile.graph = this.state.profile.yearlyGraph
+      this.state['profile']['currentRange'] = this.state.profile.ranges[1]
     }
 
     this.setState(this.state)
