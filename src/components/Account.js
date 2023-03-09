@@ -106,15 +106,17 @@ export default class Profile extends Component {
     var url = backend_url + "api/toshi/accountGraph/";
     axios.post(url, this.state).then((response) => {
       console.log("GRAPH: ", response.data['profile_response'])
-
       this.state['profile']['graph'] = response.data['profile_response'][0]
       this.state['profile']['maxGraph'] = response.data['profile_response'][0]
       this.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
       this.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
       this.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
       this.state['profile']['dailyGraph'] = response.data['profile_response'][4]
+      this.state['profile']['ranges'] = response.data['profile_response'][5]
+      this.state['profile']['currentRange'] = response.data['profile_response'][5][1]
       this.setState(this.State);
       console.log("ACCOUNT GRAPH STATE: ", this.state);
+      console.log("currentRange", this.state.profile.currentRange )
     });
   };
 
@@ -316,6 +318,7 @@ export default class Profile extends Component {
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
         <Chart
           graphData = {this.state['profile']['graph']}
+          currentRange = {this.state['profile']['currentRange']}
         />
         < TableOverview
             state = {this.state}

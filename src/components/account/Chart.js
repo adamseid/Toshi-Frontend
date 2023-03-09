@@ -11,7 +11,7 @@ import {
     ReferenceLine,
   } from "recharts";
 
-export const Chart = ( { graphData } ) => {
+export const Chart = ( { graphData, currentRange } ) => {
 
   return (
     <div className="account-container">
@@ -65,7 +65,14 @@ export const Chart = ( { graphData } ) => {
                   dot = {false}
               />
               {/* <Tooltip cursor={false} /> */}
-              <Tooltip cursor={{ stroke: "#86F9A6", strokeDasharray: 5 }} itemStyle={{color: "green"}}/>
+              <Tooltip cursor={{ stroke: "#86F9A6", strokeDasharray: 3 }} itemStyle={{color: "green"}}/>
+              {currentRange ? <ReferenceLine
+                y={(currentRange[0]["USD"]+currentRange[1]["USD"])/2}
+                stroke= "#86F9A6"
+                strokeDasharray= "3"
+              /> : <></>
+              }
+              
             </LineChart>
         </div>
     </div>
