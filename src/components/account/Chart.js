@@ -8,10 +8,13 @@ import {
     CartesianGrid,
     Tooltip,
     Legend,
-    Label,
+    ReferenceLine,
   } from "recharts";
 
 export const Chart = ( { graphData } ) => {
+
+    
+
   return (
     <div className="account-container">
         <div className="chart-container">
@@ -31,7 +34,7 @@ export const Chart = ( { graphData } ) => {
                   bottom: 0
               }}
             >
-              <CartesianGrid strokeDasharray="3 3" horizontal={false} vertical={false} />
+              <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={true} stroke={"#313233"}/>
               <XAxis 
               dataKey="time_name"
               tick={{ fill: '#FFFFFF' }} 
@@ -45,20 +48,24 @@ export const Chart = ( { graphData } ) => {
               label={{ value: 'Amount (USD)', angle: 90, position: 'right', offset:"-10"}}
               orientation="right" 
               tick={{ fill: '#FFFFFF' }} 
-              tickLine={{ stroke: '#FFFFFF' }} 
+              tickLine={{ stroke: '#FFFFFF' }}
+              tickCount = {10}
               stroke="#FFFFFF"
-              width={80} >
+              width={80}
+              domain={[0, "auto"]}
+               >
               </YAxis>
               <Legend verticalAlign="top" display={false} />
               <Legend display={true} />
               <Line
                   type="natural"
                   dataKey="USD"
-                  stroke="#86F9A6"
+                  stroke="green"
                   activeDot={{ stroke: 'red', strokeWidth: 0, r: 5 }}
                   dot = {false}
               />
-              <Tooltip cursor={false} />
+              {/* <Tooltip cursor={false} /> */}
+              <Tooltip cursor={{ stroke: "#86F9A6", strokeDasharray: 5 }} />
             </LineChart>
         </div>
     </div>

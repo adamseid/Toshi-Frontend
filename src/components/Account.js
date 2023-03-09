@@ -120,18 +120,24 @@ export default class Profile extends Component {
   select = (data,event) => {
     if(data == "MAX"){
       this.state.time = 4
+      this.state.profile.graph = this.state.profile.maxGraph
     }else if (data == "1D"){
       this.state.time = 0
+      this.state.profile.graph = this.state.profile.dailyGraph
     }else if (data == "1W"){
       this.state.time = 1
+      this.state.profile.graph = this.state.profile.weeklyGraph
     }else if(data == "1M"){
       this.state.time = 2
+      this.state.profile.graph = this.state.profile.monthlyGraph
     }else if(data == "1Y"){
       this.state.time = 3
+      this.state.profile.graph = this.state.profile.yearlyGraph
     }
 
     this.setState(this.state)
     console.log(this.state.time)
+    console.log(this.state.profile.graph)
     
     for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
         document.getElementsByClassName("hour")[i].classList.remove("active")
