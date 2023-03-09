@@ -27,20 +27,20 @@ const dexToolsURL = "https://etherscan.io/dex/uniswapv2/";
 
 export default class Graph extends Component {
 
-  graphHttpRequest = () => {
-    var url = backend_url + "api/toshi/accountGraph/";
-    axios.post(url, this.props.state).then((response) => {
-      console.log("GRAPH: ", response.data['profile_response'])
-      this.props.state['profile']['graph'] = response.data['profile_response'][0]
-      this.props.state['profile']['maxGraph'] = response.data['profile_response'][0]
-      this.props.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
-      this.props.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
-      this.props.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
-      this.props.state['profile']['dailyGraph'] = response.data['profile_response'][4]
-      this.setPropsState();
-      console.log("ACCOUNT GRAPGH STATE: ", this.props.state);
-    });
-  };
+  // graphHttpRequest = () => {
+  //   var url = backend_url + "api/toshi/accountGraph/";
+  //   axios.post(url, this.props.state).then((response) => {
+  //     console.log("GRAPH: ", response.data['profile_response'])
+  //     this.props.state['profile']['graph'] = response.data['profile_response'][0]
+  //     this.props.state['profile']['maxGraph'] = response.data['profile_response'][0]
+  //     this.props.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
+  //     this.props.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
+  //     this.props.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
+  //     this.props.state['profile']['dailyGraph'] = response.data['profile_response'][4]
+  //     this.setPropsState();
+  //     console.log("ACCOUNT GRAPGH STATE: ", this.props.state);
+  //   });
+  // };
 
   setPropsState = () => {
     this.setState(this.props.state);
@@ -49,7 +49,7 @@ export default class Graph extends Component {
   componentDidUpdate = () => {
     if (walletID != this.props["state"]["header"]["walletAddress"]) {
       this.props["state"]["accountDetailed"]["table"] = [];
-      this.graphHttpRequest();
+      // this.graphHttpRequest();
     }
     walletID = this.props["state"]["header"]["walletAddress"];
   };
@@ -157,7 +157,7 @@ export default class Graph extends Component {
             </div>
               
 
-            <div className="chart-container">
+            {/* <div className="chart-container">
             <LineChart
               width={400}
               height={300}
@@ -203,7 +203,7 @@ export default class Graph extends Component {
               />
               <Tooltip cursor={false} />
             </LineChart>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

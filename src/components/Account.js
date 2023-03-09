@@ -9,6 +9,7 @@ import axios from "axios";
 import LeftBar from "./account/header/LeftBar"
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from './account/LoadingSpinner'
+import { Chart } from "./account/Chart";
 
 // WEBSOCKET-LINK
 // ('ws://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
@@ -101,6 +102,21 @@ export default class Profile extends Component {
     })
   }
 
+  graphHttpRequest = () => {
+    var url = backend_url + "api/toshi/accountGraph/";
+    axios.post(url, this.state).then((response) => {
+      console.log("GRAPH: ", response.data['profile_response'])
+      this.state['profile']['graph'] = response.data['profile_response'][0]
+      this.state['profile']['maxGraph'] = response.data['profile_response'][0]
+      this.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
+      this.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
+      this.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
+      this.state['profile']['dailyGraph'] = response.data['profile_response'][4]
+      this.setState(this.State);
+      console.log("ACCOUNT GRAPH STATE: ", this.state);
+    });
+  };
+
   select = (data,event) => {
     if(data == "MAX"){
       this.state.time = 4
@@ -127,8 +143,8 @@ export default class Profile extends Component {
   componentDidUpdate = () => {
     if(walletID != this['state']['header']['walletAddress']){
         this['state']['accountDetailed']['table'] = []
-        // this.assetTableHttpRequest()
         this.volumeHistoryHttpRequest()
+        this.graphHttpRequest()
       }
       walletID = this['state']['header']['walletAddress']
       
@@ -291,6 +307,9 @@ export default class Profile extends Component {
             <button className='hour' onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
+        <Chart
+          graphData = {this.state['profile']['graph']}
+        />
         < TableOverview
             state = {this.state}
             numberOfZeros = {this.numberOfZeros}
