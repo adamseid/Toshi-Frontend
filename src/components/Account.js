@@ -114,6 +114,8 @@ export default class Profile extends Component {
       this.state['profile']['dailyGraph'] = response.data['profile_response'][4]
       this.state['profile']['ranges'] = response.data['profile_response'][5]
       this.state['profile']['currentRange'] = response.data['profile_response'][5][1]
+      this.state['profile']['ticks'] = response.data['profile_response'][6]
+      this.state['profile']['currentTicks'] = response.data['profile_response'][6][0]
       this.setState(this.State);
       console.log("ACCOUNT GRAPH STATE: ", this.state);
       console.log("currentRange", this.state.profile.currentRange )
@@ -324,6 +326,8 @@ export default class Profile extends Component {
         <Chart
           graphData = {this.state['profile']['graph']}
           currentRange = {this.state['profile']['currentRange']}
+          ticks = {this.state['profile']['currentTicks']}
+          time = {this.state['time']}
         />
         < TableOverview
             state = {this.state}
