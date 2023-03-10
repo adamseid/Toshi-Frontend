@@ -18,10 +18,13 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
   const UNIX_MONTH = 2628000
   const UNIX_WEEK = 604800
   const UNIX_DAY = 86400
+  const UNIX_HOUR = 3600
 
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
+
+  let count = 0
 
   const findDomain = () => {
     end = Date.now()/1000
@@ -46,7 +49,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               height={600}
               data={
                 graphData == [] ? (
-                  <></>
+                  []
                 ) : 
                 graphData
               }
@@ -58,20 +61,32 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               }}
             >
               <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={true} stroke={"#313233"}/>
+               
               <XAxis 
               dataKey = "time"
               type="number"
-              domain={findDomain()}
+              domain={!graphData ? []: findDomain()}
               tick={{ fill: '#FFFFFF' }} 
-              ticks = {ticks}
-              tickFormatter={(label)=> {
-                date = new Date(label * 1000)
+              ticks = {!graphData ? [] : ticks}
+              tickFormatter={!graphData ? []: (label)=> {
+                date = new Date(label * 1000.0)
                 if(time === 3 || time === 4){
                   return `${date.getMonth() + 1}/${date.getFullYear()}`
                 } else if(time === 2 || time === 1){
                   return `${monthNames[date.getMonth()]} ${date.getDate()}`
                 } else if(time === 0){
-                  return `${date.getHours()}:00`
+                  console.log(date.getHours())
+                  if(count % 2 != 0){
+                    count++
+                    if(date.getHours() === 0){
+                      return `${monthNames[date.getMonth()]} ${date.getDate()}`
+                    } else {
+                      return `${date.getHours()}:00`
+                    }
+                  } else {
+                    count++
+                    return ""
+                  }  
                 }
               }}
               allowDataOverflow = {true}
@@ -81,6 +96,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               label={{ value: 'Time', angle: 0, position: 'bottom', offset:"-25", }}
               >
               </XAxis>
+              
               <YAxis 
               label={{ value: 'Amount (USD)', angle: 90, position: 'right', offset:"-10"}}
               orientation="right" 
@@ -102,8 +118,21 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
                   activeDot={{ stroke: 'red', strokeWidth: 0, r: 5 }}
                   dot = {false}
               />
-              {/* <Tooltip cursor={false} /> */}
-              <Tooltip cursor={{ stroke: "#86F9A6", strokeDasharray: "3 3" }} itemStyle={{color: "green"}}/>
+              <Tooltip 
+              cursor={{ stroke: "#86F9A6", strokeDasharray: "3 3" }} 
+              itemStyle={{color: "white"}} 
+              contentStyle={{backgroundColor: "black", color: "white"}}
+              position={{x:0, y:0}}
+              labelFormatter = {(date)=> {
+                console.log("!" + date)
+                date = new Date(date * 1000.0)
+                return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:00`
+              }}
+              formatter = {(number)=>{
+                return `$${number}`
+              }}
+              
+              />
               {currentRange ? <ReferenceLine
                 y={(currentRange[0]["USD"]+currentRange[1]["USD"])/2}
                 stroke= "#86F9A6"

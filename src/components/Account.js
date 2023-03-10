@@ -107,15 +107,15 @@ export default class Profile extends Component {
     axios.post(url, this.state).then((response) => {
       console.log("GRAPH: ", response.data['profile_response'])
       this.state['profile']['graph'] = response.data['profile_response'][0]
-      this.state['profile']['maxGraph'] = response.data['profile_response'][0]
-      this.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
-      this.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
-      this.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
-      this.state['profile']['dailyGraph'] = response.data['profile_response'][4]
-      this.state['profile']['ranges'] = response.data['profile_response'][5]
-      this.state['profile']['currentRange'] = response.data['profile_response'][5][1]
-      this.state['profile']['ticks'] = response.data['profile_response'][6]
-      this.state['profile']['currentTicks'] = response.data['profile_response'][6][0]
+      // this.state['profile']['maxGraph'] = response.data['profile_response'][0]
+      // this.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
+      // this.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
+      // this.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
+      // this.state['profile']['dailyGraph'] = response.data['profile_response'][4]
+      this.state['profile']['ranges'] = response.data['profile_response'][1]
+      this.state['profile']['currentRange'] = response.data['profile_response'][1][1]
+      this.state['profile']['ticks'] = response.data['profile_response'][2]
+      this.state['profile']['currentTicks'] = response.data['profile_response'][2][0]
       this.setState(this.State);
       console.log("ACCOUNT GRAPH STATE: ", this.state);
       console.log("currentRange", this.state.profile.currentRange )
@@ -125,26 +125,26 @@ export default class Profile extends Component {
   select = (data,event) => {
     if(data == "MAX"){
       this.state.time = 4
-      this.state.profile.graph = this.state.profile.maxGraph
+      // this.state.profile.graph = this.state.profile.maxGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[0]
     }else if (data == "1D"){
       this.state.time = 0
-      this.state.profile.graph = this.state.profile.dailyGraph
+      // this.state.profile.graph = this.state.profile.dailyGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[4]
       this.state['profile']['currentTicks'] = this.state.profile.ticks[3]
     }else if (data == "1W"){
       this.state.time = 1
-      this.state.profile.graph = this.state.profile.weeklyGraph
+      // this.state.profile.graph = this.state.profile.weeklyGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[3]
       this.state['profile']['currentTicks'] = this.state.profile.ticks[2]
     }else if(data == "1M"){
       this.state.time = 2
-      this.state.profile.graph = this.state.profile.monthlyGraph
+      // this.state.profile.graph = this.state.profile.monthlyGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[2]
       this.state['profile']['currentTicks'] = this.state.profile.ticks[1]
     }else if(data == "1Y"){
       this.state.time = 3
-      this.state.profile.graph = this.state.profile.yearlyGraph
+      // this.state.profile.graph = this.state.profile.yearlyGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[1]
       this.state['profile']['currentTicks'] = this.state.profile.ticks[0]
     }
@@ -328,7 +328,7 @@ export default class Profile extends Component {
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
         <Chart
-          graphData = {this.state['profile']['maxGraph']}
+          graphData = {this.state['profile']['graph']}
           currentRange = {this.state['profile']['currentRange']}
           ticks = {this.state['profile']['currentTicks']}
           time = {this.state['time']}
