@@ -14,15 +14,28 @@ import {
 export const Chart = ( { graphData, currentRange, ticks, time } ) => {
 
   let date, end, begin;
-  const unix_year = 31536000
+  const UNIX_YEAR = 31536000
+  const UNIX_MONTH = 2628000
+  const UNIX_WEEK = 604800
+  const UNIX_DAY = 86400
+
+  const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+  "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+  ];
 
   const findDomain = () => {
+    end = Date.now()/1000
+    // This can be a switch statement
     if(time === 3){
-      end = Date.now()/1000
-      begin = end - unix_year
-      console.log([begin, end])
-      return [begin, end]
+      begin = end - UNIX_YEAR
+    } else if(time === 2){
+      begin = end - UNIX_MONTH
+    } else if(time === 1){
+      begin = end - UNIX_WEEK
+    } else if(time === 0){
+      begin = end - UNIX_DAY
     }
+    return [begin, end]
   }
 
   return (
@@ -50,13 +63,18 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               type="number"
               domain={findDomain()}
               tick={{ fill: '#FFFFFF' }} 
-              tickFormatter={(label)=> {
-                console.log(label)
-                date = new Date(label * 1000)
-                console.log(date)
-                return `${date.getMonth() + 1}/${date.getFullYear()}`
-              }}
               ticks = {ticks}
+              tickFormatter={(label)=> {
+                date = new Date(label * 1000)
+                if(time === 3 || time === 4){
+                  return `${date.getMonth() + 1}/${date.getFullYear()}`
+                } else if(time === 2 || time === 1){
+                  return `${monthNames[date.getMonth()]} ${date.getDate()}`
+                } else if(time === 0){
+                  return `${date.getHours()}:00`
+                }
+              }}
+              allowDataOverflow = {true}
               tickLine={{ stroke: '#FFFFFF' }} 
               stroke="#FFFFFF"
               height = {60}

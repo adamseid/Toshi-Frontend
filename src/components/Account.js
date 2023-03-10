@@ -131,23 +131,27 @@ export default class Profile extends Component {
       this.state.time = 0
       this.state.profile.graph = this.state.profile.dailyGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[4]
+      this.state['profile']['currentTicks'] = this.state.profile.ticks[3]
     }else if (data == "1W"){
       this.state.time = 1
       this.state.profile.graph = this.state.profile.weeklyGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[3]
+      this.state['profile']['currentTicks'] = this.state.profile.ticks[2]
     }else if(data == "1M"){
       this.state.time = 2
       this.state.profile.graph = this.state.profile.monthlyGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[2]
+      this.state['profile']['currentTicks'] = this.state.profile.ticks[1]
     }else if(data == "1Y"){
       this.state.time = 3
       this.state.profile.graph = this.state.profile.yearlyGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[1]
+      this.state['profile']['currentTicks'] = this.state.profile.ticks[0]
     }
 
     this.setState(this.state)
     console.log(this.state.time)
-    console.log(this.state.profile.graph)
+    console.log(this.state.profile.currentTicks)
     
     for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
         document.getElementsByClassName("hour")[i].classList.remove("active")
@@ -324,7 +328,7 @@ export default class Profile extends Component {
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
         <Chart
-          graphData = {this.state['profile']['graph']}
+          graphData = {this.state['profile']['maxGraph']}
           currentRange = {this.state['profile']['currentRange']}
           ticks = {this.state['profile']['currentTicks']}
           time = {this.state['time']}
