@@ -45,6 +45,7 @@ const LeftBar = ({walletId}) => {
 
     return (
         <div className="left-bar-container">
+            <div>
             <div className="left-bar-logo-container">
                 <img src={logo} className="left-bar-logo" />
                 <div className="left-bar-text-container">
@@ -77,7 +78,8 @@ const LeftBar = ({walletId}) => {
                     </div>
                 </div>
             </div>
-
+            </div>
+            <div>
             <div className="social-container">
                 <a href = "https://twitter.com/Toshi_Tools" className="social-item" target="_blank">
                     <img className="social-image" src={twitter} />
@@ -113,7 +115,9 @@ const LeftBar = ({walletId}) => {
                 </div>
                 
             </div>
+            
             </a>
+            </div>
         </div>
     )
 }
