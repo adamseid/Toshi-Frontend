@@ -557,6 +557,11 @@ a {
   margin-right: 33px;
 }
 
+.profile-wallet-information-left{
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
 .profile-wallet-information {
   margin-bottom: 38px;
 }

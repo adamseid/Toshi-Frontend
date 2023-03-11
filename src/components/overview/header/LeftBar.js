@@ -10,7 +10,7 @@ import profileImage from './images/temp-profile-image.png'
 import { useState } from "react"
 import "../../../App.css"
 import { useNavigate } from "react-router-dom";
-
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 
 const LeftBar = ({walletId}) => {
 
@@ -79,6 +79,7 @@ const LeftBar = ({walletId}) => {
                 </div>
             </div>
             </div>
+            
             <div>
             <div className="social-container">
                 <a href = "https://twitter.com/Toshi_Tools" className="social-item" target="_blank">
@@ -103,8 +104,10 @@ const LeftBar = ({walletId}) => {
 
             <a href={"https://etherscan.io/address/" + walletId} target="_blank">
             <div className="header-account-container">
-                
+                { walletId ? <Jazzicon diameter={40} seed={jsNumberForAddress(walletId)} /> :
                 <img src={profileImage} className="header-profile-image" />
+                }
+                
                 <div className="header-profile-id">
                     Account 1
                 </div>
