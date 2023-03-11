@@ -2,6 +2,8 @@ import React from 'react'
 
 import {
     LineChart,
+    AreaChart,
+    Area,
     Line,
     XAxis,
     YAxis,
@@ -44,7 +46,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
   return (
     <div className="account-container">
         <div className="chart-container">
-            <LineChart
+            <AreaChart
               width={1200}
               height={600}
               data={
@@ -60,8 +62,14 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
                   bottom: 0
               }}
             >
+              <defs>
+                <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="5%" stopColor="#82ca9d" stopOpacity={0.8}/>
+                  <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
+                </linearGradient>
+              </defs>
+              <Area type="monotone" dataKey="USD" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
               <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={true} stroke={"#313233"}/>
-               
               <XAxis 
               dataKey = "time"
               type="number"
@@ -70,7 +78,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               ticks = {!graphData ? [] : ticks}
               tickFormatter={!graphData ? []: (label)=> {
                 date = new Date(label * 1000.0)
-                if(time === 3 || time === 4){
+                if(time === 3){
                   return `${date.getMonth() + 1}/${date.getFullYear()}`
                 } else if(time === 2 || time === 1){
                   return `${monthNames[date.getMonth()]} ${date.getDate()}`
@@ -105,13 +113,13 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               tickCount = {10}
               stroke="#FFFFFF"
               width={80}
-              domain={[0, "auto"]}
+              domain={[ -100 , "auto"]}
                >
               </YAxis>
               <Legend verticalAlign="top" display={false} />
               <Legend display={true} />
               <Line
-                  type="basis"
+                  type="linear"
                   dataKey="USD"
                   stroke="#86F9A6"
                   strokeWidth={"3"}
@@ -124,7 +132,6 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               contentStyle={{backgroundColor: "black", color: "white"}}
               position={{x:0, y:0}}
               labelFormatter = {(date)=> {
-                console.log("!" + date)
                 date = new Date(date * 1000.0)
                 return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:00`
               }}
@@ -140,7 +147,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               /> : <></>
               }
               
-            </LineChart>
+            </AreaChart>
         </div>
     </div>
   )

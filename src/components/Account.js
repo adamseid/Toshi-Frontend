@@ -124,7 +124,9 @@ export default class Profile extends Component {
 
   select = (data,event) => {
     if(data == "MAX"){
-      this.state.time = 4
+      //  Set time is equal to year for max. 
+      // Include logic that says that if data goes past one year, then we set this.state.time as 4
+      this.state.time = 3
       // this.state.profile.graph = this.state.profile.maxGraph
       this.state['profile']['currentRange'] = this.state.profile.ranges[0]
     }else if (data == "1D"){
