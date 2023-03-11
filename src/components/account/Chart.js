@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 import {
     LineChart,
@@ -27,6 +27,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
   ];
 
   let count = 0
+  let counter = 0
 
   const findDomain = () => {
     end = Date.now()/1000
@@ -39,6 +40,19 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
       begin = end - UNIX_WEEK
     } else if(time === 0){
       begin = end - UNIX_DAY
+    } else if(time === 4){
+      counter = 0
+      graphData.forEach((data)=> {
+        if(data["time"] < (end-UNIX_YEAR)){
+          counter++
+          console.log("passed a year")
+        }
+        if(counter > 2){
+          begin = end - UNIX_YEAR*2
+        } else {
+          begin = end - UNIX_YEAR
+        }
+      })
     }
     return [begin, end]
   }
@@ -61,6 +75,8 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
                   left: 0,
                   bottom: 0
               }}
+              onMouseEnter={()=>console.log("enter")}
+              onMouseLeave={()=>console.log("leave")}
             >
               <defs>
                 <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
@@ -78,12 +94,11 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               ticks = {!graphData ? [] : ticks}
               tickFormatter={!graphData ? []: (label)=> {
                 date = new Date(label * 1000.0)
-                if(time === 3){
+                if(time === 3 || time === 4){
                   return `${date.getMonth() + 1}/${date.getFullYear()}`
                 } else if(time === 2 || time === 1){
                   return `${monthNames[date.getMonth()]} ${date.getDate()}`
                 } else if(time === 0){
-                  console.log(date.getHours())
                   if(count % 2 != 0){
                     count++
                     if(date.getHours() === 0){
