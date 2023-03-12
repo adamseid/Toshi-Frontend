@@ -65,7 +65,7 @@ const default_state = {
     table: [],
     holdingsDisplay: false,
   },
-  time: 4,
+  time: 3,
   isLoading: false,
 }
 

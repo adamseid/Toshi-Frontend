@@ -42,31 +42,6 @@ export default class Graph extends Component {
     });
   };
 
-  getCurrentHoldings = () => {
-    var url = backend_url + "api/toshi/assets/";
-    axios
-      .post(url, this.props.state)
-      .then((response) => {
-        console.log(
-          "READ assets response: ",
-          response.data["profile_response"]["profile"]["table"]
-        );
-        const currentHoldings = {};
-        response.data["profile_response"]["profile"]["table"].forEach((asset)=>{
-          currentHoldings[asset[0]] = [asset[4], asset[3]]
-        })
-        this.props.state["accountDetailed"]["currentHoldings"] =
-          currentHoldings;
-        this.setPropsState();
-        console.log("Read State Profile Table: " + JSON.stringify(this.props.state["accountDetailed"]["currentHoldings"]));
-      })
-      .catch((error) => {
-        this.props.state["accountDetailed"]["currentHoldings"] = {};
-        this.setPropsState();
-        console.log("Error in getCurrentHoldings" + error.message);
-      });
-  };
-
   setPropsState = () => {
     this.setState(this.props.state);
   };
@@ -75,7 +50,6 @@ export default class Graph extends Component {
     if (walletID != this.props["state"]["header"]["walletAddress"]) {
       this.props["state"]["accountDetailed"]["table"] = [];
       this.graphHttpRequest();
-      // this.getCurrentHoldings();
     }
     walletID = this.props["state"]["header"]["walletAddress"];
   };
@@ -169,7 +143,7 @@ export default class Graph extends Component {
                   <div className="nowrap">
                       {this.props.state.tokenHistoryOverview.holdingsDisplay ? (
                         asset[6] === 0 || asset[7] === 0 ? <>$0</> :
-                      asset[6] < 0.01 ? <NumberFormat number={asset[6]}/> : "$" + Math.round(asset[6]*100)/100
+                      asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + Math.round(asset[6]*100)/100
                 ): asset[6] === 0 || asset[7] === 0 ? <>0<span className="grey"> ETH</span></> : 
                 asset[7] < 0.01 ? <><NumberFormat number={asset[7]}/><span className="grey"> ETH</span></> : 
                 <>{Math.round(asset[7]*10000)/10000}<span className="grey"> ETH</span></>}
