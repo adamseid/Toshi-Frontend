@@ -142,10 +142,10 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
                   dot = {false}
               />
               <Tooltip 
-              cursor={{ stroke: "#86F9A6", strokeDasharray: "3 3" }} 
+              // cursor={{ stroke: "#86F9A6", strokeDasharray: "3 3" }} 
               itemStyle={{color: "white"}} 
-              contentStyle={{backgroundColor: "black", color: "white"}}
-              position={{x:0, y:0}}
+              contentStyle={{backgroundColor: "black", color: "white", borderRadius: "5px"}}
+              // position={{x:0, y:0}}
               labelFormatter = {(date)=> {
                 date = new Date(date * 1000.0)
                 return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:00`
