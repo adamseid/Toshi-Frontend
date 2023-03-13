@@ -527,6 +527,16 @@ a {
   margin-bottom: 24px;
 }
 
+.chart-text{
+  font-family: Rajdhani;
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
 .positive{
   display: flex;
   color: #0DFF09;
