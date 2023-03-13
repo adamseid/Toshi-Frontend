@@ -61,6 +61,10 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
     <>
     <div className="chart-text">Total Wallet Value</div>
     <div className="chart-text">${ graphData ? graphData.at(-1)["USD"] : 0}</div>
+    <div className="chart-button-container">
+      <div className="chart-button">ETH</div>
+      <div className="chart-button">USD</div>
+    </div>
     <div className="account-container">
         <div className="chart-container">
             <AreaChart
