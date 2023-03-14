@@ -176,7 +176,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
                 return `${date.getMonth()}/${date.getDate()}/${date.getFullYear()} ${date.getHours()}:00`
               }}
               formatter = {(number)=>{
-                return `$${number}`
+                return currency ? `$${number}` : Math.round(number * 1000)/1000
               }}
               
               />
