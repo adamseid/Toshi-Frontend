@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef} from 'react'
 
 import {
     LineChart,
@@ -13,29 +13,49 @@ import {
     ReferenceLine,
   } from "recharts";
 
-export const Chart = ( { graphData, currentRange, ticks, time } ) => {
+export const Chart = ( { graphData, ranges, ticks} ) => {
 
   const [currency, setCurrency] = useState(true)
   const ethRef = useRef()
   const usdRef = useRef()
+  const [time, setTime] = useState(3)
 
-  let date, end, begin;
+  let date, end, begin, counter, currentRange, currentTicks;
+
   const UNIX_YEAR = 31536000
   const UNIX_MONTH = 2628000
   const UNIX_WEEK = 604800
   const UNIX_DAY = 86400
   const UNIX_HOUR = 3600
+  const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX']
 
   const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
   "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
   ];
 
   let count = 0
-  let counter = 0
+
+  const findMedian = () => {
+    if(time === 3){
+      currentRange = ranges[1]
+    } else if(time === 2){
+      currentRange = ranges[2]
+    } else if(time === 1){
+      currentRange = ranges[3]
+    } else if(time === 0){
+      currentRange = ranges[4]
+    } else if(time === 4){
+      currentRange = ranges[0]
+    }
+    if(currency){
+      return (currentRange[0]["USD"]+currentRange[1]["USD"])/2
+    } else {
+      return (currentRange[0]["ETH"]+currentRange[1]["ETH"])/2
+    }
+  }
 
   const findDomain = () => {
     end = Date.now()/1000
-    // This can be a switch statement
     if(time === 3){
       begin = end - UNIX_YEAR
     } else if(time === 2){
@@ -61,6 +81,21 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
     return [begin, end]
   }
 
+  const findTicks = () => {
+    if(time === 3){
+      currentTicks = ticks[0]
+    } else if(time === 2){
+      currentTicks = ticks[1]
+    } else if(time === 1){
+      currentTicks = ticks[2]
+    } else if(time === 0){
+      currentTicks = ticks[3]
+    } else if(time === 4){
+      currentTicks = ticks[0]
+    }
+    return currentTicks
+  }
+
   const onClickHandler = (e) => {
     if(!e.target.classList.contains("active")){
       setCurrency(prevCurrency => !prevCurrency)
@@ -73,6 +108,20 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
     }
     console.log(usdRef.current.classList)
     console.log(ethRef.current.classList)
+  }
+
+  const onTimeChangeHandler = (data) => {
+    if(data == "MAX"){
+      setTime(4)
+    }else if (data == "1D"){
+      setTime(0)
+    }else if (data == "1W"){
+      setTime(1)
+    }else if(data == "1M"){
+      setTime(2)
+    }else if(data == "1Y"){
+      setTime(3)
+    }
   }
 
   return (
@@ -116,7 +165,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               type="number"
               domain={!graphData ? []: findDomain()}
               tick={{ fill: '#FFFFFF' }} 
-              ticks = {!graphData ? [] : ticks}
+              ticks = {!graphData ? [] : findTicks()}
               tickFormatter={!graphData ? []: (label)=> {
                 date = new Date(label * 1000.0)
                 if(time === 3 || time === 4){
@@ -153,7 +202,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               tickCount = {10}
               stroke="#FFFFFF"
               width={80}
-              domain={currency ? [ -100 , "auto"] : [-0.00001, "auto"]}
+              domain={currency ? [ -100 , "auto"] : [-0.5, "auto"]}
                >
               </YAxis>
               <Legend verticalAlign="top" display={false} />
@@ -180,8 +229,8 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               }}
               
               />
-              {currentRange ? <ReferenceLine
-                y={(currentRange[0]["USD"]+currentRange[1]["USD"])/2}
+              {ranges ? <ReferenceLine
+                y={findMedian()}
                 stroke= "#86F9A6"
                 strokeDasharray= "3"
               /> : <></>
@@ -190,6 +239,14 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
             </AreaChart>
         </div>
     </div>
+    <div className='date-change'>
+      <button className={"hour " + (time===0 ? "active" : "")} onClick={()=>onTimeChangeHandler(time_frame[1])}>{time_frame[1]}</button>
+      <button className={"hour " + (time===1 ? "active" : "")}  onClick={()=>onTimeChangeHandler(time_frame[2])}>{time_frame[2]}</button>
+      <button className={"hour " + (time===2 ? "active" : "")}  onClick={()=>onTimeChangeHandler(time_frame[3])}>{time_frame[3]}</button>
+      <button className={"hour " + (time===3 ? "active" : "")}  onClick={()=>onTimeChangeHandler(time_frame[4])}>{time_frame[4]}</button>
+      <button className={"hour " + (time===4 ? "active" : "")}  onClick={()=>onTimeChangeHandler(time_frame[5])}>{time_frame[5]}</button>
+    </div>
+    
     </>
   )
 }

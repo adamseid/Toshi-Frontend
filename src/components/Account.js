@@ -107,59 +107,35 @@ export default class Profile extends Component {
     axios.post(url, this.state).then((response) => {
       console.log("GRAPH: ", response.data['profile_response'])
       this.state['profile']['graph'] = response.data['profile_response'][0]
-      // this.state['profile']['maxGraph'] = response.data['profile_response'][0]
-      // this.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
-      // this.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
-      // this.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
-      // this.state['profile']['dailyGraph'] = response.data['profile_response'][4]
       this.state['profile']['ranges'] = response.data['profile_response'][1]
-      this.state['profile']['currentRange'] = response.data['profile_response'][1][1]
       this.state['profile']['ticks'] = response.data['profile_response'][2]
-      this.state['profile']['currentTicks'] = response.data['profile_response'][2][0]
       this.setState(this.State);
       console.log("ACCOUNT GRAPH STATE: ", this.state);
-      console.log("currentRange", this.state.profile.currentRange )
     });
   };
 
   select = (data,event) => {
     if(data == "MAX"){
-      //  Set time is equal to year for max. 
-      // Include logic that says that if data goes past one year, then we set this.state.time as 4
       this.state.time = 4
-      // this.state.profile.graph = this.state.profile.maxGraph
-      this.state['profile']['currentRange'] = this.state.profile.ranges[0]
     }else if (data == "1D"){
       this.state.time = 0
-      // this.state.profile.graph = this.state.profile.dailyGraph
-      this.state['profile']['currentRange'] = this.state.profile.ranges[4]
-      this.state['profile']['currentTicks'] = this.state.profile.ticks[3]
     }else if (data == "1W"){
       this.state.time = 1
-      // this.state.profile.graph = this.state.profile.weeklyGraph
-      this.state['profile']['currentRange'] = this.state.profile.ranges[3]
-      this.state['profile']['currentTicks'] = this.state.profile.ticks[2]
     }else if(data == "1M"){
       this.state.time = 2
-      // this.state.profile.graph = this.state.profile.monthlyGraph
-      this.state['profile']['currentRange'] = this.state.profile.ranges[2]
-      this.state['profile']['currentTicks'] = this.state.profile.ticks[1]
     }else if(data == "1Y"){
       this.state.time = 3
-      // this.state.profile.graph = this.state.profile.yearlyGraph
-      this.state['profile']['currentRange'] = this.state.profile.ranges[1]
-      this.state['profile']['currentTicks'] = this.state.profile.ticks[0]
     }
 
     this.setState(this.state)
     console.log(this.state.time)
     console.log(this.state.profile.currentTicks)
     
-    for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
-        document.getElementsByClassName("hour")[i].classList.remove("active")
-      }
+    // for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
+    //     document.getElementsByClassName("hour")[i].classList.remove("active")
+    //   }
 
-    event.target.classList.add("active")
+    // event.target.classList.add("active")
   }
 
   componentDidUpdate = () => {
@@ -322,18 +298,17 @@ export default class Profile extends Component {
         </div>
       <div className='account-outer-container'>
         <div className='date-change'>
-            <button className='hour' onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
-            <button className='hour active' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
+            <button className={"hour " + (this.state.time===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
+            <button className={"hour " + (this.state.time===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
+            <button className={"hour " + (this.state.time===2 ? "active" : "")} onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
+            <button className={"hour " + (this.state.time===3 ? "active" : "")} onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
+            <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
         <Chart
           graphData = {this.state['profile']['graph']}
-          currentRange = {this.state['profile']['currentRange']}
-          ticks = {this.state['profile']['currentTicks']}
-          time = {this.state['time']}
+          ranges = {this.state['profile']['ranges']}
+          ticks = {this.state['profile']['ticks']}
         />
         < TableOverview
             state = {this.state}
