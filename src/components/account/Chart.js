@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 
 import {
     LineChart,
@@ -14,6 +14,10 @@ import {
   } from "recharts";
 
 export const Chart = ( { graphData, currentRange, ticks, time } ) => {
+
+  const [currency, setCurrency] = useState(true)
+  const ethRef = useRef()
+  const usdRef = useRef()
 
   let date, end, begin;
   const UNIX_YEAR = 31536000
@@ -57,13 +61,27 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
     return [begin, end]
   }
 
+  const onClickHandler = (e) => {
+    if(!e.target.classList.contains("active")){
+      setCurrency(prevCurrency => !prevCurrency)
+      e.target.classList.add("active")
+      if(e.target === usdRef.current){
+        ethRef.current.classList.remove("active")
+      } else if(e.target === ethRef.current) {
+        usdRef.current.classList.remove("active")
+      }
+    }
+    console.log(usdRef.current.classList)
+    console.log(ethRef.current.classList)
+  }
+
   return (
     <>
     <div className="chart-text">Total Wallet Value</div>
     <div className="chart-text">${ graphData ? graphData.at(-1)["USD"] : 0}</div>
     <div className="chart-button-container">
-      <div className="chart-button">ETH</div>
-      <div className="chart-button">USD</div>
+      <div className="chart-button" onClick={onClickHandler} ref={ethRef}>ETH</div>
+      <div className="chart-button active" onClick={onClickHandler} ref={usdRef}>USD</div>
     </div>
     <div className="account-container">
         <div className="chart-container">
@@ -91,7 +109,7 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
                   <stop offset="95%" stopColor="#82ca9d" stopOpacity={0}/>
                 </linearGradient>
               </defs>
-              <Area type="monotone" dataKey="USD" stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
+              <Area type="monotone" dataKey={currency ? "USD" : "ETH"} stroke="#82ca9d" fillOpacity={1} fill="url(#colorPv)" />
               <CartesianGrid strokeDasharray="3 3" horizontal={true} vertical={true} stroke={"#313233"}/>
               <XAxis 
               dataKey = "time"
@@ -135,19 +153,19 @@ export const Chart = ( { graphData, currentRange, ticks, time } ) => {
               tickCount = {10}
               stroke="#FFFFFF"
               width={80}
-              domain={[ -100 , "auto"]}
+              domain={currency ? [ -100 , "auto"] : [-0.00001, "auto"]}
                >
               </YAxis>
               <Legend verticalAlign="top" display={false} />
               <Legend display={true} />
-              <Line
+              {/* <Line
                   type="linear"
-                  dataKey="USD"
+                  dataKey={currency ? "USD" : "ETH"}
                   stroke="#86F9A6"
                   strokeWidth={"3"}
                   activeDot={{ stroke: 'red', strokeWidth: 0, r: 5 }}
                   dot = {false}
-              />
+              /> */}
               <Tooltip 
               // cursor={{ stroke: "#86F9A6", strokeDasharray: "3 3" }} 
               itemStyle={{color: "white"}} 
