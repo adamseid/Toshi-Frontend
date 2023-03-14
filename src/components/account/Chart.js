@@ -36,7 +36,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
   let count = 0
 
   const findMedian = () => {
-    if(time === 3){
+    if(time === 3){ 
       currentRange = ranges[1]
     } else if(time === 2){
       currentRange = ranges[2]
@@ -106,8 +106,6 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
         usdRef.current.classList.remove("active")
       }
     }
-    console.log(usdRef.current.classList)
-    console.log(ethRef.current.classList)
   }
 
   const onTimeChangeHandler = (data) => {
@@ -127,7 +125,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
   return (
     <>
     <div className="chart-text">Total Wallet Value</div>
-    <div className="chart-text">${ graphData ? graphData.at(-1)["USD"] : 0}</div>
+    <div className="chart-text">{ graphData ? (currency? "$" + graphData.at(-1)["USD"] : Math.round(graphData.at(-1)["ETH"]*1000)/1000 + "ETH") : 0}</div>
     <div className="chart-button-container">
       <div className="chart-button" onClick={onClickHandler} ref={ethRef}>ETH</div>
       <div className="chart-button active" onClick={onClickHandler} ref={usdRef}>USD</div>
@@ -149,8 +147,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
                   left: 0,
                   bottom: 0
               }}
-              onMouseEnter={()=>console.log("enter")}
-              onMouseLeave={()=>console.log("leave")}
+
             >
               <defs>
                 <linearGradient id="colorPv" x1="0" y1="0" x2="0" y2="1">
