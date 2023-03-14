@@ -305,11 +305,7 @@ export default class Profile extends Component {
             <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
-        <Chart
-          graphData = {this.state['profile']['graph']}
-          ranges = {this.state['profile']['ranges']}
-          ticks = {this.state['profile']['ticks']}
-        />
+        
         < TableOverview
             state = {this.state}
             numberOfZeros = {this.numberOfZeros}
@@ -317,6 +313,11 @@ export default class Profile extends Component {
         />
         < VolumeHistoryOverviewTable
           state = {this.state}
+        />
+        <Chart
+          graphData = {this.state['profile']['graph']}
+          ranges = {this.state['profile']['ranges']}
+          ticks = {this.state['profile']['ticks']}
         />
         < TableHistory
             state = {this.state}
