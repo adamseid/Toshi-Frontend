@@ -34,9 +34,9 @@ a {
 }
 
 .header-left {
-  font-family: Rajdhani;
+  /* font-family: Rajdhani; */
   font-size: 26px;
-  font-weight: 300;
+  font-weight: 700;
   line-height: 33px;
   letter-spacing: 0em;
   text-align: left;
