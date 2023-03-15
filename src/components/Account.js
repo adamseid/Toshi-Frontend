@@ -74,6 +74,7 @@ const default_state = {
     numberOfPages : [],
   },
   time: 3,
+  showEth: false,
   isLoading: false,
 }
 
@@ -341,8 +342,12 @@ export default class Profile extends Component {
     return null;
   };
 
-  clusterOnClick = () => {
-    console.log("cluster clicked")
+  clusterOnClick = (e) => {
+    console.log(e.target.innerText)
+    if(!e.target.classList.contains("active")){
+      this.state.showEth = !this.state.showEth
+      this.setState(this.state)
+    }
   }
 
   render() {
@@ -408,8 +413,8 @@ export default class Profile extends Component {
             
             </div>
             <div className="chart-button-container">
-              <div className="chart-button" onClick={this.clusterOnClick}>ETH</div>
-              <div className="chart-button active" onClick={this.clusterOnClick}>USD</div>
+              <div className={"chart-button" + (this.state.showEth ? " active" : "")} onClick={this.clusterOnClick}>ETH</div>
+              <div className={"chart-button" + (this.state.showEth ? "" : " active")} onClick={this.clusterOnClick}>USD</div>
             </div>
           </div>
         </div>
