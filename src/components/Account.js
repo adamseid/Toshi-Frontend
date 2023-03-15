@@ -147,6 +147,7 @@ export default class Profile extends Component {
 
   componentDidUpdate = () => {
     if(walletID != this['state']['header']['walletAddress']){
+        this.graphHttpRequest()
         this['state']['accountDetailed']['table'] = []
         this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
       }
@@ -187,10 +188,9 @@ export default class Profile extends Component {
             // const walletTest=this.state['header']['walletAddress'] =  "0xb71b13b85d2c094b0fdec64ab891b5bf5f110a8e"
             const walletTest=this.state['header']['walletAddress'] = result[0]
             // const walletTest = this.state['header']['walletAddress'] = "0x47da741e9fada9aff75c0f2df69e9cd2b216b225"
-            this.connectAndSendWebsocketRequest("0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a")
-            // const walletTest=this.state['header']['walletAddress'] =  "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"
+            // const walletTest=this.state['header']['walletAddress'] =  "0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A"
+            this.connectAndSendWebsocketRequest(result[0])
             this.updateWalletAddress()
-
             // this.sendWalletAddress(walletTest);   
           }
         }
@@ -269,6 +269,7 @@ export default class Profile extends Component {
 
     ws.onmessage = (e) => {
       this.state.isLoading = false;
+      this.setState(this.state)
       document.body.classList.remove("greyBackground");
       let data = JSON.parse(e.data)['response']
       let numberofPagesArr = []
@@ -276,15 +277,16 @@ export default class Profile extends Component {
       this.state['profitHistoryOverview']['table'] = data[0]
       this.state['volumeHistoryOverview']['table'] = data[1]
       this.state['tokenHistoryOverview']['table'] = data[2]
-      console.log("INCOMING DATA: ", data[2][3])
+      // console.log("INCOMING DATA: ", data[2][3])
       for(let i = 0; i < lengthOfTable; i++){
         numberofPagesArr.push(i+1)
       }
       this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
-      console.log("LENGTH OF TABLE: ", lengthOfTable)
-      this.setState(this.state)
+      // console.log("LENGTH OF TABLE: ", lengthOfTable)
+      // console.log("NUMBER OF PAGES: ", numberofPagesArr)
+      // console.log("Updated state: ", this.state.tokenHistoryOverview)
     }
-    this.setState(this.state)
+    this.updateWalletAddress()
   }
 
   
