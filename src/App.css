@@ -5,7 +5,7 @@
 
 .bg {
   min-height: 100vh;
-  background: url("./background-bull.png"),linear-gradient(108.7deg, #000000 -1.31%, #2D2D2D -1.3%, #000000 35.38%);
+  background: url("./background-bull.png");
   object-fit: cover;
   background-repeat: no-repeat;
   background-color: black;
@@ -1361,4 +1361,8 @@ input:checked + .slider:before {
   cursor: pointer;
   width: 125px;
   height: 25px;
+}
+
+.jazzicon{
+  height: 300px!important;
 }
