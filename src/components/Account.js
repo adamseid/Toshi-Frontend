@@ -9,7 +9,7 @@ import axios from "axios";
 import LeftBar from "./account/header/LeftBar"
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from './account/LoadingSpinner'
-
+import { Chart } from "./account/Chart";
 
 // WEBSOCKET-LINK
 // ('ws://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
@@ -184,7 +184,7 @@ export default class Profile extends Component {
             // const walletTest=this.state['header']['walletAddress'] =  "0xb71b13b85d2c094b0fdec64ab891b5bf5f110a8e"
             const walletTest=this.state['header']['walletAddress'] = result[0]
             // const walletTest = this.state['header']['walletAddress'] = "0x47da741e9fada9aff75c0f2df69e9cd2b216b225"
-            this.connectAndSendWebsocketRequest("0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a")
+            this.connectAndSendWebsocketRequest(result[0])
             // const walletTest=this.state['header']['walletAddress'] =  "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"
             this.updateWalletAddress()
 
