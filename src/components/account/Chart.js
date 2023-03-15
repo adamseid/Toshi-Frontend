@@ -125,7 +125,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
   return (
     <>
     <div className="chart-text">Total Wallet Value</div>
-    <div className="chart-text">{ graphData?.length != 0 ? (currency? "$" + graphData?.at(-1)["USD"]?.toFixed(2) : Math.round(graphData?.at(-1)["ETH"]*10000)/10000 + " ETH") : 0}</div>
+    <div className="chart-text">{ graphData?.length != 0 && graphData ? (currency? "$" + graphData?.at(-1)["USD"]?.toFixed(2) : Math.round(graphData?.at(-1)["ETH"]*10000)/10000 + " ETH") : 0}</div>
     <div className="chart-button-container">
       <div className="chart-button" onClick={onClickHandler} ref={ethRef}>ETH</div>
       <div className="chart-button active" onClick={onClickHandler} ref={usdRef}>USD</div>
