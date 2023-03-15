@@ -5,12 +5,13 @@
 
 .bg {
   min-height: 100vh;
-  background: url("./background-bull.png");
+  background: url("./TOSHI_LOGO_OUTLINED.png");
   object-fit: cover;
   background-repeat: no-repeat;
   background-color: black;
   background-position: center;
   background-attachment: fixed;
+  background-size: 60% 100%;
 }
 
 a {
