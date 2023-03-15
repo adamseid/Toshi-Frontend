@@ -395,7 +395,7 @@ export default class Profile extends Component {
           </div>
           <div className='profile-wallet-information-right'>
             <div className='wallet-worth'>
-              { this.state.profile.graph?.length != 0 && this.state.profile.graph ? this.state.profile.graph?.at(-1)["USD"]?.toFixed(2) : 0}
+              { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : "$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))) : 0 }
             </div>
             <div className='wallet-id'>
               {this.state.header.walletAddress ? 

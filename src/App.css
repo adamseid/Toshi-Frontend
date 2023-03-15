@@ -587,10 +587,6 @@ a {
   color: white;
 }
 
-.wallet-worth::before {
-  content: '$';
-}
-
 .wallet-change {
   font-family: Poppins;
   font-size: 23px;
