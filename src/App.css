@@ -55,7 +55,6 @@ a {
   max-width: 115px;
   border-radius: 27px;
   background: #7DFFA1;
-  margin-right: 28px;
   height: 38px;
   width: 115px;
   display: flex;
@@ -78,7 +77,6 @@ a {
   max-height: 38px;
   height: 38px;
   width: 285px;
-  margin-right: 8px;
   background: black;
 }
 
@@ -1516,4 +1514,18 @@ input:checked + .slider:before {
   border: 1px solid white;
   border-radius: 15px;
   margin-left: 20px;
+}
+
+.my-wallet-container{
+  display: flex;
+  align-items: center;
+}
+
+.my-wallet-img{
+  height: 40px;
+  width: 40px;
+}
+
+.mr{
+  margin-right: 20px;
 }

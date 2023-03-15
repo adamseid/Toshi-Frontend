@@ -2,6 +2,7 @@ import "../../App.css"
 import { useHistory } from "react-router-dom";
 import LeftBar from "./header/LeftBar"
 import axios from "axios";
+import MyWallet from "../images/my_wallet_button.png"
 
 import React, { Component } from 'react'
 export default class Header extends Component {

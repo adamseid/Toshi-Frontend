@@ -12,7 +12,7 @@ import { LoadingSpinner } from './account/LoadingSpinner'
 import { Chart } from "./account/Chart";
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import profileImage from "./profile/header/images/temp-profile-image.png"
-
+import MyWallet from "./images/my_wallet_button.png"
 
 // WEBSOCKET-LINK
 // ('ws://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
@@ -349,9 +349,10 @@ export default class Profile extends Component {
             </div>
             <div className='inner-flex-box-container'>
               <form className='left-side' onSubmit={this.handleSubmit}>
-                <input type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
-                <input type="submit" id = "submit" value="Submit" className='search' />
+                <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
+                <input type="submit" id = "submit" value="Submit" className='search mr' />
               </form>
+              
               <div className='right-side'>
                 {
                   this.state['header']['walletAddress'] == "" ? (
@@ -359,8 +360,13 @@ export default class Profile extends Component {
                       Connect
                     </div>
                   ) : 
+                  <div className="my-wallet-container">
+                  <a href={"https://etherscan.io/address/" + this.state.header.walletAddress} target="_blank">
+                    <img src={MyWallet} className="my-wallet-img mr"></img>
+                  </a>
                   <div className='connect_button'>
                       {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)}
+                  </div>
                   </div>
                 }
               </div>
