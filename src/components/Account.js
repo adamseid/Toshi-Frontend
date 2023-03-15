@@ -339,6 +339,10 @@ export default class Profile extends Component {
     return null;
   };
 
+  clusterOnClick = () => {
+    console.log("cluster clicked")
+  }
+
   render() {
     return (
       <div className='bg'>
@@ -402,8 +406,8 @@ export default class Profile extends Component {
             
             </div>
             <div className="chart-button-container">
-              <div className="chart-button">ETH</div>
-              <div className="chart-button active">USD</div>
+              <div className="chart-button" onClick={this.clusterOnClick}>ETH</div>
+              <div className="chart-button active" onClick={this.clusterOnClick}>USD</div>
             </div>
           </div>
         </div>
