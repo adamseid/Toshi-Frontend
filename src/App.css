@@ -9,9 +9,10 @@
   object-fit: cover;
   background-repeat: no-repeat;
   background-color: black;
-  background-position: center;
+  background-position-x: center;
+  background-position-y: bottom;
   background-attachment: fixed;
-  background-size: 60% 100%;
+  background-size: 60% 95%;
 }
 
 a {
