@@ -312,9 +312,12 @@ export default class Profile extends Component {
               { this.state.profile.graph?.length != 0 && this.state.profile.graph ? this.state.profile.graph?.at(-1)["USD"]?.toFixed(2) : 0}
             </div>
             <div className='wallet-id'>
+              {this.state.header.walletAddress ? 
               <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
               {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
-              </a>
+              </a> :
+              <span>...</span>
+            }
             </div>
           </div>
         </div>
