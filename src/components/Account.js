@@ -302,7 +302,7 @@ export default class Profile extends Component {
       <div className='account-outer-container'>
       <div className='profile-wallet-information'>
           <div className='profile-wallet-information-left'>
-            {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={100} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
+            {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={153} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
             <img className='profile-image' src = {profileImage} />
             }
             
