@@ -300,6 +300,24 @@ export default class Profile extends Component {
           <LeftBar walletId = {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)} />
         </div>
       <div className='account-outer-container'>
+      <div className='profile-wallet-information'>
+          <div className='profile-wallet-information-left'>
+            {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={100} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
+            <img className='profile-image' src = {profileImage} />
+            }
+            
+          </div>
+          <div className='profile-wallet-information-right'>
+            <div className='wallet-worth'>
+              { this.state.profile.graph?.length != 0 && this.state.profile.graph ? this.state.profile.graph?.at(-1)["USD"]?.toFixed(2) : 0}
+            </div>
+            <div className='wallet-id'>
+              <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
+              {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
+              </a>
+            </div>
+          </div>
+        </div>
         <div className='date-change'>
             <button className={"hour " + (this.state.time===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
             <button className={"hour " + (this.state.time===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
@@ -308,30 +326,6 @@ export default class Profile extends Component {
             <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
-        <div className='profile-wallet-information'>
-          <div className='profile-wallet-information-left'>
-            {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={100} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
-            <img className='profile-image' src = {profileImage} />
-            }
-            
-          </div>
-          <div className='profile-wallet-information-right'>
-            {/* <div className='wallet-worth'>
-              {
-                this.props.state['profile']['displayTotalTokens'] ? (this.props.state['profile']['totalTokens']) :
-                (this.props.state['profile']['accountBalance'] ? (
-                  Math.round((this.props.state['profile']['accountBalance']*100))/100
-                ) :
-                <>0</>)
-              }
-            </div> */}
-            <div className='wallet-id'>
-              <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
-              {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
-              </a>
-            </div>
-          </div>
-        </div>
         < TableOverview
             state = {this.state}
             numberOfZeros = {this.numberOfZeros}
