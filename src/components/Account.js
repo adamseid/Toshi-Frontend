@@ -313,11 +313,18 @@ export default class Profile extends Component {
             </div>
             <div className='wallet-id'>
               {this.state.header.walletAddress ? 
+              <>
               <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
               {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
-              </a> :
+              </a>
+              <span className="my-wallet">
+              My Wallet
+              </span>
+              </>
+               :
               <span>...</span>
             }
+            
             </div>
             <div className="chart-button-container">
               <div className="chart-button">ETH</div>

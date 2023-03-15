@@ -1363,6 +1363,12 @@ input:checked + .slider:before {
   height: 25px;
 }
 
-.jazzicon{
-  height: 300px!important;
+.my-wallet{
+  color: white;
+  font-size:13px;
+  font-weight: 500;
+  padding: 5px 10px;
+  border: 1px solid white;
+  border-radius: 15px;
+  margin-left: 20px;
 }
