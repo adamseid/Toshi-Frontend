@@ -86,6 +86,38 @@ export default class Profile extends Component {
     this.state = default_state
   }
 
+  volumeHistoryHttpRequest = () => {
+    this.state.isLoading = true;
+    document.body.classList.add("greyBackground");
+    this.setState(this.state)
+    var url = backend_url + "api/toshi/history"
+    axios.post( url  , this.state).then((response) => {
+      var incomingData = response.data['profile_response']
+      console.log("HISTORY RESPONSE: ",incomingData)
+      this.state['profitHistoryOverview']['table'] = incomingData[0]
+      this.state['volumeHistoryOverview']['table'] = incomingData[1]
+      this.state['tokenHistoryOverview']['table'] = incomingData[2]
+      this.state.isLoading = false;
+      document.body.classList.remove("greyBackground");
+      this.setState(this.state)
+    }).catch(error => {
+      document.body.classList.remove("greyBackground");
+      console.log(error)
+    })
+  }
+
+  graphHttpRequest = () => {
+    var url = backend_url + "api/toshi/accountGraph/";
+    axios.post(url, this.state).then((response) => {
+      console.log("GRAPH: ", response.data['profile_response'])
+      this.state['profile']['graph'] = response.data['profile_response'][0]
+      this.state['profile']['ranges'] = response.data['profile_response'][1]
+      this.state['profile']['ticks'] = response.data['profile_response'][2]
+      this.setState(this.State);
+      console.log("ACCOUNT GRAPH STATE: ", this.state);
+    });
+  };
+
   select = (data,event) => {
     if(data == "MAX"){
       this.state.time = 4
@@ -101,12 +133,13 @@ export default class Profile extends Component {
 
     this.setState(this.state)
     console.log(this.state.time)
+    console.log(this.state.profile.currentTicks)
     
-    for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
-        document.getElementsByClassName("hour")[i].classList.remove("active")
-      }
+    // for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
+    //     document.getElementsByClassName("hour")[i].classList.remove("active")
+    //   }
 
-    event.target.classList.add("active")
+    // event.target.classList.add("active")
   }
 
   componentDidUpdate = () => {
@@ -334,13 +367,14 @@ export default class Profile extends Component {
         </div>
       <div className='account-outer-container'>
         <div className='date-change'>
-            <button className='hour' onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
-            <button className='hour active' onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
-            <button className='hour' onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
+            <button className={"hour " + (this.state.time===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
+            <button className={"hour " + (this.state.time===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
+            <button className={"hour " + (this.state.time===2 ? "active" : "")} onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
+            <button className={"hour " + (this.state.time===3 ? "active" : "")} onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
+            <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
+        
         < TableOverview
             state = {this.state}
             numberOfZeros = {this.numberOfZeros}
@@ -348,6 +382,11 @@ export default class Profile extends Component {
         />
         < VolumeHistoryOverviewTable
           state = {this.state}
+        />
+        <Chart
+          graphData = {this.state['profile']['graph']}
+          ranges = {this.state['profile']['ranges']}
+          ticks = {this.state['profile']['ticks']}
         />
         < TableHistory
             state = {this.state}

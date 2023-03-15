@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import profileImage from "../profile/header/images/temp-profile-image.png"
 import {
     LineChart,
@@ -88,7 +89,10 @@ export default class Graph extends Component {
       <div>
         <div className='profile-wallet-information'>
           <div className='profile-wallet-information-left'>
+            {walletID? <Jazzicon className="jazzicon" diameter={100} seed={jsNumberForAddress(walletID)} /> :
             <img className='profile-image' src = {profileImage} />
+            }
+            
           </div>
           <div className='profile-wallet-information-right'>
             <div className='wallet-worth'>

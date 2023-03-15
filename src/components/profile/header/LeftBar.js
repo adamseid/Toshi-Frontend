@@ -10,6 +10,7 @@ import profileImage from './images/temp-profile-image.png'
 import { useState } from "react"
 import "../../../App.css"
 import { useNavigate } from "react-router-dom";
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon';
 
 
 
@@ -45,6 +46,7 @@ const LeftBar = ({walletId}) => {
 
     return (
         <div className="left-bar-container">
+            <div>
             <div className="left-bar-logo-container">
                 <img src={logo} className="left-bar-logo" />
                 <div className="left-bar-text-container">
@@ -56,7 +58,7 @@ const LeftBar = ({walletId}) => {
                     </div>
                 </div>
             </div>
-
+            
             <div className="pages-container">
                 <div className="page-item" onClick={() => handleClick('overview')}>
                     
@@ -78,7 +80,9 @@ const LeftBar = ({walletId}) => {
                     </div>
                 </div>
             </div>
+            </div>
 
+            <div>
             <div className="social-container">
                 <a href = "https://twitter.com/Toshi_Tools" className="social-item" target="_blank">
                     <img className="social-image" src={twitter} />
@@ -103,7 +107,9 @@ const LeftBar = ({walletId}) => {
             <a href={"https://etherscan.io/address/" + walletId} target="_blank">
             <div className="header-account-container">
                 
+                { walletId ? <Jazzicon diameter={40} seed={jsNumberForAddress(walletId)} /> :
                 <img src={profileImage} className="header-profile-image" />
+                }
                 <div className="header-profile-id">
                     Account 1
                 </div>
@@ -115,6 +121,7 @@ const LeftBar = ({walletId}) => {
                 
             </div>
             </a>
+            </div>
         </div>
     )
 }

@@ -11,7 +11,10 @@ import {
     Legend,
     Label
 } from "recharts";
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
+
 const time_frame = ['1D', '1W', '1M', '1Y']
+
 
 
 export default class TopPerformer extends Component {
@@ -49,6 +52,7 @@ export default class TopPerformer extends Component {
                 <div className='profile-wallet-information'>
                     <div className='profile-wallet-information-left'>
                         <img className='profile-image' src={profileImage} />
+                        {/* <Jazzicon diameter={40} seed={jsNumberForAddress(walletID)} /> */}
                     </div>
                     <div className='profile-wallet-information-right'>
                         <div className='wallet-worth'>

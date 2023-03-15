@@ -23,6 +23,21 @@ const dexToolsURL = "https://etherscan.io/dex/uniswapv2/";
 
 export default class Graph extends Component {
 
+  // graphHttpRequest = () => {
+  //   var url = backend_url + "api/toshi/accountGraph/";
+  //   axios.post(url, this.props.state).then((response) => {
+  //     console.log("GRAPH: ", response.data['profile_response'])
+  //     this.props.state['profile']['graph'] = response.data['profile_response'][0]
+  //     this.props.state['profile']['maxGraph'] = response.data['profile_response'][0]
+  //     this.props.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
+  //     this.props.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
+  //     this.props.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
+  //     this.props.state['profile']['dailyGraph'] = response.data['profile_response'][4]
+  //     this.setPropsState();
+  //     console.log("ACCOUNT GRAPGH STATE: ", this.props.state);
+  //   });
+  // };
+
   setPropsState = () => {
     this.setState(this.props.state);
   };
@@ -205,37 +220,57 @@ export default class Graph extends Component {
               </Suspense>
               
             </div>
+              
+
+            {/* <div className="chart-container">
+            <LineChart
+              width={400}
+              height={300}
+              data={
+                this.props.state['profile']['graph'] == [] ? (
+                  <></>
+                ) : 
+                this.props.state['profile']['graph']
+              }
+              margin={{
+                  top: 0,
+                  right: 0,
+                  left: 0,
+                  bottom: 0
+              }}
+            >
+              <CartesianGrid strokeDasharray="3 3" horizontal={false} vertical={false} />
+              <XAxis 
+              dataKey="time_name"
+              tick={{ fill: '#FFFFFF' }} 
+              tickLine={{ stroke: '#FFFFFF' }} 
+              stroke="#FFFFFF"
+              height = {60}
+              label={{ value: 'Time', angle: 0, position: 'bottom', offset:"-25", }}
+              >
+              </XAxis>
+              <YAxis 
+              label={{ value: 'Amount (USD)', angle: 90, position: 'right', offset:"-10"}}
+              orientation="right" 
+              tick={{ fill: '#FFFFFF' }} 
+              tickLine={{ stroke: '#FFFFFF' }} 
+              stroke="#FFFFFF"
+              width={80} >
+              </YAxis>
+              <Legend verticalAlign="top" display={false} />
+              <Legend display={true} />
+              <Line
+                  type="natural"
+                  dataKey="USD"
+                  stroke="#86F9A6"
+                  activeDot={{ stroke: 'red', strokeWidth: 0, r: 5 }}
+                  dot = {false}
+              />
+              <Tooltip cursor={false} />
+            </LineChart>
+            </div> */}
           </div>
         </div>
-        {
-          console.log(this.props.state["tokenHistoryOverview"]["numberOfPages"])
-        }
-        {
-          this.props.state["tokenHistoryOverview"]["numberOfPages"].length > 0 ? (
-            <div className='pagination_buttons'>
-              {
-                this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
-                  console.log(index)
-                  if(index == 0){
-                    return (
-                      <div key={index} className='page_number active' onClick={this.pageNumber}>
-                        {asset}
-                      </div>
-                    )
-                  }else{
-                    return (
-                      <div key={index} className='page_number' onClick={this.pageNumber}>
-                        {asset}
-                      </div>
-                    )
-                  }
-                })
-              }
-            </div>
-          ) : (
-            <></>
-          )
-        }
       </div>
     );
   }
