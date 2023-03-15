@@ -10,6 +10,9 @@ import LeftBar from "./account/header/LeftBar"
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from './account/LoadingSpinner'
 import { Chart } from "./account/Chart";
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
+import profileImage from "./profile/header/images/temp-profile-image.png"
+
 
 // WEBSOCKET-LINK
 // ('ws://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
@@ -305,7 +308,30 @@ export default class Profile extends Component {
             <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
-        
+        <div className='profile-wallet-information'>
+          <div className='profile-wallet-information-left'>
+            {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={100} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
+            <img className='profile-image' src = {profileImage} />
+            }
+            
+          </div>
+          <div className='profile-wallet-information-right'>
+            {/* <div className='wallet-worth'>
+              {
+                this.props.state['profile']['displayTotalTokens'] ? (this.props.state['profile']['totalTokens']) :
+                (this.props.state['profile']['accountBalance'] ? (
+                  Math.round((this.props.state['profile']['accountBalance']*100))/100
+                ) :
+                <>0</>)
+              }
+            </div> */}
+            <div className='wallet-id'>
+              <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
+              {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
+              </a>
+            </div>
+          </div>
+        </div>
         < TableOverview
             state = {this.state}
             numberOfZeros = {this.numberOfZeros}
