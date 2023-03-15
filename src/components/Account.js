@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { lazy, Suspense,Component } from 'react'
 import Header from './account/Header'
 import { updateState } from '../modules/Profile'
 import Graph from './account/Graph'
@@ -68,6 +68,10 @@ const default_state = {
   tokenHistoryOverview : {
     table: [],
     holdingsDisplay: false,
+    startPage : 0,
+    endPage : 10,
+    numberOfItems : 10,
+    numberOfPages : [],
   },
   time: 3,
   isLoading: false,
@@ -144,8 +148,7 @@ export default class Profile extends Component {
   componentDidUpdate = () => {
     if(walletID != this['state']['header']['walletAddress']){
         this['state']['accountDetailed']['table'] = []
-        this.volumeHistoryHttpRequest()
-        this.graphHttpRequest()
+        this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
       }
       walletID = this['state']['header']['walletAddress']
       
@@ -181,12 +184,14 @@ export default class Profile extends Component {
       }).then((result) => {
         if(result[0]){
           if(result[0].length > 0){
-            this.updateWalletAddress()
             // const walletTest=this.state['header']['walletAddress'] =  "0xb71b13b85d2c094b0fdec64ab891b5bf5f110a8e"
             const walletTest=this.state['header']['walletAddress'] = result[0]
             // const walletTest = this.state['header']['walletAddress'] = "0x47da741e9fada9aff75c0f2df69e9cd2b216b225"
+            this.connectAndSendWebsocketRequest("0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a")
             // const walletTest=this.state['header']['walletAddress'] =  "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"
-            this.sendWalletAddress(walletTest);       
+            this.updateWalletAddress()
+
+            // this.sendWalletAddress(walletTest);   
           }
         }
       })
@@ -201,6 +206,8 @@ export default class Profile extends Component {
 
 
   componentDidMount(){
+    this.state['profitHistoryOverview']['table'] = []
+    this.setState(this.state)
 
     if(this.mobileAndTabletCheck()){
       url = window.location['origin'] + '/mobile'
@@ -212,10 +219,72 @@ export default class Profile extends Component {
       var temp_wallet_address = window.location.href.split("?")[1]
       if(this.isValid(temp_wallet_address)){
         this.urlWalletAddress(temp_wallet_address)
+        this.connectAndSendWebsocketRequest(temp_wallet_address)
       }
     }else{
       this.iswalletConnected()
     }
+
+  }
+
+  tokenHistoryOverviewResponse = (itemRow,year,action) => {
+    var profit = itemRow[5]
+    var profitHistoryOverviewTable = this.state['profitHistoryOverview']['table'][year]
+    var volumeHistoryOverviewTable = this.state['volumeHistoryOverview']['table'][year]
+    if(action == "subtract"){
+      profitHistoryOverviewTable[0] = profitHistoryOverviewTable[0] - profit
+      if(profit >=0){
+        volumeHistoryOverviewTable[3] = volumeHistoryOverviewTable[3] - profit
+      }else{
+        volumeHistoryOverviewTable[4] = volumeHistoryOverviewTable[4] - profit
+      }
+    }else if(action == "addition"){
+      profitHistoryOverviewTable[0] = profitHistoryOverviewTable[0] + profit
+      if(profit >=0){
+        volumeHistoryOverviewTable[3] = volumeHistoryOverviewTable[3] + profit
+      }else{
+        volumeHistoryOverviewTable[4] = volumeHistoryOverviewTable[4] + profit
+      }
+    }
+    this.setState(this.state)
+  }
+
+  connectAndSendWebsocketRequest(address){
+    const ws = new WebSocket(process.env.REACT_APP_.BACKEND_BASE_URL_WEBSOCKET + 'toshi-history' + '/');
+    
+    ws.onopen = () => {
+      console.log("history page websocket connected")
+      if(ws.readyState){
+        this.state.isLoading = true;
+        document.body.classList.add("greyBackground");
+        this.setState(this.state)
+        ws.send(
+            JSON.stringify({
+                request: "connect",
+                walletAddress: address,
+            })
+        )
+      }
+    }
+
+    ws.onmessage = (e) => {
+      this.state.isLoading = false;
+      document.body.classList.remove("greyBackground");
+      let data = JSON.parse(e.data)['response']
+      let numberofPagesArr = []
+      var lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
+      this.state['profitHistoryOverview']['table'] = data[0]
+      this.state['volumeHistoryOverview']['table'] = data[1]
+      this.state['tokenHistoryOverview']['table'] = data[2]
+      console.log("INCOMING DATA: ", data[2][3])
+      for(let i = 0; i < lengthOfTable; i++){
+        numberofPagesArr.push(i+1)
+      }
+      this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
+      console.log("LENGTH OF TABLE: ", lengthOfTable)
+      this.setState(this.state)
+    }
+    this.setState(this.state)
   }
 
   
@@ -357,6 +426,7 @@ export default class Profile extends Component {
             state = {this.state}
             numberOfZeros = {this.numberOfZeros}
             convertDecimalFormat = {this.convertDecimalFormat}
+            tokenHistoryOverviewResponse = {this.tokenHistoryOverviewResponse}
         />
     </div>
   </div>
