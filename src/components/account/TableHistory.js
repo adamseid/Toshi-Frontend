@@ -1,6 +1,8 @@
-import React, { Component } from "react";
+import React, { lazy, Suspense,Component } from 'react'
 import axios from "axios";
 import BulletPoint from "../images/bulletPoint.png";
+import hideImage from "../images/hide.png";
+import showImage from "../images/show.png";
 import {
   LineChart,
   Line,
@@ -13,43 +15,23 @@ import {
 } from "recharts";
 import { NumberFormat } from "./NumberFormat";
 
-// const time_frame = ['1H', '1D', '1W', '1M', '1Y']
-
-// const backend_url = "https://ws.toshitools.app/"
-// const backend_url = "https://stagingws.toshitools.app/"
-// const backend_url = "http://127.0.0.1:8000/";
-
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
-
+const ITEMS_PER_PAGE = 1; // Number of items per page
 var toggle = true;
 var walletID = "";
 const dexToolsURL = "https://etherscan.io/dex/uniswapv2/";
 
 export default class Graph extends Component {
 
-  graphHttpRequest = () => {
-    var url = backend_url + "api/toshi/accountGraph/";
-    axios.post(url, this.props.state).then((response) => {
-      console.log("GRAPH: ", response.data['profile_response'])
-      this.props.state['profile']['graph'] = response.data['profile_response'][0]
-      this.props.state['profile']['maxGraph'] = response.data['profile_response'][0]
-      this.props.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
-      this.props.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
-      this.props.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
-      this.props.state['profile']['dailyGraph'] = response.data['profile_response'][4]
-      this.setPropsState();
-      console.log("ACCOUNT GRAPGH STATE: ", this.props.state);
-    });
-  };
-
   setPropsState = () => {
     this.setState(this.props.state);
   };
 
   componentDidUpdate = () => {
+    // console.log("NEW ITEM: ", this.props["state"]['tokenHistoryOverview']['table'])
     if (walletID != this.props["state"]["header"]["walletAddress"]) {
       this.props["state"]["accountDetailed"]["table"] = [];
-      this.graphHttpRequest();
+      // this.graphHttpRequest();
     }
     walletID = this.props["state"]["header"]["walletAddress"];
   };
@@ -61,43 +43,106 @@ export default class Graph extends Component {
     console.log("switched");
   };
 
+  handleClick = (page) => {
+    console.log(page)
+  };
+
+  showAsset = (index) => {
+    var itemRow = document.getElementsByClassName("account-detailed-ids")[index]
+    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[this.props.state.time][index],this.props.state.time,"addition")
+    var showImage = document.getElementsByClassName("show_image")[index]
+    var hideImage = document.getElementsByClassName("hide_image")[index]
+    showImage.style.display = "block"
+    hideImage.style.display = "none"
+    itemRow.style.opacity = "1"
+  }
+
+  hideAsset = (index) => {
+    var itemRow = document.getElementsByClassName("account-detailed-ids")[index]
+    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[this.props.state.time][index],this.props.state.time,"subtract")
+    var showImage = document.getElementsByClassName("show_image")[index]
+    var hideImage = document.getElementsByClassName("hide_image")[index]
+    hideImage.style.display = "block"
+    showImage.style.display = "none"
+    itemRow.style.opacity = "0.3"
+  }
+
+  pageNumber = (e) => {
+    var pageNumberClassName = e.target.classList[0]
+    var targetPageNumber = parseInt(e.target.innerText)
+    console.log(e.target.innerText)
+    var pageNumberClassNameArr = document.getElementsByClassName(pageNumberClassName)
+    for(let i=0;i<pageNumberClassNameArr.length;i++){
+      pageNumberClassNameArr[i].classList.remove("active")
+    }
+    e.target.classList.add("active")
+    this.props.state.tokenHistoryOverview.startPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
+    this.props.state.tokenHistoryOverview.endPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems)
+    this.setPropsState();
+    console.log(this.props.state.tokenHistoryOverview)
+  }
+
   render() {
     return (
       <div className="table-overview-outer-container">
         <div className="profile-header-text">Token History Overview</div>
         <div className="account-container">
-          <div className="tokenHistoryOverviewTitles">
-            <div className="asset-text-first-history">Token Name</div>
-            <div className="asset-text-history">Total Transactions</div>
-            <div className="asset-text-history nowrap">
-              Total Profit <br />
-              (USD)
-            </div>
-            <div className="asset-text-history nowrap">
-              Current Holdings
-              <br />
-              <label className="switch">
-                <input
-                  type="checkbox"
-                  onChange={this.onClickSwitchHandler}
-                  checked={
-                    this.props.state["tokenHistoryOverview"]["holdingsDisplay"]
-                  }
-                />
-                <span className="slider round"></span>
-                <span className="ETH-label">ETH</span>
-                <span className="USD-label">USD</span>
-              </label>
+          <div className='tokenHistoryOverviewTitlesContainer'>
+            <div className="tokenHistoryOverviewTitles">
+              <div className="token_history_overview_title token_name">
+                Token Name
+              </div>
+
+              <div className="token_history_overview_title total_transactions">
+                <div className='divider_line_total_transactions'></div>
+                Total Transactions
+              </div>
+              <div className="token_history_overview_title total_profit">
+              <div className='divider_line_total_profit'></div>
+                Total Profit
+                <label className="switch">
+                  <input
+                    type="checkbox"
+                    onChange={this.onClickSwitchHandler}
+                    checked={
+                      this.props.state["tokenHistoryOverview"]["holdingsDisplay"]
+                    }
+                  />
+                  <span className="slider round"></span>
+                  <span className="ETH-label">ETH</span>
+                  <span className="USD-label">USD</span>
+                </label>
+              </div>
+              <div className="token_history_overview_title current_holdings">
+              <div className='divider_line_holdings'></div>
+                Current Holdings
+                <label className="switch">
+                  <input
+                    type="checkbox"
+                    onChange={this.onClickSwitchHandler}
+                    checked={
+                      this.props.state["tokenHistoryOverview"]["holdingsDisplay"]
+                    }
+                  />
+                  <span className="slider round"></span>
+                  <span className="ETH-label">ETH</span>
+                  <span className="USD-label">USD</span>
+                </label>
+              </div>
+              <div className="token_history_overview_title hide_unhide">
+              <div className='divider_line_hide_unhide'></div>
+                Hide/Unhide
+              </div>
             </div>
           </div>
           <div className="account-table">
-            <div>
-               
+            <div className='tokenItmesContainer'>
+              <Suspense fallback={<div>Loading...</div>}>
               <div>
-              {this.props.state.tokenHistoryOverview.table[this.props.state.time]?.map((asset, index)=> {
+              {this.props.state.tokenHistoryOverview.table[this.props.state.time]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).map((asset, index)=> {
                 return (
               <div key={index} className="account-detailed-ids">
-                  <div className="asset-text-data-detailed-first-element">
+                  <div className="asset-text-data-detailed-first-element token_detailes">
                     <div className="account-token-outer-container">
                       <img className="account-bullet" src={
                         asset[9] ? asset[9] : BulletPoint
@@ -115,11 +160,11 @@ export default class Graph extends Component {
                     </div>
                   </div>
  
-                  <div className="asset-text-data-detailed">
+                  <div className="asset-text-data-detailed total_transactions">
                     {asset[3]}
                   </div>
               
-                  <div className="asset-text-data-detailed">
+                  <div className="asset-text-data-detailed total_profit">
                     {asset[5] >= 0 ? (
                               <div className = "positive tokenHistoryTableBlock" key={index}>
                                   <div>
@@ -139,7 +184,7 @@ export default class Graph extends Component {
                               </div>
                           </div>}
                   </div>
-                <div className="asset-text-data-detailed currentHoldings">
+                <div className="asset-text-data-detailed currentHoldings current_holdings">
                   <div className="nowrap">
                       {this.props.state.tokenHistoryOverview.holdingsDisplay ? (
                         asset[6] === 0 || asset[7] === 0 ? <>$0</> :
@@ -149,63 +194,48 @@ export default class Graph extends Component {
                 <>{Math.round(asset[7]*10000)/10000}<span className="grey"> ETH</span></>}
                   </div>
                 </div>
+                <div className="asset-text-data-detailed hide_unhide">
+                    <img className='show_image' src={showImage} onClick={this.hideAsset.bind(this, index)} />
+                    <img className='hide_image' src={hideImage} onClick={this.showAsset.bind(this, index)}/>
+                </div>
               </div>
                 )
               })}
             </div>
+              </Suspense>
               
-            </div>
-              
-
-            <div className="chart-container">
-            <LineChart
-              width={400}
-              height={300}
-              data={
-                this.props.state['profile']['graph'] == [] ? (
-                  <></>
-                ) : 
-                this.props.state['profile']['graph']
-              }
-              margin={{
-                  top: 0,
-                  right: 0,
-                  left: 0,
-                  bottom: 0
-              }}
-            >
-              <CartesianGrid strokeDasharray="3 3" horizontal={false} vertical={false} />
-              <XAxis 
-              dataKey="time_name"
-              tick={{ fill: '#FFFFFF' }} 
-              tickLine={{ stroke: '#FFFFFF' }} 
-              stroke="#FFFFFF"
-              height = {60}
-              label={{ value: 'Time', angle: 0, position: 'bottom', offset:"-25", }}
-              >
-              </XAxis>
-              <YAxis 
-              label={{ value: 'Amount (USD)', angle: 90, position: 'right', offset:"-10"}}
-              orientation="right" 
-              tick={{ fill: '#FFFFFF' }} 
-              tickLine={{ stroke: '#FFFFFF' }} 
-              stroke="#FFFFFF"
-              width={80} >
-              </YAxis>
-              <Legend verticalAlign="top" display={false} />
-              <Legend display={true} />
-              <Line
-                  type="natural"
-                  dataKey="USD"
-                  stroke="#86F9A6"
-                  activeDot={{ stroke: 'red', strokeWidth: 0, r: 5 }}
-                  dot = {false}
-              />
-              <Tooltip cursor={false} />
-            </LineChart>
             </div>
           </div>
         </div>
+        {
+          console.log(this.props.state["tokenHistoryOverview"]["numberOfPages"])
+        }
+        {
+          this.props.state["tokenHistoryOverview"]["numberOfPages"].length > 0 ? (
+            <div className='pagination_buttons'>
+              {
+                this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
+                  console.log(index)
+                  if(index == 0){
+                    return (
+                      <div key={index} className='page_number active' onClick={this.pageNumber}>
+                        {asset}
+                      </div>
+                    )
+                  }else{
+                    return (
+                      <div key={index} className='page_number' onClick={this.pageNumber}>
+                        {asset}
+                      </div>
+                    )
+                  }
+                })
+              }
+            </div>
+          ) : (
+            <></>
+          )
+        }
       </div>
     );
   }
