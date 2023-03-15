@@ -345,7 +345,7 @@ export default class Profile extends Component {
         <div>
           <div className='outer-flex-box-container'>
             <div className='header-left'>
-                Your Profile: Account 1
+                Wallet Overview
             </div>
             <div className='inner-flex-box-container'>
               <form className='left-side' onSubmit={this.handleSubmit}>
