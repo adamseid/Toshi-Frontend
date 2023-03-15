@@ -14,7 +14,7 @@ function App() {
   return (
       <Router>
         <Routes>
-          <Route exact path='/' element={<Overview />} />
+          <Route exact path='/' element={<Account />} />
           <Route exact path='/profile' element={<Profile />}/>
           <Route exact path='/account' element={<Account />}/>
           <Route exact path='/mobile' element={<Mobile />}/>
