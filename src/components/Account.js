@@ -319,6 +319,10 @@ export default class Profile extends Component {
               <span>...</span>
             }
             </div>
+            <div className="chart-button-container">
+              <div className="chart-button">ETH</div>
+              <div className="chart-button active">USD</div>
+            </div>
           </div>
         </div>
         <div className='date-change'>
