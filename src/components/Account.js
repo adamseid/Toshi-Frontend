@@ -11,6 +11,9 @@ import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from './account/LoadingSpinner'
 import { Chart } from "./account/Chart";
 import WalletAssets from './account/WalletAssets'
+import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
+import profileImage from "./profile/header/images/temp-profile-image.png"
+import MyWallet from "./images/my_wallet_button.png"
 
 // WEBSOCKET-LINK
 // ('ws://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
@@ -72,6 +75,7 @@ const default_state = {
     numberOfPages : [],
   },
   time: 3,
+  showEth: false,
   isLoading: false,
 }
 
@@ -174,6 +178,7 @@ export default class Profile extends Component {
 
   componentDidUpdate = () => {
     if(walletID != this['state']['header']['walletAddress']){
+        this.graphHttpRequest()
         this['state']['accountDetailed']['table'] = []
         this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
         this.graphHttpRequest()
@@ -380,19 +385,28 @@ export default class Profile extends Component {
     return null;
   };
 
+  clusterOnClick = (e) => {
+    console.log(e.target.innerText)
+    if(!e.target.classList.contains("active")){
+      this.state.showEth = !this.state.showEth
+      this.setState(this.state)
+    }
+  }
+
   render() {
     return (
       <div className='bg'>
         <div>
           <div className='outer-flex-box-container'>
             <div className='header-left'>
-                Your Profile: Account 1
+                Wallet Overview
             </div>
             <div className='inner-flex-box-container'>
               <form className='left-side' onSubmit={this.handleSubmit}>
-                <input type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
-                <input type="submit" id = "submit" value="Submit" className='search' />
+                <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
+                <input type="submit" id = "submit" value="Submit" className='search mr' />
               </form>
+              
               <div className='right-side'>
                 {
                   this.state['header']['walletAddress'] == "" ? (
@@ -400,8 +414,13 @@ export default class Profile extends Component {
                       Connect
                     </div>
                   ) : 
+                  <div className="my-wallet-container">
+                  <a href={"https://etherscan.io/address/" + this.state.header.walletAddress} target="_blank">
+                    <img src={MyWallet} className="my-wallet-img mr"></img>
+                  </a>
                   <div className='connect_button'>
                       {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)}
+                  </div>
                   </div>
                 }
               </div>
@@ -410,6 +429,38 @@ export default class Profile extends Component {
           <LeftBar walletId = {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)} />
         </div>
       <div className='account-outer-container'>
+      <div className='profile-wallet-information'>
+          <div className='profile-wallet-information-left'>
+            {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={153} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
+            <img className='profile-image' src = {profileImage} />
+            }
+            
+          </div>
+          <div className='profile-wallet-information-right'>
+            <div className='wallet-worth'>
+              { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph?.at(-1)["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))) :"$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2)))) : 0 }
+            </div>
+            <div className='wallet-id'>
+              {this.state.header.walletAddress ? 
+              <>
+              <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
+              {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
+              </a>
+              <span className="my-wallet">
+              My Wallet
+              </span>
+              </>
+               :
+              <span>...</span>
+            }
+            
+            </div>
+            <div className="chart-button-container">
+              <div className={"chart-button" + (this.state.showEth ? " active" : "")} onClick={this.clusterOnClick}>ETH</div>
+              <div className={"chart-button" + (this.state.showEth ? "" : " active")} onClick={this.clusterOnClick}>USD</div>
+            </div>
+          </div>
+        </div>
         <div className='date-change'>
             <button className={"hour " + (this.state.time===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
             <button className={"hour " + (this.state.time===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
@@ -418,7 +469,6 @@ export default class Profile extends Component {
             <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
         </div>
         {this.state.isLoading ? <LoadingSpinner/> : <></>}
-        
         < TableOverview
             state = {this.state}
             numberOfZeros = {this.numberOfZeros}
