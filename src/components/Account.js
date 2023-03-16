@@ -21,6 +21,7 @@ const default_state = {
 
   header: {
       walletAddress: "",
+      connectedWalletAddress: "",
   },
   accountOverview: {
       table: [],
@@ -191,7 +192,9 @@ export default class Profile extends Component {
             // const walletTest = this.state['header']['walletAddress'] = "0x47da741e9fada9aff75c0f2df69e9cd2b216b225"
             // const walletTest=this.state['header']['walletAddress'] =  "0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A"
             this.connectAndSendWebsocketRequest(result[0])
+            this.state.header.connectedWalletAddress = result[0]
             this.updateWalletAddress()
+            console.log(this.state)
             // this.sendWalletAddress(walletTest);   
           }
         }
@@ -366,17 +369,19 @@ export default class Profile extends Component {
               
               <div className='right-side'>
                 {
-                  this.state['header']['walletAddress'] == "" ? (
+                  this.state['header']['connectedWalletAddress'] == "" ? (
                     <div className='connect_button' onClick={this.onPressed}>
                       Connect
                     </div>
                   ) : 
                   <div className="my-wallet-container">
-                  <a href={"https://etherscan.io/address/" + this.state.header.walletAddress} target="_blank">
-                    <img src={MyWallet} className="my-wallet-img mr"></img>
-                  </a>
+                    {this.state.header.connectedWalletAddress == "" ? <></>:
+                      <a href={"https://etherscan.io/address/" + this.state.header.connectedWalletAddress} target="_blank">
+                        <img src={MyWallet} className="my-wallet-img mr"></img>
+                      </a>
+                    }
                   <div className='connect_button'>
-                      {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)}
+                      {this.state.header.connectedWalletAddress.substring(0, 6) + "..." +  this.state.header.connectedWalletAddress.substring(38, 42)}
                   </div>
                   </div>
                 }
@@ -403,9 +408,13 @@ export default class Profile extends Component {
               <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
               {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
               </a>
-              <span className="my-wallet">
-              My Wallet
-              </span>
+              {
+                this.state.header.walletAddress === this.state.header.connectedWalletAddress ? 
+                <span className="my-wallet">
+                  My Wallet
+                </span> : <></>
+              }
+              
               </>
                :
               <span>...</span>
