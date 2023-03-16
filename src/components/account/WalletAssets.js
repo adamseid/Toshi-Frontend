@@ -80,70 +80,97 @@ export default class WalletAssets extends Component {
 
   render() {
     return (
-            <div className="table-overview-outer-container">
-                <div className="profile-header-text">Wallet Assets</div>
-                <div className="account-container">
-                    <div className='walletAssetsTitlesContainer'>
-                        <div className="walletAssetsItems">
-                            Token name
-                        </div>
-                        <div className='divider_line_wallet_assets_left'></div>
-                        <div className='walletAssetsItems'>
-                            Token Price (USD)
-                        </div>
-                        <div className='divider_line_wallet_assets_right'></div>
-                        <div className='walletAssetsItems'>
-                            Token Value
-                        </div>
-                    </div>
-                    <div className="account-table">
-                        <Suspense fallback={<div>Loading...</div>}>
-                            <div className='walletAssetsTokenNameOuterContainer'>
-                                {this.props.state.tokenHistoryOverview.table[this.props.state.time]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).map((asset, index)=> {
-                                    return (
-                                        <div key={index} className="walletAssetsTokenNameContainer">
-                                            <div className="walletAssetsTokenName">
-                                                <img className="account-bullet" src={asset[9] ? asset[9] : BulletPoint} />
-                                                <div className="account-token-inner-container">
-                                                    <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]} target="_blank">
-                                                        <div className="account-token-name nowrap">{asset[0]}</div>
-                                                        <div className="account-token-symbol nowrap">{asset[1]}</div>
-                                                    </a>
-                                                    <div className="account-bottom-row">
-                                                        <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
-                                                        <div className="account-token-allocation-percentage"></div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="walletAssetsTokenName">
-                                                {
-                                                    this.props.state.tokenHistoryOverview.holdingsDisplay ? (
-                                                        asset[6] === 0 || asset[7] === 0 ? <>$0</> :
-                                                            asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + (Math.round((asset[6]/asset[4])*100)/100)
-                                                    ): asset[6] === 0 || asset[7] === 0 ? <>0</> : 
-                                                        asset[7] < 0.01 ? <><NumberFormat number={asset[6]}/></> : 
-                                                    <>$ {(Math.round((asset[6]/asset[4])*100)/100)}</>
-                                                }
-                                            </div>
-                                            <div className="walletAssetsTokenName">
-                                                {
-                                                    this.props.state.tokenHistoryOverview.holdingsDisplay ? (
-                                                        asset[6] === 0 || asset[7] === 0 ? <>$0</> :
-                                                            asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + Math.round(asset[6]*100)/100
-                                                    ): asset[6] === 0 || asset[7] === 0 ? <>0</> : 
-                                                        asset[7] < 0.01 ? <><NumberFormat number={asset[6]}/></> : 
-                                                    <>$ {Math.round(asset[6]*100)/100}</>
-                                                }
-                                            </div>
-                                        </div>
-                                    )})
-                                }
-                            </div>
-                        </Suspense>
-                    </div>
-                </div>
-
+      <div className="table-overview-outer-container">
+        <div className="profile-header-text">Wallet Assets</div>
+        <div className="account-container">
+          <div className='walletAssetsTitlesContainer'>
+            <div className="walletAssetsItems">
+              Token name
             </div>
+            <div className='divider_line_wallet_assets_left'></div>
+            <div className='walletAssetsItems'>
+              Token Price (USD)
+            </div>
+            <div className='divider_line_wallet_assets_right'></div>
+            <div className='walletAssetsItems'>
+              Token Value
+            </div>
+          </div>
+          <div className="account-table">
+            <Suspense fallback={<div>Loading...</div>}>
+              <div className='walletAssetsTokenNameOuterContainer'>
+                {
+                  this.props.state.tokenHistoryOverview.table[this.props.state.time]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).map((asset, index)=> {
+                    return (
+                      <div key={index} className="walletAssetsTokenNameContainer">
+                        <div className="walletAssetsTokenName">
+                          <img className="account-bullet" src={asset[9] ? asset[9] : BulletPoint} />
+                          <div className="account-token-inner-container">
+                            <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]} target="_blank">
+                              <div className="account-token-name nowrap">{asset[0]}</div>
+                              <div className="account-token-symbol nowrap">{asset[1]}</div>
+                            </a>
+                            <div className="account-bottom-row">
+                              <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
+                              <div className="account-token-allocation-percentage"></div>
+                            </div>
+                          </div>
+                        </div>
+                        <div className="walletAssetsTokenName">
+                          {
+                            this.props.state.tokenHistoryOverview.holdingsDisplay ? (
+                            asset[6] === 0 || asset[7] === 0 ? <>$0</> :
+                            asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + (Math.round((asset[6]/asset[4])*100)/100)
+                            ): asset[6] === 0 || asset[7] === 0 ? <>0</> : 
+                            asset[7] < 0.01 ? <><NumberFormat number={asset[6]}/></> : 
+                            <>${(Math.round((asset[6]/asset[4])*100)/100)}</>
+                          }
+                        </div>
+                        <div className="walletAssetsTokenName">
+                          {
+                            this.props.state.tokenHistoryOverview.holdingsDisplay ? (
+                            asset[6] === 0 || asset[7] === 0 ? <>$0</> :
+                            asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + Math.round(asset[6]*100)/100
+                            ): asset[6] === 0 || asset[7] === 0 ? <>0</> : 
+                            asset[7] < 0.01 ? <><NumberFormat number={asset[6]}/></> : 
+                            <>${Math.round(asset[6]*100)/100}</>
+                          }
+                        </div>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+            </Suspense>
+          </div>
+        </div>
+        {
+          this.props.state["tokenHistoryOverview"]["numberOfPages"].length > 0 ? (
+            <div className='pagination_buttons'>
+              {
+                this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
+                  console.log(index)
+                  if(index == 0){
+                    return (
+                      <div key={index} className='page_number_wallet_asset active' onClick={this.pageNumber}>
+                        {asset}
+                      </div>
+                    )
+                  }else{
+                    return (
+                      <div key={index} className='page_number_wallet_asset' onClick={this.pageNumber}>
+                        {asset}
+                      </div>
+                    )
+                  }
+                })
+              }
+            </div>
+          ) : (
+            <></>
+          )
+        }
+      </div>
     );
   }
 }

@@ -1072,6 +1072,7 @@ a {
 }
 
 .walletAssetsItems{
+  width: 16%;
   font-size: 21px;
   font-weight: 700;
   line-height: 26px;
@@ -1105,11 +1106,11 @@ a {
   width: 100%;
 }
 
-.page_number:hover{
+.page_number:hover, .page_number_wallet_asset:hover{
   cursor: pointer;
 }
 
-.page_number{
+.page_number,.page_number_wallet_asset{
   font-family: Rajdhani;
   font-size: 21px;
   font-weight: 700;
@@ -1122,7 +1123,7 @@ a {
   margin-right: 6px;
 }
 
-.page_number.active{
+.page_number.active, .page_number_wallet_asset.active{
   background: #1E1E1E;
   padding-left: 14px;
   border-radius: 25px;
@@ -1304,7 +1305,7 @@ a {
 }
 
 .walletAssetsTokenName{
-  width: 10%;
+  width: 16%;
   font-family: Inter;
   font-size: 18px;
   font-weight: 400;
@@ -1323,7 +1324,7 @@ a {
   align-items: center;
   padding-top: 22px;
   padding-left: 47px;
-  padding-right: 0px;
+  padding-right: 47px;
 }
 
 .divider_line_wallet_assets_right{

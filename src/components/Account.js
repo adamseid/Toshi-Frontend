@@ -214,7 +214,7 @@ export default class Profile extends Component {
         if(result[0]){
           if(result[0].length > 0){
             const walletTest=this.state['header']['walletAddress'] = result[0]
-            const userAddress = result[0];
+            const userAddress = "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a";
             const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
             erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
               if (!error) {
