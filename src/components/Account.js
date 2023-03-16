@@ -75,6 +75,7 @@ const default_state = {
     numberOfPages : [],
   },
   time: 3,
+  historyTime: 3,
   showEth: false,
   isLoading: false,
 }
@@ -139,12 +140,6 @@ export default class Profile extends Component {
     this.setState(this.state)
     console.log(this.state.time)
     console.log(this.state.profile.currentTicks)
-    
-    // for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
-    //     document.getElementsByClassName("hour")[i].classList.remove("active")
-    //   }
-
-    // event.target.classList.add("active")
   }
 
   componentDidUpdate = () => {
