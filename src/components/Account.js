@@ -13,6 +13,7 @@ import { Chart } from "./account/Chart";
 import WalletAssets from './account/WalletAssets'
 import Jazzicon, { jsNumberForAddress } from 'react-jazzicon'
 import profileImage from "./profile/header/images/temp-profile-image.png"
+import modalImage from "./images/modalImage.png"
 import MyWallet from "./images/my_wallet_button.png"
 
 // WEBSOCKET-LINK
@@ -23,6 +24,7 @@ const default_state = {
   header: {
       walletAddress: "",
       connectedWalletAddress: "",
+      isLoggedIn: false,
   },
   accountOverview: {
       table: [],
@@ -54,6 +56,7 @@ const default_state = {
     maxTable:[],
     ethPriceChange: 0,
     holdingsDisplay: false,
+    profitDisplay: false,
   },
   volumeHistoryTable: {
     maxVolumeHistoryTable:[],
@@ -212,7 +215,7 @@ export default class Profile extends Component {
         if(result[0]){
           if(result[0].length > 0){
             const walletTest=this.state['header']['walletAddress'] = result[0]
-            const userAddress = "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a";
+            const userAddress = result[0];
             const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
             erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
               if (!error) {
@@ -221,11 +224,11 @@ export default class Profile extends Component {
                 console.log(`User's token balance: ${remainder}`);
                 if(remainder >= 0 || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
+                  this.state.header.isLoggedIn = true
                   this.updateWalletAddress()
                   this.connectAndSendWebsocketRequest(userAddress)
                 }else{
                   remainder = Math.abs(remainder)
-                  alert(`Please deposit ${remainder} of Toshi-Tools Token in your wallet to use this application`)
                 }
               } else {
                 console.error(error);
@@ -273,19 +276,24 @@ export default class Profile extends Component {
     var volumeHistoryOverviewTable = this.state['volumeHistoryOverview']['table'][year]
     if(action == "subtract"){
       profitHistoryOverviewTable[0] = profitHistoryOverviewTable[0] - profit
+      profitHistoryOverviewTable[1] = profitHistoryOverviewTable[1] - 1
       if(profit >=0){
+        profitHistoryOverviewTable[2] = profitHistoryOverviewTable[2] - 1
         volumeHistoryOverviewTable[3] = volumeHistoryOverviewTable[3] - profit
       }else{
         volumeHistoryOverviewTable[4] = volumeHistoryOverviewTable[4] - profit
       }
     }else if(action == "addition"){
       profitHistoryOverviewTable[0] = profitHistoryOverviewTable[0] + profit
+      profitHistoryOverviewTable[1] = profitHistoryOverviewTable[1] + 1
       if(profit >=0){
+        profitHistoryOverviewTable[2] = profitHistoryOverviewTable[2] + 1
         volumeHistoryOverviewTable[3] = volumeHistoryOverviewTable[3] + profit
       }else{
         volumeHistoryOverviewTable[4] = volumeHistoryOverviewTable[4] + profit
       }
     }
+    profitHistoryOverviewTable[3] = Math.round((profitHistoryOverviewTable[2]/profitHistoryOverviewTable[1])*100)
     this.setState(this.state)
   }
 
@@ -317,14 +325,10 @@ export default class Profile extends Component {
       this.state['profitHistoryOverview']['table'] = data[0]
       this.state['volumeHistoryOverview']['table'] = data[1]
       this.state['tokenHistoryOverview']['table'] = data[2]
-      // console.log("INCOMING DATA: ", data[2][3])
       for(let i = 0; i < lengthOfTable; i++){
         numberofPagesArr.push(i+1)
       }
       this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
-      // console.log("LENGTH OF TABLE: ", lengthOfTable)
-      // console.log("NUMBER OF PAGES: ", numberofPagesArr)
-      // console.log("Updated state: ", this.state.tokenHistoryOverview)
     }
     this.updateWalletAddress()
     console.log(this.state)
@@ -377,11 +381,12 @@ export default class Profile extends Component {
                 var remainder = tokenAmount - 4000000000
                 console.log(`User's token balance: ${remainder}`);
                 if(remainder >= 0 || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
+                  this.state.header.connectedWalletAddress = userAddress
+                  this.state.header.isLoggedIn = true
                   this.connectAndSendWebsocketRequest(result[0])
                   this.updateWalletAddress()
                 }else{
                   remainder = Math.abs(remainder)
-                  alert(`Please deposit ${remainder} of Toshi-Tools Token in your wallet to use this application`)
                 }
               } else {
                 console.error(error);
@@ -418,112 +423,242 @@ export default class Profile extends Component {
 
   render() {
     return (
-      <div className='bg'>
-        <div>
-          <div className='outer-flex-box-container'>
-            <div className='header-left'>
-                Wallet Overview
-            </div>
-            <div className='inner-flex-box-container'>
-              <form className='left-side' onSubmit={this.handleSubmit}>
-                <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
-                <input type="submit" id = "submit" value="Submit" className='search mr' style={{cursor: 'pointer'}} />
-              </form>
-              
-              <div className='right-side'>
-                {
-                  this.state['header']['connectedWalletAddress'] == "" ? (
-                    <div className='connect_button' onClick={this.onPressed}>
-                      Connect
+      <div>
+        {
+          this.state.header.isLoggedIn == false ? (
+            <div className='not_auth_container'>
+              <div className='bg not_auth'>
+                <div className='account_header'>
+                  <div className='outer-flex-box-container'>
+                    <div className='header-left'>
+                        Wallet Overview
                     </div>
-                  ) : 
-                  <div className="my-wallet-container">
-                    {this.state.header.connectedWalletAddress == "" ? <></>:
-                      <div onClick={this.handleMyWallet} style={{cursor: 'pointer'}}>
-                        <img src={MyWallet} className="my-wallet-img mr"></img>
+                    <div className='inner-flex-box-container'>
+                      <form className='left-side' onSubmit={this.handleSubmit}>
+                        <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
+                        <input type="submit" id = "submit" value="Submit" className='search mr' style={{cursor: 'pointer'}} />
+                      </form>
+                      
+                      <div className='right-side'>
+                        {
+                          this.state['header']['connectedWalletAddress'] == "" ? (
+                            <div className='connect_button' onClick={this.onPressed}>
+                              Connect
+                            </div>
+                          ) : 
+                          <div className="my-wallet-container">
+                            {this.state.header.connectedWalletAddress == "" ? <></>:
+                              <div onClick={this.handleMyWallet} style={{cursor: 'pointer'}}>
+                                <img src={MyWallet} className="my-wallet-img mr"></img>
+                              </div>
+                            }
+                          <div className='connect_button'>
+                              {this.state.header.connectedWalletAddress.substring(0, 6) + "..." +  this.state.header.connectedWalletAddress.substring(38, 42)}
+                          </div>
+                          </div>
+                        }
                       </div>
+                    </div>
+                  </div>
+                  <LeftBar walletId = {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)} />
+                </div>
+              <div className='account-outer-container'>
+              <div className='profile-wallet-information'>
+                  <div className='profile-wallet-information-left'>
+                    {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={153} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
+                    <img className='profile-image' src = {profileImage} />
                     }
-                  <div className='connect_button'>
-                      {this.state.header.connectedWalletAddress.substring(0, 6) + "..." +  this.state.header.connectedWalletAddress.substring(38, 42)}
+                    
                   </div>
+                  <div className='profile-wallet-information-right'>
+                    <div className='wallet-worth'>
+                      { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph?.at(-1)["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")))) : 0 }
+                    </div>
+                    <div className='wallet-id'>
+                      {this.state.header.walletAddress ? 
+                      <>
+                      <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
+                      {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
+                      </a>
+                      {
+                        this.state.header.walletAddress === this.state.header.connectedWalletAddress ? 
+                        <span className="my-wallet">
+                          My Wallet
+                        </span> : <></>
+                      }
+                      
+                      </>
+                      :
+                      <span>...</span>
+                    }
+                    
+                    </div>
+                    <div className="chart-button-container">
+                      <div className={"chart-button" + (this.state.showEth ? " active" : "")} onClick={this.clusterOnClick}>ETH</div>
+                      <div className={"chart-button" + (this.state.showEth ? "" : " active")} onClick={this.clusterOnClick}>USD</div>
+                    </div>
                   </div>
-                }
+                </div>
+                <div className='date-change'>
+                    <button className={"hour " + (this.state.time===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
+                    <button className={"hour " + (this.state.time===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
+                    <button className={"hour " + (this.state.time===2 ? "active" : "")} onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
+                    <button className={"hour " + (this.state.time===3 ? "active" : "")} onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
+                    <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
+                </div>
+                {this.state.isLoading ? <LoadingSpinner/> : <></>}
+                < TableOverview
+                    state = {this.state}
+                    numberOfZeros = {this.numberOfZeros}
+                    convertDecimalFormat = {this.convertDecimalFormat}
+                />
+                < VolumeHistoryOverviewTable
+                  state = {this.state}
+                />
+                <Chart
+                  graphData = {this.state['profile']['graph']}
+                  ranges = {this.state['profile']['ranges']}
+                  ticks = {this.state['profile']['ticks']}
+                />
+                < WalletAssets
+                    state = {this.state}
+                    numberOfZeros = {this.numberOfZeros}
+                    convertDecimalFormat = {this.convertDecimalFormat}
+                    tokenHistoryOverviewResponse = {this.tokenHistoryOverviewResponse}
+                />
+                < TableHistory
+                    state = {this.state}
+                    numberOfZeros = {this.numberOfZeros}
+                    convertDecimalFormat = {this.convertDecimalFormat}
+                    tokenHistoryOverviewResponse = {this.tokenHistoryOverviewResponse}
+                />
+            </div>
+          </div>
+              <div className='un_authenticated_user_modal_container'>
+                <img className='un_authenticated_user_modal_container_image' src={modalImage} />
+                <div className='un_authenticated_user_modal_container_title'>
+                  Tier 1 Holder Required to use Dapp
+                </div>
+                <div className='un_authenticated_user_modal_container_text'>
+                  Please Connect a wallet that has at least 4,000,000,000 $TOSHI 
+                </div>
+                <div className='un_authenticated_user_modal_container_button_container'>
+                  <div className='un_authenticated_user_modal_container_button'>
+                    What is a Tier 1 Holder?
+                  </div>
+                </div>
               </div>
             </div>
+          ) : (
+            <div className='bg'>
+              <div className='account_header'>
+                <div className='outer-flex-box-container'>
+                  <div className='header-left'>
+                      Wallet Overview
+                  </div>
+                  <div className='inner-flex-box-container'>
+                    <form className='left-side' onSubmit={this.handleSubmit}>
+                      <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
+                      <input type="submit" id = "submit" value="Submit" className='search mr' style={{cursor: 'pointer'}} />
+                    </form>
+                    
+                    <div className='right-side'>
+                      {
+                        this.state['header']['connectedWalletAddress'] == "" ? (
+                          <div className='connect_button' onClick={this.onPressed}>
+                            Connect
+                          </div>
+                        ) : 
+                        <div className="my-wallet-container">
+                          {this.state.header.connectedWalletAddress == "" ? <></>:
+                            <div onClick={this.handleMyWallet} style={{cursor: 'pointer'}}>
+                              <img src={MyWallet} className="my-wallet-img mr"></img>
+                            </div>
+                          }
+                        <div className='connect_button'>
+                            {this.state.header.connectedWalletAddress.substring(0, 6) + "..." +  this.state.header.connectedWalletAddress.substring(38, 42)}
+                        </div>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                </div>
+                <LeftBar walletId = {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)} />
+              </div>
+            <div className='account-outer-container'>
+            <div className='profile-wallet-information'>
+                <div className='profile-wallet-information-left'>
+                  {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={153} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
+                  <img className='profile-image' src = {profileImage} />
+                  }
+                  
+                </div>
+                <div className='profile-wallet-information-right'>
+                  <div className='wallet-worth'>
+                    { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph?.at(-1)["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")))) : 0 }
+                  </div>
+                  <div className='wallet-id'>
+                    {this.state.header.walletAddress ? 
+                    <>
+                    <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
+                    {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
+                    </a>
+                    {
+                      this.state.header.walletAddress === this.state.header.connectedWalletAddress ? 
+                      <span className="my-wallet">
+                        My Wallet
+                      </span> : <></>
+                    }
+                    
+                    </>
+                    :
+                    <span>...</span>
+                  }
+                  
+                  </div>
+                  <div className="chart-button-container">
+                    <div className={"chart-button" + (this.state.showEth ? " active" : "")} onClick={this.clusterOnClick}>ETH</div>
+                    <div className={"chart-button" + (this.state.showEth ? "" : " active")} onClick={this.clusterOnClick}>USD</div>
+                  </div>
+                </div>
+              </div>
+              <div className='date-change'>
+                  <button className={"hour " + (this.state.time===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
+                  <button className={"hour " + (this.state.time===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
+                  <button className={"hour " + (this.state.time===2 ? "active" : "")} onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
+                  <button className={"hour " + (this.state.time===3 ? "active" : "")} onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
+                  <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
+              </div>
+              {this.state.isLoading ? <LoadingSpinner/> : <></>}
+              < TableOverview
+                  state = {this.state}
+                  numberOfZeros = {this.numberOfZeros}
+                  convertDecimalFormat = {this.convertDecimalFormat}
+              />
+              < VolumeHistoryOverviewTable
+                state = {this.state}
+              />
+              <Chart
+                graphData = {this.state['profile']['graph']}
+                ranges = {this.state['profile']['ranges']}
+                ticks = {this.state['profile']['ticks']}
+              />
+              < WalletAssets
+                  state = {this.state}
+                  numberOfZeros = {this.numberOfZeros}
+                  convertDecimalFormat = {this.convertDecimalFormat}
+                  tokenHistoryOverviewResponse = {this.tokenHistoryOverviewResponse}
+              />
+              < TableHistory
+                  state = {this.state}
+                  numberOfZeros = {this.numberOfZeros}
+                  convertDecimalFormat = {this.convertDecimalFormat}
+                  tokenHistoryOverviewResponse = {this.tokenHistoryOverviewResponse}
+              />
           </div>
-          <LeftBar walletId = {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)} />
         </div>
-      <div className='account-outer-container'>
-      <div className='profile-wallet-information'>
-          <div className='profile-wallet-information-left'>
-            {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={153} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
-            <img className='profile-image' src = {profileImage} />
-            }
-            
-          </div>
-          <div className='profile-wallet-information-right'>
-            <div className='wallet-worth'>
-              { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph?.at(-1)["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")))) : 0 }
-            </div>
-            <div className='wallet-id'>
-              {this.state.header.walletAddress ? 
-              <>
-              <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
-              {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
-              </a>
-              {
-                this.state.header.walletAddress === this.state.header.connectedWalletAddress ? 
-                <span className="my-wallet">
-                  My Wallet
-                </span> : <></>
-              }
-              
-              </>
-               :
-              <span>...</span>
-            }
-            
-            </div>
-            <div className="chart-button-container">
-              <div className={"chart-button" + (this.state.showEth ? " active" : "")} onClick={this.clusterOnClick}>ETH</div>
-              <div className={"chart-button" + (this.state.showEth ? "" : " active")} onClick={this.clusterOnClick}>USD</div>
-            </div>
-          </div>
-        </div>
-        <div className='date-change'>
-            <button className={"hour " + (this.state.time===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
-            <button className={"hour " + (this.state.time===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
-            <button className={"hour " + (this.state.time===2 ? "active" : "")} onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
-            <button className={"hour " + (this.state.time===3 ? "active" : "")} onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
-            <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
-        </div>
-        {this.state.isLoading ? <LoadingSpinner/> : <></>}
-        < TableOverview
-            state = {this.state}
-            numberOfZeros = {this.numberOfZeros}
-            convertDecimalFormat = {this.convertDecimalFormat}
-        />
-        < VolumeHistoryOverviewTable
-          state = {this.state}
-        />
-        <Chart
-          graphData = {this.state['profile']['graph']}
-          ranges = {this.state['profile']['ranges']}
-          ticks = {this.state['profile']['ticks']}
-        />
-        < WalletAssets
-            state = {this.state}
-            numberOfZeros = {this.numberOfZeros}
-            convertDecimalFormat = {this.convertDecimalFormat}
-            tokenHistoryOverviewResponse = {this.tokenHistoryOverviewResponse}
-        />
-        < TableHistory
-            state = {this.state}
-            numberOfZeros = {this.numberOfZeros}
-            convertDecimalFormat = {this.convertDecimalFormat}
-            tokenHistoryOverviewResponse = {this.tokenHistoryOverviewResponse}
-        />
-    </div>
+          )
+        }
   </div>
     )
   }

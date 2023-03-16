@@ -15,6 +15,7 @@ import {
   Label,
 } from "recharts";
 import { NumberFormat } from "./NumberFormat";
+import { ShortenTokenNameSymbol } from './ShortenTokenNameSymbol';
 
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
 const ITEMS_PER_PAGE = 1; // Number of items per page
@@ -58,9 +59,16 @@ export default class TableHistory extends Component {
     walletID = this.props["state"]["header"]["walletAddress"];
   };
 
-  onClickSwitchHandler = () => {
+  onClickSwitchHandlerHoldings = () => {
     this.props.state["tokenHistoryOverview"]["holdingsDisplay"] =
       !this.props.state["tokenHistoryOverview"]["holdingsDisplay"];
+    this.setPropsState();
+    console.log("switched");
+  };
+
+  onClickSwitchHandlerProfit = () => {
+    this.props.state["tokenHistoryOverview"]["profitDisplay"] =
+      !this.props.state["tokenHistoryOverview"]["profitDisplay"];
     this.setPropsState();
     console.log("switched");
   };
@@ -141,9 +149,9 @@ export default class TableHistory extends Component {
                 <label className="switch">
                   <input
                     type="checkbox"
-                    onChange={this.onClickSwitchHandler}
+                    onChange={this.onClickSwitchHandlerProfit}
                     checked={
-                      this.props.state["tokenHistoryOverview"]["holdingsDisplay"]
+                      this.props.state["tokenHistoryOverview"]["profitDisplay"]
                     }
                   />
                   <span className="slider round"></span>
@@ -157,7 +165,7 @@ export default class TableHistory extends Component {
                 <label className="switch">
                   <input
                     type="checkbox"
-                    onChange={this.onClickSwitchHandler}
+                    onChange={this.onClickSwitchHandlerHoldings}
                     checked={
                       this.props.state["tokenHistoryOverview"]["holdingsDisplay"]
                     }
@@ -187,8 +195,8 @@ export default class TableHistory extends Component {
                       } />
                       <div className="account-token-inner-container">
                       <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]} target="_blank">
-                      <div className="account-token-name nowrap">{asset[0]}</div>
-                      <div className="account-token-symbol nowrap">{asset[1]}</div>
+                      <div className="account-token-name nowrap"><ShortenTokenNameSymbol number={asset[0]}/></div>
+                      <div className="account-token-symbol nowrap"><ShortenTokenNameSymbol number={asset[1]}/></div>
                       </a>
                       <div className="account-bottom-row">
                         <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
@@ -205,21 +213,32 @@ export default class TableHistory extends Component {
                   <div className="asset-text-data-detailed total_profit">
                     {asset[5] >= 0 ? (
                               <div className = "positive tokenHistoryTableBlock" key={index}>
-                                  <div>
-                                    {/* $<BigNumberComma number={asset[5]}/> */}
-                                      {/* ${(Math.round(asset[5]*100)/100).toFixed(2)} */}
-                                      {Math.abs(Math.round((asset[5]*100))/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                                  </div>
-                                  <div className='bottom'>
-                                      {asset[10]}%
-                                  </div>
+                                <div className="nowrap">
+                                  {this.props.state.tokenHistoryOverview.profitDisplay ? (
+                                  asset[6] === 0 || asset[7] === 0 ? <>$0</> :
+                                  asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + Math.abs(Math.round(asset[5]*100)/100)
+                                  ): asset[6] === 0 || asset[7] === 0 ? <>0<span className="grey"> ETH</span></> : 
+                                  asset[7] < 0.01 ? <><NumberFormat number={asset[7]}/><span className="grey"> ETH</span></> : 
+                                  <>{Math.abs(Math.round((asset[7]/asset[6])*asset[5]*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
+                                </div>
+                                <div className='bottom'>
+                                    {asset[10]}%
+                                </div>
                               </div>
                           ) :
                           <div className = "negative tokenHistoryTableBlock" key={index}>
-                              <div>
-                                  {/* $<BigNumberComma number={asset[5]}/> */}
+                            <div className="nowrap">
+                              {this.props.state.tokenHistoryOverview.profitDisplay ? (
+                              asset[6] === 0 || asset[7] === 0 ? <>$0</> :
+                              asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + Math.abs(Math.round(asset[5]*100)/100)
+                              ): asset[6] === 0 || asset[7] === 0 ? <>0<span className="grey"> ETH</span></> : 
+                              asset[7] < 0.01 ? <><NumberFormat number={asset[7]}/><span className="grey"> ETH</span></> : 
+                              <>{Math.abs(Math.round((asset[7]/asset[6])*asset[5]*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
+                            </div>
+                            {/* {Math.round(asset[7]*10000)/10000} */}
+                              {/* <div>
                                   {Math.abs(Math.round((asset[5]*100))/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                              </div>
+                              </div> */}
                               <div className='bottom'>
                                   {asset[10]}%
                               </div>

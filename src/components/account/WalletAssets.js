@@ -5,6 +5,7 @@ import hideImage from "../images/hide.png";
 import showImage from "../images/show.png";
 import {BigNumberComma} from "./BigNumberComma"
 import { NumberFormat } from "./NumberFormat";
+import { ShortenTokenNameSymbol } from './ShortenTokenNameSymbol';
 
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
 const ITEMS_PER_PAGE = 1; // Number of items per page
@@ -107,8 +108,8 @@ export default class WalletAssets extends Component {
                           <img className="account-bullet" src={asset[9] ? asset[9] : BulletPoint} />
                           <div className="account-token-inner-container">
                             <a className="account-top-row" href={"https://etherscan.io/token/" + asset[2]} target="_blank">
-                              <div className="account-token-name nowrap">{asset[0]}</div>
-                              <div className="account-token-symbol nowrap">{asset[1]}</div>
+                              <div className="account-token-name nowrap"><ShortenTokenNameSymbol number={asset[0]}/></div>
+                              <div className="account-token-symbol nowrap"><ShortenTokenNameSymbol number={asset[1]}/></div>
                             </a>
                             <div className="account-bottom-row">
                               <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
