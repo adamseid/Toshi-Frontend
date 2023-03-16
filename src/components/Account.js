@@ -22,6 +22,7 @@ const default_state = {
 
   header: {
       walletAddress: "",
+      connectedWalletAddress: "",
   },
   accountOverview: {
       table: [],
@@ -75,6 +76,7 @@ const default_state = {
     numberOfPages : [],
   },
   time: 3,
+  historyTime: 3,
   showEth: false,
   isLoading: false,
 }
@@ -168,12 +170,6 @@ export default class Profile extends Component {
     this.setState(this.state)
     console.log(this.state.time)
     console.log(this.state.profile.currentTicks)
-    
-    // for (let i = 0; i < document.getElementsByClassName("hour").length; i++) {
-    //     document.getElementsByClassName("hour")[i].classList.remove("active")
-    //   }
-
-    // event.target.classList.add("active")
   }
 
   componentDidUpdate = () => {
@@ -219,7 +215,6 @@ export default class Profile extends Component {
           if(result[0].length > 0){
             const walletTest=this.state['header']['walletAddress'] = result[0]
             const userAddress = result[0];
-            console.log("USER ADDRESS: ", result[0])
             const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
             erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
               if (!error) {
@@ -227,8 +222,9 @@ export default class Profile extends Component {
                 var remainder = tokenAmount - 4000000000
                 console.log(`User's token balance: ${remainder}`);
                 if(remainder >= 0 || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
-                  this.connectAndSendWebsocketRequest(result[0])
+                  this.state.header.connectedWalletAddress = userAddress
                   this.updateWalletAddress()
+                  this.connectAndSendWebsocketRequest(userAddress)
                 }else{
                   remainder = Math.abs(remainder)
                   alert(`Please deposit ${remainder} of Toshi-Tools Token in your wallet to use this application`)
@@ -430,17 +426,19 @@ export default class Profile extends Component {
               
               <div className='right-side'>
                 {
-                  this.state['header']['walletAddress'] == "" ? (
+                  this.state['header']['connectedWalletAddress'] == "" ? (
                     <div className='connect_button' onClick={this.onPressed}>
                       Connect
                     </div>
                   ) : 
                   <div className="my-wallet-container">
-                  <a href={"https://etherscan.io/address/" + this.state.header.walletAddress} target="_blank">
-                    <img src={MyWallet} className="my-wallet-img mr"></img>
-                  </a>
+                    {this.state.header.connectedWalletAddress == "" ? <></>:
+                      <a href={"https://etherscan.io/address/" + this.state.header.connectedWalletAddress} target="_blank">
+                        <img src={MyWallet} className="my-wallet-img mr"></img>
+                      </a>
+                    }
                   <div className='connect_button'>
-                      {this.state['header']['walletAddress'].substring(0, 6) + "..." +  this.state['header']['walletAddress'].substring(38, 42)}
+                      {this.state.header.connectedWalletAddress.substring(0, 6) + "..." +  this.state.header.connectedWalletAddress.substring(38, 42)}
                   </div>
                   </div>
                 }
@@ -467,9 +465,13 @@ export default class Profile extends Component {
               <a href={"https://etherscan.io/address/" + this.state['header']['walletAddress']} target="_blank">
               {this.state['header']['walletAddress'].substring(0, 6) + "..." + this.state['header']['walletAddress'].substring(38, 42)}
               </a>
-              <span className="my-wallet">
-              My Wallet
-              </span>
+              {
+                this.state.header.walletAddress === this.state.header.connectedWalletAddress ? 
+                <span className="my-wallet">
+                  My Wallet
+                </span> : <></>
+              }
+              
               </>
                :
               <span>...</span>

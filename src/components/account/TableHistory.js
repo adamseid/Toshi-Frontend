@@ -21,6 +21,7 @@ const ITEMS_PER_PAGE = 1; // Number of items per page
 var toggle = true;
 var walletID = "";
 const dexToolsURL = "https://etherscan.io/dex/uniswapv2/";
+const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX'];
 
 export default class TableHistory extends Component {
 
@@ -41,7 +42,7 @@ export default class TableHistory extends Component {
 
   componentDidUpdate = () => {
     console.log("UPDATED")
-    console.log(this.props.state.tokenHistoryOverview.table[this.props.state.time])
+    console.log(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime])
   }
 
   setPropsState = () => {
@@ -70,7 +71,7 @@ export default class TableHistory extends Component {
 
   showAsset = (index) => {
     var itemRow = document.getElementsByClassName("account-detailed-ids")[index]
-    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[this.props.state.time][index],this.props.state.time,"addition")
+    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime][index],this.props.state.historyTime,"addition")
     var showImage = document.getElementsByClassName("show_image")[index]
     var hideImage = document.getElementsByClassName("hide_image")[index]
     showImage.style.display = "block"
@@ -80,7 +81,7 @@ export default class TableHistory extends Component {
 
   hideAsset = (index) => {
     var itemRow = document.getElementsByClassName("account-detailed-ids")[index]
-    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[this.props.state.time][index],this.props.state.time,"subtract")
+    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime][index],this.props.state.historyTime,"subtract")
     var showImage = document.getElementsByClassName("show_image")[index]
     var hideImage = document.getElementsByClassName("hide_image")[index]
     hideImage.style.display = "block"
@@ -102,6 +103,22 @@ export default class TableHistory extends Component {
     this.setPropsState();
     console.log(this.props.state.tokenHistoryOverview)
   }
+
+  select = (data,event) => {
+    if(data == "MAX"){
+      this.props.state.historyTime = 4
+    }else if (data == "1D"){
+      this.props.state.historyTime = 0
+    }else if (data == "1W"){
+      this.props.state.historyTime = 1
+    }else if(data == "1M"){
+      this.props.state.historyTime = 2
+    }else if(data == "1Y"){
+      this.props.state.historyTime = 3
+    }
+    this.setPropsState();
+  }
+
 
   render() {
     return (
@@ -160,7 +177,7 @@ export default class TableHistory extends Component {
             <div className='tokenItmesContainer'>
               <Suspense fallback={<div>Loading...</div>}>
               <div>
-              {this.props.state.tokenHistoryOverview.table[this.props.state.time]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).map((asset, index)=> {
+              {this.props.state.tokenHistoryOverview.table[this.props.state.historyTime]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).map((asset, index)=> {
                 return (
               <div key={index} className="account-detailed-ids">
                   <div className="asset-text-data-detailed-first-element token_detailes">
@@ -258,7 +275,15 @@ export default class TableHistory extends Component {
             <></>
           )
         }
+        <div className='date-change'>
+            <button className={"hour " + (this.props.state.historyTime===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
+            <button className={"hour " + (this.props.state.historyTime===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
+            <button className={"hour " + (this.props.state.historyTime===2 ? "active" : "")} onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
+            <button className={"hour " + (this.props.state.historyTime===3 ? "active" : "")} onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
+            <button className={"hour " + (this.props.state.historyTime===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
+        </div>
       </div>
+      
     );
   }
 }
