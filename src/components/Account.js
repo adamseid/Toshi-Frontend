@@ -168,8 +168,6 @@ export default class Profile extends Component {
     }
 
     this.setState(this.state)
-    console.log(this.state.time)
-    console.log(this.state.profile.currentTicks)
   }
 
   componentDidUpdate = () => {
@@ -354,6 +352,14 @@ export default class Profile extends Component {
     document.getElementById("search-text").value = ""
   }
 
+  handleMyWallet = () => {
+    if(this.state.header.connectedWalletAddress != ""){
+      this.state['header']['walletAddress'] = this.state.header.connectedWalletAddress
+      this.updateWalletAddress();
+    }
+ 
+  }
+
   onPressed = async () => {
     if (window.ethereum){
       await window.ethereum.request({
@@ -421,7 +427,7 @@ export default class Profile extends Component {
             <div className='inner-flex-box-container'>
               <form className='left-side' onSubmit={this.handleSubmit}>
                 <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
-                <input type="submit" id = "submit" value="Submit" className='search mr' />
+                <input type="submit" id = "submit" value="Submit" className='search mr' style={{cursor: 'pointer'}} />
               </form>
               
               <div className='right-side'>
@@ -433,9 +439,9 @@ export default class Profile extends Component {
                   ) : 
                   <div className="my-wallet-container">
                     {this.state.header.connectedWalletAddress == "" ? <></>:
-                      <a href={"https://etherscan.io/address/" + this.state.header.connectedWalletAddress} target="_blank">
+                      <div onClick={this.handleMyWallet} style={{cursor: 'pointer'}}>
                         <img src={MyWallet} className="my-wallet-img mr"></img>
-                      </a>
+                      </div>
                     }
                   <div className='connect_button'>
                       {this.state.header.connectedWalletAddress.substring(0, 6) + "..." +  this.state.header.connectedWalletAddress.substring(38, 42)}
@@ -457,7 +463,7 @@ export default class Profile extends Component {
           </div>
           <div className='profile-wallet-information-right'>
             <div className='wallet-worth'>
-              { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph?.at(-1)["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))) :"$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2)))) : 0 }
+              { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph?.at(-1)["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")))) : 0 }
             </div>
             <div className='wallet-id'>
               {this.state.header.walletAddress ? 

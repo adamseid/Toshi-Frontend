@@ -206,8 +206,9 @@ export default class TableHistory extends Component {
                     {asset[5] >= 0 ? (
                               <div className = "positive tokenHistoryTableBlock" key={index}>
                                   <div>
-                                    $<BigNumberComma number={asset[5]}/>
+                                    {/* $<BigNumberComma number={asset[5]}/> */}
                                       {/* ${(Math.round(asset[5]*100)/100).toFixed(2)} */}
+                                      {Math.abs(Math.round((asset[5]*100))/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                                   </div>
                                   <div className='bottom'>
                                       {asset[10]}%
@@ -216,7 +217,8 @@ export default class TableHistory extends Component {
                           ) :
                           <div className = "negative tokenHistoryTableBlock" key={index}>
                               <div>
-                                  $<BigNumberComma number={asset[5]}/>
+                                  {/* $<BigNumberComma number={asset[5]}/> */}
+                                  {Math.abs(Math.round((asset[5]*100))/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                               </div>
                               <div className='bottom'>
                                   {asset[10]}%
