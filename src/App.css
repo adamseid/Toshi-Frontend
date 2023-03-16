@@ -539,6 +539,16 @@ a {
   color: white;
 }
 
+.chart-title{
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin: 5px 0px;
+}
+
 .positive{
   display: flex;
   color: #0DFF09;
