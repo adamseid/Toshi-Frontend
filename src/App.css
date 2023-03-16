@@ -331,6 +331,7 @@ a {
   align-items: center;
   transition: 0.5s;
   box-shadow: 0 0 9px -2px #7dffa1;
+  z-index:1;
 }
 
 .left-bar-inner-container {
