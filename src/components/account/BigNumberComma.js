@@ -16,7 +16,7 @@ export const BigNumberComma = (props) => {
             }
             return returnNumber;
         } 
-        return number;
+        return Math.round((number));
       };
 
   return (

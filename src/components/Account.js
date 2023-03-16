@@ -82,7 +82,7 @@ const default_state = {
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
 var walletID = ""
 const Web3 = require('web3');
-const web3 = new Web3(window.ethereum);
+const web3 = new Web3("https://eth-mainnet.g.alchemy.com/v2/_mEa4ksrzCdb8fgB5_7-4doIZrMWwpKf")
 const erc20TokenAbi = [
   {
     "constant": true,
@@ -217,23 +217,26 @@ export default class Profile extends Component {
       }).then((result) => {
         if(result[0]){
           if(result[0].length > 0){
-            // const walletTest=this.state['header']['walletAddress'] =  "0xb71b13b85d2c094b0fdec64ab891b5bf5f110a8e"
             const walletTest=this.state['header']['walletAddress'] = result[0]
-            // const walletTest = this.state['header']['walletAddress'] = "0x47da741e9fada9aff75c0f2df69e9cd2b216b225"
-            // const userAddress = '0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A';
-            // const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
-            // erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
-            //   if (!error) {
-            //     console.log(`User's token balance: ${result}`);
-            //   } else {
-            //     console.error(error);
-            //   }
-            // });
-            // const walletTest=this.state['header']['walletAddress'] =  "0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A"
-            this.connectAndSendWebsocketRequest(result[0])
-            // this.connectAndSendWebsocketRequest(result[0])
-            this.updateWalletAddress()
-            // this.sendWalletAddress(walletTest);   
+            const userAddress = result[0];
+            console.log("USER ADDRESS: ", result[0])
+            const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
+            erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
+              if (!error) {
+                var tokenAmount = result / (10 ** 9)
+                var remainder = tokenAmount - 4000000000
+                console.log(`User's token balance: ${remainder}`);
+                if(remainder >= 0 || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
+                  this.connectAndSendWebsocketRequest(result[0])
+                  this.updateWalletAddress()
+                }else{
+                  remainder = Math.abs(remainder)
+                  alert(`Please deposit ${remainder} of Toshi-Tools Token in your wallet to use this application`)
+                }
+              } else {
+                console.error(error);
+              }
+            });
           }
         }
       })
@@ -362,8 +365,26 @@ export default class Profile extends Component {
       }).then((result) => {
         if(result[0]){
           if(result[0].length > 0){
-            this.updateWalletAddress()
             this.state['header']['walletAddress'] = result[0]
+            const userAddress = result[0];
+            console.log("USER ADDRESS: ", result[0])
+            const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
+            erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
+              if (!error) {
+                var tokenAmount = result / (10 ** 9)
+                var remainder = tokenAmount - 4000000000
+                console.log(`User's token balance: ${remainder}`);
+                if(remainder >= 0 || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
+                  this.connectAndSendWebsocketRequest(result[0])
+                  this.updateWalletAddress()
+                }else{
+                  remainder = Math.abs(remainder)
+                  alert(`Please deposit ${remainder} of Toshi-Tools Token in your wallet to use this application`)
+                }
+              } else {
+                console.error(error);
+              }
+            });
           }
           else{
             console.log("No wallet connected")
