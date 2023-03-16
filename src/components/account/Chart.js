@@ -20,7 +20,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
   const usdRef = useRef()
   const [time, setTime] = useState(3)
 
-  let date, end, begin, counter, currentRange, currentTicks;
+  let date, end, begin, counter, counter2, currentRange, currentTicks;
 
   const UNIX_YEAR = 31536000
   const UNIX_MONTH = 2628000
@@ -65,18 +65,34 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
     } else if(time === 0){
       begin = end - UNIX_DAY
     } else if(time === 4){
-      counter = 0
-      graphData.forEach((data)=> {
-        if(data["time"] < (end-UNIX_YEAR)){
-          counter++
-          console.log("passed a year")
-        }
-        if(counter > 2){
-          begin = end - UNIX_YEAR*2
-        } else {
-          begin = end - UNIX_YEAR
-        }
-      })
+      if(graphData[2]["time"] < end-UNIX_YEAR*3){
+        begin = end - UNIX_YEAR*4
+      } else if(graphData[2]["time"] < end-UNIX_YEAR*2){
+        begin = end - UNIX_YEAR*3
+      } else if(graphData[2]["time"] < end-UNIX_YEAR) {
+        begin = end - UNIX_YEAR*2
+      } else {
+        begin = end - UNIX_YEAR
+      }
+      // counter = 0
+      // counter2 = 0
+      // graphData.forEach((data)=> {
+      //   if(data["time"] < (end-UNIX_YEAR*2) && data["USD"] != 0){
+      //     counter2++
+      //     console.log("passed two years")
+      //   }
+      //   if(data["time"] < (end-UNIX_YEAR) && data["USD"] != 0){
+      //     counter++
+      //     console.log("passed a year")
+      //   }
+      // })
+      // if(counter2 > 1){
+      //   begin = end - UNIX_YEAR*3
+      // } else if(counter > 1) {
+      //   begin = end - UNIX_YEAR*2
+      // } else {
+      //   begin = end - UNIX_YEAR
+      // }
     }
     return [begin, end]
   }

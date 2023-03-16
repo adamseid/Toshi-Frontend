@@ -100,7 +100,7 @@ export default class TableHistory extends Component {
   pageNumber = (e) => {
     var pageNumberClassName = e.target.classList[0]
     var targetPageNumber = parseInt(e.target.innerText)
-    console.log(e.target.innerText)
+    // console.log(e.target.innerText)
     var pageNumberClassNameArr = document.getElementsByClassName(pageNumberClassName)
     for(let i=0;i<pageNumberClassNameArr.length;i++){
       pageNumberClassNameArr[i].classList.remove("active")
@@ -109,7 +109,7 @@ export default class TableHistory extends Component {
     this.props.state.tokenHistoryOverview.startPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
     this.props.state.tokenHistoryOverview.endPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems)
     this.setPropsState();
-    console.log(this.props.state.tokenHistoryOverview)
+    // console.log(this.props.state.tokenHistoryOverview)
   }
 
   select = (data,event) => {
@@ -268,14 +268,14 @@ export default class TableHistory extends Component {
           </div>
         </div>
         {
-          console.log(this.props.state["tokenHistoryOverview"]["numberOfPages"])
+          // console.log(this.props.state["tokenHistoryOverview"]["numberOfPages"])
         }
         {
           this.props.state["tokenHistoryOverview"]["numberOfPages"].length > 0 ? (
             <div className='pagination_buttons'>
               {
                 this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
-                  console.log(index)
+                  // console.log(index)
                   if(index == 0){
                     return (
                       <div key={index} className='page_number active' onClick={this.pageNumber}>
