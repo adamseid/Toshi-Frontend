@@ -3,6 +3,7 @@ import axios from "axios";
 import BulletPoint from "../images/bulletPoint.png";
 import hideImage from "../images/hide.png";
 import showImage from "../images/show.png";
+import {BigNumberComma} from "./BigNumberComma"
 import {
   LineChart,
   Line,
@@ -21,7 +22,7 @@ var toggle = true;
 var walletID = "";
 const dexToolsURL = "https://etherscan.io/dex/uniswapv2/";
 
-export default class Graph extends Component {
+export default class TableHistory extends Component {
 
   // graphHttpRequest = () => {
   //   var url = backend_url + "api/toshi/accountGraph/";
@@ -188,7 +189,8 @@ export default class Graph extends Component {
                     {asset[5] >= 0 ? (
                               <div className = "positive tokenHistoryTableBlock" key={index}>
                                   <div>
-                                      ${(Math.round(asset[5]*100)/100).toFixed(2)}
+                                    $<BigNumberComma number={(Math.round(asset[5]*100)/100).toFixed(2)}/>
+                                      {/* ${(Math.round(asset[5]*100)/100).toFixed(2)} */}
                                   </div>
                                   <div className='bottom'>
                                       {asset[10]}%
@@ -197,7 +199,7 @@ export default class Graph extends Component {
                           ) :
                           <div className = "negative tokenHistoryTableBlock" key={index}>
                               <div>
-                                  ${(Math.abs(Math.round(asset[5]*100)/100)).toFixed(2)}
+                                  $<BigNumberComma number={(Math.abs(Math.round(asset[5]*100)/100)).toFixed(2)}/>
                               </div>
                               <div className='bottom'>
                                   {asset[10]}%

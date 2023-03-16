@@ -10,6 +10,7 @@ import LeftBar from "./account/header/LeftBar"
 import { useNavigate } from "react-router-dom";
 import { LoadingSpinner } from './account/LoadingSpinner'
 import { Chart } from "./account/Chart";
+import WalletAssets from './account/WalletAssets'
 
 // WEBSOCKET-LINK
 // ('ws://dualstack.build-dmslo-1gg8dgp88n8zn-697868476.us-east-1.elb.amazonaws.com/ws/toshi-profile/')
@@ -76,6 +77,35 @@ const default_state = {
 
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
 var walletID = ""
+const Web3 = require('web3');
+const web3 = new Web3(window.ethereum);
+const erc20TokenAbi = [
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "name",
+    "outputs": [{ "name": "", "type": "string" }],
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [],
+    "name": "symbol",
+    "outputs": [{ "name": "", "type": "string" }],
+    "payable": false,
+    "type": "function"
+  },
+  {
+    "constant": true,
+    "inputs": [{ "name": "_owner", "type": "address" }],
+    "name": "balanceOf",
+    "outputs": [{ "name": "balance", "type": "uint256" }],
+    "payable": false,
+    "type": "function"
+  },
+]
+const tokenContractAddress = '0x77a90B04d64189d4D09508612C09219bC6816BdC';
 const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX']
 
 export default class Profile extends Component {
@@ -146,6 +176,7 @@ export default class Profile extends Component {
     if(walletID != this['state']['header']['walletAddress']){
         this['state']['accountDetailed']['table'] = []
         this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
+        this.graphHttpRequest()
       }
       walletID = this['state']['header']['walletAddress']
       
@@ -184,8 +215,18 @@ export default class Profile extends Component {
             // const walletTest=this.state['header']['walletAddress'] =  "0xb71b13b85d2c094b0fdec64ab891b5bf5f110a8e"
             const walletTest=this.state['header']['walletAddress'] = result[0]
             // const walletTest = this.state['header']['walletAddress'] = "0x47da741e9fada9aff75c0f2df69e9cd2b216b225"
+            // const userAddress = '0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A';
+            // const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
+            // erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
+            //   if (!error) {
+            //     console.log(`User's token balance: ${result}`);
+            //   } else {
+            //     console.error(error);
+            //   }
+            // });
             // const walletTest=this.state['header']['walletAddress'] =  "0xFDA9d5B343cAd6bCDe6A2D14B4BcF28b17e05B2A"
             this.connectAndSendWebsocketRequest(result[0])
+            // this.connectAndSendWebsocketRequest(result[0])
             this.updateWalletAddress()
             // this.sendWalletAddress(walletTest);   
           }
@@ -216,6 +257,7 @@ export default class Profile extends Component {
       if(this.isValid(temp_wallet_address)){
         this.urlWalletAddress(temp_wallet_address)
         this.connectAndSendWebsocketRequest(temp_wallet_address)
+        this.graphHttpRequest()
       }
     }else{
       this.iswalletConnected()
@@ -283,6 +325,7 @@ export default class Profile extends Component {
       // console.log("Updated state: ", this.state.tokenHistoryOverview)
     }
     this.updateWalletAddress()
+    console.log(this.state)
   }
 
   
@@ -388,6 +431,12 @@ export default class Profile extends Component {
           graphData = {this.state['profile']['graph']}
           ranges = {this.state['profile']['ranges']}
           ticks = {this.state['profile']['ticks']}
+        />
+        < WalletAssets
+            state = {this.state}
+            numberOfZeros = {this.numberOfZeros}
+            convertDecimalFormat = {this.convertDecimalFormat}
+            tokenHistoryOverviewResponse = {this.tokenHistoryOverviewResponse}
         />
         < TableHistory
             state = {this.state}

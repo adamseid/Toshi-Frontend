@@ -1063,6 +1063,26 @@ a {
   justify-content: center;
 }
 
+.walletAssetsItems{
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+.walletAssetsTitlesContainer{
+  display: flex;
+  padding-bottom: 14px;
+  padding-top: 22px;
+  padding-left: 47px;
+  padding-right: 47px;
+  border-bottom: solid 1.18px #7DFFA1;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 .tokenHistoryOverviewTitles{
   display: flex;
   margin-left: 14px;
@@ -1259,6 +1279,53 @@ a {
   height: 100%;
   margin-right: 20px;
   left: 25%;
+}
+
+.divider_line_wallet_assets_left{
+  width: 1px;
+  border-left: 1px solid #252525;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  margin-right: 20px;
+  left: 30%;
+}
+
+.walletAssetsTokenNameOuterContainer{
+  width: 100%;
+}
+
+.walletAssetsTokenName{
+  width: 10%;
+  font-family: Inter;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.walletAssetsTokenNameContainer{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 22px;
+  padding-left: 47px;
+  padding-right: 0px;
+}
+
+.divider_line_wallet_assets_right{
+  width: 1px;
+  border-left: 1px solid #252525;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  margin-right: 20px;
+  right: 30%;
 }
 
 .divider_line_total_profit{
