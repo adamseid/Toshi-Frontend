@@ -24,7 +24,7 @@ const default_state = {
   header: {
       walletAddress: "",
       connectedWalletAddress: "",
-      isLoggedIn: false,
+      isLoggedIn: true,
   },
   accountOverview: {
       table: [],
@@ -127,20 +127,16 @@ export default class Profile extends Component {
 
   volumeHistoryHttpRequest = () => {
     this.state.isLoading = true;
-    document.body.classList.add("greyBackground");
     this.setState(this.state)
     var url = backend_url + "api/toshi/history"
     axios.post( url  , this.state).then((response) => {
       var incomingData = response.data['profile_response']
-      console.log("HISTORY RESPONSE: ",incomingData)
       this.state['profitHistoryOverview']['table'] = incomingData[0]
       this.state['volumeHistoryOverview']['table'] = incomingData[1]
       this.state['tokenHistoryOverview']['table'] = incomingData[2]
       this.state.isLoading = false;
-      document.body.classList.remove("greyBackground");
       this.setState(this.state)
     }).catch(error => {
-      document.body.classList.remove("greyBackground");
       console.log(error)
     })
   }
@@ -153,7 +149,6 @@ export default class Profile extends Component {
       this.state['profile']['ranges'] = response.data['profile_response'][1]
       this.state['profile']['ticks'] = response.data['profile_response'][2]
       this.setState(this.State);
-      console.log("ACCOUNT GRAPH STATE: ", this.state);
     });
   };
 
@@ -175,11 +170,14 @@ export default class Profile extends Component {
 
   componentDidUpdate = () => {
     if(walletID != this['state']['header']['walletAddress']){
+      if(walletID != ""){
         this.graphHttpRequest()
         this['state']['accountDetailed']['table'] = []
+        console.log("sadfasd fas df asd fa sdf as dfasdfasdfasdfasdf")
         this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
         this.graphHttpRequest()
       }
+    }
       walletID = this['state']['header']['walletAddress']
       
   }
@@ -221,13 +219,13 @@ export default class Profile extends Component {
               if (!error) {
                 var tokenAmount = result / (10 ** 9)
                 var remainder = tokenAmount - 4000000000
-                console.log(`User's token balance: ${remainder}`);
                 if(remainder >= 0 || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
-                  this.state.header.isLoggedIn = true
                   this.updateWalletAddress()
                   this.connectAndSendWebsocketRequest(userAddress)
                 }else{
+                  this.state.header.isLoggedIn = false
+                  this.updateWalletAddress()
                   remainder = Math.abs(remainder)
                 }
               } else {
@@ -272,11 +270,16 @@ export default class Profile extends Component {
 
   tokenHistoryOverviewResponse = (itemRow,year,action) => {
     var profit = itemRow[5]
+    var transfersIn = itemRow[12]
+    var transfersOut = itemRow[13]
     var profitHistoryOverviewTable = this.state['profitHistoryOverview']['table'][year]
     var volumeHistoryOverviewTable = this.state['volumeHistoryOverview']['table'][year]
     if(action == "subtract"){
       profitHistoryOverviewTable[0] = profitHistoryOverviewTable[0] - profit
       profitHistoryOverviewTable[1] = profitHistoryOverviewTable[1] - 1
+      volumeHistoryOverviewTable[0] = volumeHistoryOverviewTable[0] - transfersOut - transfersIn
+      volumeHistoryOverviewTable[1] = volumeHistoryOverviewTable[1] - transfersIn
+      volumeHistoryOverviewTable[2] = volumeHistoryOverviewTable[2] - transfersOut
       if(profit >=0){
         profitHistoryOverviewTable[2] = profitHistoryOverviewTable[2] - 1
         volumeHistoryOverviewTable[3] = volumeHistoryOverviewTable[3] - profit
@@ -284,6 +287,9 @@ export default class Profile extends Component {
         volumeHistoryOverviewTable[4] = volumeHistoryOverviewTable[4] - profit
       }
     }else if(action == "addition"){
+      volumeHistoryOverviewTable[0] = volumeHistoryOverviewTable[0] + transfersOut + transfersIn
+      volumeHistoryOverviewTable[1] = volumeHistoryOverviewTable[1] + transfersIn
+      volumeHistoryOverviewTable[2] = volumeHistoryOverviewTable[2] + transfersOut
       profitHistoryOverviewTable[0] = profitHistoryOverviewTable[0] + profit
       profitHistoryOverviewTable[1] = profitHistoryOverviewTable[1] + 1
       if(profit >=0){
@@ -331,7 +337,6 @@ export default class Profile extends Component {
       this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
     }
     this.updateWalletAddress()
-    console.log(this.state)
   }
 
   
@@ -350,7 +355,6 @@ export default class Profile extends Component {
   }
 
   handleSubmit = (event) => {
-    console.log("Searched: ", this.state)
     event.preventDefault();
     this.updateWalletAddress();
     document.getElementById("search-text").value = ""
@@ -373,19 +377,18 @@ export default class Profile extends Component {
           if(result[0].length > 0){
             this.state['header']['walletAddress'] = result[0]
             const userAddress = result[0];
-            console.log("USER ADDRESS: ", result[0])
             const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
             erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
               if (!error) {
                 var tokenAmount = result / (10 ** 9)
                 var remainder = tokenAmount - 4000000000
-                console.log(`User's token balance: ${remainder}`);
                 if(remainder >= 0 || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
-                  this.state.header.isLoggedIn = true
                   this.connectAndSendWebsocketRequest(result[0])
                   this.updateWalletAddress()
                 }else{
+                  this.state.header.isLoggedIn = false
+                  this.updateWalletAddress()
                   remainder = Math.abs(remainder)
                 }
               } else {
@@ -414,7 +417,6 @@ export default class Profile extends Component {
   };
 
   clusterOnClick = (e) => {
-    console.log(e.target.innerText)
     if(!e.target.classList.contains("active")){
       this.state.showEth = !this.state.showEth
       this.setState(this.state)
@@ -506,7 +508,6 @@ export default class Profile extends Component {
                     <button className={"hour " + (this.state.time===3 ? "active" : "")} onClick={this.select.bind(this, time_frame[4])}>{time_frame[4]}</button>
                     <button className={"hour " + (this.state.time===4 ? "active" : "")} onClick={this.select.bind(this, time_frame[5])}>{time_frame[5]}</button>
                 </div>
-                {this.state.isLoading ? <LoadingSpinner/> : <></>}
                 < TableOverview
                     state = {this.state}
                     numberOfZeros = {this.numberOfZeros}
@@ -542,11 +543,11 @@ export default class Profile extends Component {
                 <div className='un_authenticated_user_modal_container_text'>
                   Please Connect a wallet that has at least 4,000,000,000 $TOSHI 
                 </div>
-                <div className='un_authenticated_user_modal_container_button_container'>
+                <a href = "https://www.toshi.tools/" className='un_authenticated_user_modal_container_button_container'>
                   <div className='un_authenticated_user_modal_container_button'>
                     What is a Tier 1 Holder?
                   </div>
-                </div>
+                </a>
               </div>
             </div>
           ) : (
