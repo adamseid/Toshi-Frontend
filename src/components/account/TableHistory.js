@@ -110,6 +110,18 @@ export default class TableHistory extends Component {
     this.props.state.tokenHistoryOverview.endPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems)
     this.setPropsState();
     console.log(this.props.state.tokenHistoryOverview)
+    var showImage = document.getElementsByClassName("show_image")
+    var hideImage = document.getElementsByClassName("hide_image")
+    var tokenRows = document.getElementsByClassName("account-detailed-ids")
+    for(let i=0;i<showImage.length;i++){
+      hideImage[i].style.display = "none"
+    }
+    for(let i=0;i<showImage.length;i++){
+      showImage[i].style.display = "block"
+    }
+    for(let i=0;i<tokenRows.length;i++){
+      tokenRows[i].style.opacity = "1"
+    }
   }
 
   select = (data,event) => {
@@ -199,7 +211,9 @@ export default class TableHistory extends Component {
                       <div className="account-token-symbol nowrap"><ShortenTokenNameSymbol number={asset[1]}/></div>
                       </a>
                       <div className="account-bottom-row">
-                        <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
+                        <div className="account-token-allocation">
+                          {Math.abs(Math.round(asset[4]*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        </div>
                         <div className="account-token-allocation-percentage"></div>
                       </div>
                       </div>
@@ -272,7 +286,7 @@ export default class TableHistory extends Component {
         }
         {
           this.props.state["tokenHistoryOverview"]["numberOfPages"].length > 0 ? (
-            <div className='pagination_buttons'>
+            <div className='pagination_buttons_tokens'>
               {
                 this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
                   console.log(index)
@@ -296,7 +310,7 @@ export default class TableHistory extends Component {
             <></>
           )
         }
-        <div className='date-change'>
+        <div className='date-change_tokens'>
             <button className={"hour " + (this.props.state.historyTime===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
             <button className={"hour " + (this.props.state.historyTime===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
             <button className={"hour " + (this.props.state.historyTime===2 ? "active" : "")} onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>

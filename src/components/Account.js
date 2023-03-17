@@ -173,7 +173,6 @@ export default class Profile extends Component {
       if(walletID != ""){
         this.graphHttpRequest()
         this['state']['accountDetailed']['table'] = []
-        console.log("sadfasd fas df asd fa sdf as dfasdfasdfasdfasdf")
         this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
         this.graphHttpRequest()
       }
@@ -623,6 +622,7 @@ export default class Profile extends Component {
                   </div>
                 </div>
               </div>
+              <div className="time-header-text">Select Data Timeframe</div>
               <div className='date-change'>
                   <button className={"hour " + (this.state.time===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
                   <button className={"hour " + (this.state.time===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>

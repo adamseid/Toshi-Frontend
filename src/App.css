@@ -168,7 +168,7 @@ a {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 35px 0px;
+  margin-bottom: 35px;
   padding: 20px;
   transition: 0.2s;
 }
@@ -527,7 +527,27 @@ a {
   letter-spacing: 0em;
   text-align: left;
   color: white;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+}
+
+.volume-header-text{
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-bottom: 33px;
+}
+
+.time-header-text{
+  font-size: 31px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-bottom: 25px;
 }
 
 .chart-text{
@@ -538,6 +558,7 @@ a {
   letter-spacing: 0em;
   text-align: left;
   color: white;
+  margin-bottom: 8px;
 }
 
 .chart-title{
@@ -547,7 +568,7 @@ a {
   letter-spacing: 0em;
   text-align: left;
   color: white;
-  margin: 5px 0px;
+  margin-bottom: 12px;
 }
 
 .positive{
@@ -586,7 +607,7 @@ a {
 }
 
 .profile-wallet-information {
-  margin-bottom: 38px;
+  margin-bottom: 42px;
 }
 
 .wallet-worth {
@@ -964,7 +985,22 @@ a {
   padding-top: 2px;
   padding-bottom: 2px;
   border-radius: 4.15px;
-  margin-bottom: 14.15px;
+  margin-bottom: 35px;
+  width: 376.8px;
+}
+
+.date-change_tokens{
+  display: flex;
+  background: linear-gradient(119.02deg, #1E1E1E 80.59%, #000000 101.02%);
+  flex-direction: row;
+  box-shadow: 0px 0px 7.887511730194092px -1.2453967332839966px #ffffff73;
+  justify-content: space-between;
+  padding-left: 9px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 4.15px;
+  margin-bottom: 63px;
   width: 376.8px;
 }
 
@@ -1227,9 +1263,15 @@ a {
   margin-bottom: 40px;
 }
 
+.pagination_buttons_tokens{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
 .account-container{
   position: relative;
-  margin-top: 35px;
   background: linear-gradient(0deg, #1E1E1E, #1E1E1E);
   box-shadow: 0px 0px 12.471795082092285px -1.9692308902740479px #FFFFFF73;
   height: 100%;
@@ -1238,7 +1280,7 @@ a {
   padding-left: 8px;
   padding-right: 8px;
   padding-bottom: 21.38px;
-  margin-bottom: 20px;
+  margin-bottom: 40px;
 }
 
 .account-ids {
@@ -1569,6 +1611,9 @@ input:checked + .slider:before {
 .hide_image:hover{
   cursor: pointer;
 }
+.show_image{
+  display: block;
+}
 .hide_image{
   display: none;
 }
@@ -1632,7 +1677,7 @@ input:checked + .slider:before {
 
 .chart-button-container {
   display: flex;
-  margin-top: 10px;
+  margin-bottom: 22px;
 }
 
 .chart-button{

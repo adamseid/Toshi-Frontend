@@ -112,7 +112,7 @@ export default class WalletAssets extends Component {
                               <div className="account-token-symbol nowrap"><ShortenTokenNameSymbol number={asset[1]}/></div>
                             </a>
                             <div className="account-bottom-row">
-                              <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
+                              <div className="account-token-allocation">{Math.abs(Math.round(asset[4]*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
                               <div className="account-token-allocation-percentage"></div>
                             </div>
                           </div>

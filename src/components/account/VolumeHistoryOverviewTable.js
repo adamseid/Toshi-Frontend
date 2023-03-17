@@ -23,7 +23,7 @@ export default class Graph extends Component {
   render() {
     return (
       <div className = "table-overview-outer-container">
-      <div className='profile-header-text'>
+      <div className='volume-header-text'>
         Volume History Overview
       </div>
       <div className='account-container'>
