@@ -26,7 +26,7 @@ export default class Graph extends Component {
       <div className='volume-header-text'>
         Volume History Overview
       </div>
-      <div className='account-container'>
+      <div className='account-container top-container'>
           <div className='account-ids'>
               <div className='asset-text'>
                 Total Wallet Volume
@@ -44,6 +44,7 @@ export default class Graph extends Component {
                 Total Wallet Loss Volume
               </div>
           </div>
+          <div className="green-border"></div>
            <div className='account-ids'>
            {
              this.props.state.volumeHistoryOverview.table[this.props.state.time]?.map((account, index) => {

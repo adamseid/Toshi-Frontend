@@ -21,7 +21,7 @@ export default class Graph extends Component {
     return (
       <div className="table-overview-outer-container">
         <div className="profile-header-text">Profit History Overview</div>
-        <div className="account-container">
+        <div className="account-container top-container">
           <div className="account-ids">
             <div className="asset-text">Profit Total</div>
             <div className="asset-text">Total Tokens Traded</div>
@@ -29,6 +29,7 @@ export default class Graph extends Component {
             <div className="asset-text">Win Rate</div>
             <div className="asset-text">Total spent on gas fees (USD)</div>
           </div>
+          <div className="green-border"></div>
 
            
           <div className="account-ids">
