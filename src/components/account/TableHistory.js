@@ -26,21 +26,6 @@ const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX'];
 
 export default class TableHistory extends Component {
 
-  // graphHttpRequest = () => {
-  //   var url = backend_url + "api/toshi/accountGraph/";
-  //   axios.post(url, this.props.state).then((response) => {
-  //     console.log("GRAPH: ", response.data['profile_response'])
-  //     this.props.state['profile']['graph'] = response.data['profile_response'][0]
-  //     this.props.state['profile']['maxGraph'] = response.data['profile_response'][0]
-  //     this.props.state['profile']['yearlyGraph'] = response.data['profile_response'][1]
-  //     this.props.state['profile']['monthlyGraph'] = response.data['profile_response'][2]
-  //     this.props.state['profile']['weeklyGraph'] = response.data['profile_response'][3]
-  //     this.props.state['profile']['dailyGraph'] = response.data['profile_response'][4]
-  //     this.setPropsState();
-  //     console.log("ACCOUNT GRAPGH STATE: ", this.props.state);
-  //   });
-  // };
-
   componentDidUpdate = () => {
     console.log("UPDATED")
     console.log(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime])
@@ -51,10 +36,8 @@ export default class TableHistory extends Component {
   };
 
   componentDidUpdate = () => {
-    // console.log("NEW ITEM: ", this.props["state"]['tokenHistoryOverview']['table'])
     if (walletID != this.props["state"]["header"]["walletAddress"]) {
       this.props["state"]["accountDetailed"]["table"] = [];
-      // this.graphHttpRequest();
     }
     walletID = this.props["state"]["header"]["walletAddress"];
   };
@@ -100,7 +83,6 @@ export default class TableHistory extends Component {
   pageNumber = (e) => {
     var pageNumberClassName = e.target.classList[0]
     var targetPageNumber = parseInt(e.target.innerText)
-    // console.log(e.target.innerText)
     var pageNumberClassNameArr = document.getElementsByClassName(pageNumberClassName)
     for(let i=0;i<pageNumberClassNameArr.length;i++){
       pageNumberClassNameArr[i].classList.remove("active")
@@ -109,7 +91,18 @@ export default class TableHistory extends Component {
     this.props.state.tokenHistoryOverview.startPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
     this.props.state.tokenHistoryOverview.endPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems)
     this.setPropsState();
-    // console.log(this.props.state.tokenHistoryOverview)
+    var showImage = document.getElementsByClassName("show_image")
+    var hideImage = document.getElementsByClassName("hide_image")
+    var tokenRows = document.getElementsByClassName("account-detailed-ids")
+    for(let i=0;i<showImage.length;i++){
+      hideImage[i].style.display = "none"
+    }
+    for(let i=0;i<showImage.length;i++){
+      showImage[i].style.display = "block"
+    }
+    for(let i=0;i<tokenRows.length;i++){
+      tokenRows[i].style.opacity = "1"
+    }
   }
 
   select = (data,event) => {
@@ -124,7 +117,15 @@ export default class TableHistory extends Component {
     }else if(data == "1Y"){
       this.props.state.historyTime = 3
     }
+    this.props.state.tokenHistoryOverview.endPage = 1
+    var lengthOfTable = Math.ceil(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime].length/ this.props.state['tokenHistoryOverview']['numberOfItems'])
+    let numberofPagesArr = []
+    for(let i = 0; i < lengthOfTable; i++){
+      numberofPagesArr.push(i+1)
+    }
+    this.props.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
     this.setPropsState();
+
   }
 
 
@@ -199,7 +200,9 @@ export default class TableHistory extends Component {
                       <div className="account-token-symbol nowrap"><ShortenTokenNameSymbol number={asset[1]}/></div>
                       </a>
                       <div className="account-bottom-row">
-                        <div className="account-token-allocation">{Math.round(asset[4]*100)/100}</div>
+                        <div className="account-token-allocation">
+                          {Math.abs(Math.round(asset[4]*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
+                        </div>
                         <div className="account-token-allocation-percentage"></div>
                       </div>
                       </div>
@@ -268,14 +271,10 @@ export default class TableHistory extends Component {
           </div>
         </div>
         {
-          // console.log(this.props.state["tokenHistoryOverview"]["numberOfPages"])
-        }
-        {
           this.props.state["tokenHistoryOverview"]["numberOfPages"].length > 0 ? (
-            <div className='pagination_buttons'>
+            <div className='pagination_buttons_tokens'>
               {
                 this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
-                  // console.log(index)
                   if(index == 0){
                     return (
                       <div key={index} className='page_number active' onClick={this.pageNumber}>
@@ -296,7 +295,7 @@ export default class TableHistory extends Component {
             <></>
           )
         }
-        <div className='date-change'>
+        <div className='date-change_tokens'>
             <button className={"hour " + (this.props.state.historyTime===0 ? "active" : "")} onClick={this.select.bind(this, time_frame[1])}>{time_frame[1]}</button>
             <button className={"hour " + (this.props.state.historyTime===1 ? "active" : "")} onClick={this.select.bind(this, time_frame[2])}>{time_frame[2]}</button>
             <button className={"hour " + (this.props.state.historyTime===2 ? "active" : "")} onClick={this.select.bind(this, time_frame[3])}>{time_frame[3]}</button>
