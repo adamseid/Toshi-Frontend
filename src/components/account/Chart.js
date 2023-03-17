@@ -81,7 +81,6 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
   const findTicks = () => {
     if(time === 3){
       currentTicks = ticks[0].slice(0, 12)
-      console.log(currentTicks)
     } else if(time === 2){
       currentTicks = ticks[1]
     } else if(time === 1){
