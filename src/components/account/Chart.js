@@ -90,6 +90,15 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
       currentTicks = ticks[3]
     } else if(time === 4){
       currentTicks = ticks[0]
+      if(graphData.at(-3)["time"] < end-UNIX_YEAR*3){
+        currentTicks = ticks[0].slice(0,48)
+      } else if(graphData.at(-3)["time"] < end-UNIX_YEAR*2){
+        currentTicks = ticks[0].slice(0,36)
+      } else if(graphData.at(-3)["time"] < end-UNIX_YEAR) {
+        currentTicks = ticks[0].slice(0,24)
+      } else {
+        currentTicks = ticks[0].slice(0,12)
+      }
     }
     return currentTicks
   }
