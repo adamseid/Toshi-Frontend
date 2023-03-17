@@ -65,34 +65,15 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
     } else if(time === 0){
       begin = end - UNIX_DAY
     } else if(time === 4){
-      if(graphData[2]["time"] < end-UNIX_YEAR*3){
+      if(graphData.at(-3)["time"] < end-UNIX_YEAR*3){
         begin = end - UNIX_YEAR*4
-      } else if(graphData[2]["time"] < end-UNIX_YEAR*2){
+      } else if(graphData.at(-3)["time"] < end-UNIX_YEAR*2){
         begin = end - UNIX_YEAR*3
-      } else if(graphData[2]["time"] < end-UNIX_YEAR) {
+      } else if(graphData.at(-3)["time"] < end-UNIX_YEAR) {
         begin = end - UNIX_YEAR*2
       } else {
         begin = end - UNIX_YEAR
       }
-      // counter = 0
-      // counter2 = 0
-      // graphData.forEach((data)=> {
-      //   if(data["time"] < (end-UNIX_YEAR*2) && data["USD"] != 0){
-      //     counter2++
-      //     console.log("passed two years")
-      //   }
-      //   if(data["time"] < (end-UNIX_YEAR) && data["USD"] != 0){
-      //     counter++
-      //     console.log("passed a year")
-      //   }
-      // })
-      // if(counter2 > 1){
-      //   begin = end - UNIX_YEAR*3
-      // } else if(counter > 1) {
-      //   begin = end - UNIX_YEAR*2
-      // } else {
-      //   begin = end - UNIX_YEAR
-      // }
     }
     return [begin, end]
   }
@@ -141,7 +122,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
   return (
     <>
     <div className="chart-title">Total Wallet Value</div>
-    <div className="chart-text">{ graphData?.length != 0 && graphData ? (currency? (graphData?.at(-1)["USD"] < 0 ? "-$" + Math.abs(graphData?.at(-1)["USD"]?.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + graphData?.at(-1)["USD"]?.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : Math.round(graphData?.at(-1)["ETH"]*10000)/10000 + " ETH") : 0}</div>
+    <div className="chart-text">{ graphData?.length != 0 && graphData ? (currency? (graphData[0]["USD"] < 0 ? "-$" + Math.abs(graphData[0]["USD"]?.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + graphData[0]["USD"]?.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : Math.round(graphData[0]["ETH"]*10000)/10000 + " ETH") : 0}</div>
     <div className="chart-button-container">
       <div className="chart-button" onClick={onClickHandler} ref={ethRef}>ETH</div>
       <div className="chart-button active" onClick={onClickHandler} ref={usdRef}>USD</div>
@@ -215,7 +196,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
               tickCount = {10}
               stroke="#FFFFFF"
               width={80}
-              domain={currency ? [ -100 , "auto"] : [-0.5, "auto"]}
+              domain={currency ? [ -100 , "auto"] : [-0.10, "auto"]}
                >
               </YAxis>
               <Legend verticalAlign="top" display={false} />

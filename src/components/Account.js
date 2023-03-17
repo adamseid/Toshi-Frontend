@@ -84,6 +84,8 @@ const default_state = {
   isLoading: false,
 }
 
+let wallet_balance;
+
 const backend_url = process.env.REACT_APP_.BACKEND_BASE_URL
 var walletID = ""
 const Web3 = require('web3');
@@ -153,6 +155,7 @@ export default class Profile extends Component {
       this.state['profile']['ranges'] = response.data['profile_response'][1]
       this.state['profile']['ticks'] = response.data['profile_response'][2]
       this.setState(this.State);
+      wallet_balance = (this.state.profile.graph[0]["USD"]?.toFixed(2)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ","))
       console.log("ACCOUNT GRAPH STATE: ", this.state);
     });
   };
@@ -178,7 +181,7 @@ export default class Profile extends Component {
         this.graphHttpRequest()
         this['state']['accountDetailed']['table'] = []
         this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
-        this.graphHttpRequest()
+        // this.graphHttpRequest()
       }
       walletID = this['state']['header']['walletAddress']
       
@@ -472,7 +475,9 @@ export default class Profile extends Component {
                   </div>
                   <div className='profile-wallet-information-right'>
                     <div className='wallet-worth'>
-                      { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph?.at(-1)["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")))) : 0 }
+                    {/* { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth? (this.state.profile.graph[0]["USD"] < 0 ? "-$" + Math.abs(this.state.profile.graph[0]["USD"]?.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + this.state.profile.graph[0]["USD"]?.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : Math.round(this.state.profile.graph[0]["ETH"]*10000)/10000 + " ETH") : 0} */}
+                      { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph[0]["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph[0]["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph[0]["USD"]?.toFixed(2)))?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + (this.state.profile.graph[0]["USD"]?.toFixed(2)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")))) : 0 }
+                    
                     </div>
                     <div className='wallet-id'>
                       {this.state.header.walletAddress ? 
@@ -595,7 +600,9 @@ export default class Profile extends Component {
                 </div>
                 <div className='profile-wallet-information-right'>
                   <div className='wallet-worth'>
-                    { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph?.at(-1)["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")))) : 0 }
+                    {/* { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph?.at(-1)["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph?.at(-1)["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph?.at(-1)["USD"]?.toFixed(2))).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + (this.state.profile.graph?.at(-1)["USD"]?.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")))) : 0 } */}
+                    { this.state.profile.graph?.length != 0 && this.state.profile.graph ? (this.state.showEth ? (Math.round(this.state.profile.graph[0]["ETH"]*10000)/10000).toFixed(4) + " ETH" : (this.state.profile.graph[0]["USD"] < 0 ? "-$" + Math.abs((this.state.profile.graph[0]["USD"]?.toFixed(2)))?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + (this.state.profile.graph[0]["USD"]?.toFixed(2)?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")))) : 0 }
+
                   </div>
                   <div className='wallet-id'>
                     {this.state.header.walletAddress ? 
