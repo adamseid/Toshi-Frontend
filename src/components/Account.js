@@ -223,6 +223,8 @@ export default class Profile extends Component {
                 if(remainder >= 0 || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
                   this.updateWalletAddress()
+                  this.graphHttpRequest()
+                  this.updateWalletAddress()
                   this.connectAndSendWebsocketRequest(userAddress)
                 }else{
                   this.state.header.isLoggedIn = false
