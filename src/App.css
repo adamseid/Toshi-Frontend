@@ -1635,6 +1635,7 @@ input:checked + .slider:before {
 }
 .show_image{
   display: block;
+  margin-left: 40px;
 }
 .hide_image{
   display: none;
@@ -1760,3 +1761,4 @@ input:checked + .slider:before {
 .mr{
   margin-right: 20px;
 }
+
