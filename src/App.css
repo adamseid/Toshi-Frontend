@@ -1455,7 +1455,7 @@ a {
 }
 
 .walletAssetsTokenName{
-  width: 16%;
+  width: 15%;
   font-family: Inter;
   font-size: 18px;
   font-weight: 400;
@@ -1465,7 +1465,7 @@ a {
   display: flex;
   flex-direction: row;
   align-items: center;
-  
+  margin-right: 5px;
 }
 
 .walletAssetsTokenNameContainer{
