@@ -226,6 +226,7 @@ export default class Profile extends Component {
                   this.graphHttpRequest()
                   this.updateWalletAddress()
                   this.connectAndSendWebsocketRequest(userAddress)
+                  document.getElementById("search-text").disabled = false
                 }else{
                   this.state.header.isLoggedIn = false
                   this.updateWalletAddress()
@@ -250,6 +251,7 @@ export default class Profile extends Component {
 
   componentDidMount(){
     this.state['profitHistoryOverview']['table'] = []
+    document.getElementById("search-text").disabled = true
     this.setState(this.state)
 
     if(this.mobileAndTabletCheck()){
@@ -312,6 +314,7 @@ export default class Profile extends Component {
     ws.onopen = () => {
       console.log("history page websocket connected")
       if(ws.readyState){
+        console.log("history page websocket ready")
         this.state.isLoading = true;
         document.body.classList.add("greyBackground");
         this.setState(this.state)
@@ -321,6 +324,7 @@ export default class Profile extends Component {
                 walletAddress: address,
             })
         )
+        console.log("history page websocket sent 1")
       }
     }
 
@@ -387,8 +391,9 @@ export default class Profile extends Component {
                 var remainder = tokenAmount - 4000000000
                 if(remainder >= 0 || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
-                  this.connectAndSendWebsocketRequest(result[0])
+                  this.connectAndSendWebsocketRequest(userAddress)
                   this.updateWalletAddress()
+                  document.getElementById("search-text").disabled = false
                 }else{
                   this.state.header.isLoggedIn = false
                   this.updateWalletAddress()
@@ -440,7 +445,7 @@ export default class Profile extends Component {
                     </div>
                     <div className='inner-flex-box-container'>
                       <form className='left-side' onSubmit={this.handleSubmit}>
-                        <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
+                        <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS'  disabled={true}/>
                         <input type="submit" id = "submit" value="Submit" className='search mr' style={{cursor: 'pointer'}} />
                       </form>
                       
