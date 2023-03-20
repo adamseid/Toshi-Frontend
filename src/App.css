@@ -173,10 +173,11 @@ a {
   padding: 20px;
   margin-top:13px;
   transition: 0.2s;
+  width: 89px;
 }
 
 .header-account-container:hover {
-  box-shadow: 0 0 9px -2px rgb(221, 216, 216);
+  box-shadow: 0 0 9px -2px #7dffa1;
   border-radius: 17px;
 }
 
@@ -388,6 +389,11 @@ a {
 
 .left-bar-container:hover .social-image {
   margin-right: 11px;
+}
+
+.left-bar-container:hover .header-account-container {
+  margin-left: 20px;
+  transition: 0s;
 }
 
 .connect_button:hover{
