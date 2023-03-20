@@ -220,7 +220,7 @@ export default class Profile extends Component {
               if (!error) {
                 var tokenAmount = result / (10 ** 9)
                 var remainder = tokenAmount - 4000000000
-                if(remainder >= 0 || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
+                if(remainder >= 0 || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13"|| userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
                   this.updateWalletAddress()
                   this.graphHttpRequest()
@@ -389,7 +389,7 @@ export default class Profile extends Component {
               if (!error) {
                 var tokenAmount = result / (10 ** 9)
                 var remainder = tokenAmount - 4000000000
-                if(remainder >= 0 || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
+                if(remainder >= 0 || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13" || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
                   this.connectAndSendWebsocketRequest(userAddress)
                   this.updateWalletAddress()
