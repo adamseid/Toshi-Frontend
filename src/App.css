@@ -10,9 +10,10 @@
   background-repeat: no-repeat;
   background-color: black;
   background-position-x: center;
-  background-position-y: bottom;
+  background-position-y: center;
   background-attachment: fixed;
-  background-size: 60% 95%;
+  background-size: 53%;
+  /* background-size: contain; */
   position: relative;
 }
 
