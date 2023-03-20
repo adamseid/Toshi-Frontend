@@ -24,7 +24,7 @@ const default_state = {
   header: {
       walletAddress: "",
       connectedWalletAddress: "",
-      isLoggedIn: true,
+      isLoggedIn: false,
   },
   accountOverview: {
       table: [],
@@ -171,16 +171,20 @@ export default class Profile extends Component {
   }
 
   componentDidUpdate = () => {
+    walletID = this['state']['header']['walletAddress']
+    if(walletID == ""){
+      console.log("SIGNED OUT")
+    }
+    console.log("SIGNED IN")
     if(walletID != this['state']['header']['walletAddress']){
       if(walletID != ""){
         this.graphHttpRequest()
         this['state']['accountDetailed']['table'] = []
         this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
+        this.iswalletConnected()
         // this.graphHttpRequest()
       }
-    }
-      walletID = this['state']['header']['walletAddress']
-      
+    }      
   }
 
   urlWalletAddress = (wallet) => {
@@ -213,7 +217,7 @@ export default class Profile extends Component {
       }).then((result) => {
         if(result[0]){
           if(result[0].length > 0){
-            const walletTest=this.state['header']['walletAddress'] = result[0]
+            const walletTest=this.state['header']['walletAddress'] = result[0];
             const userAddress = result[0];
             const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
             erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
@@ -222,6 +226,7 @@ export default class Profile extends Component {
                 var remainder = tokenAmount - 4000000000
                 if(remainder >= 0 || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13"|| userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
+                  this.state.header.isLoggedIn = true
                   this.updateWalletAddress()
                   this.graphHttpRequest()
                   this.updateWalletAddress()
@@ -329,6 +334,7 @@ export default class Profile extends Component {
     }
 
     ws.onmessage = (e) => {
+      console.log("history page websocket recieved: ", e)
       this.state.isLoading = false;
       this.setState(this.state)
       document.body.classList.remove("greyBackground");
@@ -382,7 +388,7 @@ export default class Profile extends Component {
       }).then((result) => {
         if(result[0]){
           if(result[0].length > 0){
-            this.state['header']['walletAddress'] = result[0]
+            this.state['header']['walletAddress'] = result[0];
             const userAddress = result[0];
             const erc20Contract = new web3.eth.Contract(erc20TokenAbi, tokenContractAddress);
             erc20Contract.methods.balanceOf(userAddress).call((error, result) => {
@@ -391,7 +397,10 @@ export default class Profile extends Component {
                 var remainder = tokenAmount - 4000000000
                 if(remainder >= 0 || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13" || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
+                  this.state.header.isLoggedIn = true
                   this.connectAndSendWebsocketRequest(userAddress)
+                  this.updateWalletAddress()
+                  this.graphHttpRequest()
                   this.updateWalletAddress()
                   document.getElementById("search-text").disabled = false
                 }else{
@@ -553,7 +562,10 @@ export default class Profile extends Component {
                 <div className='un_authenticated_user_modal_container_text'>
                   Please Connect a wallet that has at least 4,000,000,000 $TOSHI 
                 </div>
-                <a href = "https://www.toshi.tools/" className='un_authenticated_user_modal_container_button_container'>
+                <div className='connect_button_modal' onClick={this.onPressed}>
+                  Connect Wallet
+                </div>
+                <a href = "https://www.toshi.tools/#holder-tiers" className='un_authenticated_user_modal_container_button_container'>
                   <div className='un_authenticated_user_modal_container_button'>
                     What is a Tier 1 Holder?
                   </div>
