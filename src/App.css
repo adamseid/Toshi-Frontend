@@ -150,7 +150,7 @@ a {
 .social-image {
   width: 32.89px;
   height: 32px;
-  object-fit: cover;
+  object-fit: contain;
   margin-right: 0px;
 }
 
