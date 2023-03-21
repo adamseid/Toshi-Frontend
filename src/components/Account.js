@@ -170,22 +170,23 @@ export default class Profile extends Component {
     this.setState(this.state)
   }
 
-  componentDidUpdate = () => {
-    walletID = this['state']['header']['walletAddress']
-    if(walletID == ""){
-      console.log("SIGNED OUT")
-    }
-    console.log("SIGNED IN")
-    if(walletID != this['state']['header']['walletAddress']){
-      if(walletID != ""){
-        this.graphHttpRequest()
-        this['state']['accountDetailed']['table'] = []
-        this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
-        this.iswalletConnected()
-        // this.graphHttpRequest()
-      }
-    }      
-  }
+  // componentDidUpdate = () => {
+  //   walletID = this['state']['header']['walletAddress']
+  //   console.log(this['state']['header']['walletAddress'])
+  //   if(walletID == ""){
+  //     console.log("SIGNED OUT")
+  //   }
+  //   console.log("SIGNED IN")
+  //   if(walletID != this['state']['header']['walletAddress']){
+  //     if(walletID != ""){
+  //       this.graphHttpRequest()
+  //       this['state']['accountDetailed']['table'] = []
+  //       this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
+  //       this.iswalletConnected()
+  //       // this.graphHttpRequest()
+  //     }
+  //   }      
+  // }
 
   urlWalletAddress = (wallet) => {
     this.state['header']['walletAddress'] = wallet
@@ -343,7 +344,11 @@ export default class Profile extends Component {
       var lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
       this.state['profitHistoryOverview']['table'] = data[0]
       this.state['volumeHistoryOverview']['table'] = data[1]
+      for (let i=0;i<data[2].length;i++){
+        data[2][i] = data[2][i].sort((a, b) => b[7] - a[7]);
+      }
       this.state['tokenHistoryOverview']['table'] = data[2]
+      // console.log(this.state['tokenHistoryOverview']['table'])
       for(let i = 0; i < lengthOfTable; i++){
         numberofPagesArr.push(i+1)
       }
@@ -364,12 +369,22 @@ export default class Profile extends Component {
   }
   
   handleText = (event) => {
+    // console.log(event.target.value)
     this.state['header']['walletAddress'] = event.target.value
   }
 
   handleSubmit = (event) => {
     event.preventDefault();
     this.updateWalletAddress();
+    var incomingWallet = this.state.header.walletAddress
+    if(incomingWallet != walletID){
+      walletID = this.state.header.walletAddress
+      if(incomingWallet != ""){
+        this.graphHttpRequest()
+        this['state']['accountDetailed']['table'] = []
+        this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
+      }
+    }
     document.getElementById("search-text").value = ""
   }
 

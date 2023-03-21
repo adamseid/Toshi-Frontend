@@ -1202,10 +1202,10 @@ a {
   
 }
 .token_detailes{
-  width: 48%;
+  width: 31%;
 }
 .token_name{
-  width: 21%;
+  width: 25%;
   padding-left: 17px;
 }
 .total_transactions{
@@ -1445,7 +1445,7 @@ a {
   padding-top: 5px;
   text-align: left;
   /* min-width: 20px; */
-  margin-right: 50px;
+  margin-right: 48px;
 }
 
 .currentHoldings{
@@ -1460,7 +1460,7 @@ a {
   top: 0px;
   height: 100%;
   margin-right: 20px;
-  left: 25%;
+  left: 27%;
 }
 
 .divider_line_wallet_assets_left{
@@ -1518,7 +1518,7 @@ a {
   top: 0px;
   height: 100%;
   margin-right: 20px;
-  left: 42%;
+  left: 44.5%;
 }
 
 .divider_line_holdings{
@@ -1528,7 +1528,7 @@ a {
   top: 0px;
   height: 100%;
   margin-right: 20px;
-  left: 61%;
+  left: 63.5%;
 }
 
 .divider_line_hide_unhide{
@@ -1538,7 +1538,7 @@ a {
   top: 0px;
   height: 100%;
   margin-right: 20px;
-  left: 85%;
+  left: 87%;
 }
 
 .asset-text-data-detailed-first-element{
@@ -1549,7 +1549,7 @@ a {
   letter-spacing: 0em;
   text-align: left;
   color: #FFFFFF;
-  width: 495px;
+  width: 50%;
   /* width: 300px; */
   /* width: 420px; */
 }
