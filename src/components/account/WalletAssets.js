@@ -97,11 +97,12 @@ export default class WalletAssets extends Component {
               Token Value
             </div>
           </div>
+          <div className='green_horizontal_line' />
           <div className="account-table">
             <Suspense fallback={<div>Loading...</div>}>
               <div className='walletAssetsTokenNameOuterContainer'>
                 {
-                  this.props.state.tokenHistoryOverview.table[4]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).sort((a,b)=>b[6]-a[6]).map((asset, index)=> {
+                  this.props.state.tokenHistoryOverview.table[3]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).sort((a,b)=>b[6]-a[6]).map((asset, index)=> {
                     return (
                       <div key={index} className="walletAssetsTokenNameContainer">
                         <div className="walletAssetsTokenName">

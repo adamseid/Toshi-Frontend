@@ -117,6 +117,7 @@ export default class TableHistory extends Component {
     }else if(data == "1Y"){
       this.props.state.historyTime = 3
     }
+    this.props.state.tokenHistoryOverview.startPage = 0
     this.props.state.tokenHistoryOverview.endPage = 10
     var lengthOfTable = Math.ceil(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime].length/ this.props.state['tokenHistoryOverview']['numberOfItems'])
     let numberofPagesArr = []
@@ -182,6 +183,7 @@ export default class TableHistory extends Component {
               </div>
             </div>
           </div>
+          <div className='green_horizontal_line' />
           <div className="account-table">
             <div className='tokenItmesContainer'>
               <Suspense fallback={<div>Loading...</div>}>
@@ -273,23 +275,25 @@ export default class TableHistory extends Component {
         {
           this.props.state["tokenHistoryOverview"]["numberOfPages"].length > 0 ? (
             <div className='pagination_buttons_tokens'>
-              {
-                this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
-                  if(index == 0){
-                    return (
-                      <div key={index} className='page_number active' onClick={this.pageNumber}>
-                        {asset}
-                      </div>
-                    )
-                  }else{
-                    return (
-                      <div key={index} className='page_number' onClick={this.pageNumber}>
-                        {asset}
-                      </div>
-                    )
-                  }
-                })
-              }
+              <div className='pagination_inner_container'>
+                {
+                  this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
+                    if(index == 0){
+                      return (
+                        <div key={index} className='page_number active' onClick={this.pageNumber}>
+                          {asset}
+                        </div>
+                      )
+                    }else{
+                      return (
+                        <div key={index} className='page_number' onClick={this.pageNumber}>
+                          {asset}
+                        </div>
+                      )
+                    }
+                  })
+                }
+              </div>
             </div>
           ) : (
             <></>
