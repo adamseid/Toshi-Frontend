@@ -9,6 +9,7 @@
   object-fit: cover;
   background-repeat: no-repeat;
   background-color: black;
+  /* background-position-x: 57%; */
   background-position-x: center;
   background-position-y: center;
   background-attachment: fixed;
