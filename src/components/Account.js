@@ -346,7 +346,7 @@ export default class Profile extends Component {
       this.state['volumeHistoryOverview']['table'] = data[1]
       console.log(data)
       for (let i=0;i<data[2].length;i++){
-        data[2][i] = data[2][i].sort((a, b) => b[5] - a[5]);
+        data[2][i] = data[2][i].sort((a, b) => (Math.abs(b[5]) - Math.abs(a[5])));
       }
       this.state['tokenHistoryOverview']['table'] = data[2]
       // console.log(this.state['tokenHistoryOverview']['table'])
