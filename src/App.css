@@ -10,9 +10,10 @@
   background-repeat: no-repeat;
   background-color: black;
   background-position-x: center;
-  background-position-y: bottom;
+  background-position-y: center;
   background-attachment: fixed;
-  background-size: 60% 95%;
+  background-size: 53%;
+  /* background-size: contain; */
   position: relative;
 }
 
@@ -30,7 +31,8 @@ a {
   justify-content: space-between;
   align-items: center;
   max-width: 1248px;
-  margin-left: auto;
+  /* margin-left: auto; */
+  margin-left: 200px;
   margin-right: auto;
 }
 
@@ -173,7 +175,7 @@ a {
 .social-image {
   width: 32.89px;
   height: 32px;
-  object-fit: cover;
+  object-fit: contain;
   margin-right: 0px;
 }
 
@@ -196,10 +198,11 @@ a {
   padding: 20px;
   margin-top:13px;
   transition: 0.2s;
+  width: 89px;
 }
 
 .header-account-container:hover {
-  box-shadow: 0 0 9px -2px rgb(221, 216, 216);
+  box-shadow: 0 0 9px -2px #7dffa1;
   border-radius: 17px;
 }
 
@@ -411,6 +414,11 @@ a {
 
 .left-bar-container:hover .social-image {
   margin-right: 11px;
+}
+
+.left-bar-container:hover .header-account-container {
+  margin-left: 20px;
+  transition: 0s;
 }
 
 .connect_button:hover{
@@ -754,7 +762,8 @@ a {
   align-items: flex-start;
   max-width: 1248px;
   margin-right: auto;
-  margin-left: auto;
+  margin-left: 200px;
+  /* margin-left: auto; */
   margin-top: 56px;
   
 }
@@ -1192,7 +1201,7 @@ a {
   display: flex;
   align-items: flex-start;
   /* font-family: 'Rajdhani', sans-serif; */
-  font-size: 21px;
+  font-size: 17.5px;
   font-weight: 700;
   line-height: 26px;
   letter-spacing: 0em;
@@ -1233,7 +1242,7 @@ a {
 
 .walletAssetsItems{
   width: 16%;
-  font-size: 21px;
+  font-size: 17.5px;
   font-weight: 700;
   line-height: 26px;
   letter-spacing: 0em;
