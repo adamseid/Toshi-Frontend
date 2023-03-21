@@ -344,8 +344,9 @@ export default class Profile extends Component {
       var lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
       this.state['profitHistoryOverview']['table'] = data[0]
       this.state['volumeHistoryOverview']['table'] = data[1]
+      console.log(data)
       for (let i=0;i<data[2].length;i++){
-        data[2][i] = data[2][i].sort((a, b) => b[7] - a[7]);
+        data[2][i] = data[2][i].sort((a, b) => b[5] - a[5]);
       }
       this.state['tokenHistoryOverview']['table'] = data[2]
       // console.log(this.state['tokenHistoryOverview']['table'])
