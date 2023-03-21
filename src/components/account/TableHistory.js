@@ -117,7 +117,7 @@ export default class TableHistory extends Component {
     }else if(data == "1Y"){
       this.props.state.historyTime = 3
     }
-    this.props.state.tokenHistoryOverview.endPage = 1
+    this.props.state.tokenHistoryOverview.endPage = 10
     var lengthOfTable = Math.ceil(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime].length/ this.props.state['tokenHistoryOverview']['numberOfItems'])
     let numberofPagesArr = []
     for(let i = 0; i < lengthOfTable; i++){
