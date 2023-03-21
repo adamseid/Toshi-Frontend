@@ -355,6 +355,7 @@ export default class Profile extends Component {
       this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
     }
     this.updateWalletAddress()
+    console.log("INCOMING DATA: ", this.state)
   }
 
   
