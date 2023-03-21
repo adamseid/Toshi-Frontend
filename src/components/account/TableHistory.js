@@ -183,6 +183,7 @@ export default class TableHistory extends Component {
               </div>
             </div>
           </div>
+          <div className='green_horizontal_line' />
           <div className="account-table">
             <div className='tokenItmesContainer'>
               <Suspense fallback={<div>Loading...</div>}>

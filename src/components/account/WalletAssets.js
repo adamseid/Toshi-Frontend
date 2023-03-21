@@ -97,6 +97,7 @@ export default class WalletAssets extends Component {
               Token Value
             </div>
           </div>
+          <div className='green_horizontal_line' />
           <div className="account-table">
             <Suspense fallback={<div>Loading...</div>}>
               <div className='walletAssetsTokenNameOuterContainer'>

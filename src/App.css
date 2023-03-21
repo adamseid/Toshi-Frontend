@@ -1197,9 +1197,17 @@ a {
 
 /* Token History Overview */
 
-.tokenHistoryOverviewTitlesContainer{
-  border-bottom: 1.18px solid #7DFFA1;
+.green_horizontal_line{
+  width: 100%;
+  height: 1.18px;
+  background: #7DFFA1;
+  position: relative;
+  z-index: 5;
 }
+
+/* .tokenHistoryOverviewTitlesContainer{
+  border-bottom: 1.18px solid #7DFFA1;
+} */
 
 .token_history_overview_title{
   padding-top: 21px;
@@ -1261,7 +1269,6 @@ a {
   padding-top: 22px;
   padding-left: 47px;
   padding-right: 47px;
-  border-bottom: solid 1.18px #7DFFA1;
   flex-direction: row;
   justify-content: space-between;
 }
