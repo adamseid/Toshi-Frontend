@@ -176,8 +176,8 @@ export default class TableHistory extends Component {
                   <span className="USD-label">USD</span>
                 </label>
               </div>
-              <div className="token_history_overview_title hide_unhide">
               <div className='divider_line_hide_unhide'></div>
+              <div className="token_history_overview_title hide_unhide">
                 Hide/Unhide
               </div>
             </div>
