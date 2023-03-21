@@ -17,7 +17,7 @@ export default class WalletAssets extends Component {
 
   componentDidUpdate = () => {
     console.log("UPDATED")
-    console.log(this.props.state.tokenHistoryOverview.table[this.props.state.time])
+    console.log(this.props.state.tokenHistoryOverview.table[4])
   }
 
   setPropsState = () => {
@@ -46,7 +46,7 @@ export default class WalletAssets extends Component {
 
   showAsset = (index) => {
     var itemRow = document.getElementsByClassName("account-detailed-ids")[index]
-    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[this.props.state.time][index],this.props.state.time,"addition")
+    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[4][index],4,"addition")
     var showImage = document.getElementsByClassName("show_image")[index]
     var hideImage = document.getElementsByClassName("hide_image")[index]
     showImage.style.display = "block"
@@ -56,7 +56,7 @@ export default class WalletAssets extends Component {
 
   hideAsset = (index) => {
     var itemRow = document.getElementsByClassName("account-detailed-ids")[index]
-    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[this.props.state.time][index],this.props.state.time,"subtract")
+    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[4][index],4,"subtract")
     var showImage = document.getElementsByClassName("show_image")[index]
     var hideImage = document.getElementsByClassName("hide_image")[index]
     hideImage.style.display = "block"
@@ -101,7 +101,7 @@ export default class WalletAssets extends Component {
             <Suspense fallback={<div>Loading...</div>}>
               <div className='walletAssetsTokenNameOuterContainer'>
                 {
-                  this.props.state.tokenHistoryOverview.table[this.props.state.time]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).map((asset, index)=> {
+                  this.props.state.tokenHistoryOverview.table[4]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).map((asset, index)=> {
                     return (
                       <div key={index} className="walletAssetsTokenNameContainer">
                         <div className="walletAssetsTokenName">
