@@ -246,9 +246,9 @@ a {
 
 
 .left-bar-logo {
-  max-height: 19.582693099975586px;
-  max-width: 24.815532684326172px;
-  margin-bottom: 5.93px;
+  height: 37.5px;
+  width: 67.2px;
+  /* margin-bottom: 5.93px; */
 }
 
 .left-bar-text-container {
@@ -334,7 +334,7 @@ a {
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 21px;
-  padding-top: 15px;
+  /* padding-top: 15px; */
   padding-bottom: 13px;
   padding-left: 10px;
   padding-right: 10px;
@@ -399,11 +399,11 @@ a {
   color: white;
 }
 
-.left-bar-container:hover .left-bar-logo {
+/* .left-bar-container:hover .left-bar-logo {
   max-height: 40.924991607666016px;
   max-width: 51.860870361328125px;
   margin-bottom: 12.4px;
-}
+} */
 
 .left-bar-container:hover .page-text {
   display: block;
