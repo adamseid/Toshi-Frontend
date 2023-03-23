@@ -329,6 +329,7 @@ export default class Profile extends Component {
       this.setState(this.state)
       document.body.classList.remove("greyBackground");
       let data = JSON.parse(e.data)['response']
+      console.log("INCOMING DATA: ", data)
       let numberofPagesArr = []
       let numberofPagesArrWalletAssset = []
       var lengthOfTable = 10
