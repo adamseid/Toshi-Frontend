@@ -117,6 +117,12 @@ export default class TableHistory extends Component {
     }else if(data == "1Y"){
       this.props.state.historyTime = 3
     }
+
+    var pageNumberClassNameArr = document.getElementsByClassName("page_number")
+    for(let i=0;i<pageNumberClassNameArr.length;i++){
+      pageNumberClassNameArr[i].classList.remove("active")
+    }
+    pageNumberClassNameArr[0].classList.add("active")
     this.props.state.tokenHistoryOverview.startPage = 0
     this.props.state.tokenHistoryOverview.endPage = 10
     var lengthOfTable = Math.ceil(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime].length/ this.props.state['tokenHistoryOverview']['numberOfItems'])
@@ -218,34 +224,36 @@ export default class TableHistory extends Component {
                   <div className="asset-text-data-detailed total_profit">
                     {asset[5] >= 0 ? (
                               <div className = "positive tokenHistoryTableBlock" key={index}>
-                                <div className="nowrap">
-                                  {this.props.state.tokenHistoryOverview.profitDisplay ? (
-                                  asset[6] === 0 || asset[7] === 0 ? <>$0</> :
-                                  asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + Math.abs(Math.round(asset[5]*100)/100)
-                                  ): asset[6] === 0 || asset[7] === 0 ? <>0<span className="grey"> ETH</span></> : 
-                                  asset[7] < 0.01 ? <><NumberFormat number={asset[7]}/><span className="grey"> ETH</span></> : 
-                                  <>{Math.abs(Math.round((asset[7]/asset[6])*asset[5]*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
-                                </div>
+                              <div className="nowrap">
+                                {this.props.state.tokenHistoryOverview.profitDisplay ? (
+                                  asset[5] === 0 ? <>$0</> :
+                                  Math.abs(asset[5]) < 0.01 ? 
+                                      <>$<NumberFormat number={Math.abs(asset[5])}/></> 
+                                      : 
+                                      "$" + Math.abs(Math.round(asset[5]*100)/100)
+                                ) : asset[5] === 0  ? <>0<span className="grey"> ETH</span></> : 
+                                Math.abs(asset[5]) < 0.01 ? <><NumberFormat number={Math.abs(asset[5])}/><span className="grey"> ETH</span></> : 
+                                <>{Math.abs(Math.round((asset[7]/asset[6])*asset[5]*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
+                              </div>
                                 <div className='bottom'>
-                                    {asset[10]}%
+                                    {Math.abs(Math.round(asset[10]*100)/100)}%
                                 </div>
                               </div>
                           ) :
                           <div className = "negative tokenHistoryTableBlock" key={index}>
                             <div className="nowrap">
                               {this.props.state.tokenHistoryOverview.profitDisplay ? (
-                              asset[6] === 0 || asset[7] === 0 ? <>$0</> :
-                              asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + Math.abs(Math.round(asset[5]*100)/100)
-                              ): asset[6] === 0 || asset[7] === 0 ? <>0<span className="grey"> ETH</span></> : 
-                              asset[7] < 0.01 ? <><NumberFormat number={asset[7]}/><span className="grey"> ETH</span></> : 
+                                asset[5] === 0 ? <>$0</> :
+                                Math.abs(asset[5]) < 0.01 ? 
+                                    <>$<NumberFormat number={Math.abs(asset[5])}/></> 
+                                    : 
+                                    "$" + Math.abs(Math.round(asset[5]*100)/100)
+                              ) : asset[5] === 0  ? <>0<span className="grey"> ETH</span></> : 
+                              Math.abs(asset[5]) < 0.01 ? <><NumberFormat number={Math.abs(asset[5])}/><span className="grey"> ETH</span></> : 
                               <>{Math.abs(Math.round((asset[7]/asset[6])*asset[5]*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
                             </div>
-                            {/* {Math.round(asset[7]*10000)/10000} */}
-                              {/* <div>
-                                  {Math.abs(Math.round((asset[5]*100))/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
-                              </div> */}
                               <div className='bottom'>
-                                  {asset[10]}%
+                                {Math.abs(Math.round(asset[10]*100)/100)}%
                               </div>
                           </div>}
                   </div>
@@ -277,17 +285,17 @@ export default class TableHistory extends Component {
             <div className='pagination_buttons_tokens'>
               <div className='pagination_inner_container'>
                 {
-                  this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
+                  this.props.state["tokenHistoryOverview"]["numberOfPages"].map((pages, index)=> {
                     if(index == 0){
                       return (
                         <div key={index} className='page_number active' onClick={this.pageNumber}>
-                          {asset}
+                          {pages}
                         </div>
                       )
                     }else{
                       return (
                         <div key={index} className='page_number' onClick={this.pageNumber}>
-                          {asset}
+                          {pages}
                         </div>
                       )
                     }

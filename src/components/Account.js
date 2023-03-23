@@ -341,7 +341,10 @@ export default class Profile extends Component {
       document.body.classList.remove("greyBackground");
       let data = JSON.parse(e.data)['response']
       let numberofPagesArr = []
-      var lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
+      var lengthOfTable = 10
+      if(data[2][3]){
+        lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
+      }
       this.state['profitHistoryOverview']['table'] = data[0]
       this.state['volumeHistoryOverview']['table'] = data[1]
       console.log(data)
