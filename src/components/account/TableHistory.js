@@ -119,10 +119,14 @@ export default class TableHistory extends Component {
     }
 
     var pageNumberClassNameArr = document.getElementsByClassName("page_number")
-    for(let i=0;i<pageNumberClassNameArr.length;i++){
-      pageNumberClassNameArr[i].classList.remove("active")
+    if(pageNumberClassNameArr){
+      for(let i=0;i<pageNumberClassNameArr.length;i++){
+        pageNumberClassNameArr[i].classList.remove("active")
+      }
+      if(pageNumberClassNameArr[0]){
+        pageNumberClassNameArr[0].classList.add("active")
+      }
     }
-    pageNumberClassNameArr[0].classList.add("active")
     this.props.state.tokenHistoryOverview.startPage = 0
     this.props.state.tokenHistoryOverview.endPage = 10
     var lengthOfTable = Math.ceil(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime].length/ this.props.state['tokenHistoryOverview']['numberOfItems'])
