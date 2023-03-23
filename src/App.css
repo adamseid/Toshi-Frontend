@@ -50,20 +50,30 @@ a {
 
 .search {
   font-family: Rajdhani;
-  font-size: 14px;
+  font-size: 17.4px;
   font-weight: 500;
   line-height: 17px;
   letter-spacing: 0em;
   text-align: center;
   max-height: 38px;
-  max-width: 115px;
+  max-width: 125px;
   border-radius: 27px;
   background: #7DFFA1;
   height: 38px;
-  width: 115px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  width: 125px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  
+}
+
+.search-label{
+  color: black;
+  position:absolute;
+  left: 78%;
+  font-family: Rajdhani;
+  font-weight: 500;
+  line-height: 22.3px;
+  cursor: pointer;
 }
 
 #search-text {
@@ -71,7 +81,7 @@ a {
   font-family: Rajdhani;
   border-radius: 27px;
   border: none;
-  font-size: 14px;
+  font-weight: 500;
   font-weight: 500;
   line-height: 17px;
   text-align: left;
@@ -82,6 +92,10 @@ a {
   height: 38px;
   width: 285px;
   background: black;
+}
+
+#search-text::placeholder{
+  color: white;
 }
 
 .connect_button_modal:hover{
@@ -110,7 +124,7 @@ a {
 
 .connect_button {
   font-family: Rajdhani;
-  font-size: 14px;
+  font-size: 17.4px;
   font-weight: 500;
   line-height: 17px;
   letter-spacing: 0em;
@@ -133,6 +147,7 @@ a {
   align-content: center;
   justify-content: center;
   align-items: center;
+  position: relative;
 }
 
 .inner-flex-box-container {
@@ -567,7 +582,7 @@ a {
 
 .profile-header-text {
   /* font-family: Rajdhani; */
-  font-size: 31px;
+  font-size: 33px;
   font-weight: 700;
   line-height: 39px;
   letter-spacing: 0em;
@@ -577,7 +592,7 @@ a {
 }
 
 .volume-header-text{
-  font-size: 31px;
+  font-size: 33px;
   font-weight: 700;
   line-height: 39px;
   letter-spacing: 0em;
@@ -587,7 +602,7 @@ a {
 }
 
 .time-header-text{
-  font-size: 31px;
+  font-size: 33px;
   font-weight: 700;
   line-height: 39px;
   letter-spacing: 0em;
@@ -608,7 +623,7 @@ a {
 }
 
 .chart-title{
-  font-size: 31px;
+  font-size: 33px;
   font-weight: 700;
   line-height: 39px;
   letter-spacing: 0em;
@@ -658,7 +673,7 @@ a {
 
 .wallet-worth {
   font-family: Poppins;
-  font-size: 56px;
+  font-size: 72.4px;
   font-weight: 300;
   line-height: 85px;
   letter-spacing: 0em;
@@ -678,7 +693,7 @@ a {
 
 .wallet-id {
   /* font-family: Be Vietnam; */
-  font-size: 26px;
+  font-size: 33px;
   font-weight: 700;
   line-height: 38px;
   letter-spacing: 0em;
@@ -1757,9 +1772,9 @@ input:checked + .slider:before {
 }
 
 .chart-button{
-  font-family: Rajdhani;
-  font-size: 14px;
-  font-weight: 700;
+  /* font-family: Rajdhani; */
+  font-size: 17px;
+  font-weight: 500;
   line-height: 17px;
   letter-spacing: 0em;
   text-align: center;
@@ -1776,9 +1791,9 @@ input:checked + .slider:before {
 }
 
 .chart-button:hover, .chart-button.active{
-  font-family: Rajdhani;
-  font-size: 14px;
-  font-weight: 700;
+  /* font-family: Rajdhani;
+  font-size: 14px; */
+  /* font-weight: 700; */
   line-height: 17px;
   letter-spacing: 0em;
   text-align: center;
@@ -1793,9 +1808,9 @@ input:checked + .slider:before {
 
 .my-wallet{
   color: white;
-  font-size:13px;
+  font-size:17.4px;
   font-weight: 500;
-  padding: 5px 10px;
+  padding: 7px 14px;
   border: 1px solid white;
   border-radius: 15px;
   margin-left: 20px;
@@ -1804,6 +1819,7 @@ input:checked + .slider:before {
 .my-wallet-container{
   display: flex;
   align-items: center;
+  
 }
 
 .my-wallet-img{
