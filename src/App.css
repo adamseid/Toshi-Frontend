@@ -74,6 +74,7 @@ a {
   font-weight: 500;
   line-height: 22.3px;
   cursor: pointer;
+  pointer-events: none;
 }
 
 #search-text {

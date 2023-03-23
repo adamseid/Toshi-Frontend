@@ -600,7 +600,7 @@ export default class Profile extends Component {
                     <form className='left-side' onSubmit={this.handleSubmit}>
                       <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
                       <input type="submit" id = "submit" value="" className='search mr' style={{cursor: 'pointer'}} />
-                      <div className="search-label">Search</div>
+                      <label className="search-label">Search</label>
                     </form>
                     
                     <div className='right-side'>
