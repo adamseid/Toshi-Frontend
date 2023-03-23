@@ -97,20 +97,20 @@ export default class WalletAssets extends Component {
                           </div>
                         </div>
                         <div className="walletAssetsTokenName">
-                          ${
+                          {
                             Math.abs(asset[6]/asset[4]) < 0.01 &&  Math.abs(asset[6]/asset[4]) != 0 ? (
-                              <div><NumberFormat number={(asset[6]/asset[4])}/></div>
+                              <div>$<NumberFormat number={(asset[6]/asset[4])}/></div>
                             ) : (
-                              Math.abs(Math.round((asset[6]/asset[4])*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                              "$" + Math.abs(Math.round((asset[6]/asset[4])*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                             )
                           }
                         </div>
                         <div className="walletAssetsTokenName">
-                          ${
+                          {
                             Math.abs(asset[6]) < 0.01 &&  Math.abs(asset[6]) != 0 ? (
-                              <div><NumberFormat number={(asset[6])}/></div>
+                              <div>$<NumberFormat number={(asset[6])}/></div>
                             ) : (
-                              Math.abs(Math.round((asset[6])*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                              "$" + Math.abs(Math.round((asset[6])*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                             )
                           }
                         </div>
