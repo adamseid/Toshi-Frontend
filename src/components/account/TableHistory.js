@@ -23,6 +23,8 @@ var toggle = true;
 var walletID = "";
 const dexToolsURL = "https://etherscan.io/dex/uniswapv2/";
 const time_frame = ['1H', '1D', '1W', '1M', '1Y', 'MAX'];
+const Web3 = require('web3');
+const web3 = new Web3("https://eth-mainnet.g.alchemy.com/v2/_mEa4ksrzCdb8fgB5_7-4doIZrMWwpKf")
 
 export default class TableHistory extends Component {
 
@@ -236,8 +238,8 @@ export default class TableHistory extends Component {
                                       : 
                                       "$" + Math.abs(Math.round(asset[5]*100)/100)
                                 ) : asset[5] === 0  ? <>0<span className="grey"> ETH</span></> : 
-                                Math.abs(asset[5]) < 0.01 ? <><NumberFormat number={Math.abs(asset[5])}/><span className="grey"> ETH</span></> : 
-                                <>{Math.abs(Math.round((asset[7]/asset[6])*asset[5]*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
+                                Math.abs(asset[5]/asset[14]) < 0.01 ? <><NumberFormat number={Math.abs(asset[5]/asset[14])}/><span className="grey"> ETH</span></> : 
+                                <>{Math.abs(Math.round((asset[5]/asset[14])*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
                               </div>
                                 <div className='bottom'>
                                     {Math.abs(Math.round(asset[10]*100)/100)}%
@@ -253,8 +255,8 @@ export default class TableHistory extends Component {
                                     : 
                                     "$" + Math.abs(Math.round(asset[5]*100)/100)
                               ) : asset[5] === 0  ? <>0<span className="grey"> ETH</span></> : 
-                              Math.abs(asset[5]) < 0.01 ? <><NumberFormat number={Math.abs(asset[5])}/><span className="grey"> ETH</span></> : 
-                              <>{Math.abs(Math.round((asset[7]/asset[6])*asset[5]*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
+                              Math.abs(asset[5]/asset[14]) < 0.01 ? <><NumberFormat number={Math.abs(asset[5]/asset[14])}/><span className="grey"> ETH</span></> : 
+                              <>{Math.abs(Math.round((asset[5]/asset[14])*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
                             </div>
                               <div className='bottom'>
                                 {Math.abs(Math.round(asset[10]*100)/100)}%
