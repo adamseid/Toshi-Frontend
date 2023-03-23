@@ -17,7 +17,7 @@ export default class WalletAssets extends Component {
 
   componentDidUpdate = () => {
     console.log("UPDATED")
-    console.log(this.props.state.tokenHistoryOverview.table[4])
+    console.log(this.props.state.walletAssetsTokens.table)
   }
 
   setPropsState = () => {
@@ -25,7 +25,7 @@ export default class WalletAssets extends Component {
   };
 
   componentDidUpdate = () => {
-    // console.log("NEW ITEM: ", this.props["state"]['tokenHistoryOverview']['table'])
+    // console.log("NEW ITEM: ", this.props["state"]['walletAssetsTokens']['table'])
     if (walletID != this.props["state"]["header"]["walletAddress"]) {
       this.props["state"]["accountDetailed"]["table"] = [];
       // this.graphHttpRequest();
@@ -33,36 +33,6 @@ export default class WalletAssets extends Component {
     walletID = this.props["state"]["header"]["walletAddress"];
   };
 
-  onClickSwitchHandler = () => {
-    this.props.state["tokenHistoryOverview"]["holdingsDisplay"] =
-      !this.props.state["tokenHistoryOverview"]["holdingsDisplay"];
-    this.setPropsState();
-    console.log("switched");
-  };
-
-  handleClick = (page) => {
-    console.log(page)
-  };
-
-  showAsset = (index) => {
-    var itemRow = document.getElementsByClassName("account-detailed-ids")[index]
-    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[4][index],4,"addition")
-    var showImage = document.getElementsByClassName("show_image")[index]
-    var hideImage = document.getElementsByClassName("hide_image")[index]
-    showImage.style.display = "block"
-    hideImage.style.display = "none"
-    itemRow.style.opacity = "1"
-  }
-
-  hideAsset = (index) => {
-    var itemRow = document.getElementsByClassName("account-detailed-ids")[index]
-    this.props.tokenHistoryOverviewResponse(this.props.state.tokenHistoryOverview.table[4][index],4,"subtract")
-    var showImage = document.getElementsByClassName("show_image")[index]
-    var hideImage = document.getElementsByClassName("hide_image")[index]
-    hideImage.style.display = "block"
-    showImage.style.display = "none"
-    itemRow.style.opacity = "0.3"
-  }
 
   pageNumber = (e) => {
     var pageNumberClassName = e.target.classList[0]
@@ -73,10 +43,10 @@ export default class WalletAssets extends Component {
       pageNumberClassNameArr[i].classList.remove("active")
     }
     e.target.classList.add("active")
-    this.props.state.tokenHistoryOverview.startPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
-    this.props.state.tokenHistoryOverview.endPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems)
+    this.props.state.walletAssetsTokens.startPage = (targetPageNumber * this.props.state.walletAssetsTokens.numberOfItems) - this.props.state.walletAssetsTokens.numberOfItems
+    this.props.state.walletAssetsTokens.endPage = (targetPageNumber * this.props.state.walletAssetsTokens.numberOfItems)
     this.setPropsState();
-    // console.log(this.props.state.tokenHistoryOverview)
+    // console.log(this.props.state.walletAssetsTokens)
   }
 
   render() {
@@ -102,7 +72,7 @@ export default class WalletAssets extends Component {
             <Suspense fallback={<div>Loading...</div>}>
               <div className='walletAssetsTokenNameOuterContainer'>
                 {
-                  this.props.state.tokenHistoryOverview.table[3]?.slice(this.props.state.tokenHistoryOverview.startPage, this.props.state.tokenHistoryOverview.endPage).sort((a,b)=>b[6]-a[6]).map((asset, index)=> {
+                  this.props.state.walletAssetsTokens.table?.slice(this.props.state.walletAssetsTokens.startPage, this.props.state.walletAssetsTokens.endPage).sort((a,b)=>b[6]-a[6]).map((asset, index)=> {
                     return (
                       <div key={index} className="walletAssetsTokenNameContainer">
                         <div className="walletAssetsTokenName">
@@ -113,29 +83,35 @@ export default class WalletAssets extends Component {
                               <div className="account-token-symbol nowrap"><ShortenTokenNameSymbol number={asset[1]}/></div>
                             </a>
                             <div className="account-bottom-row">
-                              <div className="account-token-allocation">{Math.abs(Math.round(asset[4]*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}</div>
+                              <div className="account-token-allocation">
+                                {
+                                  asset[4] < 0.01 ? (
+                                    <NumberFormat number={asset[4]}/>
+                                  ) : (
+                                    Math.abs(Math.round(asset[4]*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                                  )
+                                }
+                              </div>
                               <div className="account-token-allocation-percentage"></div>
                             </div>
                           </div>
                         </div>
                         <div className="walletAssetsTokenName">
-                          {
-                            this.props.state.tokenHistoryOverview.holdingsDisplay ? (
-                            asset[6] === 0 || asset[7] === 0 ? <>$0</> :
-                            asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + (Math.round((asset[6]/asset[4])*100)/100)
-                            ): asset[6] === 0 || asset[7] === 0 ? <>0</> : 
-                            asset[7] < 0.01 ? <><NumberFormat number={asset[6]}/></> : 
-                            <>${(Math.round((asset[6]/asset[4])*100)/100)}</>
+                          ${
+                            Math.abs(asset[6]/asset[4]) < 0.01 &&  Math.abs(asset[6]/asset[4]) != 0 ? (
+                              <NumberFormat number={(asset[6]/asset[4])}/>
+                            ) : (
+                              Math.abs(Math.round((asset[6]/asset[4])*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                            )
                           }
                         </div>
                         <div className="walletAssetsTokenName">
-                          {
-                            this.props.state.tokenHistoryOverview.holdingsDisplay ? (
-                            asset[6] === 0 || asset[7] === 0 ? <>$0</> :
-                            asset[6] < 0.01 ? <>$<NumberFormat number={asset[6]}/></> : "$" + Math.round(asset[6]*100)/100
-                            ): asset[6] === 0 || asset[7] === 0 ? <>0</> : 
-                            asset[7] < 0.01 ? <><NumberFormat number={asset[6]}/></> : 
-                            <>${Math.round(asset[6]*100)/100}</>
+                          ${
+                            Math.abs(asset[6]) < 0.01 &&  Math.abs(asset[6]) != 0 ? (
+                              <NumberFormat number={(asset[6])}/>
+                            ) : (
+                              Math.abs(Math.round((asset[6])*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                            )
                           }
                         </div>
                       </div>
@@ -147,10 +123,10 @@ export default class WalletAssets extends Component {
           </div>
         </div>
         {
-          this.props.state["tokenHistoryOverview"]["numberOfPages"].length > 0 ? (
+          this.props.state["walletAssetsTokens"]["numberOfPages"].length > 0 ? (
             <div className='pagination_buttons'>
               {
-                this.props.state["tokenHistoryOverview"]["numberOfPages"].map((asset, index)=> {
+                this.props.state["walletAssetsTokens"]["numberOfPages"].map((asset, index)=> {
                   // console.log(index)
                   if(index == 0){
                     return (

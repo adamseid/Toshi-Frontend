@@ -67,6 +67,13 @@ const default_state = {
   profitHistoryOverview : {
     table: []
   },
+  walletAssetsTokens : {
+    table: [],
+    startPage : 0,
+    endPage : 10,
+    numberOfItems : 10,
+    numberOfPages : [],
+  },
   volumeHistoryOverview : {
     table: []
   },
@@ -169,24 +176,6 @@ export default class Profile extends Component {
 
     this.setState(this.state)
   }
-
-  // componentDidUpdate = () => {
-  //   walletID = this['state']['header']['walletAddress']
-  //   console.log(this['state']['header']['walletAddress'])
-  //   if(walletID == ""){
-  //     console.log("SIGNED OUT")
-  //   }
-  //   console.log("SIGNED IN")
-  //   if(walletID != this['state']['header']['walletAddress']){
-  //     if(walletID != ""){
-  //       this.graphHttpRequest()
-  //       this['state']['accountDetailed']['table'] = []
-  //       this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
-  //       this.iswalletConnected()
-  //       // this.graphHttpRequest()
-  //     }
-  //   }      
-  // }
 
   urlWalletAddress = (wallet) => {
     this.state['header']['walletAddress'] = wallet
@@ -341,22 +330,30 @@ export default class Profile extends Component {
       document.body.classList.remove("greyBackground");
       let data = JSON.parse(e.data)['response']
       let numberofPagesArr = []
+      let numberofPagesArrWalletAssset = []
       var lengthOfTable = 10
+      var lengthOfTableWalletAssets = 10
       if(data[2][3]){
         lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
       }
+      if(data[3]){
+        lengthOfTableWalletAssets = Math.ceil(data[3].length/ this.state['walletAssetsTokens']['numberOfItems'])
+      }
       this.state['profitHistoryOverview']['table'] = data[0]
       this.state['volumeHistoryOverview']['table'] = data[1]
-      console.log(data)
+      this.state['tokenHistoryOverview']['table'] = data[2]
+      this.state['walletAssetsTokens']['table'] = data[3]
       for (let i=0;i<data[2].length;i++){
         data[2][i] = data[2][i].sort((a, b) => (Math.abs(b[5]) - Math.abs(a[5])));
       }
-      this.state['tokenHistoryOverview']['table'] = data[2]
-      // console.log(this.state['tokenHistoryOverview']['table'])
       for(let i = 0; i < lengthOfTable; i++){
         numberofPagesArr.push(i+1)
       }
+      for(let i = 0; i < lengthOfTableWalletAssets; i++){
+        numberofPagesArrWalletAssset.push(i+1)
+      }
       this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
+      this.state['walletAssetsTokens']['numberOfPages'] = numberofPagesArrWalletAssset
     }
     this.updateWalletAddress()
     console.log("INCOMING DATA: ", this.state)
@@ -374,7 +371,6 @@ export default class Profile extends Component {
   }
   
   handleText = (event) => {
-    // console.log(event.target.value)
     this.state['header']['walletAddress'] = event.target.value
   }
 
