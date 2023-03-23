@@ -349,7 +349,7 @@ export default class Profile extends Component {
       this.state['volumeHistoryOverview']['table'] = data[1]
       console.log(data)
       for (let i=0;i<data[2].length;i++){
-        data[2][i] = data[2][i].sort((a, b) => b[5] - a[5]);
+        data[2][i] = data[2][i].sort((a, b) => (Math.abs(b[5]) - Math.abs(a[5])));
       }
       this.state['tokenHistoryOverview']['table'] = data[2]
       // console.log(this.state['tokenHistoryOverview']['table'])
@@ -602,7 +602,8 @@ export default class Profile extends Component {
                   <div className='inner-flex-box-container'>
                     <form className='left-side' onSubmit={this.handleSubmit}>
                       <input className="mr" type="text" onChange={this.handleText} id="search-text" name="search-text" placeholder='Search by token, wallet, ENS' />
-                      <input type="submit" id = "submit" value="Submit" className='search mr' style={{cursor: 'pointer'}} />
+                      <input type="submit" id = "submit" value="" className='search mr' style={{cursor: 'pointer'}} />
+                      <div className="search-label">Search</div>
                     </form>
                     
                     <div className='right-side'>
@@ -631,7 +632,7 @@ export default class Profile extends Component {
             <div className='account-outer-container'>
             <div className='profile-wallet-information'>
                 <div className='profile-wallet-information-left'>
-                  {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={153} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
+                  {this.state['header']['walletAddress']? <Jazzicon className="jazzicon" diameter={170} seed={jsNumberForAddress(this.state['header']['walletAddress'])} /> :
                   <img className='profile-image' src = {profileImage} />
                   }
                   

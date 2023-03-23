@@ -1,4 +1,4 @@
-import logo from "./images/left-bar-logo.png"
+import logo from "./images/left-bar-logo3.png"
 import overview from "./images/left-bar-chart.png"
 import favourite from "./images/left-bar-star.png"
 import settings from "./images/left-bar-gear.png"
@@ -48,14 +48,14 @@ const LeftBar = ({walletId}) => {
             <div>
             <div className="left-bar-logo-container">
                 <img src={logo} className="left-bar-logo" />
-                <div className="left-bar-text-container">
+                {/* <div className="left-bar-text-container">
                     <div className="left-bar-toshi">
                         Toshi
                     </div>
                     <div className="left-bar-tools">
                         Tools
                     </div>
-                </div>
+                </div> */}
             </div>
             
 
