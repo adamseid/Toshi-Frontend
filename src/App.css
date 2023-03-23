@@ -246,8 +246,8 @@ a {
 
 
 .left-bar-logo {
-  height: 37.5px;
-  width: 67.2px;
+  height: 45px;
+  width: 81px;
   /* margin-bottom: 5.93px; */
 }
 
@@ -334,7 +334,7 @@ a {
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 21px;
-  /* padding-top: 15px; */
+  padding-top: 15px;
   padding-bottom: 13px;
   padding-left: 10px;
   padding-right: 10px;
