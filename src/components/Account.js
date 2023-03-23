@@ -390,9 +390,12 @@ export default class Profile extends Component {
   }
 
   handleMyWallet = () => {
-    if(this.state.header.connectedWalletAddress != ""){
+    if(this.state.header.connectedWalletAddress != "" && this.state.header.walletAddress != this.state.header.connectedWalletAddress){
       this.state['header']['walletAddress'] = this.state.header.connectedWalletAddress
       this.updateWalletAddress();
+      this.graphHttpRequest()
+      this['state']['accountDetailed']['table'] = []
+      this.connectAndSendWebsocketRequest(this['state']['header']['walletAddress']);
     }
  
   }
