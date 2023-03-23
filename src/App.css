@@ -699,6 +699,7 @@ a {
   letter-spacing: 0em;
   text-align: left;
   color: white;
+  margin-top: 10px;
 }
 
 .recharts-legend-wrapper {
@@ -1768,7 +1769,7 @@ input:checked + .slider:before {
 
 .chart-button-container {
   display: flex;
-  margin: 8px 0px 20px 0px;
+  margin: 17px 0px 0px 0px;
 }
 
 .chart-button{
@@ -1787,7 +1788,11 @@ input:checked + .slider:before {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-right: 30px;
+  margin-right: 20px;
+}
+
+.mb{
+  margin-bottom: 22px;
 }
 
 .chart-button:hover, .chart-button.active{
@@ -1799,7 +1804,7 @@ input:checked + .slider:before {
   text-align: center;
   border-radius: 27px;
   background: #7DFFA1;
-  margin-right: 30px;
+  /* margin-right: 30px; */
   color: black;
   cursor: pointer;
   width: 125px;

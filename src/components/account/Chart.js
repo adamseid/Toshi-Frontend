@@ -132,7 +132,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
     <>
     <div className="chart-title">Total Wallet Value</div>
     <div className="chart-text">{ graphData?.length != 0 && graphData ? (currency? (graphData[0]["USD"] < 0 ? "-$" + Math.abs(graphData[0]["USD"]?.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") :"$" + graphData[0]["USD"]?.toFixed(2)).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",") : Math.round(graphData[0]["ETH"]*10000)/10000 + " ETH") : 0}</div>
-    <div className="chart-button-container">
+    <div className="chart-button-container mb">
       <div className="chart-button" onClick={onClickHandler} ref={ethRef}>ETH</div>
       <div className="chart-button active" onClick={onClickHandler} ref={usdRef}>USD</div>
     </div>
