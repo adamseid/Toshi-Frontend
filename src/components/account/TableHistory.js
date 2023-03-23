@@ -236,7 +236,7 @@ export default class TableHistory extends Component {
                                   Math.abs(asset[5]) < 0.01 ? 
                                       <>$<NumberFormat number={Math.abs(asset[5])}/></> 
                                       : 
-                                      "$" + Math.abs(Math.round(asset[5]*100)/100)
+                                      "$" + Math.abs(Math.round(asset[5]*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                                 ) : asset[5] === 0  ? <>0<span className="grey"> ETH</span></> : 
                                 Math.abs(asset[5]/asset[14]) < 0.01 ? <><NumberFormat number={Math.abs(asset[5]/asset[14])}/><span className="grey"> ETH</span></> : 
                                 <>{Math.abs(Math.round((asset[5]/asset[14])*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
@@ -253,7 +253,7 @@ export default class TableHistory extends Component {
                                 Math.abs(asset[5]) < 0.01 ? 
                                     <>$<NumberFormat number={Math.abs(asset[5])}/></> 
                                     : 
-                                    "$" + Math.abs(Math.round(asset[5]*100)/100)
+                                    "$" + Math.abs(Math.round(asset[5]*100)/100).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
                               ) : asset[5] === 0  ? <>0<span className="grey"> ETH</span></> : 
                               Math.abs(asset[5]/asset[14]) < 0.01 ? <><NumberFormat number={Math.abs(asset[5]/asset[14])}/><span className="grey"> ETH</span></> : 
                               <>{Math.abs(Math.round((asset[5]/asset[14])*1000)/1000).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}<span className="grey"> ETH</span></>}
