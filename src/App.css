@@ -1452,6 +1452,7 @@ a {
   flex-wrap: wrap;
   justify-content: flex-start;
   height: 50px;
+  width: 370px;
 }
 
 .account-bullet{
