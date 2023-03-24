@@ -86,8 +86,8 @@ export default class TableHistory extends Component {
     var targetPageNumber = parseInt(e.target.innerText)
     console.log(targetPageNumber)
     this.props.state.tokenHistoryOverview.currentPage = targetPageNumber-1;
-    this.props.state.tokenHistoryOverview.startPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
-    this.props.state.tokenHistoryOverview.endPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems)
+    this.props.state.tokenHistoryOverview.startPage = ((targetPageNumber) * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
+    this.props.state.tokenHistoryOverview.endPage = ((targetPageNumber) * this.props.state.tokenHistoryOverview.numberOfItems)
     this.setPropsState();
     var showImage = document.getElementsByClassName("show_image")
     var hideImage = document.getElementsByClassName("hide_image")
@@ -106,8 +106,8 @@ export default class TableHistory extends Component {
   pageTurnHandler = (num) => {
     var targetPageNumber = this.props.state.tokenHistoryOverview.currentPage + num
     this.props.state.tokenHistoryOverview.currentPage = targetPageNumber;
-    this.props.state.tokenHistoryOverview.startPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
-    this.props.state.tokenHistoryOverview.endPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems)
+    this.props.state.tokenHistoryOverview.startPage = ((targetPageNumber+1) * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
+    this.props.state.tokenHistoryOverview.endPage = ((targetPageNumber+1) * this.props.state.tokenHistoryOverview.numberOfItems)
     this.setPropsState();
     var showImage = document.getElementsByClassName("show_image")
     var hideImage = document.getElementsByClassName("hide_image")
@@ -126,8 +126,8 @@ export default class TableHistory extends Component {
   pageEndsHandler = (page) => {
     var targetPageNumber = page;
     this.props.state.tokenHistoryOverview.currentPage = targetPageNumber;
-    this.props.state.tokenHistoryOverview.startPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
-    this.props.state.tokenHistoryOverview.endPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems)
+    this.props.state.tokenHistoryOverview.startPage = ((targetPageNumber+1) * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
+    this.props.state.tokenHistoryOverview.endPage = ((targetPageNumber+1) * this.props.state.tokenHistoryOverview.numberOfItems)
     this.setPropsState();
     var showImage = document.getElementsByClassName("show_image")
     var hideImage = document.getElementsByClassName("hide_image")
@@ -156,15 +156,16 @@ export default class TableHistory extends Component {
       this.props.state.historyTime = 3
     }
 
-    var pageNumberClassNameArr = document.getElementsByClassName("page_number")
-    if(pageNumberClassNameArr){
-      for(let i=0;i<pageNumberClassNameArr.length;i++){
-        pageNumberClassNameArr[i].classList.remove("active")
-      }
-      if(pageNumberClassNameArr[0]){
-        pageNumberClassNameArr[0].classList.add("active")
-      }
-    }
+    // var pageNumberClassNameArr = document.getElementsByClassName("page_number")
+    // if(pageNumberClassNameArr){
+    //   for(let i=0;i<pageNumberClassNameArr.length;i++){
+    //     pageNumberClassNameArr[i].classList.remove("active")
+    //   }
+    //   if(pageNumberClassNameArr[0]){
+    //     pageNumberClassNameArr[0].classList.add("active")
+    //   }
+    // }
+    this.props.state.tokenHistoryOverview.currentPage = 0;
     this.props.state.tokenHistoryOverview.startPage = 0
     this.props.state.tokenHistoryOverview.endPage = 10
     var lengthOfTable = Math.ceil(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime].length/ this.props.state['tokenHistoryOverview']['numberOfItems'])
