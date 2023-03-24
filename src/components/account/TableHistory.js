@@ -330,7 +330,7 @@ export default class TableHistory extends Component {
                     }
                   })
                 }
-                <span className="page_number" onClick={()=>this.pageTurnHandler(1)}>Next</span>
+                {this.props.state.tokenHistoryOverview.currentPage < this.props.state.tokenHistoryOverview.numberOfPages.length-1 && <span className="page_number" onClick={()=>this.pageTurnHandler(1)}>Next</span>}
               </div>
             </div>
           ) : (
