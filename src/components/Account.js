@@ -145,6 +145,7 @@ export default class Profile extends Component {
       this.state['volumeHistoryOverview']['table'] = incomingData[1]
       this.state['tokenHistoryOverview']['table'] = incomingData[2]
       this.state.isLoading = false;
+      this.state.tokenHistoryOverview.currentPage = 0;
       this.setState(this.state)
     }).catch(error => {
       console.log(error)
