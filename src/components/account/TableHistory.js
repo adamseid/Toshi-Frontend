@@ -83,15 +83,51 @@ export default class TableHistory extends Component {
   }
 
   pageNumber = (e) => {
-    var pageNumberClassName = e.target.classList[0]
     var targetPageNumber = parseInt(e.target.innerText)
-    var pageNumberClassNameArr = document.getElementsByClassName(pageNumberClassName)
-    for(let i=0;i<pageNumberClassNameArr.length;i++){
-      pageNumberClassNameArr[i].classList.remove("active")
+    console.log(targetPageNumber)
+    this.props.state.tokenHistoryOverview.currentPage = targetPageNumber-1;
+    this.props.state.tokenHistoryOverview.startPage = ((targetPageNumber) * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
+    this.props.state.tokenHistoryOverview.endPage = ((targetPageNumber) * this.props.state.tokenHistoryOverview.numberOfItems)
+    this.setPropsState();
+    var showImage = document.getElementsByClassName("show_image")
+    var hideImage = document.getElementsByClassName("hide_image")
+    var tokenRows = document.getElementsByClassName("account-detailed-ids")
+    for(let i=0;i<showImage.length;i++){
+      hideImage[i].style.display = "none"
     }
-    e.target.classList.add("active")
-    this.props.state.tokenHistoryOverview.startPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
-    this.props.state.tokenHistoryOverview.endPage = (targetPageNumber * this.props.state.tokenHistoryOverview.numberOfItems)
+    for(let i=0;i<showImage.length;i++){
+      showImage[i].style.display = "block"
+    }
+    for(let i=0;i<tokenRows.length;i++){
+      tokenRows[i].style.opacity = "1"
+    }
+  }
+
+  pageTurnHandler = (num) => {
+    var targetPageNumber = this.props.state.tokenHistoryOverview.currentPage + num
+    this.props.state.tokenHistoryOverview.currentPage = targetPageNumber;
+    this.props.state.tokenHistoryOverview.startPage = ((targetPageNumber+1) * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
+    this.props.state.tokenHistoryOverview.endPage = ((targetPageNumber+1) * this.props.state.tokenHistoryOverview.numberOfItems)
+    this.setPropsState();
+    var showImage = document.getElementsByClassName("show_image")
+    var hideImage = document.getElementsByClassName("hide_image")
+    var tokenRows = document.getElementsByClassName("account-detailed-ids")
+    for(let i=0;i<showImage.length;i++){
+      hideImage[i].style.display = "none"
+    }
+    for(let i=0;i<showImage.length;i++){
+      showImage[i].style.display = "block"
+    }
+    for(let i=0;i<tokenRows.length;i++){
+      tokenRows[i].style.opacity = "1"
+    }
+  }
+
+  pageEndsHandler = (page) => {
+    var targetPageNumber = page;
+    this.props.state.tokenHistoryOverview.currentPage = targetPageNumber;
+    this.props.state.tokenHistoryOverview.startPage = ((targetPageNumber+1) * this.props.state.tokenHistoryOverview.numberOfItems) - this.props.state.tokenHistoryOverview.numberOfItems
+    this.props.state.tokenHistoryOverview.endPage = ((targetPageNumber+1) * this.props.state.tokenHistoryOverview.numberOfItems)
     this.setPropsState();
     var showImage = document.getElementsByClassName("show_image")
     var hideImage = document.getElementsByClassName("hide_image")
@@ -120,15 +156,16 @@ export default class TableHistory extends Component {
       this.props.state.historyTime = 3
     }
 
-    var pageNumberClassNameArr = document.getElementsByClassName("page_number")
-    if(pageNumberClassNameArr){
-      for(let i=0;i<pageNumberClassNameArr.length;i++){
-        pageNumberClassNameArr[i].classList.remove("active")
-      }
-      if(pageNumberClassNameArr[0]){
-        pageNumberClassNameArr[0].classList.add("active")
-      }
-    }
+    // var pageNumberClassNameArr = document.getElementsByClassName("page_number")
+    // if(pageNumberClassNameArr){
+    //   for(let i=0;i<pageNumberClassNameArr.length;i++){
+    //     pageNumberClassNameArr[i].classList.remove("active")
+    //   }
+    //   if(pageNumberClassNameArr[0]){
+    //     pageNumberClassNameArr[0].classList.add("active")
+    //   }
+    // }
+    this.props.state.tokenHistoryOverview.currentPage = 0;
     this.props.state.tokenHistoryOverview.startPage = 0
     this.props.state.tokenHistoryOverview.endPage = 10
     var lengthOfTable = Math.ceil(this.props.state.tokenHistoryOverview.table[this.props.state.historyTime].length/ this.props.state['tokenHistoryOverview']['numberOfItems'])
@@ -290,8 +327,14 @@ export default class TableHistory extends Component {
           this.props.state["tokenHistoryOverview"]["numberOfPages"].length > 0 ? (
             <div className='pagination_buttons_tokens'>
               <div className='pagination_inner_container'>
+                {this.props.state.tokenHistoryOverview.currentPage > 0 && 
+                <>
+                  <span className="page_number" onClick={()=>this.pageEndsHandler(0)}>First</span>
+                  <span className="page_number" onClick={()=>this.pageTurnHandler(-1)}>Prev</span>
+                </>
+                }
                 {
-                  this.props.state["tokenHistoryOverview"]["numberOfPages"].map((pages, index)=> {
+                  this.props.state["tokenHistoryOverview"]["numberOfPages"].slice(this.props.state.tokenHistoryOverview.currentPage, this.props.state.tokenHistoryOverview.currentPage + 3).map((pages, index)=> {
                     if(index == 0){
                       return (
                         <div key={index} className='page_number active' onClick={this.pageNumber}>
@@ -307,6 +350,11 @@ export default class TableHistory extends Component {
                     }
                   })
                 }
+                {this.props.state.tokenHistoryOverview.currentPage < this.props.state.tokenHistoryOverview.numberOfPages.length-1 && 
+                <>
+                  <span className="page_number" onClick={()=>this.pageTurnHandler(1)}>Next</span>
+                  <span className="page_number" onClick={()=>this.pageEndsHandler(this.props.state.tokenHistoryOverview.numberOfPages.length-1)}>Last</span>
+                </>}
               </div>
             </div>
           ) : (
