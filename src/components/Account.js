@@ -84,6 +84,7 @@ const default_state = {
     endPage : 10,
     numberOfItems : 10,
     numberOfPages : [],
+    currentPage: 0,
   },
   time: 3,
   historyTime: 3,
