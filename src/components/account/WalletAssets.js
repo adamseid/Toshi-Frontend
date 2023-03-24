@@ -35,18 +35,35 @@ export default class WalletAssets extends Component {
 
 
   pageNumber = (e) => {
-    var pageNumberClassName = e.target.classList[0]
+    // var pageNumberClassName = e.target.classList[0]
     var targetPageNumber = parseInt(e.target.innerText)
     // console.log(e.target.innerText)
-    var pageNumberClassNameArr = document.getElementsByClassName(pageNumberClassName)
-    for(let i=0;i<pageNumberClassNameArr.length;i++){
-      pageNumberClassNameArr[i].classList.remove("active")
-    }
-    e.target.classList.add("active")
+    // var pageNumberClassNameArr = document.getElementsByClassName(pageNumberClassName)
+    // for(let i=0;i<pageNumberClassNameArr.length;i++){
+    //   pageNumberClassNameArr[i].classList.remove("active")
+    // }
+    // e.target.classList.add("active")
+    this.props.state.walletAssetsTokens.currentPage = targetPageNumber - 1;
     this.props.state.walletAssetsTokens.startPage = (targetPageNumber * this.props.state.walletAssetsTokens.numberOfItems) - this.props.state.walletAssetsTokens.numberOfItems
     this.props.state.walletAssetsTokens.endPage = (targetPageNumber * this.props.state.walletAssetsTokens.numberOfItems)
     this.setPropsState();
     // console.log(this.props.state.walletAssetsTokens)
+  }
+
+  pageTurnHandler = (num) => {
+    var targetPageNumber = this.props.state.walletAssetsTokens.currentPage + 1 + num
+    this.props.state.walletAssetsTokens.currentPage = targetPageNumber - 1;
+    this.props.state.walletAssetsTokens.startPage = ((targetPageNumber) * this.props.state.walletAssetsTokens.numberOfItems) - this.props.state.walletAssetsTokens.numberOfItems
+    this.props.state.walletAssetsTokens.endPage = ((targetPageNumber) * this.props.state.walletAssetsTokens.numberOfItems)
+    this.setPropsState();
+  }
+
+  pageEndsHandler = (page) => {
+    this.props.state.walletAssetsTokens.currentPage = page;
+    var targetPageNumber = this.props.state.walletAssetsTokens.currentPage + 1
+    this.props.state.walletAssetsTokens.startPage = ((targetPageNumber) * this.props.state.walletAssetsTokens.numberOfItems) - this.props.state.walletAssetsTokens.numberOfItems
+    this.props.state.walletAssetsTokens.endPage = ((targetPageNumber) * this.props.state.walletAssetsTokens.numberOfItems)
+    this.setPropsState();
   }
 
   render() {
@@ -125,8 +142,14 @@ export default class WalletAssets extends Component {
         {
           this.props.state["walletAssetsTokens"]["numberOfPages"].length > 0 ? (
             <div className='pagination_buttons'>
+              {this.props.state.walletAssetsTokens.currentPage > 0 && 
+                <>
+                  <span className="page_number" onClick={()=>this.pageEndsHandler(0)}>First</span>
+                  <span className="page_number" onClick={()=>this.pageTurnHandler(-1)}>Prev</span>
+                </>
+                }
               {
-                this.props.state["walletAssetsTokens"]["numberOfPages"].map((asset, index)=> {
+                this.props.state["walletAssetsTokens"]["numberOfPages"].slice(this.props.state.walletAssetsTokens.currentPage, this.props.state.walletAssetsTokens.currentPage + 3).map((asset, index)=> {
                   // console.log(index)
                   if(index == 0){
                     return (
@@ -143,6 +166,11 @@ export default class WalletAssets extends Component {
                   }
                 })
               }
+              {this.props.state.walletAssetsTokens.currentPage < this.props.state.walletAssetsTokens.numberOfPages.length-1 && 
+                <>
+                  <span className="page_number" onClick={()=>this.pageTurnHandler(1)}>Next</span>
+                  <span className="page_number" onClick={()=>this.pageEndsHandler(this.props.state.walletAssetsTokens.numberOfPages.length-1)}>Last</span>
+                </>}
             </div>
           ) : (
             <></>

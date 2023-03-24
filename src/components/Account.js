@@ -73,6 +73,7 @@ const default_state = {
     endPage : 10,
     numberOfItems : 10,
     numberOfPages : [],
+    currentPage: 0,
   },
   volumeHistoryOverview : {
     table: []
