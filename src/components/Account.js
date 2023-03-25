@@ -334,10 +334,10 @@ export default class Profile extends Component {
       let data = JSON.parse(e.data)['response']
       console.log(data.length)
       // UNCOMMENT HERE TO DISABLE SEARCH BAR WHILE SEARCHING
-      // if(data.length != 0){
+      if(data.length != 0){
         console.log("INCOMING DATA: ", data)
-        // document.getElementsByClassName("left-side")[0].style.opacity = 0.5
-        // document.getElementById("search-text").disabled = true
+        document.getElementsByClassName("left-side")[0].style.opacity = 0.5
+        document.getElementById("search-text").disabled = true
         let numberofPagesArr = []
         let numberofPagesArrWalletAssset = []
         var lengthOfTable = 10
@@ -365,10 +365,10 @@ export default class Profile extends Component {
         this.state['walletAssetsTokens']['numberOfPages'] = numberofPagesArrWalletAssset
         console.log("INCOMING DATA: ", this.state)
         this.updateWalletAddress()
-      // }else{
-      //   document.getElementsByClassName("left-side")[0].style.opacity = 1
-      //   document.getElementById("search-text").disabled = false
-      // }
+      }else{
+        document.getElementsByClassName("left-side")[0].style.opacity = 1
+        document.getElementById("search-text").disabled = false
+      }
     }
   }
 
