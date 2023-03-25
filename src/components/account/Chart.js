@@ -139,7 +139,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
     </div>
     <div className="account-container">
         <div className="chart-container">
-          <ResponsiveContainer width={"100%"} height={600}>
+          <ResponsiveContainer width={"98%"} height={600}>
             <AreaChart
               data={
                 graphData == [] ? (

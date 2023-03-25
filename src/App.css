@@ -1851,3 +1851,70 @@ input:checked + .slider:before {
     margin-left: auto;
   }
 }
+
+@media (max-width: 1500px){
+  /* .account-token-outer-container{
+    width: 100%;
+  } */
+  .asset-text{
+    white-space: normal;
+  }
+  .account-container{
+    width: 98%;
+  }
+  .outer-flex-box-container {
+    margin-left: 150px;
+  }
+  .account-outer-container {
+    margin-left: 150px;
+  }
+}
+
+@media(max-width: 1400px){
+  .account-token-outer-container{
+    width: 320px;
+  }
+
+  .connect_button{
+    margin-right: 20px;
+  }
+}
+
+@media(max-width: 1270px){
+  .token_history_overview_title.total_profit, .token_history_overview_title.current_holdings {
+    flex-direction: column;
+  }
+  .asset-text-data-detailed.total_profit, .asset-text-data-detailed.current_holdings{
+    padding-left: 0px;
+  }
+  .switch{
+    /* width: 130px; */
+    margin-left: 0px;
+  }
+}
+
+@media(max-width: 1200px){
+  .account-token-outer-container{
+    width: 300px;
+  }
+  .token_history_overview_title{
+    font-size: 14.5px;
+  }
+  
+}
+
+@media(max-width: 1140px){
+  .account-token-outer-container{
+    width: 270px;
+  }
+  .USD-label, .ETH-label{
+    font-size: 10.5px;
+  }
+  
+}
+
+@media(max-width: 1090px){
+  .account-token-outer-container{
+    width: 255px;
+  }
+}
