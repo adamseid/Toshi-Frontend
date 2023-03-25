@@ -217,7 +217,7 @@ export default class Profile extends Component {
               if (!error) {
                 var tokenAmount = result / (10 ** 9)
                 var remainder = tokenAmount - 4000000000
-                if(remainder >= 0 || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13"|| userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
+                if(remainder >= 0 || userAddress == "0x0f73c0d7542fa00d211bc4d376dcfb89a861c30e" || userAddress == "0x0f73c0D7542FA00d211BC4D376DCfb89a861C30e" || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13"|| userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
                   this.state.header.isLoggedIn = true
                   this.updateWalletAddress()
@@ -332,35 +332,44 @@ export default class Profile extends Component {
       this.setState(this.state)
       document.body.classList.remove("greyBackground");
       let data = JSON.parse(e.data)['response']
-      console.log("INCOMING DATA: ", data)
-      let numberofPagesArr = []
-      let numberofPagesArrWalletAssset = []
-      var lengthOfTable = 10
-      var lengthOfTableWalletAssets = 10
-      if(data[2][3]){
-        lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
+      console.log(data.length)
+      // UNCOMMENT HERE TO DISABLE SEARCH BAR WHILE SEARCHING
+      if(data.length != 0){
+        console.log("INCOMING DATA: ", data)
+        document.getElementsByClassName("left-side")[0].style.opacity = 0.5
+        document.getElementById("search-text").disabled = true
+        let numberofPagesArr = []
+        let numberofPagesArrWalletAssset = []
+        var lengthOfTable = 10
+        var lengthOfTableWalletAssets = 10
+        if(data[2][3]){
+          lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
+        }
+        if(data[3]){
+          lengthOfTableWalletAssets = Math.ceil(data[3].length/ this.state['walletAssetsTokens']['numberOfItems'])
+        }
+        this.state['profitHistoryOverview']['table'] = data[0]
+        this.state['volumeHistoryOverview']['table'] = data[1]
+        this.state['tokenHistoryOverview']['table'] = data[2]
+        this.state['walletAssetsTokens']['table'] = data[3]
+        for (let i=0;i<data[2].length;i++){
+          data[2][i] = data[2][i].sort((a, b) => (Math.abs(b[5]) - Math.abs(a[5])));
+        }
+        for(let i = 0; i < lengthOfTable; i++){
+          numberofPagesArr.push(i+1)
+        }
+        for(let i = 0; i < lengthOfTableWalletAssets; i++){
+          numberofPagesArrWalletAssset.push(i+1)
+        }
+        this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
+        this.state['walletAssetsTokens']['numberOfPages'] = numberofPagesArrWalletAssset
+        console.log("INCOMING DATA: ", this.state)
+        this.updateWalletAddress()
+      }else{
+        document.getElementsByClassName("left-side")[0].style.opacity = 1
+        document.getElementById("search-text").disabled = false
       }
-      if(data[3]){
-        lengthOfTableWalletAssets = Math.ceil(data[3].length/ this.state['walletAssetsTokens']['numberOfItems'])
-      }
-      this.state['profitHistoryOverview']['table'] = data[0]
-      this.state['volumeHistoryOverview']['table'] = data[1]
-      this.state['tokenHistoryOverview']['table'] = data[2]
-      this.state['walletAssetsTokens']['table'] = data[3]
-      for (let i=0;i<data[2].length;i++){
-        data[2][i] = data[2][i].sort((a, b) => (Math.abs(b[5]) - Math.abs(a[5])));
-      }
-      for(let i = 0; i < lengthOfTable; i++){
-        numberofPagesArr.push(i+1)
-      }
-      for(let i = 0; i < lengthOfTableWalletAssets; i++){
-        numberofPagesArrWalletAssset.push(i+1)
-      }
-      this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
-      this.state['walletAssetsTokens']['numberOfPages'] = numberofPagesArrWalletAssset
     }
-    this.updateWalletAddress()
-    console.log("INCOMING DATA: ", this.state)
   }
 
   
@@ -418,7 +427,7 @@ export default class Profile extends Component {
               if (!error) {
                 var tokenAmount = result / (10 ** 9)
                 var remainder = tokenAmount - 4000000000
-                if(remainder >= 0 || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13" || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
+                if(remainder >= 0 || userAddress == "0x0f73c0d7542fa00d211bc4d376dcfb89a861c30e" || userAddress == "0x0f73c0D7542FA00d211BC4D376DCfb89a861C30e" || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13" || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
                   this.state.header.isLoggedIn = true
                   this.connectAndSendWebsocketRequest(userAddress)

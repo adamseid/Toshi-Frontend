@@ -51,13 +51,13 @@ export default class Graph extends Component {
                return (
                  index === 3 ? 
                    <div key={index} className='asset-text-data green'>
-                     +${Math.abs((Math.round(account*100)/100)).toFixed(2)}
+                     +${Math.abs((Math.round(account*100)/100)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                    </div> : (index == 4 ? 
                      <div key={index} className='asset-text-data red'>
-                     -${Math.abs((Math.round(account*100)/100)).toFixed(2)}
+                     -${Math.abs((Math.round(account*100)/100)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                    </div> : 
                    <div key={index} className='asset-text-data'>
-                     ${Math.abs((Math.round(account*100)/100)).toFixed(2)}
+                     ${Math.abs((Math.round(account*100)/100)).toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")}
                    </div>
                      )      
                )
