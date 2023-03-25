@@ -89,7 +89,7 @@ export default class WalletAssets extends Component {
             <Suspense fallback={<div>Loading...</div>}>
               <div className='walletAssetsTokenNameOuterContainer'>
                 {
-                  this.props.state.walletAssetsTokens.table?.slice(this.props.state.walletAssetsTokens.startPage, this.props.state.walletAssetsTokens.endPage).sort((a,b)=>b[6]-a[6]).map((asset, index)=> {
+                  this.props.state.walletAssetsTokens.table?.slice(this.props.state.walletAssetsTokens.startPage, this.props.state.walletAssetsTokens.endPage).sort((a,b)=>b[7]-a[7]).map((asset, index)=> {
                     return (
                       <div key={index} className="walletAssetsTokenNameContainer">
                         <div className="walletAssetsTokenName">
