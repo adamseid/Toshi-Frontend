@@ -1753,7 +1753,7 @@ input:checked + .slider:before {
   animation: spinner 1.5s linear infinite;
   position: fixed;
   top: 37%;
-  left: 45%;
+  left: 44%;
   transform: translate(-50%, -50%);
 }
 
