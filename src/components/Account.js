@@ -332,35 +332,44 @@ export default class Profile extends Component {
       this.setState(this.state)
       document.body.classList.remove("greyBackground");
       let data = JSON.parse(e.data)['response']
-      console.log("INCOMING DATA: ", data)
-      let numberofPagesArr = []
-      let numberofPagesArrWalletAssset = []
-      var lengthOfTable = 10
-      var lengthOfTableWalletAssets = 10
-      if(data[2][3]){
-        lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
-      }
-      if(data[3]){
-        lengthOfTableWalletAssets = Math.ceil(data[3].length/ this.state['walletAssetsTokens']['numberOfItems'])
-      }
-      this.state['profitHistoryOverview']['table'] = data[0]
-      this.state['volumeHistoryOverview']['table'] = data[1]
-      this.state['tokenHistoryOverview']['table'] = data[2]
-      this.state['walletAssetsTokens']['table'] = data[3]
-      for (let i=0;i<data[2].length;i++){
-        data[2][i] = data[2][i].sort((a, b) => (Math.abs(b[5]) - Math.abs(a[5])));
-      }
-      for(let i = 0; i < lengthOfTable; i++){
-        numberofPagesArr.push(i+1)
-      }
-      for(let i = 0; i < lengthOfTableWalletAssets; i++){
-        numberofPagesArrWalletAssset.push(i+1)
-      }
-      this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
-      this.state['walletAssetsTokens']['numberOfPages'] = numberofPagesArrWalletAssset
+      console.log(data.length)
+      // UNCOMMENT HERE TO DISABLE SEARCH BAR WHILE SEARCHING
+      // if(data.length != 0){
+        console.log("INCOMING DATA: ", data)
+        document.getElementsByClassName("left-side")[0].style.opacity = 0.5
+        document.getElementById("search-text").disabled = true
+        let numberofPagesArr = []
+        let numberofPagesArrWalletAssset = []
+        var lengthOfTable = 10
+        var lengthOfTableWalletAssets = 10
+        if(data[2][3]){
+          lengthOfTable = Math.ceil(data[2][3].length/ this.state['tokenHistoryOverview']['numberOfItems'])
+        }
+        if(data[3]){
+          lengthOfTableWalletAssets = Math.ceil(data[3].length/ this.state['walletAssetsTokens']['numberOfItems'])
+        }
+        this.state['profitHistoryOverview']['table'] = data[0]
+        this.state['volumeHistoryOverview']['table'] = data[1]
+        this.state['tokenHistoryOverview']['table'] = data[2]
+        this.state['walletAssetsTokens']['table'] = data[3]
+        for (let i=0;i<data[2].length;i++){
+          data[2][i] = data[2][i].sort((a, b) => (Math.abs(b[5]) - Math.abs(a[5])));
+        }
+        for(let i = 0; i < lengthOfTable; i++){
+          numberofPagesArr.push(i+1)
+        }
+        for(let i = 0; i < lengthOfTableWalletAssets; i++){
+          numberofPagesArrWalletAssset.push(i+1)
+        }
+        this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
+        this.state['walletAssetsTokens']['numberOfPages'] = numberofPagesArrWalletAssset
+        console.log("INCOMING DATA: ", this.state)
+        this.updateWalletAddress()
+      // }else{
+      //   document.getElementsByClassName("left-side")[0].style.opacity = 1
+      //   document.getElementById("search-text").disabled = false
+      // }
     }
-    this.updateWalletAddress()
-    console.log("INCOMING DATA: ", this.state)
   }
 
   
