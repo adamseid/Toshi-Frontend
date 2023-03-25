@@ -336,8 +336,8 @@ export default class Profile extends Component {
       // UNCOMMENT HERE TO DISABLE SEARCH BAR WHILE SEARCHING
       // if(data.length != 0){
         console.log("INCOMING DATA: ", data)
-        document.getElementsByClassName("left-side")[0].style.opacity = 0.5
-        document.getElementById("search-text").disabled = true
+        // document.getElementsByClassName("left-side")[0].style.opacity = 0.5
+        // document.getElementById("search-text").disabled = true
         let numberofPagesArr = []
         let numberofPagesArrWalletAssset = []
         var lengthOfTable = 10
