@@ -1095,6 +1095,7 @@ a {
 .chart-container {
   margin-top: 15px;
   margin-left: 15px;
+  width: 100%;
 }
 
 /* Mobile */
@@ -1750,14 +1751,16 @@ input:checked + .slider:before {
   border-top: 10px solid #383636; 
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
-  position: absolute;
-  top: 50%;
+  position: fixed;
+  top: 37%;
   left: 45%;
   transform: translate(-50%, -50%);
 }
 
 .greyBackground{
-  opacity: 0.5;
+  opacity: 0.3;
+  background-color: rgb(0, 0, 0);
+  background-blend-mode: multiply;
 }
 
 .wallet-glow:hover{
@@ -1840,3 +1843,11 @@ input:checked + .slider:before {
   margin-right: 20px;
 }
 
+@media (min-width: 1795px){
+  .outer-flex-box-container {
+    margin-left: auto;
+  }
+  .account-outer-container {
+    margin-left: auto;
+  }
+}

@@ -11,6 +11,7 @@ import {
     Tooltip,
     Legend,
     ReferenceLine,
+    ResponsiveContainer,
   } from "recharts";
 
 export const Chart = ( { graphData, ranges, ticks} ) => {
@@ -138,9 +139,8 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
     </div>
     <div className="account-container">
         <div className="chart-container">
+          <ResponsiveContainer width={"100%"} height={600}>
             <AreaChart
-              width={1200}
-              height={600}
               data={
                 graphData == [] ? (
                   []
@@ -240,6 +240,7 @@ export const Chart = ( { graphData, ranges, ticks} ) => {
               }
               
             </AreaChart>
+          </ResponsiveContainer>
         </div>
     </div>
     <div className='date-change'>
