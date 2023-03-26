@@ -1840,3 +1840,30 @@ input:checked + .slider:before {
   margin-right: 20px;
 }
 
+/* Support Button */
+
+.support_button_outer_container{
+  position: sticky;
+  max-width: 150px;
+  top: calc(100vh - 56px);
+  margin-right: 30px;
+  left: 100%;
+  z-index: 1000000;
+}
+
+.support_button_text{
+  font-family: Rajdhani;
+  height: 28px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #DEDEDE;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 7px;
+  background-color: black;
+  box-shadow: 0px 0px 2px 2px #7DFFA133;
+  border-radius: 27px;
+}

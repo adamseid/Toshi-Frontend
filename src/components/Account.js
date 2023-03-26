@@ -338,6 +338,7 @@ export default class Profile extends Component {
         console.log("INCOMING DATA: ", data)
         document.getElementsByClassName("left-side")[0].style.opacity = 0.5
         document.getElementById("search-text").disabled = true
+        document.getElementById("search-text").placeholder = "Loading data, please wait"
         let numberofPagesArr = []
         let numberofPagesArrWalletAssset = []
         var lengthOfTable = 10
@@ -366,6 +367,7 @@ export default class Profile extends Component {
         console.log("INCOMING DATA: ", this.state)
         this.updateWalletAddress()
       }else{
+        document.getElementById("search-text").placeholder = 'Search by token, wallet, ENS'
         document.getElementsByClassName("left-side")[0].style.opacity = 1
         document.getElementById("search-text").disabled = false
       }
@@ -606,6 +608,13 @@ export default class Profile extends Component {
             </div>
           ) : (
             <div className='bg'>
+              <div className='support_button_outer_container'>
+                <a href = "https://support.toshitools.app/" className='support_button_inner_container'>
+                  <div className='support_button_text'>
+                    Report a bug
+                  </div>
+                </a>
+              </div>
               <div className='account_header'>
                 <div className='outer-flex-box-container'>
                   <div className='header-left'>
