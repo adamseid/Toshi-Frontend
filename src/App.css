@@ -1095,6 +1095,7 @@ a {
 .chart-container {
   margin-top: 15px;
   margin-left: 15px;
+  width: 100%;
 }
 
 /* Mobile */
@@ -1750,14 +1751,16 @@ input:checked + .slider:before {
   border-top: 10px solid #383636; 
   border-radius: 50%;
   animation: spinner 1.5s linear infinite;
-  position: absolute;
-  top: 50%;
-  left: 45%;
+  position: fixed;
+  top: 37%;
+  left: 44%;
   transform: translate(-50%, -50%);
 }
 
 .greyBackground{
-  opacity: 0.5;
+  opacity: 0.3;
+  background-color: rgb(0, 0, 0);
+  background-blend-mode: multiply;
 }
 
 .wallet-glow:hover{
@@ -1841,6 +1844,14 @@ input:checked + .slider:before {
 }
 
 /* Support Button */
+@media (min-width: 1795px){
+  .outer-flex-box-container {
+    margin-left: auto;
+  }
+  .account-outer-container {
+    margin-left: auto;
+  }
+}
 
 .support_button_outer_container{
   position: sticky;
@@ -1866,4 +1877,70 @@ input:checked + .slider:before {
   background-color: black;
   box-shadow: 0px 0px 2px 2px #7DFFA133;
   border-radius: 27px;
+}
+@media (max-width: 1500px){
+  /* .account-token-outer-container{
+    width: 100%;
+  } */
+  .asset-text{
+    white-space: normal;
+  }
+  .account-container{
+    width: 98%;
+  }
+  .outer-flex-box-container {
+    margin-left: 150px;
+  }
+  .account-outer-container {
+    margin-left: 150px;
+  }
+}
+
+@media(max-width: 1400px){
+  .account-token-outer-container{
+    width: 320px;
+  }
+
+  .connect_button{
+    margin-right: 20px;
+  }
+}
+
+@media(max-width: 1270px){
+  .token_history_overview_title.total_profit, .token_history_overview_title.current_holdings {
+    flex-direction: column;
+  }
+  .asset-text-data-detailed.total_profit, .asset-text-data-detailed.current_holdings{
+    padding-left: 0px;
+  }
+  .switch{
+    /* width: 130px; */
+    margin-left: 0px;
+  }
+}
+
+@media(max-width: 1200px){
+  .account-token-outer-container{
+    width: 300px;
+  }
+  .token_history_overview_title{
+    font-size: 14.5px;
+  }
+  
+}
+
+@media(max-width: 1140px){
+  .account-token-outer-container{
+    width: 270px;
+  }
+  .USD-label, .ETH-label{
+    font-size: 10.5px;
+  }
+  
+}
+
+@media(max-width: 1090px){
+  .account-token-outer-container{
+    width: 255px;
+  }
 }
