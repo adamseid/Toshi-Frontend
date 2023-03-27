@@ -156,7 +156,7 @@ export default class Profile extends Component {
   graphHttpRequest = () => {
     var url = backend_url + "api/toshi/accountGraph/";
     axios.post(url, this.state).then((response) => {
-      console.log("GRAPH: ", response.data['profile_response'])
+      // console.log("GRAPH: ", response.data['profile_response'])
       this.state['profile']['graph'] = response.data['profile_response'][0]
       this.state['profile']['ranges'] = response.data['profile_response'][1]
       this.state['profile']['ticks'] = response.data['profile_response'][2]
@@ -217,7 +217,7 @@ export default class Profile extends Component {
               if (!error) {
                 var tokenAmount = result / (10 ** 9)
                 var remainder = tokenAmount - 4000000000
-                if(remainder >= 0 || userAddress == "0x3e9d51eb02948e6d0680dd94c9a707b352453407" || userAddress == "0x3e9D51eB02948E6D0680DD94C9a707B352453407" || userAddress == "0x0f73c0d7542fa00d211bc4d376dcfb89a861c30e" || userAddress == "0x0f73c0D7542FA00d211BC4D376DCfb89a861C30e" || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13"|| userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
+                if(remainder >= 0 || userAddress == "0x34D3fd71BbE34fce99994df9b65C72b79B16423c" || userAddress == "0x34d3fd71bbe34fce99994df9b65c72b79b16423c" || userAddress == "0x3e9d51eb02948e6d0680dd94c9a707b352453407" || userAddress == "0x3e9D51eB02948E6D0680DD94C9a707B352453407" || userAddress == "0x0f73c0d7542fa00d211bc4d376dcfb89a861c30e" || userAddress == "0x0f73c0D7542FA00d211BC4D376DCfb89a861C30e" || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13"|| userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
                   this.state.header.isLoggedIn = true
                   this.updateWalletAddress()
@@ -332,10 +332,10 @@ export default class Profile extends Component {
       this.setState(this.state)
       document.body.classList.remove("greyBackground");
       let data = JSON.parse(e.data)['response']
-      console.log(data.length)
+      // console.log(data.length)
       // UNCOMMENT HERE TO DISABLE SEARCH BAR WHILE SEARCHING
       if(data.length != 0){
-        console.log("INCOMING DATA: ", data)
+        // console.log("INCOMING DATA: ", data)
         document.getElementsByClassName("left-side")[0].style.opacity = 0.5
         document.getElementById("search-text").disabled = true
         document.getElementById("search-text").placeholder = "Loading data, please wait"
@@ -364,7 +364,7 @@ export default class Profile extends Component {
         }
         this.state['tokenHistoryOverview']['numberOfPages'] = numberofPagesArr
         this.state['walletAssetsTokens']['numberOfPages'] = numberofPagesArrWalletAssset
-        console.log("INCOMING DATA: ", this.state)
+        // console.log("INCOMING DATA: ", this.state)
         this.updateWalletAddress()
       }else{
         document.getElementById("search-text").placeholder = 'Search by token, wallet, ENS'
@@ -429,7 +429,7 @@ export default class Profile extends Component {
               if (!error) {
                 var tokenAmount = result / (10 ** 9)
                 var remainder = tokenAmount - 4000000000
-                if(remainder >= 0 || userAddress == "0x3e9d51eb02948e6d0680dd94c9a707b352453407" || userAddress == "0x3e9D51eB02948E6D0680DD94C9a707B352453407" || userAddress == "0x0f73c0d7542fa00d211bc4d376dcfb89a861c30e" || userAddress == "0x0f73c0D7542FA00d211BC4D376DCfb89a861C30e" || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13" || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
+                if(remainder >= 0  || userAddress == "0x34D3fd71BbE34fce99994df9b65C72b79B16423c" || userAddress == "0x34d3fd71bbe34fce99994df9b65c72b79b16423c" || userAddress == "0x3e9d51eb02948e6d0680dd94c9a707b352453407" || userAddress == "0x3e9D51eB02948E6D0680DD94C9a707B352453407" || userAddress == "0x0f73c0d7542fa00d211bc4d376dcfb89a861c30e" || userAddress == "0x0f73c0D7542FA00d211BC4D376DCfb89a861C30e" || userAddress == "0x0741cE75543B9a2D69afFF096e587f7bAa5E4F13" ||  userAddress == "0x0741ce75543b9a2d69afff096e587f7baa5e4f13" || userAddress == "0x1cab3c4ad653148f15b4ad8d7b5bd96ad968279c"|| userAddress == "0xae719f64348d9cc7b781746b95584a971d1bcb71"|| userAddress == "0xfda9d5b343cad6bcde6a2d14b4bcf28b17e05b2a"){
                   this.state.header.connectedWalletAddress = userAddress
                   this.state.header.isLoggedIn = true
                   this.connectAndSendWebsocketRequest(userAddress)
