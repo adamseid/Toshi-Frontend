@@ -1,0 +1,1946 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&family=Montserrat&family=Playfair+Display&family=Poppins&family=Rajdhani&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Rajdhani&display=swap');
+
+
+.bg {
+  min-height: 100vh;
+  background: url("./TOSHI_LOGO_OUTLINED.png");
+  object-fit: cover;
+  background-repeat: no-repeat;
+  background-color: black;
+  /* background-position-x: 57%; */
+  background-position-x: center;
+  background-position-y: center;
+  background-attachment: fixed;
+  background-size: 53%;
+  /* background-size: contain; */
+  position: relative;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Header */
+
+.outer-flex-box-container {
+  padding-top: 36px;
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1248px;
+  /* margin-left: auto; */
+  margin-left: 200px;
+  margin-right: auto;
+}
+
+.header-left {
+  /* font-family: Rajdhani; */
+  font-size: 26px;
+  font-weight: 700;
+  line-height: 33px;
+  letter-spacing: 0em;
+  text-align: left;
+  width: 25%;
+  color: white;
+}
+
+.search {
+  font-family: Rajdhani;
+  font-size: 17.4px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  max-height: 38px;
+  max-width: 125px;
+  border-radius: 27px;
+  background: #7DFFA1;
+  height: 38px;
+  width: 125px;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  
+}
+
+.search-label{
+  color: black;
+  position:absolute;
+  left: 78%;
+  font-family: Rajdhani;
+  font-weight: 500;
+  line-height: 22.3px;
+  cursor: pointer;
+  pointer-events: none;
+}
+
+#search-text {
+  padding-left: 18px;
+  font-family: Rajdhani;
+  border-radius: 27px;
+  border: none;
+  font-weight: 500;
+  font-weight: 500;
+  line-height: 17px;
+  text-align: left;
+  box-shadow: 0px 0px 2px 2px #7DFFA180;
+  color: white;
+  max-width: 285px;
+  max-height: 38px;
+  height: 38px;
+  width: 285px;
+  background: black;
+}
+
+#search-text::placeholder{
+  color: white;
+}
+
+.connect_button_modal:hover{
+  cursor: pointer;
+}
+
+.connect_button_modal{
+  font-family: Rajdhani;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  box-shadow: 0px 0px 2px 2px #7dffa1;
+  border-radius: 27px;
+  max-width: 189px;
+  max-height: 38px;
+  width: 189px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-bottom: 13.08px;
+}
+
+.connect_button {
+  font-family: Rajdhani;
+  font-size: 17.4px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  box-shadow: 0px 0px 2px 2px #7dffa1;
+  border-radius: 27px;
+  max-width: 143.3px;
+  max-height: 38px;
+  width: 143.3px;
+  height: 38px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+}
+
+.left-side {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.inner-flex-box-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  width: 100%;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.social-text {
+  /* font-family: Be Vietnam; */
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 19px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  display: none;
+}
+
+.social-container {
+  padding-top: 20px;
+  padding-bottom: 8px;
+  padding-right: 14px;
+  padding-left: 14px;
+  margin: 0 20px;
+  /* box-shadow: 0px 0px 2px 2px #7DFFA1; */
+  /* border: solid 1.5px #7DFFA1; */
+  /* box-shadow: 1px 1px 11px 0 rgb(125 255 161 / 38%); */
+  box-shadow: 0 0 9px -2px #7dffa1;
+  border-radius: 17px;
+  max-width: 243px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.social-image {
+  width: 32.89px;
+  height: 32px;
+  object-fit: contain;
+  margin-right: 0px;
+}
+
+.social-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 7px 0px;
+  position: relative;
+}
+
+.header-account-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 35px;
+  padding: 20px;
+  margin-top:13px;
+  transition: 0.2s;
+  width: 89px;
+}
+
+.header-account-container:hover {
+  box-shadow: 0 0 9px -2px #7dffa1;
+  border-radius: 17px;
+}
+
+.header-profile-id {
+  /* font-family: Be Vietnam; */
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 15px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: white;
+  padding-top: 4px;
+}
+
+.header-profile-image {
+  max-width: 43.13px;
+  max-height: 43.13px;
+  border-radius: 25px;
+}
+
+.left-bar-toshi {
+  font-family: Playfair Display;
+  font-size: 14px;
+  font-weight: 900;
+  line-height: 11px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.left-bar-tools {
+  font-family: Montserrat;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 11px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+
+.left-bar-logo {
+  height: 45px;
+  width: 81px;
+  /* margin-bottom: 5.93px; */
+}
+
+.left-bar-text-container {
+  display: flex;
+  flex-direction: row;
+
+}
+
+.left-bar-logo-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 49px;
+  padding-top: 36px;
+}
+
+.page-text {
+  /* font-family: Be Vietnam; */
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  display: none;
+}
+
+
+.page-item:hover {
+  cursor: pointer;
+  /* border-top: 1.5px solid #7DFFA1;
+  border-bottom: 1.5px solid #7DFFA1; */
+}
+
+@keyframes pageItemAnimation{
+  from {width: 0%;}
+  to {width:100%;}
+}
+
+.page-item:hover::before, .social-item:hover::before{
+  position: absolute;
+  content: "";
+  background: #7DFFA1;
+  top: 0;
+  right: 0;
+  height: 2px;
+  width: 0%;
+  animation-name: pageItemAnimation;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.page-item:hover::after, .social-item:hover::after{
+  position: absolute;
+  content: "";
+  background: #7DFFA1;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  width: 0%;
+  animation-name: pageItemAnimation;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.social-item:hover {
+  cursor: pointer;
+}
+
+.page-image {
+  max-height: 29px;
+  max-width: 34.395347595214844px;
+  margin-right: 0px;
+}
+
+/* style="transform: translate3d(-120%, 0px, 0px) scale3d(1, 1, 1) rotateX(0deg) rotateY(0deg) rotateZ(0deg) skew(0deg, 0deg); transform-style: preserve-3d;" */
+
+.page-item {
+  position:relative;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-start;
+  margin-bottom: 21px;
+  padding-top: 15px;
+  padding-bottom: 13px;
+  padding-left: 10px;
+  padding-right: 10px;
+  /* transition: border 1s linear; */
+}
+
+.pages-container {
+  max-width: 144.5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.left-bar-container {
+  background: black;
+  position: fixed;
+  top: 0px;
+  min-height: 90vh;
+  height: 100%;
+  width: 121px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  transition: 0.5s;
+  box-shadow: 0 0 9px -2px #7dffa1;
+  z-index:1;
+}
+
+.left-bar-inner-container {
+  position: sticky;
+}
+
+.left-bar-container:hover {
+  width: 242px;
+  transition: width 0.5s;
+}
+
+.left-bar-container:hover .page-image {
+  max-height: 29px;
+  max-width: 34.395347595214844px;
+  margin-right: 28.6px;
+}
+
+.left-bar-container:hover .left-bar-toshi {
+  font-family: Playfair Display;
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.left-bar-container:hover .left-bar-tools {
+  font-family: Montserrat;
+  font-size: 28px;
+  font-weight: 300;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+/* .left-bar-container:hover .left-bar-logo {
+  max-height: 40.924991607666016px;
+  max-width: 51.860870361328125px;
+  margin-bottom: 12.4px;
+} */
+
+.left-bar-container:hover .page-text {
+  display: block;
+}
+
+.left-bar-container:hover .social-text {
+  display: block;
+}
+
+.left-bar-container:hover .social-image {
+  margin-right: 11px;
+}
+
+.left-bar-container:hover .header-account-container {
+  margin-left: 20px;
+  transition: 0s;
+}
+
+.connect_button:hover{
+  cursor: pointer;
+}
+
+
+/* Overview */
+
+.wallet-difference::after{
+  content: "%";
+}
+
+.assets-container {
+  margin-bottom: 50px;
+}
+
+.asset-text-middle {
+  font-family: Rajdhani;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #F9F9F9;
+  margin-left: 200px;
+}
+
+.table-right {
+  margin-top: -5px;
+  margin-right: 12px;
+  width: 6%;
+}
+
+.top-token-container {
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-top: 0.75px;
+  width: 17%;
+  margin-right: 33px;
+  margin-left: 5px;
+}
+
+.top-token-container > a {
+  text-decoration: none;
+  color: white;
+}
+
+/* Profile */
+
+.profile_token_image{
+  max-width: 31px;
+  max-height: 31px;
+  border-radius: 15.5px;
+  margin-right: 20px;
+}
+
+.asset-text {
+  padding: 36px 0px 0px 0px;
+  /* font-family: Rajdhani; */
+  font-size: 17.5px;
+  font-weight: 700;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #F9F9F9;
+  width: 12.5%;
+  margin-left: 30px;
+  white-space: nowrap;
+}
+
+.asset-text-data {
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24.01px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+  width: 12.5%;
+  margin-top: 9px;
+  margin-bottom: 9px;
+  margin-left: 30px;
+}
+
+.asset-text-first-history{
+  font-family: Rajdhani;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #F9F9F9;
+  width: 35%;
+  margin-left:57px;
+  margin-right: 25px;
+}
+
+.asset-text-history{
+  font-family: Rajdhani;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 13px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #F9F9F9;
+  width: 10%;
+  margin-left:45px;
+}
+
+.green-border{
+  height: 1px;
+  margin: 10px 15px 0px 15px;
+  background-color: #7DFFA1;
+}
+
+/* .border-top{
+  border-top: solid 1.18px #7DFFA1;
+} */
+
+.table-ids {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.assets-container {
+  background: linear-gradient(0deg, #1E1E1E, #1E1E1E);
+  box-shadow: 0px 0px 12.471795082092285px -1.9692308902740479px #FFFFFF73;
+  max-width: 512px;
+  height: 100%;
+  width: 100%;
+  border-radius: 6.56px;
+  padding-left: 20.35px;
+  padding-right: 26.26px;
+  padding-bottom: 21.38px;
+  padding-top: 14.44px;
+}
+
+.profile-header-text {
+  /* font-family: Rajdhani; */
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-bottom: 28px;
+}
+
+.volume-header-text{
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-bottom: 33px;
+}
+
+.time-header-text{
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-bottom: 25px;
+}
+
+.chart-text{
+  font-family: Rajdhani;
+  font-size: 45px;
+  font-weight: 400;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-bottom: 8px;
+}
+
+.chart-title{
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 39px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-bottom: 12px;
+}
+
+.positive{
+  display: flex;
+  color: #0DFF09;
+  flex-direction: column;
+}
+
+.bottom{
+  font-size: 18px;
+}
+
+.top-positive:before{
+  content: "+";
+}
+
+.negative{
+  color: #D8494A;
+  display: flex;
+  flex-direction: column;
+}
+
+.top-negative:before{
+  content: "-";
+}
+
+.profile-image {
+  max-height: 138px;
+  max-width: 138px;
+  margin-right: 33px;
+}
+
+.profile-wallet-information-left{
+  margin-right: 20px;
+  margin-top: 10px;
+}
+
+.profile-wallet-information {
+  margin-bottom: 42px;
+}
+
+.wallet-worth {
+  font-family: Poppins;
+  font-size: 72.4px;
+  font-weight: 300;
+  line-height: 85px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.wallet-change {
+  font-family: Poppins;
+  font-size: 23px;
+  font-weight: 300;
+  line-height: 34px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #0DFF09;
+}
+
+.wallet-id {
+  /* font-family: Be Vietnam; */
+  font-size: 33px;
+  font-weight: 700;
+  line-height: 38px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+  margin-top: 10px;
+}
+
+.recharts-legend-wrapper {
+  display: none;
+}
+
+.chartTitle {
+  color: white;
+  font-family: Rajdhani;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 28px;
+  letter-spacing: 0em;
+  margin-left: 40px;
+  text-align: left;
+}
+
+.chart-outer-container {
+  margin-top: 15.31px;
+  background: linear-gradient(0deg, #1E1E1E, #1E1E1E);
+  box-shadow: 0px 0px 13.21336841583252px -2.0863211154937744px #ffffff73;
+  padding: 10px;
+}
+
+.overview-outer-container {
+  max-width: 1248px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 56px;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+.wallet-id::before {
+  content: 'ID: ';
+  font-family: Rajdhani;
+  font-size: 33px;
+  font-weight: 400;
+  line-height: 33px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.profile-wallet-information {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.profile-left-side {
+  margin-right: 38.76px;
+}
+
+.profile-outer-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  
+}
+
+.profile-outer-container {
+  max-width: 1248px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 56px;
+}
+
+.account-outer-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  max-width: 1248px;
+  margin-right: auto;
+  margin-left: 200px;
+  /* margin-left: auto; */
+  margin-top: 56px;
+  
+}
+
+
+
+.profile-right-side,
+.profile-left-side {
+  width: 50%;
+}
+
+.profile-left-buttons-container{
+  display: flex;
+  justify-content: left;
+  align-items: flex-start;
+  min-height: 80px;
+}
+
+.profile-left-buttons{
+  font-family: Rajdhani;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  box-shadow: 0px 0px 2px 2px #7dffa1;
+  border-radius: 27px;
+  max-width: 143.3px;
+  max-height: 38px;
+  width: 143.3px;
+  height: 38px;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 30px;
+}
+
+.profile-left-buttons:hover, .active-button{
+  font-family: Rajdhani;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  max-height: 38px;
+  max-width: 143.3px;
+  border-radius: 27px;
+  background: #7DFFA1;
+  margin-right: 30px;
+  height: 38px;
+  width: 143.3px;
+  color: black;
+  cursor: pointer;
+}
+
+.table-ids {
+  border-bottom: 0.33px solid #05D3F2;
+  padding-bottom: 7.22px;
+}
+
+.table-token-full {
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+  margin-right: 3px;
+}
+
+.table-token-short {
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #6D6D6D;
+}
+
+.table-token-price {
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+  margin-right: 3px;
+}
+
+.table-token-allocation {
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  margin-left: 10px;
+  color: #6D6D6D;
+}
+
+.table-token-allocation-small-real:after,
+.table-token-allocation-small:after{
+  content: '%';
+}
+.table-token-allocation-small{
+  /* font-family: Be Vietnam; */
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+  color: #6D6D6D;
+}
+
+.table-token-allocation-small::before{
+  content: '<';
+}
+
+.table-amount {
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.pagination_inner_container{
+  display: flex;
+  width: auto;
+  overflow: auto;
+}
+
+.table-price-change::after{
+  content: '%';
+}
+
+.table-price-change {
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #D8494A;
+  text-align: end;
+}
+
+
+.table-amount-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.75px;
+}
+
+.personal-table-left {
+  display: flex;
+  flex-direction: row;
+  margin-left: 22px;
+  width: 70%;
+}
+
+.personal-table-right {
+  margin-top: -5px;
+  margin-right: 25px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.table-left {
+  display: flex;
+  flex-direction: row;
+  margin-left: 22px;
+  width: 25%;
+}
+
+.table-token-container,
+.table-token-price-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.table-asset-small:before{
+  content: '<';
+}
+.table-item {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.table-inner-token-container {
+  margin-top: 0.75px;
+}
+
+.table-img {
+  margin-right: 42px;
+  max-width: 32px;
+  max-height: 32px;
+  object-fit: cover;
+}
+
+.table-item {
+  margin-top: 34.02px;
+  margin-right: 25px;
+}
+
+.hour,
+.day,
+.week,
+.month,
+.year {
+  /* font-family: Be Vietnam; */
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 23px;
+  letter-spacing: 0em;
+  text-align: left;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 1.47px;
+  color: #86F9A6;
+  border: none;
+  background-color: transparent;
+  border: 0.49px solid transparent;
+  margin: 5px 5px;
+}
+
+.hour:hover,
+.day:hover,
+.week:hover,
+.month:hover,
+.year:hover {
+  background-color: #86F9A6;
+  color: black;
+  border: 0.49px solid #86F9A6;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.wallet-change::after{
+  content: '%';
+}
+.hour.active, .year.active{
+  background-color: #86F9A6;
+  color: black;
+  border: 0.49px solid #86F9A6;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.date-change {
+  display: flex;
+  background: linear-gradient(119.02deg, #1E1E1E 80.59%, #000000 101.02%);
+  flex-direction: row;
+  box-shadow: 0px 0px 7.887511730194092px -1.2453967332839966px #ffffff73;
+  justify-content: space-between;
+  padding-left: 9px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 4.15px;
+  margin-bottom: 35px;
+  width: 376.8px;
+}
+
+.date-change_tokens{
+  display: flex;
+  background: linear-gradient(119.02deg, #1E1E1E 80.59%, #000000 101.02%);
+  flex-direction: row;
+  box-shadow: 0px 0px 7.887511730194092px -1.2453967332839966px #ffffff73;
+  justify-content: space-between;
+  padding-left: 9px;
+  padding-right: 6px;
+  padding-top: 2px;
+  padding-bottom: 2px;
+  border-radius: 4.15px;
+  margin-bottom: 63px;
+  width: 376.8px;
+}
+
+.wallet-amount {
+  font-family: Poppins;
+  font-size: 56px;
+  font-weight: 300;
+  line-height: 85px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: white;
+}
+
+.wallet-difference {
+  font-family: Poppins;
+  font-size: 23px;
+  font-weight: 300;
+  line-height: 34px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #0DFF09;
+}
+
+.chart-container {
+  margin-top: 15px;
+  margin-left: 15px;
+  width: 100%;
+}
+
+/* Mobile */
+
+.mobile-text{
+  margin-top: 40px;
+  max-width: 50%;
+  text-align: center;
+}
+
+.mobile-outer-container{
+  min-height: 100vh;
+  background-color: black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-content: center;
+}
+
+.mobile-inner-container{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+}
+
+
+/* Account */
+
+/* Modal */
+
+.bg.not_auth{
+  height: 100vh;
+  filter: blur(8px);
+  padding: 11px;
+  margin: -11px;
+  pointer-events: none;
+}
+
+.not_auth_container{
+  overflow: hidden;
+}
+
+
+.un_authenticated_user_modal_container{
+  max-height: 392px;
+  max-width: 540px;
+  border-radius: 14px;
+  background: linear-gradient(180deg, #202225 0%, #000000 97.92%, #000000 100%);
+  padding-top: 47px;
+  padding-bottom: 58px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+
+.un_authenticated_user_modal_container_title{
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 35px;
+  letter-spacing: 0em;
+  text-align: center;
+  color:  #7DFFA1;
+  margin-bottom: 30.95px;
+}
+
+.un_authenticated_user_modal_container_text{
+  font-family: Poppins;
+  font-size: 20px;
+  font-weight: 400;
+  line-height: 30px;
+  letter-spacing: 0em;
+  text-align: center;
+  color:  #FFFFFF;
+  margin-bottom: 54px;
+}
+
+.un_authenticated_user_modal_container_image{
+  margin-bottom: 30.84px;
+  max-height: 51.15624237060547px;
+  max-width: 64.82608795166016px;
+}
+
+.un_authenticated_user_modal_container_button_container{
+  padding: 1px;
+  
+}
+
+.un_authenticated_user_modal_container_button_container:hover{
+  cursor: pointer;
+}
+
+.un_authenticated_user_modal_container_button{
+  font-family: Rajdhani;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  color:  #FFFFFF;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 12px;
+  padding-bottom: 12px;
+  background: #000000;
+  text-decoration: underline;
+  
+}
+
+
+/* Token History Overview */
+
+.green_horizontal_line{
+  width: 100%;
+  height: 1.18px;
+  background: #7DFFA1;
+  position: relative;
+}
+
+/* .tokenHistoryOverviewTitlesContainer{
+  border-bottom: 1.18px solid #7DFFA1;
+} */
+
+.token_history_overview_title{
+  padding-top: 21px;
+  display: flex;
+  align-items: flex-start;
+  /* font-family: 'Rajdhani', sans-serif; */
+  font-size: 17.5px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  padding-bottom: 30px;
+  text-align: left;
+  color: #FFFFFF;
+  
+}
+.token_detailes{
+  width: 31%;
+}
+.token_name{
+  width: 25%;
+  padding-left: 17px;
+}
+.total_transactions{
+  padding-left: 25px;
+  width: 17%;
+}
+.total_profit{
+  padding-left: 25px;
+  width: 18%;
+}
+.current_holdings{
+  padding-left: 25px;
+  width: 23%;
+}
+.tokenItmesContainer{
+  width: 100%;
+}
+.hide_unhide{
+  padding-left: 18px;
+  width: 14%;
+  border: none;
+  display: flex;
+  justify-content: center;
+}
+
+.walletAssetsItems{
+  width: 16%;
+  font-size: 17.5px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+.walletAssetsTitlesContainer{
+  display: flex;
+  padding-bottom: 25px;
+  padding-top: 22px;
+  padding-left: 47px;
+  padding-right: 47px;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.tokenHistoryOverviewTitles{
+  display: flex;
+  margin-left: 14px;
+  margin-right: 14px;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.table-overview-outer-container{
+  width: 100%;
+}
+
+.page_number:hover, .page_number_wallet_asset:hover{
+  cursor: pointer;
+}
+
+.page_number,.page_number_wallet_asset{
+  font-family: Rajdhani;
+  font-size: 21px;
+  font-weight: 700;
+  line-height: 26px;
+  letter-spacing: 0em;
+  text-align: right;
+  color: white;
+  padding-top: 4px;
+  margin-left: 6px;
+  margin-right: 6px;
+}
+
+.page_number.active, .page_number_wallet_asset.active{
+  background: #1E1E1E;
+  padding-left: 14px;
+  border-radius: 25px;
+  padding-right: 14px;
+  padding-top: 4px;
+  padding-bottom: 2px;
+}
+
+.pagination_buttons{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 40px;
+}
+
+.pagination_buttons_tokens{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-bottom: 5px;
+}
+
+.account-container{
+  position: relative;
+  background: linear-gradient(0deg, #1E1E1E, #1E1E1E);
+  box-shadow: 0px 0px 12.471795082092285px -1.9692308902740479px #FFFFFF73;
+  height: 100%;
+  width: 100%;
+  border-radius: 6.56px;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-bottom: 21.38px;
+  margin-bottom: 40px;
+}
+
+.top-container{
+  height: 190px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.account-ids {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 87%;
+}
+
+.tokenHistoryOverviewTitles{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  max-width: 100%;
+}
+
+.account-detailed-ids{
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+  margin-left: 20px;
+}
+
+.account-token-name{
+  margin-right: 3px;
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+.account-token-symbol{
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 24px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #6D6D6D;
+}
+
+.account-table-small-eth:before{
+  content: '<';
+}
+
+.account-token-allocation{
+  margin-right: 3px;
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+}
+
+.account-token-allocation-percentage{
+  /* font-family: Be Vietnam; */
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 18px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #6D6D6D;
+}
+
+.account-bottom-row, 
+.account-top-row{
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.account-token-outer-container{
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  height: 50px;
+  width: 370px;
+}
+
+.account-bullet{
+  margin-right: 12px;
+}
+
+.asset-text-data-detailed-second-element {
+  /* font-family: Be Vietnam; */
+  
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 24.01px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+  /* width: 10%; */
+  margin-top: 9px;
+  /* min-width: 20px; */
+}
+
+.asset-text-data-detailed {
+  /* font-family: Be Vietnam; */
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 24.01px;
+  letter-spacing: 0em;
+  color: #FFFFFF;
+  /* width: 50px; */
+  padding-top: 5px;
+  text-align: left;
+  /* min-width: 20px; */
+  margin-right: 48px;
+}
+
+.asset-text-data-detailed.total_transactions{
+  margin-right: 25px;
+}
+
+.asset-text-data-detailed.total_profit{
+  margin-right: 70px;
+}
+
+.currentHoldings{
+  /* width: 50px; */
+  margin-left: 2px;
+}
+
+.divider_line_total_transactions{
+  width: 1px;
+  border-left: 1px solid #252525;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  margin-right: 20px;
+  left: 27%;
+}
+
+.divider_line_wallet_assets_left{
+  width: 1px;
+  border-left: 1px solid #252525;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  margin-right: 20px;
+  left: 30%;
+}
+
+.walletAssetsTokenNameOuterContainer{
+  width: 100%;
+}
+
+.walletAssetsTokenName{
+  width: 15%;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  line-height: 22px;
+  letter-spacing: 0em;
+  color: white;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-right: 5px;
+}
+
+.walletAssetsTokenNameContainer{
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+  padding-top: 22px;
+  padding-left: 47px;
+  padding-right: 47px;
+}
+
+.divider_line_wallet_assets_right{
+  width: 1px;
+  border-left: 1px solid #252525;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  margin-right: 20px;
+  right: 30%;
+}
+
+.divider_line_total_profit{
+  width: 1px;
+  border-left: 1px solid #252525;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  margin-right: 20px;
+  left: 44.5%;
+}
+
+.divider_line_holdings{
+  width: 1px;
+  border-left: 1px solid #252525;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  margin-right: 20px;
+  left: 63.5%;
+}
+
+.divider_line_hide_unhide{
+  width: 1px;
+  border-left: 1px solid #252525;
+  position: absolute;
+  top: 0px;
+  height: 100%;
+  margin-right: 20px;
+  left: 87%;
+}
+
+.asset-text-data-detailed-first-element{
+  /* font-family: Be Vietnam; */
+  font-size: 16.43px;
+  font-weight: 500;
+  line-height: 24.01px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: #FFFFFF;
+  width: 45%;
+  /* width: 300px; */
+  /* width: 420px; */
+}
+
+.tokenHistoryTableBlock{
+  height: 50px;
+  display: flex;
+  align-items: flex-start;
+}
+
+.account-detailed-inner-container{
+  align-items: flex-start;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 50%;
+}
+
+.account-table{
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.nowrap{
+  white-space: nowrap;
+}
+
+/* Toggle Button */
+
+.switch {
+  font-size: 16px;
+  margin-left: 10px;
+  position: relative;
+  display: inline-block;
+  width: 80px;
+  height: 23px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  border: 3px solid darkgreen;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 20px;
+  width: 40px;
+  left: -2px;
+  bottom: -1px;
+  background-color: darkgreen;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: transparent;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px darkgreen;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(36px);
+  -ms-transform: translateX(36px);
+  transform: translateX(36px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 20px;
+}
+
+.slider.round:before {
+  border-radius: 20px;
+}
+
+.ETH-label{
+  position: absolute;
+  font-size: 12px;
+  top: 0px;
+  left: 10px;
+  font-weight: 700;
+}
+.show_image:hover,
+.hide_image:hover{
+  cursor: pointer;
+}
+.show_image{
+  display: block;
+  margin-left: 40px;
+}
+.hide_image{
+  display: none;
+  margin-left: 40px;
+}
+.USD-label{
+  position: absolute;
+  left: 43px;
+  font-size: 12px;
+  top: 0px;
+  font-weight: 700;
+}
+
+.green{
+  color: #5CC489;
+}
+
+.red{
+  color: red
+}
+
+.grey{
+  color: rgb(165, 161, 161);
+}
+
+/* LoadingSpinner */
+@keyframes spinner {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.loading-spinner {
+  z-index: 1;
+  width: 200px;
+  height: 200px;
+  border: 10px solid #f3f3f3; 
+  border-top: 10px solid #383636; 
+  border-radius: 50%;
+  animation: spinner 1.5s linear infinite;
+  position: fixed;
+  top: 37%;
+  left: 44%;
+  transform: translate(-50%, -50%);
+}
+
+.greyBackground{
+  opacity: 0.3;
+  background-color: rgb(0, 0, 0);
+  background-blend-mode: multiply;
+}
+
+.wallet-glow:hover{
+  transition: all 200ms cubic-bezier(.23, 1, .32, 1);
+  text-shadow: 0px 0px 15px #f3f3f1;
+  font-weight: 700;
+}
+
+.wallet-id > a {
+  text-decoration: none;
+  color: white;
+}
+
+.chart-button-container {
+  display: flex;
+  margin: 15px 0px 5px 0px;
+}
+
+.chart-button{
+  /* font-family: Rajdhani; */
+  font-size: 17px;
+  font-weight: 500;
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  box-shadow: 0px 0px 2px 2px #7dffa1;
+  border-radius: 27px;
+  width: 125px;
+  height: 25px;
+  color: #7dffa1;
+  background: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.mb{
+  margin-bottom: 22px;
+}
+
+.chart-button:hover, .chart-button.active{
+  /* font-family: Rajdhani;
+  font-size: 14px; */
+  /* font-weight: 700; */
+  line-height: 17px;
+  letter-spacing: 0em;
+  text-align: center;
+  border-radius: 27px;
+  background: #7DFFA1;
+  /* margin-right: 30px; */
+  color: black;
+  cursor: pointer;
+  width: 125px;
+  height: 25px;
+}
+
+.my-wallet{
+  color: white;
+  font-size:17.4px;
+  font-weight: 500;
+  padding: 7px 14px;
+  border: 1px solid white;
+  border-radius: 15px;
+  margin-left: 20px;
+}
+
+.my-wallet-container{
+  display: flex;
+  align-items: center;
+  
+}
+
+.my-wallet-img{
+  height: 40px;
+  width: 40px;
+}
+
+.mr{
+  margin-right: 20px;
+}
+
+/* Support Button */
+@media (min-width: 1795px){
+  .outer-flex-box-container {
+    margin-left: auto;
+  }
+  .account-outer-container {
+    margin-left: auto;
+  }
+}
+
+.support_button_outer_container{
+  position: sticky;
+  max-width: 150px;
+  top: calc(100vh - 56px);
+  margin-right: 30px;
+  left: 100%;
+  z-index: 1000000;
+}
+
+.support_button_text{
+  font-family: Rajdhani;
+  height: 28px;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 22px;
+  letter-spacing: 0em;
+  text-align: center;
+  color: #DEDEDE;
+  padding-left: 25px;
+  padding-right: 25px;
+  padding-top: 7px;
+  background-color: black;
+  box-shadow: 0px 0px 2px 2px #7DFFA133;
+  border-radius: 27px;
+}
+@media (max-width: 1500px){
+  /* .account-token-outer-container{
+    width: 100%;
+  } */
+  .asset-text{
+    white-space: normal;
+  }
+  .account-container{
+    width: 98%;
+  }
+  .outer-flex-box-container {
+    margin-left: 150px;
+  }
+  .account-outer-container {
+    margin-left: 150px;
+  }
+}
+
+@media(max-width: 1400px){
+  .account-token-outer-container{
+    width: 320px;
+  }
+
+  .connect_button{
+    margin-right: 20px;
+  }
+}
+
+@media(max-width: 1270px){
+  .token_history_overview_title.total_profit, .token_history_overview_title.current_holdings {
+    flex-direction: column;
+  }
+  .asset-text-data-detailed.total_profit, .asset-text-data-detailed.current_holdings{
+    padding-left: 0px;
+  }
+  .switch{
+    /* width: 130px; */
+    margin-left: 0px;
+  }
+}
+
+@media(max-width: 1200px){
+  .account-token-outer-container{
+    width: 300px;
+  }
+  .token_history_overview_title{
+    font-size: 14.5px;
+  }
+  
+}
+
+@media(max-width: 1140px){
+  .account-token-outer-container{
+    width: 270px;
+  }
+  .USD-label, .ETH-label{
+    font-size: 10.5px;
+  }
+  
+}
+
+@media(max-width: 1090px){
+  .account-token-outer-container{
+    width: 255px;
+  }
+}
